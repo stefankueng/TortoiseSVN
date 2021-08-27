@@ -18,14 +18,17 @@
 //
 #pragma once
 
+#include <wrl/client.h>
+
 #include "Globals.h"
 #include "registry.h"
 #include "ShellCache.h"
 #include "RemoteCacheLink.h"
 #include "SVNFolderStatus.h"
 #include "IconBitmapUtils.h"
-#include "CrashReport.h"
+#include "ExplorerCommand.h"
 
+class CExplorerCommand;
 extern volatile LONG      g_cRefThisDll; // Reference count of this DLL.
 extern HINSTANCE          g_hModThisDll; // Instance handle for this DLL
 extern ShellCache         g_shellCache;  // caching of registry entries, ...
@@ -70,8 +73,10 @@ class CShellExt : public IContextMenu3
     , IShellIconOverlayIdentifier
     , IShellPropSheetExt
     , ICopyHookW
+    , IExplorerCommand
+    , IObjectWithSite
 {
-protected:
+public:
     enum SVNCommands
     {
         ShellSeparator = 0,
@@ -157,6 +162,7 @@ protected:
         ShellMenuLastEntry // used to mark the menu array end
     };
 
+protected:
     // helper struct for context menu entries
     struct YesNoPair
     {
@@ -209,6 +215,7 @@ protected:
     svn_revnum_t                     columnRev; ///< holds the corresponding revision to the file/dir above
     svn_wc_status_kind               fileStatus;
     CRegStdString                    regDiffLater;
+    Microsoft::WRL::ComPtr<IUnknown> m_site;
 
     SVNFolderStatus  m_cachedStatus; // status cache
     CRemoteCacheLink m_remoteCacheLink;
@@ -216,28 +223,31 @@ protected:
 
     CString                                           columnFolder;    ///< current folder of ColumnProvider
     std::vector<std::pair<std::wstring, std::string>> columnUserProps; ///< user properties of ColumnProvider
+    std::vector<CExplorerCommand>                     m_explorerCommands;
 
 #define MAKESTRING(ID) LoadStringEx(g_hResInst, ID, stringTableBuffer, _countof(stringTableBuffer), (WORD)CRegStdDWORD(L"Software\\TortoiseSVN\\LanguageID", MAKELANGID(LANG_NEUTRAL, SUBLANG_DEFAULT)))
 private:
-    void         InsertSVNMenu(BOOL isTop, HMENU menu, UINT pos, UINT_PTR id, UINT stringId, UINT icon, UINT idCmdFirst, SVNCommands com, const std::wstring& verb);
-    void         InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst, HMENU hMenu, HMENU subMenu, UINT& indexMenu, int& indexSubMenu, unsigned __int64 topMenu, bool bShowIcons);
-    std::wstring WriteFileListToTempFile();
-    bool         WriteClipboardPathsToTempFile(std::wstring& tempFile) const;
-    LPCWSTR      GetMenuTextFromResource(int id);
-    void         SetExtraColumnStatus(const wchar_t* path, const FileStatusCacheEntry* status);
-    void         GetExtraColumnStatus(const wchar_t* path, BOOL bIsDir);
-    void         GetMainColumnStatus(const wchar_t* path, BOOL bIsDir);
-    STDMETHODIMP QueryDropContext(UINT uFlags, UINT idCmdFirst, HMENU hMenu, UINT& indexMenu);
-    static bool  IsIllegalFolder(const std::wstring& folder, int* csidlarray);
-    static void  RunCommand(const std::wstring& path, const std::wstring& command, const std::wstring& folder, LPCWSTR errorMessage);
-    bool         ShouldInsertItem(const MenuInfo& pair) const;
-    bool         ShouldEnableMenu(const YesNoPair& pair) const;
-    void         GetColumnInfo(SHCOLUMNINFO* to, DWORD index, UINT charactersCount, UINT titleId, UINT descriptionId);
-    static void  TweakMenu(HMENU menu);
-    static void  ExtractProperty(const wchar_t* path, const char* propertyName, std::wstring& to);
-    void         AddPathCommand(std::wstring& svnCmd, LPCWSTR command, bool bFilesAllowed);
-    void         AddPathFileCommand(std::wstring& svnCmd, LPCWSTR command);
-    void         AddPathFileDropCommand(std::wstring& svnCmd, LPCWSTR command);
+    void                InsertSVNMenu(BOOL isTop, HMENU menu, UINT pos, UINT_PTR id, UINT stringId, UINT icon, UINT idCmdFirst, SVNCommands com, const std::wstring& verb);
+    void                InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst, HMENU hMenu, HMENU subMenu, UINT& indexMenu, int& indexSubMenu, unsigned __int64 topMenu, bool bShowIcons);
+    static std::wstring WriteFileListToTempFile(const std::vector<std::wstring>& files, const std::wstring folder);
+    static bool         WriteClipboardPathsToTempFile(std::wstring& tempFile);
+    LPCWSTR             GetMenuTextFromResource(int id);
+    UINT                IconIdForCommand(int id);
+    void                SetExtraColumnStatus(const wchar_t* path, const FileStatusCacheEntry* status);
+    void                GetExtraColumnStatus(const wchar_t* path, BOOL bIsDir);
+    void                GetMainColumnStatus(const wchar_t* path, BOOL bIsDir);
+    STDMETHODIMP        QueryDropContext(UINT uFlags, UINT idCmdFirst, HMENU hMenu, UINT& indexMenu);
+    static bool         IsIllegalFolder(const std::wstring& folder, int* csidlarray);
+    static void         RunCommand(const std::wstring& path, const std::wstring& command, const std::wstring& folder, LPCWSTR errorMessage);
+    bool                ShouldInsertItem(const MenuInfo& pair) const;
+    bool                ShouldEnableMenu(const YesNoPair& pair) const;
+    void                GetColumnInfo(SHCOLUMNINFO* to, DWORD index, UINT charactersCount, UINT titleId, UINT descriptionId);
+    static void         TweakMenu(HMENU menu);
+    static void         ExtractProperty(const wchar_t* path, const char* propertyName, std::wstring& to);
+    static void         AddPathCommand(std::wstring& svnCmd, LPCWSTR command, bool bFilesAllowed, const std::vector<std::wstring>& files, const std::wstring folder);
+    static void         AddPathFileCommand(std::wstring& svnCmd, LPCWSTR command, const std::vector<std::wstring>& files, const std::wstring folder);
+    static void         AddPathFileDropCommand(std::wstring& svnCmd, LPCWSTR command, const std::vector<std::wstring>& files, const std::wstring folder);
+    static std::wstring ExplorerViewPath();
 
 public:
     explicit CShellExt(FileState state);
@@ -320,4 +330,36 @@ public:
     //@{
     UINT STDMETHODCALLTYPE CopyCallback(HWND hWnd, UINT wFunc, UINT wFlags, LPCWSTR pszSrcFile, DWORD dwSrcAttribs, LPCWSTR pszDestFile, DWORD dwDestAttribs) override;
     //@}
+
+    /** \name IExplorerCommand
+     * IExplorerCommand members
+     */
+    //@{
+    HRESULT STDMETHODCALLTYPE GetTitle(IShellItemArray* psiItemArray, LPWSTR* ppszName) override;
+    HRESULT STDMETHODCALLTYPE GetIcon(IShellItemArray* psiItemArray, LPWSTR* ppszIcon) override;
+    HRESULT STDMETHODCALLTYPE GetToolTip(IShellItemArray* psiItemArray, LPWSTR* ppszInfotip) override;
+    HRESULT STDMETHODCALLTYPE GetCanonicalName(GUID* pguidCommandName) override;
+    HRESULT STDMETHODCALLTYPE GetState(IShellItemArray* psiItemArray, BOOL fOkToBeSlow, EXPCMDSTATE* pCmdState) override;
+    HRESULT STDMETHODCALLTYPE Invoke(IShellItemArray* psiItemArray, IBindCtx* pbc) override;
+    HRESULT STDMETHODCALLTYPE GetFlags(EXPCMDFLAGS* pFlags) override;
+    HRESULT STDMETHODCALLTYPE EnumSubCommands(IEnumExplorerCommand** ppEnum) override;
+    //@}
+
+    /** \name IObjectWithSite
+     * IObjectWithSite members
+     */
+    //@{
+    HRESULT STDMETHODCALLTYPE SetSite(IUnknown* pUnkSite) override;
+    HRESULT STDMETHODCALLTYPE GetSite(REFIID riid, void** ppvSite) override;
+    //@}
+
+    static void InvokeCommand(int                 cmd,
+                              const std::wstring& cwd,
+                              const std::wstring& appDir,
+                              const std::wstring  uuidSource,
+                              HWND                hParent,
+                              DWORD itemStates, DWORD itemStatesFolder,
+                              const std::vector<std::wstring>& paths,
+                              const std::wstring&              folder,
+                              CRegStdString&                   regDiffLater);
 };

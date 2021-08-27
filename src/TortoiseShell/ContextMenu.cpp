@@ -17,6 +17,11 @@
 // 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
 //
 #include "stdafx.h"
+
+#include <comutil.h>
+#include <winrt/base.h>
+#include <wrl/client.h>
+
 #include "ShellExt.h"
 #include "ItemIDList.h"
 #include "PreserveChdir.h"
@@ -288,7 +293,7 @@ STDMETHODIMP CShellExt::Initialize(PCIDLIST_ABSOLUTE pIDFolder,
                     UINT len = DragQueryFile(drop, i, nullptr, 0);
                     if (len == 0)
                         continue;
-                    auto szFileName = std::make_unique<wchar_t[]>(len + 1);
+                    auto szFileName = std::make_unique<wchar_t[]>(len + 1LL);
                     if (0 == DragQueryFile(drop, i, szFileName.get(), len + 1))
                     {
                         continue;
@@ -760,7 +765,7 @@ void CShellExt::InsertSVNMenu(BOOL isTop, HMENU menu, UINT pos, UINT_PTR id, UIN
     wchar_t menuTextBuffer[255] = {0};
     MAKESTRING(stringId);
 
-    if (isTop)
+    if (isTop && menu)
     {
         //menu entry for the top context menu, so append an "SVN " before
         //the menu text to indicate where the entry comes from
@@ -796,7 +801,10 @@ void CShellExt::InsertSVNMenu(BOOL isTop, HMENU menu, UINT pos, UINT_PTR id, UIN
     if (icon)
         menuItemInfo.hbmpItem = m_iconBitmapUtils.IconToBitmapPARGB32(g_hResInst, icon);
     menuItemInfo.wID = static_cast<UINT>(id);
-    InsertMenuItem(menu, pos, TRUE, &menuItemInfo);
+    if (menu)
+        InsertMenuItem(menu, pos, TRUE, &menuItemInfo);
+    else
+        m_explorerCommands.push_back(CExplorerCommand(menuTextBuffer, icon, com, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
 
     myVerbsMap[verb]              = id - idCmdFirst;
     myVerbsMap[verb]              = id;
@@ -810,7 +818,7 @@ void CShellExt::InsertSVNMenu(BOOL isTop, HMENU menu, UINT pos, UINT_PTR id, UIN
         mySubMenuMap[pos] = com;
 }
 
-bool CShellExt::WriteClipboardPathsToTempFile(std::wstring& tempFile) const
+bool CShellExt::WriteClipboardPathsToTempFile(std::wstring& tempFile)
 {
     tempFile = std::wstring();
     //write all selected files and paths to a temporary file
@@ -867,7 +875,7 @@ bool CShellExt::WriteClipboardPathsToTempFile(std::wstring& tempFile) const
     return bRet;
 }
 
-std::wstring CShellExt::WriteFileListToTempFile()
+std::wstring CShellExt::WriteFileListToTempFile(const std::vector<std::wstring>& files, const std::wstring folder)
 {
     //write all selected files and paths to a temporary file
     //for TortoiseProc.exe to read out again.
@@ -890,13 +898,13 @@ std::wstring CShellExt::WriteFileListToTempFile()
         return std::wstring();
 
     DWORD written = 0;
-    if (m_files.empty())
+    if (files.empty())
     {
-        ::WriteFile(file, m_folder.c_str(), static_cast<DWORD>(m_folder.size()) * sizeof(wchar_t), &written, nullptr);
+        ::WriteFile(file, folder.c_str(), static_cast<DWORD>(folder.size()) * sizeof(wchar_t), &written, nullptr);
         ::WriteFile(file, L"\n", 2, &written, nullptr);
     }
 
-    for (auto I = m_files.begin(); I != m_files.end(); ++I)
+    for (auto I = files.begin(); I != files.end(); ++I)
     {
         ::WriteFile(file, I->c_str(), static_cast<DWORD>(I->size()) * sizeof(wchar_t), &written, nullptr);
         ::WriteFile(file, L"\n", 2, &written, nullptr);
@@ -1099,25 +1107,28 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
     //we check that by iterating through all menu entries and check if
     //the dwItemData member points to our global ID string. That string is set
     //by our shell extension when the folder menu is inserted.
-    wchar_t menuBuf[MAX_PATH] = {0};
-    int     count             = GetMenuItemCount(hMenu);
-    for (int i = 0; i < count; ++i)
+    if (hMenu)
     {
-        MENUITEMINFO miif = {0};
-        miif.cbSize       = sizeof(MENUITEMINFO);
-        miif.fMask        = MIIM_DATA;
-        miif.dwTypeData   = menuBuf;
-        miif.cch          = _countof(menuBuf);
-        GetMenuItemInfo(hMenu, i, TRUE, &miif);
-        if (miif.dwItemData == reinterpret_cast<ULONG_PTR>(g_menuIDString))
-            return S_OK;
+        wchar_t menuBuf[MAX_PATH] = {0};
+        int     count             = GetMenuItemCount(hMenu);
+        for (int i = 0; i < count; ++i)
+        {
+            MENUITEMINFO miif = {0};
+            miif.cbSize       = sizeof(MENUITEMINFO);
+            miif.fMask        = MIIM_DATA;
+            miif.dwTypeData   = menuBuf;
+            miif.cch          = _countof(menuBuf);
+            GetMenuItemInfo(hMenu, i, TRUE, &miif);
+            if (miif.dwItemData == reinterpret_cast<ULONG_PTR>(g_menuIDString))
+                return S_OK;
+        }
     }
 
     LoadLangDll();
     UINT idCmd = idCmdFirst;
 
     //create the sub menu
-    HMENU subMenu      = CreateMenu();
+    HMENU subMenu      = hMenu ? CreateMenu() : nullptr;
     int   indexSubMenu = 0;
 
     unsigned __int64 topMenu  = g_shellCache.GetMenuLayout();
@@ -1126,7 +1137,8 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
     bool bAddSeparator   = false;
     bool bMenuEntryAdded = false;
     // insert separator at start
-    InsertMenu(hMenu, indexMenu++, MF_SEPARATOR | MF_BYPOSITION, 0, nullptr);
+    if (hMenu)
+        InsertMenu(hMenu, indexMenu++, MF_SEPARATOR | MF_BYPOSITION, 0, nullptr);
     idCmd++;
     bool bShowIcons = !!static_cast<DWORD>(CRegStdDWORD(L"Software\\TortoiseSVN\\ShowContextMenuIcons", TRUE, false, HKEY_CURRENT_USER, KEY_WOW64_64KEY));
     for (int menuIndex = 0; menuInfo[menuIndex].command != ShellMenuLastEntry; menuIndex++)
@@ -1154,7 +1166,10 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
         {
             bAddSeparator   = false;
             bMenuEntryAdded = false;
-            InsertMenu(subMenu, indexSubMenu++, MF_SEPARATOR | MF_BYPOSITION, 0, nullptr);
+            if (subMenu)
+                InsertMenu(subMenu, indexSubMenu++, MF_SEPARATOR | MF_BYPOSITION, 0, nullptr);
+            else
+                m_explorerCommands.push_back(CExplorerCommand(L"", 0, 0, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
             idCmd++;
         }
 
@@ -1249,13 +1264,15 @@ STDMETHODIMP CShellExt::QueryContextMenu(HMENU hMenu,
     menuItemInfo.hbmpUnchecked = bmp;
     menuItemInfo.hSubMenu      = subMenu;
     menuItemInfo.wID           = idCmd++;
-    InsertMenuItem(hMenu, indexMenu++, TRUE, &menuItemInfo);
+    if (hMenu)
+    {
+        InsertMenuItem(hMenu, indexMenu++, TRUE, &menuItemInfo);
 
-    //separator after
-    InsertMenu(hMenu, indexMenu++, MF_SEPARATOR | MF_BYPOSITION, 0, nullptr);
+        //separator after
+        InsertMenu(hMenu, indexMenu++, MF_SEPARATOR | MF_BYPOSITION, 0, nullptr);
+        TweakMenu(hMenu);
+    }
     idCmd++;
-
-    TweakMenu(hMenu);
 
     //return number of menu items added
     return ResultFromScode(MAKE_SCODE(SEVERITY_SUCCESS, 0, static_cast<USHORT>(idCmd - idCmdFirst)));
@@ -1271,20 +1288,20 @@ void CShellExt::TweakMenu(HMENU hMenu)
     SetMenuInfo(hMenu, &mInfo);
 }
 
-void CShellExt::AddPathCommand(std::wstring& svnCmd, LPCWSTR command, bool bFilesAllowed)
+void CShellExt::AddPathCommand(std::wstring& svnCmd, LPCWSTR command, bool bFilesAllowed, const std::vector<std::wstring>& files, const std::wstring folder)
 {
     svnCmd += command;
     svnCmd += L" /path:\"";
-    if ((bFilesAllowed) && !m_files.empty())
-        svnCmd += m_files.front();
+    if ((bFilesAllowed) && !files.empty())
+        svnCmd += files.front();
     else
-        svnCmd += m_folder;
+        svnCmd += folder;
     svnCmd += L"\"";
 }
 
-void CShellExt::AddPathFileCommand(std::wstring& svnCmd, LPCWSTR command)
+void CShellExt::AddPathFileCommand(std::wstring& svnCmd, LPCWSTR command, const std::vector<std::wstring>& files, const std::wstring folder)
 {
-    std::wstring tempFile = WriteFileListToTempFile();
+    std::wstring tempFile = WriteFileListToTempFile(files, folder);
     svnCmd += command;
     svnCmd += L" /pathfile:\"";
     svnCmd += tempFile;
@@ -1292,16 +1309,16 @@ void CShellExt::AddPathFileCommand(std::wstring& svnCmd, LPCWSTR command)
     svnCmd += L" /deletepathfile";
 }
 
-void CShellExt::AddPathFileDropCommand(std::wstring& svnCmd, LPCWSTR command)
+void CShellExt::AddPathFileDropCommand(std::wstring& svnCmd, LPCWSTR command, const std::vector<std::wstring>& files, const std::wstring folder)
 {
-    std::wstring tempFile = WriteFileListToTempFile();
+    std::wstring tempFile = WriteFileListToTempFile(files, folder);
     svnCmd += command;
     svnCmd += L" /pathfile:\"";
     svnCmd += tempFile;
     svnCmd += L"\"";
     svnCmd += L" /deletepathfile";
     svnCmd += L" /droptarget:\"";
-    svnCmd += m_folder;
+    svnCmd += folder;
     svnCmd += L"\"";
 }
 
@@ -1351,409 +1368,350 @@ STDMETHODIMP CShellExt::InvokeCommand(LPCMINVOKECOMMANDINFO lpcmi)
             }
         }
 
-        //TortoiseProc expects a command line of the form:
-        //"/command:<commandname> /pathfile:<path> /startrev:<startrevision> /endrev:<endrevision> /deletepathfile
-        // or
-        //"/command:<commandname> /path:<path> /startrev:<startrevision> /endrev:<endrevision>
-        //
-        //* path is a path to a single file/directory for commands which only act on single items (log, checkout, ...)
-        //* pathfile is a path to a temporary file which contains a list of file paths
-        std::wstring svnCmd = L" /command:";
-        switch (idIt->second)
-        {
-            case ShellMenuUpgradeWC:
-                AddPathFileCommand(svnCmd, L"wcupgrade");
-                break;
-            case ShellMenuCheckout:
-                AddPathCommand(svnCmd, L"checkout", false);
-                break;
-            case ShellMenuUpdate:
-                AddPathFileCommand(svnCmd, L"update");
-                break;
-            case ShellMenuUpdateExt:
-                AddPathFileCommand(svnCmd, L"update");
-                svnCmd += L" /rev";
-                break;
-            case ShellMenuCommit:
-                AddPathFileCommand(svnCmd, L"commit");
-                break;
-            case ShellMenuAdd:
-            case ShellMenuAddAsReplacement:
-                AddPathFileCommand(svnCmd, L"add");
-                break;
-            case ShellMenuIgnore:
-                AddPathFileCommand(svnCmd, L"ignore");
-                break;
-            case ShellMenuIgnoreGlobal:
-                AddPathFileCommand(svnCmd, L"ignore");
-                svnCmd += L" /recursive";
-                break;
-            case ShellMenuIgnoreCaseSensitive:
-                AddPathFileCommand(svnCmd, L"ignore");
-                svnCmd += L" /onlymask";
-                break;
-            case ShellMenuIgnoreCaseSensitiveGlobal:
-                AddPathFileCommand(svnCmd, L"ignore");
-                svnCmd += L" /onlymask /recursive";
-                break;
-            case ShellMenuDeleteIgnore:
-                AddPathFileCommand(svnCmd, L"ignore");
-                svnCmd += L" /delete";
-                break;
-            case ShellMenuDeleteIgnoreGlobal:
-                AddPathFileCommand(svnCmd, L"ignore");
-                svnCmd += L" /delete /recursive";
-                break;
-            case ShellMenuDeleteIgnoreCaseSensitive:
-                AddPathFileCommand(svnCmd, L"ignore");
-                svnCmd += L" /delete";
-                svnCmd += L" /onlymask";
-                break;
-            case ShellMenuDeleteIgnoreCaseSensitiveGlobal:
-                AddPathFileCommand(svnCmd, L"ignore");
-                svnCmd += L" /delete";
-                svnCmd += L" /onlymask";
-                svnCmd += L" /recursive";
-                break;
-            case ShellMenuUnIgnore:
-                AddPathFileCommand(svnCmd, L"unignore");
-                break;
-            case ShellMenuUnIgnoreGlobal:
-                AddPathFileCommand(svnCmd, L"unignore");
-                svnCmd += L" /recursive";
-                break;
-            case ShellMenuUnIgnoreCaseSensitive:
-                AddPathFileCommand(svnCmd, L"unignore");
-                svnCmd += L" /onlymask";
-                break;
-            case ShellMenuUnIgnoreCaseSensitiveGlobal:
-                AddPathFileCommand(svnCmd, L"unignore");
-                svnCmd += L" /onlymask /recursive";
-                break;
-            case ShellMenuRevert:
-                AddPathFileCommand(svnCmd, L"revert");
-                break;
-            case ShellMenuDelUnversioned:
-                AddPathFileCommand(svnCmd, L"delunversioned");
-                break;
-            case ShellMenuCleanup:
-                AddPathFileCommand(svnCmd, L"cleanup");
-                break;
-            case ShellMenuResolve:
-                AddPathFileCommand(svnCmd, L"resolve");
-                break;
-            case ShellMenuSwitch:
-                AddPathCommand(svnCmd, L"switch", true);
-                break;
-            case ShellMenuImport:
-                AddPathCommand(svnCmd, L"import", false);
-                break;
-            case ShellMenuExport:
-                AddPathCommand(svnCmd, L"export", false);
-                break;
-            case ShellMenuAbout:
-                svnCmd += L"about";
-                break;
-            case ShellMenuCreateRepos:
-                AddPathCommand(svnCmd, L"repocreate", false);
-                break;
-            case ShellMenuMerge:
-                AddPathCommand(svnCmd, L"merge", true);
-                break;
-            case ShellMenuMergeAll:
-                AddPathCommand(svnCmd, L"mergeall", true);
-                break;
-            case ShellMenuCopy:
-                AddPathCommand(svnCmd, L"copy", true);
-                break;
-            case ShellMenuSettings:
-                svnCmd += L"settings";
-                break;
-            case ShellMenuHelp:
-                svnCmd += L"help";
-                break;
-            case ShellMenuRename:
-                AddPathCommand(svnCmd, L"rename", true);
-                break;
-            case ShellMenuRemove:
-                AddPathFileCommand(svnCmd, L"remove");
-                break;
-            case ShellMenuRemoveKeep:
-                AddPathFileCommand(svnCmd, L"remove");
-                svnCmd += L" /keep";
-                break;
-            case ShellMenuDiff:
-                svnCmd += L"diff /path:\"";
-                if (m_files.size() == 1)
-                    svnCmd += m_files.front();
-                else if (m_files.size() == 2)
-                {
-                    std::vector<std::wstring>::iterator I = m_files.begin();
-                    svnCmd += *I;
-                    ++I;
-                    svnCmd += L"\" /path2:\"";
-                    svnCmd += *I;
-                }
-                else
-                    svnCmd += m_folder;
-                svnCmd += L"\"";
-                if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
-                    svnCmd += L" /alternative";
-                break;
-            case ShellMenuDiffLater:
-                svnCmd.clear();
-                if (lpcmi->fMask & CMIC_MASK_CONTROL_DOWN)
-                {
-                    regDiffLater.removeValue();
-                }
-                else if (m_files.size() == 1)
-                {
-                    regDiffLater = m_files[0];
-                }
-                break;
-            case ShellMenuDiffNow:
-                AddPathCommand(svnCmd, L"diff", true);
-                svnCmd += L"\" /path2:\"";
-                svnCmd += std::wstring(regDiffLater);
-                svnCmd += L"\"";
-                if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
-                    svnCmd += L" /alternative";
-                break;
-            case ShellMenuPrevDiff:
-                AddPathCommand(svnCmd, L"prevdiff", true);
-                if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
-                    svnCmd += L" /alternative";
-                break;
-            case ShellMenuUrlDiff:
-                AddPathCommand(svnCmd, L"urldiff", true);
-                break;
-            case ShellMenuUnifiedDiff:
-                AddPathCommand(svnCmd, L"diff", true);
-                svnCmd += L" /unified";
-                break;
-            case ShellMenuDropCopyAdd:
-                AddPathFileDropCommand(svnCmd, L"dropcopyadd");
-                break;
-            case ShellMenuDropCopy:
-                AddPathFileDropCommand(svnCmd, L"dropcopy");
-                break;
-            case ShellMenuDropCopyRename:
-                AddPathFileDropCommand(svnCmd, L"dropcopy");
-                svnCmd += L" /rename";
-                break;
-            case ShellMenuDropMove:
-                AddPathFileDropCommand(svnCmd, L"dropmove");
-                break;
-            case ShellMenuDropMoveRename:
-                AddPathFileDropCommand(svnCmd, L"dropmove");
-                svnCmd += L" /rename";
-                break;
-            case ShellMenuDropExport:
-                AddPathFileDropCommand(svnCmd, L"dropexport");
-                break;
-            case ShellMenuDropExportExtended:
-                AddPathFileDropCommand(svnCmd, L"dropexport");
-                svnCmd += L" /extended:unversioned";
-                break;
-            case ShellMenuDropExportChanged:
-                AddPathFileDropCommand(svnCmd, L"dropexport");
-                svnCmd += L" /extended:localchanges";
-                break;
-            case ShellMenuDropExternals:
-                AddPathFileDropCommand(svnCmd, L"dropexternals");
-                break;
-            case ShellMenuDropVendor:
-                AddPathFileDropCommand(svnCmd, L"dropvendor");
-                break;
-            case ShellMenuLog:
-                AddPathCommand(svnCmd, L"log", true);
-                break;
-            case ShellMenuConflictEditor:
-                AddPathCommand(svnCmd, L"conflicteditor", true);
-                break;
-            case ShellMenuRelocate:
-                AddPathCommand(svnCmd, L"relocate", false);
-                break;
-            case ShellMenuShowChanged:
-                if (m_files.size() > 1)
-                {
-                    AddPathFileCommand(svnCmd, L"repostatus");
-                }
-                else
-                {
-                    AddPathCommand(svnCmd, L"repostatus", true);
-                }
-                break;
-            case ShellMenuRepoBrowse:
-                AddPathCommand(svnCmd, L"repobrowser", true);
-                break;
-            case ShellMenuBlame:
-                AddPathCommand(svnCmd, L"blame", true);
-                break;
-            case ShellMenuCopyUrl:
-                AddPathFileCommand(svnCmd, L"copyurls");
-                break;
-            case ShellMenuShelve:
-                AddPathFileCommand(svnCmd, L"shelve");
-                break;
-            case ShellMenuUnshelve:
-                AddPathFileCommand(svnCmd, L"unshelve");
-                break;
-            case ShellMenuCreatePatch:
-                AddPathFileCommand(svnCmd, L"createpatch");
-                break;
-            case ShellMenuApplyPatch:
-                if ((itemStates & ITEMIS_PATCHINCLIPBOARD) && ((~itemStates) & ITEMIS_PATCHFILE))
-                {
-                    // if there's a patch file in the clipboard, we save it
-                    // to a temporary file and tell TortoiseMerge to use that one
-                    UINT cFormat = RegisterClipboardFormat(L"TSVN_UNIFIEDDIFF");
-                    if ((cFormat) && (OpenClipboard(nullptr)))
-                    {
-                        HGLOBAL hGlb  = GetClipboardData(cFormat);
-                        LPCSTR  lpStr = static_cast<LPCSTR>(GlobalLock(hGlb));
+        InvokeCommand(static_cast<SVNCommands>(idIt->second),
+                      cwdFolder,
+                      GetAppDirectory(),
+                      uuidSource,
+                      lpcmi->hwnd,
+                      itemStates,
+                      itemStatesFolder,
+                      m_files,
+                      m_folder,
+                      regDiffLater);
+        myIDMap.clear();
+        myVerbsIDMap.clear();
+        myVerbsMap.clear();
 
-                        DWORD len   = GetTempPath(0, nullptr);
-                        auto  path  = std::make_unique<wchar_t[]>(len + 1LL);
-                        auto  tempF = std::make_unique<wchar_t[]>(len + 100LL);
-                        GetTempPath(len + 1, path.get());
-                        GetTempFileName(path.get(), L"svn", 0, tempF.get());
-                        std::wstring sTempFile = std::wstring(tempF.get());
+        return S_OK;
+    }
+    return hr;
+}
 
-                        FILE*  outFile;
-                        size_t patchLen = strlen(lpStr);
-                        _tfopen_s(&outFile, sTempFile.c_str(), L"wb");
-                        if (outFile)
-                        {
-                            size_t size = fwrite(lpStr, sizeof(char), patchLen, outFile);
-                            if (size == patchLen)
-                            {
-                                itemStates |= ITEMIS_PATCHFILE;
-                                if ((m_folder.empty()) && (!m_files.empty()))
-                                {
-                                    m_folder = m_files[0];
-                                }
-                                itemStatesFolder |= ITEMIS_FOLDERINSVN;
-                                m_files.clear();
-                                m_files.push_back(sTempFile);
-                            }
-                            fclose(outFile);
-                        }
-                        GlobalUnlock(hGlb);
-                        CloseClipboard();
-                    }
-                }
-                if (itemStates & ITEMIS_PATCHFILE)
-                {
-                    svnCmd = L" /diff:\"";
-                    if (!m_files.empty())
-                    {
-                        svnCmd += m_files.front();
-                        if (itemStatesFolder & ITEMIS_FOLDERINSVN)
-                        {
-                            svnCmd += L"\" /patchpath:\"";
-                            svnCmd += m_folder;
-                        }
-                    }
-                    else
-                        svnCmd += m_folder;
-                    if (itemStates & ITEMIS_INVERSIONEDFOLDER)
-                        svnCmd += L"\" /wc";
-                    else
-                        svnCmd += L"\"";
-                }
-                else
-                {
-                    svnCmd = L" /patchpath:\"";
-                    if (!m_files.empty())
-                        svnCmd += m_files.front();
-                    else
-                        svnCmd += m_folder;
-                    svnCmd += L"\"";
-                }
-                if (!uuidSource.empty())
-                {
-                    CRegStdDWORD groupSetting = CRegStdDWORD(L"Software\\TortoiseSVN\\GroupTaskbarIconsPerRepo", 3, false, HKEY_CURRENT_USER, KEY_WOW64_64KEY);
-                    switch (static_cast<DWORD>(groupSetting))
-                    {
-                        case 1:
-                        case 2:
-                        {
-                            svnCmd += L" /groupuuid:";
-                            svnCmd += uuidSource;
-                        }
-                        break;
-                    }
-                }
-                myIDMap.clear();
-                myVerbsIDMap.clear();
-                myVerbsMap.clear();
-                RunCommand(tortoiseMergePath, svnCmd, cwdFolder, L"TortoiseMerge launch failed");
-                return S_OK;
-            case ShellMenuRevisionGraph:
-                AddPathCommand(svnCmd, L"revisiongraph", true);
-                break;
-            case ShellMenuLock:
-                AddPathFileCommand(svnCmd, L"lock");
-                break;
-            case ShellMenuUnlock:
-                AddPathFileCommand(svnCmd, L"unlock");
-                break;
-            case ShellMenuUnlockForce:
-                AddPathFileCommand(svnCmd, L"unlock");
-                svnCmd += L" /force";
-                break;
-            case ShellMenuProperties:
-                AddPathFileCommand(svnCmd, L"properties");
-                break;
-            case ShellMenuClipPaste:
+void CShellExt::InvokeCommand(int cmd, const std::wstring& cwd, const std::wstring& appDir, const std::wstring uuidSource, HWND hParent, DWORD itemStates, DWORD itemStatesFolder, const std::vector<std::wstring>& paths, const std::wstring& folder, CRegStdString& regDiffLater)
+{
+    //TortoiseProc expects a command line of the form:
+    //"/command:<commandname> /pathfile:<path> /startrev:<startrevision> /endrev:<endrevision> /deletepathfile
+    // or
+    //"/command:<commandname> /path:<path> /startrev:<startrevision> /endrev:<endrevision>
+    //
+    //* path is a path to a single file/directory for commands which only act on single items (log, checkout, ...)
+    //* pathfile is a path to a temporary file which contains a list of file paths
+    std::wstring svnCmd = L" /command:";
+    switch (cmd)
+    {
+        case ShellMenuUpgradeWC:
+            AddPathFileCommand(svnCmd, L"wcupgrade", paths, folder);
+            break;
+        case ShellMenuCheckout:
+            AddPathCommand(svnCmd, L"checkout", false, paths, folder);
+            break;
+        case ShellMenuUpdate:
+            AddPathFileCommand(svnCmd, L"update", paths, folder);
+            break;
+        case ShellMenuUpdateExt:
+            AddPathFileCommand(svnCmd, L"update", paths, folder);
+            svnCmd += L" /rev";
+            break;
+        case ShellMenuCommit:
+            AddPathFileCommand(svnCmd, L"commit", paths, folder);
+            break;
+        case ShellMenuAdd:
+        case ShellMenuAddAsReplacement:
+            AddPathFileCommand(svnCmd, L"add", paths, folder);
+            break;
+        case ShellMenuIgnore:
+            AddPathFileCommand(svnCmd, L"ignore", paths, folder);
+            break;
+        case ShellMenuIgnoreGlobal:
+            AddPathFileCommand(svnCmd, L"ignore", paths, folder);
+            svnCmd += L" /recursive";
+            break;
+        case ShellMenuIgnoreCaseSensitive:
+            AddPathFileCommand(svnCmd, L"ignore", paths, folder);
+            svnCmd += L" /onlymask";
+            break;
+        case ShellMenuIgnoreCaseSensitiveGlobal:
+            AddPathFileCommand(svnCmd, L"ignore", paths, folder);
+            svnCmd += L" /onlymask /recursive";
+            break;
+        case ShellMenuDeleteIgnore:
+            AddPathFileCommand(svnCmd, L"ignore", paths, folder);
+            svnCmd += L" /delete";
+            break;
+        case ShellMenuDeleteIgnoreGlobal:
+            AddPathFileCommand(svnCmd, L"ignore", paths, folder);
+            svnCmd += L" /delete /recursive";
+            break;
+        case ShellMenuDeleteIgnoreCaseSensitive:
+            AddPathFileCommand(svnCmd, L"ignore", paths, folder);
+            svnCmd += L" /delete";
+            svnCmd += L" /onlymask";
+            break;
+        case ShellMenuDeleteIgnoreCaseSensitiveGlobal:
+            AddPathFileCommand(svnCmd, L"ignore", paths, folder);
+            svnCmd += L" /delete";
+            svnCmd += L" /onlymask";
+            svnCmd += L" /recursive";
+            break;
+        case ShellMenuUnIgnore:
+            AddPathFileCommand(svnCmd, L"unignore", paths, folder);
+            break;
+        case ShellMenuUnIgnoreGlobal:
+            AddPathFileCommand(svnCmd, L"unignore", paths, folder);
+            svnCmd += L" /recursive";
+            break;
+        case ShellMenuUnIgnoreCaseSensitive:
+            AddPathFileCommand(svnCmd, L"unignore", paths, folder);
+            svnCmd += L" /onlymask";
+            break;
+        case ShellMenuUnIgnoreCaseSensitiveGlobal:
+            AddPathFileCommand(svnCmd, L"unignore", paths, folder);
+            svnCmd += L" /onlymask /recursive";
+            break;
+        case ShellMenuRevert:
+            AddPathFileCommand(svnCmd, L"revert", paths, folder);
+            break;
+        case ShellMenuDelUnversioned:
+            AddPathFileCommand(svnCmd, L"delunversioned", paths, folder);
+            break;
+        case ShellMenuCleanup:
+            AddPathFileCommand(svnCmd, L"cleanup", paths, folder);
+            break;
+        case ShellMenuResolve:
+            AddPathFileCommand(svnCmd, L"resolve", paths, folder);
+            break;
+        case ShellMenuSwitch:
+            AddPathCommand(svnCmd, L"switch", true, paths, folder);
+            break;
+        case ShellMenuImport:
+            AddPathCommand(svnCmd, L"import", false, paths, folder);
+            break;
+        case ShellMenuExport:
+            AddPathCommand(svnCmd, L"export", false, paths, folder);
+            break;
+        case ShellMenuAbout:
+            svnCmd += L"about";
+            break;
+        case ShellMenuCreateRepos:
+            AddPathCommand(svnCmd, L"repocreate", false, paths, folder);
+            break;
+        case ShellMenuMerge:
+            AddPathCommand(svnCmd, L"merge", true, paths, folder);
+            break;
+        case ShellMenuMergeAll:
+            AddPathCommand(svnCmd, L"mergeall", true, paths, folder);
+            break;
+        case ShellMenuCopy:
+            AddPathCommand(svnCmd, L"copy", true, paths, folder);
+            break;
+        case ShellMenuSettings:
+            svnCmd += L"settings";
+            break;
+        case ShellMenuHelp:
+            svnCmd += L"help";
+            break;
+        case ShellMenuRename:
+            AddPathCommand(svnCmd, L"rename", true, paths, folder);
+            break;
+        case ShellMenuRemove:
+            AddPathFileCommand(svnCmd, L"remove", paths, folder);
+            break;
+        case ShellMenuRemoveKeep:
+            AddPathFileCommand(svnCmd, L"remove", paths, folder);
+            svnCmd += L" /keep";
+            break;
+        case ShellMenuDiff:
+            svnCmd += L"diff /path:\"";
+            if (paths.size() == 1)
+                svnCmd += paths.front();
+            else if (paths.size() == 2)
             {
-                std::wstring tempFile;
-                if (WriteClipboardPathsToTempFile(tempFile))
-                {
-                    bool bCopy           = true;
-                    UINT cPrefDropFormat = RegisterClipboardFormat(L"Preferred DropEffect");
-                    if (cPrefDropFormat)
-                    {
-                        if (OpenClipboard(lpcmi->hwnd))
-                        {
-                            HGLOBAL hGlb = GetClipboardData(cPrefDropFormat);
-                            if (hGlb)
-                            {
-                                DWORD* effect = static_cast<DWORD*>(GlobalLock(hGlb));
-                                if (*effect == DROPEFFECT_MOVE)
-                                    bCopy = false;
-                                GlobalUnlock(hGlb);
-                            }
-                            CloseClipboard();
-                        }
-                    }
-
-                    if (bCopy)
-                        svnCmd += L"pastecopy /pathfile:\"";
-                    else
-                        svnCmd += L"pastemove /pathfile:\"";
-                    svnCmd += tempFile;
-                    svnCmd += L"\"";
-                    svnCmd += L" /deletepathfile";
-                    svnCmd += L" /droptarget:\"";
-                    svnCmd += m_folder;
-                    svnCmd += L"\"";
-                }
-                else
-                    return S_OK;
+                auto I = paths.cbegin();
+                svnCmd += *I;
+                ++I;
+                svnCmd += L"\" /path2:\"";
+                svnCmd += *I;
+            }
+            else
+                svnCmd += folder;
+            svnCmd += L"\"";
+            if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+                svnCmd += L" /alternative";
+            break;
+        case ShellMenuDiffLater:
+            svnCmd.clear();
+            if (GetAsyncKeyState(VK_CONTROL) & 0x8000)
+            {
+                regDiffLater.removeValue();
+            }
+            else if (paths.size() == 1)
+            {
+                regDiffLater = paths[0];
             }
             break;
-            default:
-                break;
-                //#endregion
-        } // switch (id_it->second)
-        if (!svnCmd.empty())
+        case ShellMenuDiffNow:
+            AddPathCommand(svnCmd, L"diff", true, paths, folder);
+            svnCmd += L"\" /path2:\"";
+            svnCmd += std::wstring(regDiffLater);
+            svnCmd += L"\"";
+            if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+                svnCmd += L" /alternative";
+            break;
+        case ShellMenuPrevDiff:
+            AddPathCommand(svnCmd, L"prevdiff", true, paths, folder);
+            if (GetAsyncKeyState(VK_SHIFT) & 0x8000)
+                svnCmd += L" /alternative";
+            break;
+        case ShellMenuUrlDiff:
+            AddPathCommand(svnCmd, L"urldiff", true, paths, folder);
+            break;
+        case ShellMenuUnifiedDiff:
+            AddPathCommand(svnCmd, L"diff", true, paths, folder);
+            svnCmd += L" /unified";
+            break;
+        case ShellMenuDropCopyAdd:
+            AddPathFileDropCommand(svnCmd, L"dropcopyadd", paths, folder);
+            break;
+        case ShellMenuDropCopy:
+            AddPathFileDropCommand(svnCmd, L"dropcopy", paths, folder);
+            break;
+        case ShellMenuDropCopyRename:
+            AddPathFileDropCommand(svnCmd, L"dropcopy", paths, folder);
+            svnCmd += L" /rename";
+            break;
+        case ShellMenuDropMove:
+            AddPathFileDropCommand(svnCmd, L"dropmove", paths, folder);
+            break;
+        case ShellMenuDropMoveRename:
+            AddPathFileDropCommand(svnCmd, L"dropmove", paths, folder);
+            svnCmd += L" /rename";
+            break;
+        case ShellMenuDropExport:
+            AddPathFileDropCommand(svnCmd, L"dropexport", paths, folder);
+            break;
+        case ShellMenuDropExportExtended:
+            AddPathFileDropCommand(svnCmd, L"dropexport", paths, folder);
+            svnCmd += L" /extended:unversioned";
+            break;
+        case ShellMenuDropExportChanged:
+            AddPathFileDropCommand(svnCmd, L"dropexport", paths, folder);
+            svnCmd += L" /extended:localchanges";
+            break;
+        case ShellMenuDropExternals:
+            AddPathFileDropCommand(svnCmd, L"dropexternals", paths, folder);
+            break;
+        case ShellMenuDropVendor:
+            AddPathFileDropCommand(svnCmd, L"dropvendor", paths, folder);
+            break;
+        case ShellMenuLog:
+            AddPathCommand(svnCmd, L"log", true, paths, folder);
+            break;
+        case ShellMenuConflictEditor:
+            AddPathCommand(svnCmd, L"conflicteditor", true, paths, folder);
+            break;
+        case ShellMenuRelocate:
+            AddPathCommand(svnCmd, L"relocate", false, paths, folder);
+            break;
+        case ShellMenuShowChanged:
+            if (paths.size() > 1)
+            {
+                AddPathFileCommand(svnCmd, L"repostatus", paths, folder);
+            }
+            else
+            {
+                AddPathCommand(svnCmd, L"repostatus", true, paths, folder);
+            }
+            break;
+        case ShellMenuRepoBrowse:
+            AddPathCommand(svnCmd, L"repobrowser", true, paths, folder);
+            break;
+        case ShellMenuBlame:
+            AddPathCommand(svnCmd, L"blame", true, paths, folder);
+            break;
+        case ShellMenuCopyUrl:
+            AddPathFileCommand(svnCmd, L"copyurls", paths, folder);
+            break;
+        case ShellMenuShelve:
+            AddPathFileCommand(svnCmd, L"shelve", paths, folder);
+            break;
+        case ShellMenuUnshelve:
+            AddPathFileCommand(svnCmd, L"unshelve", paths, folder);
+            break;
+        case ShellMenuCreatePatch:
+            AddPathFileCommand(svnCmd, L"createpatch", paths, folder);
+            break;
+        case ShellMenuApplyPatch:
         {
-            svnCmd += L" /hwnd:";
-            wchar_t buf[30] = {0};
-            swprintf_s(buf, L"%p", static_cast<void*>(lpcmi->hwnd));
-            svnCmd += buf;
+            auto localPaths  = paths;
+            auto localFolder = folder;
+            if ((itemStates & ITEMIS_PATCHINCLIPBOARD) && ((~itemStates) & ITEMIS_PATCHFILE))
+            {
+                // if there's a patch file in the clipboard, we save it
+                // to a temporary file and tell TortoiseMerge to use that one
+                UINT cFormat = RegisterClipboardFormat(L"TSVN_UNIFIEDDIFF");
+                if ((cFormat) && (OpenClipboard(nullptr)))
+                {
+                    HGLOBAL hGlb  = GetClipboardData(cFormat);
+                    LPCSTR  lpStr = static_cast<LPCSTR>(GlobalLock(hGlb));
+
+                    DWORD len   = GetTempPath(0, nullptr);
+                    auto  path  = std::make_unique<wchar_t[]>(len + 1LL);
+                    auto  tempF = std::make_unique<wchar_t[]>(len + 100LL);
+                    GetTempPath(len + 1, path.get());
+                    GetTempFileName(path.get(), L"svn", 0, tempF.get());
+                    std::wstring sTempFile = std::wstring(tempF.get());
+
+                    FILE*  outFile;
+                    size_t patchLen = strlen(lpStr);
+                    _tfopen_s(&outFile, sTempFile.c_str(), L"wb");
+                    if (outFile)
+                    {
+                        size_t size = fwrite(lpStr, sizeof(char), patchLen, outFile);
+                        if (size == patchLen)
+                        {
+                            itemStates |= ITEMIS_PATCHFILE;
+                            if ((folder.empty()) && (!paths.empty()))
+                            {
+                                localFolder = paths[0];
+                            }
+                            itemStatesFolder |= ITEMIS_FOLDERINSVN;
+                            localPaths.clear();
+                            localPaths.push_back(sTempFile);
+                        }
+                        fclose(outFile);
+                    }
+                    GlobalUnlock(hGlb);
+                    CloseClipboard();
+                }
+            }
+            if (itemStates & ITEMIS_PATCHFILE)
+            {
+                svnCmd = L" /diff:\"";
+                if (!localPaths.empty())
+                {
+                    svnCmd += localPaths.front();
+                    if (itemStatesFolder & ITEMIS_FOLDERINSVN)
+                    {
+                        svnCmd += L"\" /patchpath:\"";
+                        svnCmd += localFolder;
+                    }
+                }
+                else
+                    svnCmd += localFolder;
+                if (itemStates & ITEMIS_INVERSIONEDFOLDER)
+                    svnCmd += L"\" /wc";
+                else
+                    svnCmd += L"\"";
+            }
+            else
+            {
+                svnCmd = L" /patchpath:\"";
+                if (!localPaths.empty())
+                    svnCmd += localPaths.front();
+                else
+                    svnCmd += localFolder;
+                svnCmd += L"\"";
+            }
             if (!uuidSource.empty())
             {
                 CRegStdDWORD groupSetting = CRegStdDWORD(L"Software\\TortoiseSVN\\GroupTaskbarIconsPerRepo", 3, false, HKEY_CURRENT_USER, KEY_WOW64_64KEY);
@@ -1768,14 +1726,89 @@ STDMETHODIMP CShellExt::InvokeCommand(LPCMINVOKECOMMANDINFO lpcmi)
                     break;
                 }
             }
-            myIDMap.clear();
-            myVerbsIDMap.clear();
-            myVerbsMap.clear();
-            RunCommand(tortoiseProcPath, svnCmd, cwdFolder, L"TortoiseProc Launch failed");
+            RunCommand(appDir + L"TortoiseMerge.exe", svnCmd, cwd, L"TortoiseMerge launch failed");
         }
-        return S_OK;
-    } // if (id_it != myIDMap.end() && id_it->first == idCmd)
-    return hr;
+            return;
+        case ShellMenuRevisionGraph:
+            AddPathCommand(svnCmd, L"revisiongraph", true, paths, folder);
+            break;
+        case ShellMenuLock:
+            AddPathFileCommand(svnCmd, L"lock", paths, folder);
+            break;
+        case ShellMenuUnlock:
+            AddPathFileCommand(svnCmd, L"unlock", paths, folder);
+            break;
+        case ShellMenuUnlockForce:
+            AddPathFileCommand(svnCmd, L"unlock", paths, folder);
+            svnCmd += L" /force";
+            break;
+        case ShellMenuProperties:
+            AddPathFileCommand(svnCmd, L"properties", paths, folder);
+            break;
+        case ShellMenuClipPaste:
+        {
+            std::wstring tempFile;
+            if (WriteClipboardPathsToTempFile(tempFile))
+            {
+                bool bCopy           = true;
+                UINT cPrefDropFormat = RegisterClipboardFormat(L"Preferred DropEffect");
+                if (cPrefDropFormat)
+                {
+                    if (OpenClipboard(hParent))
+                    {
+                        HGLOBAL hGlb = GetClipboardData(cPrefDropFormat);
+                        if (hGlb)
+                        {
+                            DWORD* effect = static_cast<DWORD*>(GlobalLock(hGlb));
+                            if (*effect == DROPEFFECT_MOVE)
+                                bCopy = false;
+                            GlobalUnlock(hGlb);
+                        }
+                        CloseClipboard();
+                    }
+                }
+
+                if (bCopy)
+                    svnCmd += L"pastecopy /pathfile:\"";
+                else
+                    svnCmd += L"pastemove /pathfile:\"";
+                svnCmd += tempFile;
+                svnCmd += L"\"";
+                svnCmd += L" /deletepathfile";
+                svnCmd += L" /droptarget:\"";
+                svnCmd += folder;
+                svnCmd += L"\"";
+            }
+            else
+                return;
+        }
+        break;
+        default:
+            break;
+            //#endregion
+    } // switch (id_it->second)
+    if (!svnCmd.empty())
+    {
+        svnCmd += L" /hwnd:";
+        wchar_t buf[30] = {0};
+        swprintf_s(buf, L"%p", static_cast<void*>(hParent));
+        svnCmd += buf;
+        if (!uuidSource.empty())
+        {
+            CRegStdDWORD groupSetting = CRegStdDWORD(L"Software\\TortoiseSVN\\GroupTaskbarIconsPerRepo", 3, false, HKEY_CURRENT_USER, KEY_WOW64_64KEY);
+            switch (static_cast<DWORD>(groupSetting))
+            {
+                case 1:
+                case 2:
+                {
+                    svnCmd += L" /groupuuid:";
+                    svnCmd += uuidSource;
+                }
+                break;
+            }
+        }
+        RunCommand(appDir + L"TortoiseProc.exe", svnCmd, cwd, L"TortoiseProc Launch failed");
+    }
 }
 
 // This is for the status bar and things like that:
@@ -2030,6 +2063,19 @@ LPCWSTR CShellExt::GetMenuTextFromResource(int id)
     return nullptr;
 }
 
+UINT CShellExt::IconIdForCommand(int id)
+{
+    for (int menuIndex = 0; menuInfo[menuIndex].command != ShellMenuLastEntry; menuIndex++)
+    {
+        auto& menuItem = menuInfo[menuIndex];
+        if (menuItem.command != id)
+            continue;
+        MAKESTRING(menuItem.menuTextID);
+        return menuItem.iconID;
+    }
+    return 0;
+}
+
 bool CShellExt::IsIllegalFolder(const std::wstring& folder, int* csidlarray)
 {
     wchar_t          buf[MAX_PATH] = {0}; //MAX_PATH ok, since SHGetSpecialFolderPath doesn't return the required buffer length!
@@ -2060,11 +2106,13 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                                      unsigned __int64 topMenu,
                                      bool             bShowIcons)
 {
-    HMENU   ignoreSubMenu        = nullptr;
-    int     indexIgnoreSub       = 0;
-    bool    bShowIgnoreMenu      = false;
-    wchar_t maskBuf[MAX_PATH]    = {0}; // MAX_PATH is ok, since this only holds a filename
-    wchar_t ignorePath[MAX_PATH] = {0}; // MAX_PATH is ok, since this only holds a filename
+    HMENU                         ignoreSubMenu        = nullptr;
+    int                           indexIgnoreSub       = 0;
+    bool                          bShowIgnoreMenu      = false;
+    wchar_t                       maskBuf[MAX_PATH]    = {0}; // MAX_PATH is ok, since this only holds a filename
+    wchar_t                       ignorePath[MAX_PATH] = {0}; // MAX_PATH is ok, since this only holds a filename
+    std::vector<CExplorerCommand> exCmds;
+
     if (m_files.empty())
         return;
     UINT icon = bShowIcons ? IDI_IGNORE : 0;
@@ -2092,8 +2140,13 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
         }
         if (p != -1)
         {
-            ignoreSubMenu = CreateMenu();
-            InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+            if (hMenu)
+            {
+                ignoreSubMenu = CreateMenu();
+                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+            }
+            else
+                exCmds.push_back(CExplorerCommand(ignorePath, 0, ShellMenuUnIgnore, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
             std::wstring verb                = L"tsvn_" + std::wstring(ignorePath);
             myVerbsMap[verb]                 = idCmd - idCmdFirst;
             myVerbsMap[verb]                 = idCmd;
@@ -2121,7 +2174,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
         {
             CString temp;
             temp.Format(IDS_MENUIGNOREGLOBAL, ignorePath);
-            InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+            if (hMenu)
+                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+            else
+                exCmds.push_back(CExplorerCommand(static_cast<LPCWSTR>(temp), 0, ShellMenuUnIgnoreGlobal, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
             std::wstring verb                = L"tsvn_" + std::wstring(temp);
             myVerbsMap[verb]                 = idCmd - idCmdFirst;
             myVerbsMap[verb]                 = idCmd;
@@ -2138,10 +2194,15 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
             if ((p != -1) &&
                 ((ignoredProps.compare(maskBuf) == 0) || (ignoredProps.find('\n', p) == p + wcslen(maskBuf) + 1) || (ignoredProps.rfind('\n', p) == p - 1)))
             {
-                if (ignoreSubMenu == nullptr)
-                    ignoreSubMenu = CreateMenu();
+                if (hMenu)
+                {
+                    if (ignoreSubMenu == nullptr)
+                        ignoreSubMenu = CreateMenu();
 
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, maskBuf);
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, maskBuf);
+                }
+                else
+                    exCmds.push_back(CExplorerCommand(maskBuf, 0, ShellMenuUnIgnoreCaseSensitive, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 std::wstring verb                = L"tsvn_" + std::wstring(maskBuf);
                 myVerbsMap[verb]                 = idCmd - idCmdFirst;
                 myVerbsMap[verb]                 = idCmd;
@@ -2160,7 +2221,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
 
                 CString temp;
                 temp.Format(IDS_MENUIGNOREGLOBAL, maskBuf);
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                else
+                    exCmds.push_back(CExplorerCommand(static_cast<LPCWSTR>(temp), 0, ShellMenuUnIgnoreCaseSensitiveGlobal, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 std::wstring verb                = L"tsvn_" + std::wstring(temp);
                 myVerbsMap[verb]                 = idCmd - idCmdFirst;
                 myVerbsMap[verb]                 = idCmd;
@@ -2180,7 +2244,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
         {
             if (itemStates & ITEMIS_INSVN)
             {
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                else
+                    exCmds.push_back(CExplorerCommand(ignorePath, 0, ShellMenuDeleteIgnore, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 myIDMap[idCmd - idCmdFirst] = ShellMenuDeleteIgnore;
                 myIDMap[idCmd++]            = ShellMenuDeleteIgnore;
 
@@ -2188,7 +2255,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                 if (wcsrchr(ignorePath, '.'))
                 {
                     wcscat_s(maskBuf, wcsrchr(ignorePath, '.'));
-                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, maskBuf);
+                    if (hMenu)
+                        InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, maskBuf);
+                    else
+                        exCmds.push_back(CExplorerCommand(maskBuf, 0, ShellMenuDeleteIgnoreCaseSensitive, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                     std::wstring verb                = L"tsvn_" + std::wstring(maskBuf);
                     myVerbsMap[verb]                 = idCmd - idCmdFirst;
                     myVerbsMap[verb]                 = idCmd;
@@ -2200,7 +2270,11 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
 
                 CString temp;
                 temp.Format(IDS_MENUIGNOREGLOBAL, ignorePath);
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                else
+                    exCmds.push_back(CExplorerCommand(static_cast<LPCWSTR>(temp), 0, ShellMenuDeleteIgnoreGlobal, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
+
                 myIDMap[idCmd - idCmdFirst] = ShellMenuDeleteIgnoreGlobal;
                 myIDMap[idCmd++]            = ShellMenuDeleteIgnoreGlobal;
 
@@ -2209,7 +2283,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                 {
                     wcscat_s(maskBuf, wcsrchr(ignorePath, '.'));
                     temp.Format(IDS_MENUIGNOREGLOBAL, maskBuf);
-                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                    if (hMenu)
+                        InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                    else
+                        exCmds.push_back(CExplorerCommand(maskBuf, 0, ShellMenuDeleteIgnoreCaseSensitiveGlobal, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                     std::wstring verb                = L"tsvn_" + std::wstring(temp);
                     myVerbsMap[verb]                 = idCmd - idCmdFirst;
                     myVerbsMap[verb]                 = idCmd;
@@ -2221,7 +2298,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
             }
             else
             {
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                else
+                    exCmds.push_back(CExplorerCommand(ignorePath, 0, ShellMenuIgnore, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 myIDMap[idCmd - idCmdFirst] = ShellMenuIgnore;
                 myIDMap[idCmd++]            = ShellMenuIgnore;
 
@@ -2229,7 +2309,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                 if (wcsrchr(ignorePath, '.'))
                 {
                     wcscat_s(maskBuf, wcsrchr(ignorePath, '.'));
-                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, maskBuf);
+                    if (hMenu)
+                        InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, maskBuf);
+                    else
+                        exCmds.push_back(CExplorerCommand(maskBuf, 0, ShellMenuIgnoreCaseSensitive, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                     std::wstring verb                = L"tsvn_" + std::wstring(maskBuf);
                     myVerbsMap[verb]                 = idCmd - idCmdFirst;
                     myVerbsMap[verb]                 = idCmd;
@@ -2241,7 +2324,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
 
                 CString temp;
                 temp.Format(IDS_MENUIGNOREGLOBAL, ignorePath);
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                else
+                    exCmds.push_back(CExplorerCommand(static_cast<LPCWSTR>(temp), 0, ShellMenuIgnoreGlobal, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 myIDMap[idCmd - idCmdFirst] = ShellMenuIgnoreGlobal;
                 myIDMap[idCmd++]            = ShellMenuIgnoreGlobal;
 
@@ -2250,7 +2336,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                 {
                     wcscat_s(maskBuf, wcsrchr(ignorePath, '.'));
                     temp.Format(IDS_MENUIGNOREGLOBAL, maskBuf);
-                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                    if (hMenu)
+                        InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                    else
+                        exCmds.push_back(CExplorerCommand(static_cast<LPCWSTR>(temp), 0, ShellMenuIgnoreCaseSensitiveGlobal, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                     std::wstring verb                = L"tsvn_" + std::wstring(temp);
                     myVerbsMap[verb]                 = idCmd - idCmdFirst;
                     myVerbsMap[verb]                 = idCmd;
@@ -2279,7 +2368,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                     MAKESTRING(IDS_MENUDELETEIGNOREMULTIPLE);
                     swprintf_s(ignorePath, stringTableBuffer, m_files.size());
                 }
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                else
+                    exCmds.push_back(CExplorerCommand(ignorePath, 0, ShellMenuDeleteIgnore, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 std::wstring verb                = L"tsvn_" + std::wstring(ignorePath);
                 myVerbsMap[verb]                 = idCmd - idCmdFirst;
                 myVerbsMap[verb]                 = idCmd;
@@ -2298,7 +2390,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                     MAKESTRING(IDS_MENUDELETEIGNOREMULTIPLEMASK);
                     swprintf_s(ignorePath, stringTableBuffer, m_files.size());
                 }
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                else
+                    exCmds.push_back(CExplorerCommand(ignorePath, 0, ShellMenuDeleteIgnoreCaseSensitive, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 verb                             = std::wstring(ignorePath);
                 myVerbsMap[verb]                 = idCmd - idCmdFirst;
                 myVerbsMap[verb]                 = idCmd;
@@ -2319,7 +2414,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                 }
                 CString temp;
                 temp.Format(IDS_MENUIGNOREGLOBAL, ignorePath);
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                else
+                    exCmds.push_back(CExplorerCommand(static_cast<LPCWSTR>(temp), 0, ShellMenuDeleteIgnoreCaseSensitiveGlobal, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 verb                             = std::wstring(temp);
                 myVerbsMap[verb]                 = idCmd - idCmdFirst;
                 myVerbsMap[verb]                 = idCmd;
@@ -2340,7 +2438,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                     MAKESTRING(IDS_MENUIGNOREMULTIPLE);
                     swprintf_s(ignorePath, stringTableBuffer, m_files.size());
                 }
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                else
+                    exCmds.push_back(CExplorerCommand(ignorePath, 0, ShellMenuIgnore, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 std::wstring verb                = L"tsvn_" + std::wstring(ignorePath);
                 myVerbsMap[verb]                 = idCmd - idCmdFirst;
                 myVerbsMap[verb]                 = idCmd;
@@ -2359,7 +2460,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                     MAKESTRING(IDS_MENUIGNOREMULTIPLEMASK);
                     swprintf_s(ignorePath, stringTableBuffer, m_files.size());
                 }
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, ignorePath);
+                else
+                    exCmds.push_back(CExplorerCommand(ignorePath, 0, ShellMenuIgnoreCaseSensitive, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 verb                             = std::wstring(ignorePath);
                 myVerbsMap[verb]                 = idCmd - idCmdFirst;
                 myVerbsMap[verb]                 = idCmd;
@@ -2380,7 +2484,10 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
                 }
                 CString temp;
                 temp.Format(IDS_MENUIGNOREGLOBAL, ignorePath);
-                InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                if (hMenu)
+                    InsertMenu(ignoreSubMenu, indexIgnoreSub++, MF_BYPOSITION | MF_STRING, idCmd, temp);
+                else
+                    exCmds.push_back(CExplorerCommand(static_cast<LPCWSTR>(temp), 0, ShellMenuIgnoreCaseSensitiveGlobal, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
                 verb                             = std::wstring(temp);
                 myVerbsMap[verb]                 = idCmd - idCmdFirst;
                 myVerbsMap[verb]                 = idCmd;
@@ -2414,8 +2521,24 @@ void CShellExt::InsertIgnoreSubmenus(UINT& idCmd, UINT idCmdFirst,
             GetMenuTextFromResource(ShellMenuIgnoreSub);
         menuiteminfo.dwTypeData = stringTableBuffer;
         menuiteminfo.cch        = static_cast<UINT>(std::min(static_cast<UINT>(wcslen(menuiteminfo.dwTypeData)), UINT_MAX));
-
-        InsertMenuItem((topMenu & MENUIGNORE) ? hMenu : subMenu, (topMenu & MENUIGNORE) ? indexMenu++ : indexSubMenu++, TRUE, &menuiteminfo);
+        if (hMenu)
+        {
+            InsertMenuItem((topMenu & MENUIGNORE) ? hMenu : subMenu, (topMenu & MENUIGNORE) ? indexMenu++ : indexSubMenu++, TRUE, &menuiteminfo);
+        }
+        else
+        {
+            m_explorerCommands.push_back(CExplorerCommand(L"", 0, ShellSeparator, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, {}));
+            for (const auto& cmd : exCmds)
+            {
+                m_explorerCommands.push_back(cmd);
+                std::wstring prep = stringTableBuffer;
+                prep += L": ";
+                m_explorerCommands.back().PrependTitleWith(prep);
+            }
+            // currently, explorer does not support subcommands which their own subcommands. Once it does,
+            // use the line below instead of the ones above
+            //m_explorerCommands.push_back(CExplorerCommand(stringTableBuffer, icon, ShellMenuUnIgnoreSub, GetAppDirectory(), uuidSource, itemStates, itemStatesFolder, m_files, exCmds));
+        }
         if (itemStates & ITEMIS_IGNORED)
         {
             myIDMap[idCmd - idCmdFirst] = ShellMenuUnIgnoreSub;
@@ -2461,4 +2584,206 @@ bool CShellExt::ShouldEnableMenu(const YesNoPair& pair) const
     else if ((pair.no) && ((pair.no & (~itemStates)) == pair.no))
         return true;
     return false;
+}
+
+// IExplorerCommand
+HRESULT __stdcall CShellExt::GetTitle(IShellItemArray* /*psiItemArray*/, LPWSTR* ppszName)
+{
+    CTraceToOutputDebugString::Instance()(__FUNCTION__ ": Shell :: GetTitle\n");
+    SHStrDupW(L"TortoiseSVN", ppszName);
+    return S_OK;
+}
+
+HRESULT __stdcall CShellExt::GetIcon(IShellItemArray* /*psiItemArray*/, LPWSTR* ppszIcon)
+{
+    CTraceToOutputDebugString::Instance()(__FUNCTION__ ": Shell :: GetIcon\n");
+    std::wstring iconPath = GetAppDirectory() + L"TortoiseProc.exe,-";
+    iconPath += std::to_wstring(IDI_APP);
+    SHStrDupW(iconPath.c_str(), ppszIcon);
+    return S_OK;
+}
+
+HRESULT __stdcall CShellExt::GetToolTip(IShellItemArray* /*psiItemArray*/, LPWSTR* ppszInfotip)
+{
+    CTraceToOutputDebugString::Instance()(__FUNCTION__ ": Shell :: GetToolTip\n");
+    *ppszInfotip = nullptr;
+    return E_NOTIMPL;
+}
+
+HRESULT __stdcall CShellExt::GetCanonicalName(GUID* pguidCommandName)
+{
+    CTraceToOutputDebugString::Instance()(__FUNCTION__ ": Shell :: GetCanonicalName\n");
+    *pguidCommandName = GUID_NULL;
+    return S_OK;
+}
+
+HRESULT __stdcall CShellExt::GetState(IShellItemArray* psiItemArray, BOOL fOkToBeSlow, EXPCMDSTATE* pCmdState)
+{
+    CTraceToOutputDebugString::Instance()(__FUNCTION__ ": Shell :: GetState\n");
+    *pCmdState = ECS_ENABLED;
+    if (m_site)
+    {
+        Microsoft::WRL::ComPtr<IOleWindow> oleWindow;
+        m_site.As(&oleWindow);
+        if (oleWindow)
+        {
+            // in Win11, the "main" context menu does not provide an IOleWindow,
+            // so this is for the old context menu, and there we don't show this menu
+            *pCmdState = ECS_HIDDEN;
+            return S_OK;
+        }
+    }
+
+    if (!fOkToBeSlow)
+        return E_PENDING;
+
+    Initialize(nullptr, nullptr, nullptr);
+    Microsoft::WRL::ComPtr<IShellItemArray> itemArray;
+    if (psiItemArray == nullptr)
+    {
+        // context menu for a folder background (no selection),
+        // so try to get the current path of the explorer window instead
+        auto path = ExplorerViewPath();
+        if (path.empty())
+        {
+            *pCmdState = ECS_HIDDEN;
+            return S_OK;
+        }
+        PIDLIST_ABSOLUTE pidl{};
+        if (SUCCEEDED(SHParseDisplayName(path.c_str(), nullptr, &pidl, 0, nullptr)))
+        {
+            if (SUCCEEDED(SHCreateShellItemArrayFromIDLists(1, &pidl, itemArray.GetAddressOf())))
+            {
+                if (itemArray)
+                {
+                    psiItemArray = itemArray.Get();
+                }
+            }
+        }
+    }
+    if (psiItemArray)
+    {
+        IDataObject* pDataObj = nullptr;
+        if (SUCCEEDED(psiItemArray->BindToHandler(nullptr, BHID_DataObject, IID_IDataObject, reinterpret_cast<void**>(&pDataObj))))
+        {
+            CTraceToOutputDebugString::Instance()(__FUNCTION__ ": Shell :: Initialize from GetState()\n");
+
+            Initialize(nullptr, pDataObj, nullptr);
+            pDataObj->Release();
+            pDataObj = nullptr;
+        }
+        else
+            *pCmdState = ECS_HIDDEN;
+    }
+
+    if (g_shellCache.HideMenusForUnversionedItems() && (GetKeyState(VK_SHIFT) & 0x8000) == 0)
+    {
+        if ((itemStates & (ITEMIS_INSVN | ITEMIS_INVERSIONEDFOLDER | ITEMIS_FOLDERINSVN)) == 0)
+            *pCmdState = ECS_HIDDEN;
+    }
+
+    return S_OK;
+}
+
+HRESULT __stdcall CShellExt::Invoke(IShellItemArray* /*psiItemArray*/, IBindCtx* /*pbc*/)
+{
+    return E_NOTIMPL;
+}
+
+HRESULT __stdcall CShellExt::GetFlags(EXPCMDFLAGS* pFlags)
+{
+    CTraceToOutputDebugString::Instance()(__FUNCTION__ ": Shell :: GetFlags\n");
+    *pFlags = ECF_HASSUBCOMMANDS;
+    return S_OK;
+}
+
+HRESULT __stdcall CShellExt::EnumSubCommands(IEnumExplorerCommand** ppEnum)
+{
+    CTraceToOutputDebugString::Instance()(__FUNCTION__ ": Shell :: EnumSubCommands\n");
+    m_explorerCommands.clear();
+    QueryContextMenu(nullptr, 0, 0, 0, CMF_EXTENDEDVERBS | CMF_NORMAL);
+    *ppEnum = new CExplorerCommandEnum(m_explorerCommands);
+    (*ppEnum)->AddRef();
+    return S_OK;
+}
+
+std::wstring CShellExt::ExplorerViewPath()
+{
+    std::wstring path;
+    HRESULT      hr = NOERROR;
+
+    // the top context menu in Win11 does not
+    // provide an IOleWindow with the SetSite() object,
+    // so we have to use a trick to get it: since the
+    // context menu must always be the top window, we
+    // just grab the foreground window and assume that
+    // this is the explorer window.
+    auto hwnd = ::GetForegroundWindow();
+    if (hwnd == nullptr)
+        return path;
+
+    wchar_t szName[1024] = {0};
+    ::GetClassName(hwnd, szName, _countof(szName));
+    if (StrCmp(szName, L"WorkerW") == 0 ||
+        StrCmp(szName, L"Progman") == 0)
+    {
+        //special folder: desktop
+        hr = ::SHGetFolderPath(nullptr, CSIDL_DESKTOP, nullptr, SHGFP_TYPE_CURRENT, szName);
+        if (FAILED(hr))
+            return path;
+
+        path = szName;
+        return path;
+    }
+
+    if (StrCmp(szName, L"CabinetWClass") != 0)
+        return path;
+
+    // get the shell windows object to enumerate all active explorer
+    // instances. We use those to compare the foreground hwnd to it.
+    Microsoft::WRL::ComPtr<IShellWindows> shell;
+    if (FAILED(CoCreateInstance(CLSID_ShellWindows, nullptr, CLSCTX_ALL,
+                                IID_IShellWindows, reinterpret_cast<LPVOID*>(shell.GetAddressOf()))))
+        return path;
+
+    if (shell == nullptr)
+        return path;
+
+    Microsoft::WRL::ComPtr<IDispatch> disp;
+    VARIANT                           variant{};
+    variant.vt = VT_I4;
+
+    Microsoft::WRL::ComPtr<IWebBrowserApp> browser;
+    // look for correct explorer window
+    for (variant.intVal = 0; shell->Item(variant, disp.GetAddressOf()) == S_OK; variant.intVal++)
+    {
+        Microsoft::WRL::ComPtr<IWebBrowserApp> tmp;
+        if (FAILED(disp->QueryInterface(tmp.GetAddressOf())))
+            continue;
+
+        HWND tmpHwnd = nullptr;
+        hr           = tmp->get_HWND(reinterpret_cast<SHANDLE_PTR*>(&tmpHwnd));
+        if (hwnd == tmpHwnd)
+        {
+            browser = tmp;
+            break; // found it!
+        }
+    }
+
+    if (browser != nullptr)
+    {
+        BSTR url;
+        hr = browser->get_LocationURL(&url);
+        if (FAILED(hr))
+            return path;
+
+        std::wstring sUrl(url, SysStringLen(url));
+        SysFreeString(url);
+        DWORD size = _countof(szName);
+        hr         = ::PathCreateFromUrl(sUrl.c_str(), szName, &size, NULL);
+        if (SUCCEEDED(hr))
+            path = szName;
+    }
+
+    return path;
 }

@@ -120,6 +120,9 @@
     <ClCompile Include="..\Utils\LoadIconEx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ExplorerCommand.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="ShellExt.def">
@@ -349,6 +352,9 @@
     <ClInclude Include="..\Utils\LoadIconEx.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ExplorerCommand.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="resource.rc">
@@ -357,6 +363,9 @@
   </ItemGroup>
   <ItemGroup>
     <Manifest Include="..\compatibility.manifest">
+      <Filter>Resource Files</Filter>
+    </Manifest>
+    <Manifest Include="..\identity.manifest">
       <Filter>Resource Files</Filter>
     </Manifest>
   </ItemGroup>
