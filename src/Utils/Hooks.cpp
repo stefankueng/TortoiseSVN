@@ -681,7 +681,7 @@ DWORD CHooks::RunScript(CString cmd, const CTSVNPathList& paths, CString& error,
 
     if (!hErr)
     {
-        error = CFormatMessageWrapper();
+        error = static_cast<LPCWSTR>(CFormatMessageWrapper());
         return static_cast<DWORD>(-1);
     }
 
@@ -689,7 +689,7 @@ DWORD CHooks::RunScript(CString cmd, const CTSVNPathList& paths, CString& error,
 
     if (!hRedir)
     {
-        error = CFormatMessageWrapper();
+        error = static_cast<LPCWSTR>(CFormatMessageWrapper());
         return static_cast<DWORD>(-1);
     }
 
@@ -698,7 +698,7 @@ DWORD CHooks::RunScript(CString cmd, const CTSVNPathList& paths, CString& error,
 
     if (!hOut)
     {
-        error = CFormatMessageWrapper();
+        error = static_cast<LPCWSTR>(CFormatMessageWrapper());
         return static_cast<DWORD>(-1);
     }
 
@@ -715,7 +715,7 @@ DWORD CHooks::RunScript(CString cmd, const CTSVNPathList& paths, CString& error,
     if (!CreateProcess(nullptr, cmd.GetBuffer(), nullptr, nullptr, TRUE, 0, nullptr, curDir.IsEmpty() ? nullptr : curDir.GetWinPath(), &si, &pi))
     {
         const DWORD err = GetLastError(); // preserve the CreateProcess error
-        error           = CFormatMessageWrapper(err);
+        error           = static_cast<LPCWSTR>(CFormatMessageWrapper(err));
         SetLastError(err);
         cmd.ReleaseBuffer();
         return static_cast<DWORD>(-1);
@@ -948,7 +948,7 @@ bool CHooks::ApproveHook(HWND hWnd, std::map<HookKey, HookCmd>::iterator it, DWO
     taskDlg.SetCommonButtons(TDCBF_CANCEL_BUTTON);
     taskDlg.SetVerificationCheckboxText(CString(MAKEINTRESOURCE(IDS_HOOKS_APPROVE_TASK5)));
     taskDlg.SetVerificationCheckbox(false);
-    taskDlg.SetDefaultCommandControl(2);
+    taskDlg.SetDefaultCommandControl(200);
     taskDlg.SetMainIcon(TD_WARNING_ICON);
     auto ret = taskDlg.DoModal(hWnd);
     if (ret == IDCANCEL)
