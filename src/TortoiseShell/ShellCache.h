@@ -18,6 +18,7 @@
 //
 #pragma once
 #include "registry.h"
+#include "Globals.h"
 #pragma warning(push)
 #pragma warning(disable : 4091) // 'typedef ': ignored on left of '' when no variable is declared
 #include <shlobj.h>
@@ -52,12 +53,13 @@ public:
     ShellCache();
     ~ShellCache();
 
-    bool             RefreshIfNeeded();
-    CacheType        GetCacheType();
-    DWORD            BlockStatus();
-    unsigned __int64 GetMenuLayout();
-    unsigned __int64 GetMenuMask();
-    bool             IsProcessElevated() const;
+    bool                   RefreshIfNeeded();
+    CacheType              GetCacheType();
+    DWORD                  BlockStatus();
+    TSVNContextMenuEntries GetMenuLayout11();
+    unsigned __int64       GetMenuLayout();
+    unsigned __int64       GetMenuMask();
+    bool                   IsProcessElevated() const;
 
     BOOL IsOnlyNonElevated();
     BOOL IsRecursive();
@@ -194,6 +196,7 @@ private:
     CRegStdDWORD driveFloppy;
     CRegStdDWORD driveRam;
     CRegStdDWORD driveUnknown;
+    CRegStdQWORD menuLayout11;
     CRegStdDWORD menuLayoutLow;
     CRegStdDWORD menuLayoutHigh;
     CRegStdDWORD shellMenuAccelerators;
