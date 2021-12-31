@@ -65,6 +65,7 @@ public:
 };
 
 CTortoiseMergeApp::CTortoiseMergeApp()
+    : m_hasConflicts(false)
 {
     EnableHtmlHelp();
 }
@@ -238,6 +239,8 @@ BOOL CTortoiseMergeApp::InitInstance()
 
     // create and load the frame with its resources
     if (!pFrame->LoadFrame(IDR_MAINFRAME, WS_OVERLAPPEDWINDOW | FWS_ADDTOTITLE, nullptr, nullptr))
+        return FALSE;
+    if (pFrame->InitRibbon())
         return FALSE;
 
     // Fill in the command line options
@@ -498,7 +501,17 @@ int CTortoiseMergeApp::ExitInstance()
     // remove them. But only delete 'old' files
     CTempFiles::DeleteOldTempFiles(L"*svn*.*");
 
-    return CWinAppEx::ExitInstance();
+    CWinAppEx::ExitInstance();
+    return m_hasConflicts ? 1 : 0;
+}
+
+void CTortoiseMergeApp::OnClosingMainFrame(CFrameImpl* pFrameImpl)
+{
+    if (auto pFrame = dynamic_cast<CMainFrame*>(m_pMainWnd))
+    {
+        if (pFrame->CheckResolved() >= 0)
+            m_hasConflicts = true;
+    }
 }
 
 bool CTortoiseMergeApp::HasClipboardPatch()

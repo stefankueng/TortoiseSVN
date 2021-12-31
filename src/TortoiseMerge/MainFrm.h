@@ -56,9 +56,13 @@ public:
     CMainFrame();
     ~CMainFrame() override;
 
+    int  InitRibbon();
+
     void ShowDiffBar(bool bShow);
     void DiffLeftToBase() const;
     void DiffRightToBase() const;
+
+    int  CheckResolved();
 
 #ifdef _DEBUG
     void AssertValid() const override;
@@ -213,7 +217,6 @@ protected:
     void         UpdateLayout();
     virtual BOOL PatchFile(CString sFilePath, bool bContentMods, bool bPropMods, CString sVersion, BOOL bAutoPatch) override;
     virtual BOOL DiffFiles(CString sURL1, CString sRev1, CString sURL2, CString sRev2) override;
-    int          CheckResolved();
     BOOL         MarkAsResolved();
     int          SaveFile(const CString &sFilePath);
     void         WriteWindowPlacement(WINDOWPLACEMENT *pwp) const;
@@ -307,6 +310,7 @@ public:
     BOOL                              m_bReversedPatch;
     CDiffData                         m_data;
     bool                              m_bReadOnly;
+    bool                              m_bMarkedAsResolvedWasDone;
     bool                              m_bBlame;
     int                               m_nMoveMovesToIgnore;
     bool                              m_bCollapsed;
