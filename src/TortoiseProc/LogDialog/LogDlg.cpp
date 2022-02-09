@@ -73,6 +73,7 @@
 #include <sstream>
 
 #include "../LogCache/Streams/StreamException.h"
+#include <Commands/SyncCommand.h>
 
 #define ICONITEMBORDER      5
 #define MIN_CTRL_HEIGHT     (CDPIAware::Instance().Scale(GetSafeHwnd(), 20))
@@ -3496,53 +3497,6 @@ void CLogDlg::OnEnLinkMsgview(NMHDR* pNMHDR, LRESULT* pResult)
                             m_logList.SetItemState(static_cast<int>(i), LVIS_SELECTED, LVIS_SELECTED);
                             PostMessage(WM_TSVN_REFRESH_SELECTION, 0, 0);
                             return;
-                        }
-                        try
-                        {
-                            CLogCacheUtility logUtil(GetLogCachePool()->GetCache(m_sUuid,
-                                                                                 m_sRepositoryRoot),
-                                                     &m_projectProperties);
-                            if (logUtil.IsCached(rev))
-                            {
-                                auto pLogItem = logUtil.GetRevisionData(rev);
-                                if (pLogItem)
-                                {
-                                    // insert the data
-                                    m_logEntries.Sort(CLogDataVector::RevisionCol, false);
-                                    m_logEntries.AddSorted(pLogItem.release(), &m_projectProperties);
-
-                                    int selMark = m_logList.GetSelectionMark();
-                                    // now start filter the log list
-                                    SortAndFilter(rev);
-                                    m_logList.SetItemCountEx(ShownCountWithStopped());
-                                    m_logList.RedrawItems(0, ShownCountWithStopped());
-                                    if (selMark >= 0)
-                                        m_logList.SetSelectionMark(selMark);
-                                    m_logList.Invalidate();
-
-                                    for (size_t i = 0; i < m_logEntries.GetVisibleCount(); ++i)
-                                    {
-                                        PLOGENTRYDATA data = m_logEntries.GetVisible(i);
-                                        if (!data)
-                                            continue;
-                                        if (data->GetRevision() != rev)
-                                            continue;
-                                        if (selMark >= 0)
-                                        {
-                                            m_logList.SetItemState(selMark, 0, LVIS_SELECTED);
-                                        }
-                                        m_logList.EnsureVisible(static_cast<int>(i), FALSE);
-                                        m_logList.SetSelectionMark(static_cast<int>(i));
-                                        m_logList.SetItemState(static_cast<int>(i), LVIS_SELECTED, LVIS_SELECTED);
-                                        PostMessage(WM_TSVN_REFRESH_SELECTION, 0, 0);
-                                        return;
-                                    }
-                                }
-                            }
-                        }
-                        catch (CException* e)
-                        {
-                            e->Delete();
                         }
 
                         // if we get here, then the linked revision is not shown in this dialog:
@@ -8906,6 +8860,8 @@ void CLogDlg::SaveMonitorProjects(bool todisk)
         }
         else
             CTraceToOutputDebugString::Instance()(_T(__FUNCTION__) L": Error saving %s - saving failed\n", static_cast<LPCWSTR>(sTempfile));
+        SyncCommand syncCmd;
+        syncCmd.Execute();
     }
 }
 
