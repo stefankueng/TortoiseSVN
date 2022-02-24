@@ -1040,7 +1040,7 @@ CSVNStatusListCtrl::FileEntry*
 
     if (pSVNStatus->repos_relpath)
     {
-        entry->url = CPathUtils::PathUnescape(pSVNStatus->repos_relpath);
+        entry->url = CUnicodeUtils::GetUnicode(pSVNStatus->repos_relpath);
     }
 
     entry->kind = pSVNStatus->kind;
@@ -4296,8 +4296,8 @@ void CSVNStatusListCtrl::OnContextMenuHeader(CWnd* pWnd, CPoint point)
     const int columnCount = m_columnManager.GetColumnCount();
 
     CString    temp;
-    const UINT uCheckedFlags   = MF_STRING | MF_ENABLED | MF_CHECKED;
-    const UINT uUnCheckedFlags = MF_STRING | MF_ENABLED;
+    constexpr UINT uCheckedFlags   = MF_STRING | MF_ENABLED | MF_CHECKED;
+    constexpr UINT uUnCheckedFlags = MF_STRING | MF_ENABLED;
 
     // build control menu
 
