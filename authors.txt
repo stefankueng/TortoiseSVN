@@ -21,6 +21,7 @@ csaltori = csaltori <>
 csware = Sven Strickroth <email@cs-ware.de>
 d0oo0bsh = d0oo0bsh <>
 daibo = daibo <>
+danielsahlberg = dsahlberg-apache-org <>
 DartRavern = DartRavern <>
 davidtrasbo = davidtrasbo <>
 ddeguchi = ddeguchi <>
