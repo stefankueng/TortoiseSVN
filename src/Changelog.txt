@@ -5,7 +5,7 @@
 - BUG: the revision graph did not show the HEAD revision
        if not all revisions were shown. (Stefan)
 - BUG: context menu items in Win11 did show up but
-       didn't invoke the command. (Stefan
+       didn't invoke the command. (Stefan)
 - BUG: the repository tree control in the Checkout "Choose
        items" dialog didn't resize properly when resizing
        the window. (Daniel Sahlberg)
