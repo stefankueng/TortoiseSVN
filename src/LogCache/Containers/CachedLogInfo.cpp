@@ -19,6 +19,7 @@
 #include "stdafx.h"
 #include "CachedLogInfo.h"
 
+#include "../../Utils/PathUtils.h"
 #include "../Streams/RootInStream.h"
 #include "../Streams/RootOutStream.h"
 
@@ -175,6 +176,7 @@ void CCachedLogInfo::CCacheFileManager::AutoAcquire(const TFileName& filename, i
     }
 
     // auto-create file and acquire lock
+    CPathUtils::MakeSureDirectoryPathExists(lockFileName.substr(0, lockFileName.find_last_of('\\')).c_str());
 
     fileHandle = CreateFile(lockFileName.c_str(),
                             GENERIC_READ | GENERIC_WRITE,
