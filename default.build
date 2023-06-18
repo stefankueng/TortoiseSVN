@@ -114,8 +114,6 @@
     <property name="schedule" value="yes" />
     <!-- As of 230603 the build server for the nightly builds doesn't have NASM. So build OpenSSL with the no-asm option -->
     <property name="no-asm" value="yes" />
-    <!-- 230617: Do nightly builds in debug mode to see if we can reproduce the "multiple entries in logcache" issue -->
-    <property name="configuration" value="debug" />
   </target>
   <!-- ====================================================================== -->
   <!-- Project targets                                                        -->
