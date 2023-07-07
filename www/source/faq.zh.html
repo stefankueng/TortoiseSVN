@@ -457,8 +457,11 @@ lang: zh
             在更新时自动合并其他人的修改和自己的本地修改，如果要强制这些文件为冲突状态，之后再自己手工合并，可以这么做：</p>
             <ol>
                 <li>在TortoiseSVN-> 设置 ->Subversion配置文件, 点编辑按钮</li>
-                <li>修改 [helpers] 部分，添加 diff-cmd = "C:\\false.bat" diff3-cmd
-                = "C:\\false.bat" （注意，有两个反斜杠）</li>
+                <li>修改 [helpers] 部分，添加
+                <pre>
+diff-cmd = "C:\\false.bat"
+diff3-cmd = "C:\\false.bat"</pre>
+                （注意，有两个反斜杠）</li>
                 <li>创建文件 C:\false.bat，输入两行
                 <pre>
 @type %9

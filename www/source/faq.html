@@ -830,9 +830,10 @@ force security mode = 0600</pre>
             convenience.</p>
             <ol>
                 <li>In TortoiseSVN->Settings->Subversion configuration file, click on the edit button.</li>
-                <li>Change the [helpers] section by adding
-                diff-cmd = "C:\\false.bat"
-                diff3-cmd = "C:\\false.bat"
+                <li>Change the [helpers] section by adding the two lines
+                <pre>
+diff-cmd = "C:\\false.bat"
+diff3-cmd = "C:\\false.bat"</pre>
                 (note the double backslash)</li>
                 <li>Create the file C:\false.bat which contains two lines
                 <pre>
