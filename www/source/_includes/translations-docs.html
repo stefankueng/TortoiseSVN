@@ -16,14 +16,14 @@
     <td class="flag-{{ lang.flagCode | default: lang.code }}">{{ lang.name }}</td>
     {% unless nightly == true %}
     <td>
-        <a href="https://osdn.net/projects/tortoisesvn/storage/{{ site.version.short }}/Documentation/TortoiseSVN-{{ site.version.short }}-{{ lang.exeCode | default: lang.code }}.pdf/">PDF</a>
+        <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version.short }}/Documentation/TortoiseSVN-{{ site.version.short }}-{{ lang.exeCode | default: lang.code }}.pdf/">PDF</a>
     </td>
     {% endunless %}
     <td>
         <a href="/docs/{{ text }}/TortoiseSVN_{{ lang.exeCode | default: lang.code }}/index.html">HTML</a></td>
     {% unless nightly == true %}
     <td>
-        <a href="https://osdn.net/projects/tortoisesvn/storage/{{ site.version.short }}/Documentation/TortoiseMerge-{{ site.version.short }}-{{ lang.exeCode | default: lang.code }}.pdf/">PDF</a>
+        <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version.short }}/Documentation/TortoiseMerge-{{ site.version.short }}-{{ lang.exeCode | default: lang.code }}.pdf/">PDF</a>
     </td>
     {% endunless %}
     <td>

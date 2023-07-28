@@ -7,7 +7,7 @@
   "homepage": "https://tortoisesvn.net/",
   "repository": {
     "type": "svn",
-    "url": "https://osdn.net/projects/tortoisesvn/scm/svn/tree/head/trunk/www/"
+    "url": "https://sourceforge.net/p/tortoisesvn/code/HEAD/tree/trunk/www/"
   },
   "bugs": {
     "url": "https://tortoisesvn.net/reportbug.html"
