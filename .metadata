@@ -1,0 +1,7 @@
+; This file is used internally by git-svn
+; You should not have to edit it
+[svn-remote "svn"]
+	reposRoot = https://svn.code.sf.net/p/tortoisesvn/code
+	uuid = cc8e0003-5e82-43e2-9771-63201f7d8d9c
+	branches-maxRev = 1
+	tags-maxRev = 1
