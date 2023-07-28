@@ -1,0 +1,117 @@
+name: Mirror upstream TortoiseSVN repository
+
+on:
+  schedule:
+    - cron: '15 2/4 * * *'
+  workflow_dispatch:
+
+env:
+  REPOSITORY_URL: https://svn.code.sf.net/p/tortoisesvn/code
+  REPOSITORY_UUID: 154be670-7969-47af-9ab0-c6fb378d2295
+
+jobs:
+  check_version:
+    name: Check if version is up-to-date
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get latest upstream revision
+        id: upstream_revision
+        run: |
+          REVISION=$(svn info --show-item revision $REPOSITORY_URL)
+          if [[ -z "$REVISION" ]]; then
+            echo "Couldn't find upstream revision." >&1
+            exit 1
+          else
+            echo "Found upstream revision $REVISION"
+            echo "revision=$REVISION" >> $GITHUB_OUTPUT
+          fi
+      - name: Get latest local revision
+        id: local_revision
+        run: |
+          REVISION=$(curl -s -H "Authorization: token $GITHUB_TOKEN" -H "Accept: application/json" \
+            "https://api.github.com/repos/$REPO/commits/upstream" \
+            | jq -r .commit.message \
+            | sed -nE '/^$/,$ { s/^git-svn-id: [^ ]*@([0-9]+) '"$REPOSITORY_UUID"'$/\1/; t print; T; : print p }')
+          if [[ -z "$REVISION" ]]; then
+            echo "Couldn't find local revision." >&1
+          else
+            echo "Found local revision $REVISION"
+            echo "revision=$REVISION" >> $GITHUB_OUTPUT
+          fi
+        env:
+          REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+
+      - name: Check upstream version against local metadata
+        id: check_version
+        run: |
+          if [[ "$LOCAL_REVISION" == "$UPSTREAM_REVISION" ]]; then
+            echo "Local version is up-to-date: $LOCAL_REVISION = $UPSTREAM_REVISION"
+            echo "uptodate=true" >> $GITHUB_OUTPUT
+          else
+            echo "Local version is outdated: $LOCAL_REVISION != $UPSTREAM_REVISION"
+            echo "uptodate=false" >> $GITHUB_OUTPUT
+          fi
+        env:
+          UPSTREAM_REVISION: ${{ steps.upstream_revision.outputs.revision }}
+          LOCAL_REVISION: ${{ steps.local_revision.outputs.revision }}
+
+    outputs:
+      upstream_revision: ${{ steps.upstream_revision.outputs.revision }}
+      local_revision: ${{ steps.local_revision.outputs.revision }}
+      uptodate: ${{ steps.check_version.outputs.uptodate }}
+
+  fetch_changes:
+    name: Fetch changes
+    runs-on: ubuntu-latest
+
+    needs: [check_version]
+
+    if: ${{ needs.check_version.outputs.uptodate == 'false' }}
+
+    steps:
+      - name: Install requirements
+        run: |
+          sudo add-apt-repository --yes ppa:git-core/ppa
+          sudo apt-get update
+          sudo apt-get install --yes git-svn
+          git config --global core.autocrlf false
+      - name: Checkout code
+        uses: actions/checkout@v3.2.0
+        with:
+          ref: upstream
+          fetch-depth: 0
+
+      - name: Checkout svn metadata
+        uses: actions/checkout@v3.2.0
+        with:
+          ref: svn-meta
+          path: .git/svn
+
+      - name: Init git-svn remote
+        run: |
+          git svn init $REPOSITORY_URL --stdlayout
+      - name: Fetch upstream changes
+        run: |
+          git svn rebase --authors-file=.git/svn/authors.txt
+          git push
+      - name: Store updated svn metadata
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          cp ../refs/remotes/origin/trunk stored-ref
+          git add .
+          git commit -m 'svn-meta update'
+          git push
+        working-directory: .git/svn
+      - name: Rebase main branch
+        run: |
+          git config user.name github-actions
+          git config user.email github-actions@github.com
+          git checkout main --force
+          git reset --hard
+          git merge origin/upstream --ff
+          git push --force-with-lease
+          

@@ -1,0 +1,14 @@
+ext/boost/** linguist-generated=true
+ext/CrashServer/** linguist-generated=true
+ext/cyrus-SASL/** linguist-generated=true
+ext/editorconfig/** linguist-generated=true
+ext/expat/** linguist-generated=true
+ext/gssapi/** linguist-generated=true
+ext/hunspell/** linguist-generated=true
+ext/libintl/** linguist-generated=true
+ext/openssl/** linguist-generated=true
+ext/scintilla/** linguist-generated=true
+ext/spell/** linguist-generated=true
+ext/sqlite/** linguist-generated=true
+ext/TortoisePlink/** linguist-generated=true
+ext/zlib/** linguist-generated=true

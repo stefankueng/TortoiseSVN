@@ -1,0 +1,550 @@
+
+# /
+/.tx
+/Desktop.ini
+/MYBUILD
+/Tools
+/bin
+/cov-int
+/default.build.user
+/default.user
+/gpgpassphrase.txt
+/obj
+/signinfo.txt
+/tools
+/version.build
+/upload
+
+# /Languages/
+/Languages/*.prj
+/Languages/*.dll
+/Languages/*.aps
+/Languages/bin
+/Languages/zipfiles
+/Languages/*.poedit
+/Languages/*.mo
+/Languages/product.nsh
+/Languages/statusreport.txt
+/Languages/LanguagePack.nsi
+/Languages/test.bat
+/Languages/*.user
+/Languages/Debug
+/Languages/Release
+/Languages/x64
+
+# /Languages/ar/
+
+# /Languages/lt/
+
+# /Languages/th/
+
+# /Languages/vi/
+
+# /contrib/
+/contrib/TortoiseSVN.lzma
+
+# /contrib/Utils/
+/contrib/Utils/*.opensdf
+/contrib/Utils/*.sdf
+/contrib/Utils/*.suo
+/contrib/Utils/.vs
+
+# /contrib/choco/
+/contrib/choco/package
+/contrib/choco/package-ipv6
+
+# /contrib/hook-scripts/client-side/ConnectVPN/
+/contrib/hook-scripts/client-side/ConnectVPN/*.aps
+/contrib/hook-scripts/client-side/ConnectVPN/*.opensdf
+/contrib/hook-scripts/client-side/ConnectVPN/*.sdf
+/contrib/hook-scripts/client-side/ConnectVPN/*.suo
+/contrib/hook-scripts/client-side/ConnectVPN/*.user
+/contrib/hook-scripts/client-side/ConnectVPN/ipch
+
+# /contrib/issue-tracker-plugins/ExampleAtlPlugin/
+/contrib/issue-tracker-plugins/ExampleAtlPlugin/*.opensdf
+/contrib/issue-tracker-plugins/ExampleAtlPlugin/*.sdf
+/contrib/issue-tracker-plugins/ExampleAtlPlugin/*.suo
+/contrib/issue-tracker-plugins/ExampleAtlPlugin/*.user
+/contrib/issue-tracker-plugins/ExampleAtlPlugin/Debug
+/contrib/issue-tracker-plugins/ExampleAtlPlugin/ExampleAtlPlugin_i.c
+/contrib/issue-tracker-plugins/ExampleAtlPlugin/ExampleAtlPlugin_i.h
+/contrib/issue-tracker-plugins/ExampleAtlPlugin/Release
+/contrib/issue-tracker-plugins/ExampleAtlPlugin/.vs
+
+# /contrib/issue-tracker-plugins/ExampleCsPlugin/
+/contrib/issue-tracker-plugins/ExampleCsPlugin/bin
+/contrib/issue-tracker-plugins/ExampleCsPlugin/obj
+/contrib/issue-tracker-plugins/ExampleCsPlugin/*.suo
+/contrib/issue-tracker-plugins/ExampleCsPlugin/Service References
+/contrib/issue-tracker-plugins/ExampleCsPlugin/*.user
+/contrib/issue-tracker-plugins/ExampleCsPlugin/.vs
+
+# /contrib/issue-tracker-plugins/Interop.BugTraqProvider/
+/contrib/issue-tracker-plugins/Interop.BugTraqProvider/bin
+/contrib/issue-tracker-plugins/Interop.BugTraqProvider/*.suo
+/contrib/issue-tracker-plugins/Interop.BugTraqProvider/obj
+/contrib/issue-tracker-plugins/Interop.BugTraqProvider/.vs
+
+# /doc/
+/doc/*.bak
+/doc/*.lnk
+/doc/*.log
+/doc/*.mo
+/doc/IDD_Errors.txt
+/doc/Subversionbook.bat
+/doc/Tools
+/doc/doc.build.user
+/doc/docserverlogin.bat
+/doc/output
+/doc/tools
+/doc/website_backup
+/doc/Doxyfile
+
+# /doc/Aspell/
+/doc/Aspell/*.log
+/doc/Aspell/Temp.pws
+/doc/Aspell/aspell.bat
+/doc/Aspell/TortoiseSVN_*
+/doc/Aspell/TortoiseMerge_*
+
+# /doc/images/
+/doc/images/nconvert.exe
+/doc/images/f_info.txt
+
+# /doc/images/cs/
+
+# /doc/images/en/
+/doc/images/en/Clipboard.png
+
+# /doc/images/ja/
+
+# /doc/images/pl/
+/doc/images/pl/Thumbs.db
+
+# /doc/notes/
+
+# /doc/presentations/
+
+# /doc/presentations/Subversion Live 2011/
+
+# /doc/scripts/
+/doc/scripts/*.pyc
+
+# /doc/source/
+/doc/source/*
+
+# /doc/source/en/
+/doc/source/en/pubdate.xml
+/doc/source/en/version.xml
+/doc/source/en/Pubdate.xml
+/doc/source/en/Version.xml
+
+# /doc/test/
+/doc/test/temp
+/doc/test/DocPath.txt
+
+# /doc/xsl/
+/doc/xsl/db_htmlhelp.xsl
+/doc/xsl/db_htmlsingle.xsl
+/doc/xsl/db_pdfdoc.xsl
+/doc/xsl/db_htmlchunk.xsl
+
+# /doc/xsl/cs/
+/doc/xsl/cs/userconfig.xml
+
+# /doc/xsl/de/
+/doc/xsl/de/userconfig.xml
+
+# /doc/xsl/en/
+/doc/xsl/en/userconfig.xml
+
+# /doc/xsl/es/
+/doc/xsl/es/userconfig.xml
+
+# /doc/xsl/fa/
+/doc/xsl/fa/userconfig.xml
+
+# /doc/xsl/fi/
+/doc/xsl/fi/userconfig.xml
+
+# /doc/xsl/fonts/
+/doc/xsl/fonts/*.xml
+/doc/xsl/fonts/config.bat
+
+# /doc/xsl/fr/
+/doc/xsl/fr/userconfig.xml
+
+# /doc/xsl/hr/
+/doc/xsl/hr/userconfig.xml
+
+# /doc/xsl/id/
+/doc/xsl/id/userconfig.xml
+
+# /doc/xsl/ja/
+/doc/xsl/ja/userconfig.xml
+
+# /doc/xsl/pl/
+/doc/xsl/pl/userconfig.xml
+
+# /doc/xsl/ru/
+/doc/xsl/ru/userconfig.xml
+
+# /doc/xsl/sk/
+/doc/xsl/sk/userconfig.xml
+
+# /doc/xsl/sl/
+/doc/xsl/sl/userconfig.xml
+
+# /doc/xsl/sr/
+/doc/xsl/sr/userconfig.xml
+
+# /doc/xsl/sr@latin/
+/doc/xsl/sr@latin/userconfig.xml
+
+# /doc/xsl/vi/
+/doc/xsl/vi/userconfig.xml
+
+# /doc/xsl/zh_CN/
+/doc/xsl/zh_CN/userconfig.xml
+
+# /ext/
+
+# /ext/CrashServer/CommonLibs/Zlib/
+/ext/CrashServer/CommonLibs/Zlib/*.user
+
+# /ext/CrashServer/CrashHandler/
+/ext/CrashServer/CrashHandler/ipch
+/ext/CrashServer/CrashHandler/out
+/ext/CrashServer/CrashHandler/*.sdf
+/ext/CrashServer/CrashHandler/*.suo
+/ext/CrashServer/CrashHandler/*.opensdf
+/ext/CrashServer/CrashHandler/.vs
+/ext/CrashServer/CrashHandler/crashhandler.VC.db
+
+# /ext/CrashServer/CrashHandler/CrashHandler/
+/ext/CrashServer/CrashHandler/CrashHandler/*.aps
+/ext/CrashServer/CrashHandler/CrashHandler/*.user
+
+# /ext/CrashServer/CrashHandler/DumpUploaderServiceLib/
+/ext/CrashServer/CrashHandler/DumpUploaderServiceLib/*.user
+
+# /ext/CrashServer/CrashHandler/SendRpt/
+/ext/CrashServer/CrashHandler/SendRpt/*.user
+
+# /ext/CrashServer/external/
+
+# /ext/ResizableLib/
+/ext/ResizableLib/.cvsignore
+/ext/ResizableLib/ResizableLib.dsp
+/ext/ResizableLib/ResizableLib.dsw
+/ext/ResizableLib/CVS
+/ext/ResizableLib/Docs
+/ext/ResizableLib/*.user
+
+# /ext/TortoisePlink/
+/ext/TortoisePlink/*.RES
+/ext/TortoisePlink/*.aps
+/ext/TortoisePlink/*.user
+
+# /ext/TortoisePlink/windows/
+/ext/TortoisePlink/windows/*.aps
+
+# /ext/TreePropSheet/
+/ext/TreePropSheet/TreePropSheet.vcxproj.user
+
+# /ext/cyrus-SASL/
+/ext/cyrus-SASL/debug_win32
+/ext/cyrus-SASL/debug_x64
+/ext/cyrus-SASL/release_win32
+/ext/cyrus-SASL/release_x64
+
+# /ext/editorconfig/
+/ext/editorconfig/debug_win32
+/ext/editorconfig/debug_x64
+/ext/editorconfig/release_win32
+/ext/editorconfig/release_x64
+
+# /ext/gssapi/
+/ext/gssapi/debug_win32
+/ext/gssapi/debug_x64
+/ext/gssapi/release_win32
+/ext/gssapi/release_x64
+
+# /ext/libintl/
+/ext/libintl/debug_win32
+/ext/libintl/release_win32
+/ext/libintl/debug_x64
+/ext/libintl/release_x64
+
+# /ext/libintl/gettext-0.14.6/
+
+# /ext/libintl/gettext-0.14.6/gettext-runtime/
+
+# /ext/libintl/gettext-0.14.6/gettext-runtime/intl/
+/ext/libintl/gettext-0.14.6/gettext-runtime/intl/*.res
+/ext/libintl/gettext-0.14.6/gettext-runtime/intl/*.dll
+/ext/libintl/gettext-0.14.6/gettext-runtime/intl/*.manifest
+/ext/libintl/gettext-0.14.6/gettext-runtime/intl/*.exp
+/ext/libintl/gettext-0.14.6/gettext-runtime/intl/*.ilk
+/ext/libintl/gettext-0.14.6/gettext-runtime/intl/*.lib
+/ext/libintl/gettext-0.14.6/gettext-runtime/intl/*.pdb
+/ext/libintl/gettext-0.14.6/gettext-runtime/intl/*.idb
+
+# /ext/libintl/gettext-0.14.6/gettext-runtime/lib/
+
+# /ext/libintl/gettext-0.14.6/gettext-runtime/src/
+
+# /ext/libintl/gettext-0.14.6/gettext-runtime/windows/
+
+# /ext/openssl/
+/ext/openssl/*.bat
+/ext/openssl/*.bak
+/ext/openssl/Makefile
+/ext/openssl/MINFO
+/ext/openssl/inc32
+/ext/openssl/out32
+/ext/openssl/tmp32
+/ext/openssl/out32.dbg
+/ext/openssl/tmp32.dbg
+/ext/openssl/inc64
+/ext/openssl/out64
+/ext/openssl/tmp64
+/ext/openssl/out64.dbg
+/ext/openssl/tmp64.dbg
+
+# /ext/openssl/apps/
+/ext/openssl/apps/include
+
+# /ext/openssl/crypto/
+/ext/openssl/crypto/buildinf.h
+/ext/openssl/crypto/opensslconf.h
+/ext/openssl/crypto/opensslconf.h.bak
+
+# /ext/openssl/include/openssl/
+/ext/openssl/include/openssl/opensslconf.h
+
+# /ext/openssl/ms/
+/ext/openssl/ms/libeay32.def
+/ext/openssl/ms/nt.mak
+/ext/openssl/ms/ntdll.mak
+/ext/openssl/ms/ssleay32.def
+/ext/openssl/ms/uptable.asm
+/ext/openssl/ms/uptable.obj
+/ext/openssl/ms/version32.rc
+
+# /ext/scintilla/
+/ext/scintilla/*.user
+
+# /ext/scintilla/lexers/
+
+# /ext/scintilla/lexlib/
+
+# /ext/scintilla/win32/
+/ext/scintilla/win32/Lexers.lib
+/ext/scintilla/win32/*.obj
+/ext/scintilla/win32/*.res
+/ext/scintilla/win32/*.pdb
+
+# /ext/sqlite/
+/ext/sqlite/debug_win32
+/ext/sqlite/debug_x64
+/ext/sqlite/release_win32
+/ext/sqlite/release_x64
+/ext/sqlite/release_win32_static
+/ext/sqlite/debug_win32_static
+
+# /ext/zlib/
+/ext/zlib/*.asm
+/ext/zlib/debug_win32
+/ext/zlib/debug_win32_static
+/ext/zlib/debug_x64
+/ext/zlib/release_win32
+/ext/zlib/release_win32_static
+/ext/zlib/release_x64
+
+# /src/
+/src/*.ncb
+/src/*.opensdf
+/src/*.sdf
+/src/*.suo
+/src/.vs
+/src/Debug
+/src/ipch
+/src/version.h
+/src/TortoiseSVN.VC.db
+/src/TortoiseSVN.VC.VC.opendb
+/src/_ReSharper.Caches
+/src/TortoiseSVN.sln.DotSettings.user
+
+# /src/AsyncFramework/
+/src/AsyncFramework/*.user
+
+# /src/IBugTraqProvider/
+/src/IBugTraqProvider/IBugTraqProvider_i.c
+/src/IBugTraqProvider/IBugTraqProvider_p.c
+/src/IBugTraqProvider/dlldata.c
+/src/IBugTraqProvider/IBugTraqProvider_h.h
+/src/IBugTraqProvider/*.user
+
+# /src/LogCache/
+/src/LogCache/Release
+/src/LogCache/Debug
+/src/LogCache/*.ncb
+/src/LogCache/*.opt
+/src/LogCache/*.suo
+/src/LogCache/*.user
+/src/LogCache/.directory
+/src/LogCache/Makefile.in
+
+# /src/LogCache/Access/
+/src/LogCache/Access/Makefile
+/src/LogCache/Access/Makefile.in
+/src/LogCache/Access/*.user
+
+# /src/LogCache/Containers/
+/src/LogCache/Containers/*.user
+/src/LogCache/Containers/.directory
+/src/LogCache/Containers/Makefile.in
+/src/LogCache/Containers/Makefile
+
+# /src/LogCache/Streams/
+/src/LogCache/Streams/*.user
+/src/LogCache/Streams/.directory
+/src/LogCache/Streams/Makefile.in
+/src/LogCache/Streams/Makefile
+
+# /src/LogCache/Tests/
+/src/LogCache/Tests/[Bb]in
+/src/LogCache/Tests/obj
+/src/LogCache/Tests/[Dd]ebug
+/src/LogCache/Tests/[Rr]elease
+/src/LogCache/Tests/*.user
+/src/LogCache/Tests/*.aps
+/src/LogCache/Tests/*.eto
+/src/LogCache/Tests/ClientBin
+/src/LogCache/Tests/GeneratedArtifacts
+
+# /src/ResText/
+/src/ResText/*.user
+
+# /src/Resources/
+/src/Resources/*.aps
+/src/Resources/*.APS
+
+# /src/Resources/Icons/Blip/
+
+# /src/Resources/Icons/Blip Clean/
+
+# /src/Resources/Icons/DechenesVista/
+
+# /src/Resources/Icons/DechenesXp/
+
+# /src/Resources/Icons/Function/
+
+# /src/Resources/Icons/MufWin7/
+
+# /src/Resources/not used/
+
+# /src/SubWCRev/
+/src/SubWCRev/*.user
+/src/SubWCRev/Test.txt
+/src/SubWCRev/[Tt][Ee][Ss][Tt][Ww].txt
+/src/SubWCRev/*.aps
+/src/SubWCRev/*.tlb
+/src/SubWCRev/SubWCRev_h.h
+/src/SubWCRev/SubWCRev_i.c
+/src/SubWCRev/SubWCRevCOM_h.h
+/src/SubWCRev/SubWCRevCOM_i.c
+
+# /src/TSVNCache/
+/src/TSVNCache/TSVNCache.aps
+/src/TSVNCache/*.user
+
+# /src/TortoiseBlame/
+/src/TortoiseBlame/*.aps
+/src/TortoiseBlame/*.user
+
+# /src/TortoiseIDiff/
+/src/TortoiseIDiff/*.ncb
+/src/TortoiseIDiff/*.suo
+/src/TortoiseIDiff/*.user
+/src/TortoiseIDiff/*.aps
+
+# /src/TortoiseMerge/
+/src/TortoiseMerge/*.user
+
+# /src/TortoiseOverlays/
+/src/TortoiseOverlays/*.aps
+/src/TortoiseOverlays/*.ncb
+/src/TortoiseOverlays/*.sdf
+/src/TortoiseOverlays/*.suo
+/src/TortoiseOverlays/*.user
+/src/TortoiseOverlays/TortoiseOverlays.opensdf
+/src/TortoiseOverlays/VersionNumberInclude.wxi
+/src/TortoiseOverlays/version.build
+/src/TortoiseOverlays/version.h
+
+# /src/TortoiseProc/
+/src/TortoiseProc/*.user
+/src/TortoiseProc/[Bb]in
+/src/TortoiseProc/obj
+/src/TortoiseProc/[Dd]ebug
+/src/TortoiseProc/[Rr]elease
+/src/TortoiseProc/*.aps
+/src/TortoiseProc/*.eto
+
+# /src/TortoiseProc/LogDialog/
+
+# /src/TortoiseProc/Properties/
+
+# /src/TortoiseSVNSetup/
+/src/TortoiseSVNSetup/*.suo
+/src/TortoiseSVNSetup/VersionNumberInclude.wxi
+
+# /src/TortoiseSVNSetup/CustomActions/
+/src/TortoiseSVNSetup/CustomActions/*.user
+
+# /src/TortoiseShell/
+/src/TortoiseShell/deregister.reg
+/src/TortoiseShell/register.reg
+/src/TortoiseShell/registermbcs.reg
+/src/TortoiseShell/registerrelease.reg
+/src/TortoiseShell/resource.aps
+/src/TortoiseShell/*.user
+/src/TortoiseShell/*.aps
+
+# /src/TortoiseUDiff/
+/src/TortoiseUDiff/*.aps
+/src/TortoiseUDiff/*.user
+
+# /test/
+/test/*.ncb
+/test/*.opensdf
+/test/*.sdf
+/test/*.suo
+/test/ipch
+/test/.vs
+/test/x64
+
+# /test/Cache/
+/test/Cache/*.aps
+/test/Cache/*.user
+/test/Cache/x64
+
+# /www/
+/www/_site
+/www/dist
+/www/node_modules
+/www/npm-debug.log
+/www/website.zip
+
+# /www/source/
+/www/source/.jekyll-cache
+/www/source/.jekyll-metadata
+
+# /www/source/_includes/
+
+# /www/source/assets/img/
+
+# /www/source/files/
