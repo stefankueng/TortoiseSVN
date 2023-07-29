@@ -1,0 +1,1114 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{50797F06-39C5-4802-8E2B-7B7A4EF03214}</ProjectGuid>
+    <RootNamespace>TortoiseProc</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\bin\$(Configuration)\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\bin\$(Configuration)64\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\obj\$(ProjectName)\$(Configuration)64\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\bin\$(Configuration)\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\bin\$(Configuration)64\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\obj\$(ProjectName)\$(Configuration)64\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <OutDir>..\..\bin\$(Configuration)ARM64\bin\</OutDir>
+    <IntDir>..\..\obj\$(ProjectName)\$(Configuration)ARM64\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>..\..\bin\$(Configuration)ARM64\bin\</OutDir>
+    <IntDir>..\..\obj\$(ProjectName)\$(Configuration)ARM64\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr-util\include;..\..\ext\apr-util\xml\expat\lib;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_client;..\..\ext\apr\include;..\..\ext\boost;..\..\ext\openssl\include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\TortoiseShell;..\..\ext\libintl\gettext-0.14.6\gettext-runtime\intl;..\..\ext\scintilla\include;..\..\ext\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;..\LogCache\Containers;..\AsyncFramework;..\..\ext\cyrus-sasl\include;..\..\ext\openssl\inc32;RevisionGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HUNSPELL_STATIC;SVN_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);..\TortoiseShell;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;Secur32.lib;Winmm.lib;wininet.lib;shfolder.lib;UxTheme.lib;comctl32.lib;mswsock.lib;ws2_32.lib;rpcrt4.lib;shlwapi.lib;Version.lib;gdiplus.lib;libsvn_tsvn32.lib;libapr_tsvn.lib;libsasl.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\cyrus-SASL\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>windowsapp.dll</DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr-util\include;..\..\ext\apr-util\xml\expat\lib;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_client;..\..\ext\apr\include;..\..\ext\boost;..\..\ext\openssl\include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\TortoiseShell;..\..\ext\libintl\gettext-0.14.6\gettext-runtime\intl;..\..\ext\scintilla\include;..\..\ext\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;..\LogCache\Containers;..\AsyncFramework;..\..\ext\cyrus-sasl\include;..\..\ext\openssl\inc64;RevisionGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HUNSPELL_STATIC;SVN_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);..\TortoiseShell;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;Secur32.lib;Winmm.lib;wininet.lib;shfolder.lib;UxTheme.lib;comctl32.lib;mswsock.lib;ws2_32.lib;rpcrt4.lib;shlwapi.lib;Version.lib;gdiplus.lib;libsvn_tsvn.lib;libapr_tsvn.lib;libsasl.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\cyrus-SASL\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>windowsapp.dll</DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr-util\include;..\..\ext\apr-util\xml\expat\lib;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_client;..\..\ext\apr\include;..\..\ext\boost;..\..\ext\openssl\include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\TortoiseShell;..\..\ext\libintl\gettext-0.14.6\gettext-runtime\intl;..\..\ext\scintilla\include;..\..\ext\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;..\LogCache\Containers;..\AsyncFramework;..\..\ext\cyrus-sasl\include;..\..\ext\openssl\inc64;RevisionGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HUNSPELL_STATIC;SVN_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);..\TortoiseShell;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;Secur32.lib;Winmm.lib;wininet.lib;shfolder.lib;UxTheme.lib;comctl32.lib;mswsock.lib;ws2_32.lib;rpcrt4.lib;shlwapi.lib;Version.lib;gdiplus.lib;libsvn_tsvn.lib;libapr_tsvn.lib;libsasl.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\cyrus-SASL\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>windowsapp.dll</DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr-util\include;..\..\ext\apr-util\xml\expat\lib;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_client;..\..\ext\apr\include;..\..\ext\boost;..\..\ext\openssl\include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\TortoiseShell;..\..\ext\libintl\gettext-0.14.6\gettext-runtime\intl;..\..\ext\scintilla\include;..\..\ext\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;..\LogCache\Containers;..\AsyncFramework;..\..\ext\cyrus-sasl\include;..\..\ext\openssl\inc32;RevisionGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HUNSPELL_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);..\TortoiseShell;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;Secur32.lib;Winmm.lib;wininet.lib;shfolder.lib;UxTheme.lib;comctl32.lib;mswsock.lib;ws2_32.lib;rpcrt4.lib;shlwapi.lib;Version.lib;gdiplus.lib;libsvn_tsvn32.lib;libapr_tsvn.lib;libsasl.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\cyrus-SASL\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>windowsapp.dll</DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr-util\include;..\..\ext\apr-util\xml\expat\lib;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_client;..\..\ext\apr\include;..\..\ext\boost;..\..\ext\openssl\include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\TortoiseShell;..\..\ext\libintl\gettext-0.14.6\gettext-runtime\intl;..\..\ext\scintilla\include;..\..\ext\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;..\LogCache\Containers;..\AsyncFramework;..\..\ext\cyrus-sasl\include;..\..\ext\openssl\inc64;RevisionGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HUNSPELL_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);..\TortoiseShell;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;Secur32.lib;Winmm.lib;wininet.lib;shfolder.lib;UxTheme.lib;comctl32.lib;mswsock.lib;ws2_32.lib;rpcrt4.lib;shlwapi.lib;Version.lib;gdiplus.lib;libsvn_tsvn.lib;libapr_tsvn.lib;libsasl.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\cyrus-SASL\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>windowsapp.dll</DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr-util\include;..\..\ext\apr-util\xml\expat\lib;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_client;..\..\ext\apr\include;..\..\ext\boost;..\..\ext\openssl\include;..\TortoiseProc;..\Utils;..\SVN;..\..\ext\ResizableLib;..\TortoiseShell;..\..\ext\libintl\gettext-0.14.6\gettext-runtime\intl;..\..\ext\scintilla\include;..\..\ext\TreePropSheet;..\Utils\ColourPickerXP;..\Utils\NewMenu;..\Utils\MiscUI;..\LogCache;..\LogCache\Containers;..\AsyncFramework;..\..\ext\cyrus-sasl\include;..\..\ext\openssl\inc64;RevisionGraph;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>HUNSPELL_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);..\TortoiseShell;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;Secur32.lib;Winmm.lib;wininet.lib;shfolder.lib;UxTheme.lib;comctl32.lib;mswsock.lib;ws2_32.lib;rpcrt4.lib;shlwapi.lib;Version.lib;gdiplus.lib;libsvn_tsvn.lib;libapr_tsvn.lib;libsasl.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\cyrus-SASL\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <DelayLoadDLLs>windowsapp.dll</DelayLoadDLLs>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\ext\snarl\SnarlInterface.cpp">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\SVN\SVN.cpp" />
+    <ClCompile Include="..\SVN\SVNAdminDir.cpp" />
+    <ClCompile Include="..\SVN\SVNAuthData.cpp" />
+    <ClCompile Include="..\SVN\SVNBase.cpp" />
+    <ClCompile Include="..\SVN\SVNConfig.cpp" />
+    <ClCompile Include="..\SVN\SVNConflictInfo.cpp" />
+    <ClCompile Include="..\SVN\SVNDataObject.cpp" />
+    <ClCompile Include="..\SVN\SVNDiff.cpp" />
+    <ClCompile Include="..\SVN\SVNError.cpp" />
+    <ClCompile Include="..\SVN\SVNExternals.cpp" />
+    <ClCompile Include="..\SVN\SVNGlobal.cpp" />
+    <ClCompile Include="..\SVN\SVNHelpers.cpp" />
+    <ClCompile Include="..\SVN\SVNInfo.cpp" />
+    <ClCompile Include="..\SVN\SVNLogHelper.cpp" />
+    <ClCompile Include="..\SVN\SVNPrompt.cpp" />
+    <ClCompile Include="..\SVN\SVNProperties.cpp" />
+    <ClCompile Include="..\SVN\SVNReadProperties.cpp" />
+    <ClCompile Include="..\SVN\SVNRev.cpp" />
+    <ClCompile Include="..\SVN\SVNStatus.cpp" />
+    <ClCompile Include="..\SVN\SVNStatusListCtrl.cpp" />
+    <ClCompile Include="..\SVN\SVNStatusListCtrlHelpers.cpp" />
+    <ClCompile Include="..\SVN\TSVNAuth.cpp" />
+    <ClCompile Include="..\SVN\TSVNPath.cpp" />
+    <ClCompile Include="..\TSVNCache\CacheInterface.cpp" />
+    <ClCompile Include="..\Utils\accHelper.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Utils\AutoComplete.cpp" />
+    <ClCompile Include="..\Utils\BugTraqAssociations.cpp" />
+    <ClCompile Include="..\Utils\Callback.cpp" />
+    <ClCompile Include="..\Utils\CmdLineParser.cpp" />
+    <ClCompile Include="..\Utils\CmdUrlParser.cpp" />
+    <ClCompile Include="..\Utils\COMError.cpp" />
+    <ClCompile Include="..\Utils\CommonAppUtils.cpp" />
+    <ClCompile Include="..\Utils\DarkModeHelper.cpp" />
+    <ClCompile Include="..\Utils\DebugOutput.cpp" />
+    <ClCompile Include="..\Utils\DirFileEnum.cpp" />
+    <ClCompile Include="..\Utils\DragDropImpl.cpp" />
+    <ClCompile Include="..\Utils\Hash.cpp" />
+    <ClCompile Include="..\Utils\Hooks.cpp" />
+    <ClCompile Include="..\Utils\IconExtractor.cpp" />
+    <ClCompile Include="..\Utils\JumpListHelpers.cpp" />
+    <ClCompile Include="..\Utils\Libraries.cpp" />
+    <ClCompile Include="..\Utils\ListViewAccServer.cpp" />
+    <ClCompile Include="..\Utils\LoadIconEx.cpp" />
+    <ClCompile Include="..\Utils\LruCache.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\AeroControls.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\AnimationManager.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\BrowseFolder.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\BufferDC.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\DIB.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\DragDropTreeCtrl.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\EditWordBreak.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\FileDlgEventHandler.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\FileDropEdit.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\FilterEdit.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\Gradient.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\HistoryCombo.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\HyperLink.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\IconBitmapUtils.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\IconMenu.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\LinkControl.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\MyGraph.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\OddButton.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\PathEdit.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\ProgressDlg.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\RegexEdit.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\SciEdit.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\SplitterControl.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\StandAloneDlg.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\SubTooltipListCtrl.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\SVG.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\ThemeControls.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\ToastNotifications.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\Tooltip.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\WaitCursorEx.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\WaterEffect.cpp" />
+    <ClCompile Include="..\Utils\Monitor.cpp" />
+    <ClCompile Include="..\Utils\PathUtils.cpp" />
+    <ClCompile Include="..\Utils\PathWatcher.cpp" />
+    <ClCompile Include="..\Utils\PersonalDictionary.cpp" />
+    <ClCompile Include="..\Utils\PreserveChdir.cpp" />
+    <ClCompile Include="..\Utils\ProfilingInfo.cpp" />
+    <ClCompile Include="..\Utils\ReaderWriterLock.cpp" />
+    <ClCompile Include="..\Utils\RegHistory.cpp" />
+    <ClCompile Include="..\Utils\Registry.cpp" />
+    <ClCompile Include="..\Utils\ShellUpdater.cpp" />
+    <ClCompile Include="..\Utils\StdioFileT.cpp" />
+    <ClCompile Include="..\Utils\StringBuffer.cpp" />
+    <ClCompile Include="..\Utils\StringUtils.cpp" />
+    <ClCompile Include="..\Utils\SVNTrace.cpp" />
+    <ClCompile Include="..\Utils\SysImageList.cpp" />
+    <ClCompile Include="..\Utils\TaskbarUUID.cpp" />
+    <ClCompile Include="..\Utils\TempFile.cpp" />
+    <ClCompile Include="..\Utils\Theme.cpp" />
+    <ClCompile Include="..\Utils\UnicodeUtils.cpp" />
+    <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="AddDlg.cpp" />
+    <ClCompile Include="AppUtils.cpp" />
+    <ClCompile Include="AutoTextTestDlg.cpp" />
+    <ClCompile Include="Blame.cpp" />
+    <ClCompile Include="BlameDlg.cpp" />
+    <ClCompile Include="BugtraqRegexTestDlg.cpp" />
+    <ClCompile Include="ChangedDlg.cpp" />
+    <ClCompile Include="CheckForUpdatesDlg.cpp" />
+    <ClCompile Include="CheckoutDlg.cpp" />
+    <ClCompile Include="CleanupDlg.cpp" />
+    <ClCompile Include="CodeCollaborator.cpp" />
+    <ClCompile Include="CodeCollaboratorSettingsDlg.cpp" />
+    <ClCompile Include="Colors.cpp" />
+    <ClCompile Include="Commands\AboutCommand.cpp" />
+    <ClCompile Include="Commands\AddCommand.cpp" />
+    <ClCompile Include="Commands\BlameCommand.cpp" />
+    <ClCompile Include="Commands\CatCommand.cpp" />
+    <ClCompile Include="Commands\CheckoutCommand.cpp" />
+    <ClCompile Include="Commands\CleanupCommand.cpp" />
+    <ClCompile Include="Commands\Command.cpp" />
+    <ClCompile Include="Commands\CommitCommand.cpp" />
+    <ClCompile Include="Commands\ConflictEditorCommand.cpp" />
+    <ClCompile Include="Commands\CopyCommand.cpp" />
+    <ClCompile Include="Commands\CreatePatchCommand.cpp" />
+    <ClCompile Include="Commands\CreateRepositoryCommand.cpp" />
+    <ClCompile Include="Commands\DelUnversionedCommand.cpp" />
+    <ClCompile Include="Commands\DiffCommand.cpp" />
+    <ClCompile Include="Commands\DropCopyAddCommand.cpp" />
+    <ClCompile Include="Commands\DropCopyCommand.cpp" />
+    <ClCompile Include="Commands\DropExportCommand.cpp" />
+    <ClCompile Include="Commands\DropExternalCommand.cpp" />
+    <ClCompile Include="Commands\DropMoveCommand.cpp" />
+    <ClCompile Include="Commands\DropVendorCommand.cpp" />
+    <ClCompile Include="Commands\EditFileCommand.cpp" />
+    <ClCompile Include="Commands\ExportCommand.cpp" />
+    <ClCompile Include="Commands\IgnoreCommand.cpp" />
+    <ClCompile Include="Commands\ImportCommand.cpp" />
+    <ClCompile Include="Commands\LockCommand.cpp" />
+    <ClCompile Include="Commands\LogCommand.cpp" />
+    <ClCompile Include="Commands\MergeAllCommand.cpp" />
+    <ClCompile Include="Commands\MergeCommand.cpp" />
+    <ClCompile Include="Commands\MonitorCommand.cpp" />
+    <ClCompile Include="Commands\PasteCopyCommand.cpp" />
+    <ClCompile Include="Commands\PasteMoveCommand.cpp" />
+    <ClCompile Include="Commands\PrevDiffCommand.cpp" />
+    <ClCompile Include="Commands\PropertiesCommand.cpp" />
+    <ClCompile Include="Commands\RebuildIconCacheCommand.cpp" />
+    <ClCompile Include="Commands\RelocateCommand.cpp" />
+    <ClCompile Include="Commands\RemoveCommand.cpp" />
+    <ClCompile Include="Commands\RenameCommand.cpp" />
+    <ClCompile Include="Commands\RepositoryBrowserCommand.cpp" />
+    <ClCompile Include="Commands\RepoStatusCommand.cpp" />
+    <ClCompile Include="Commands\ResolveCommand.cpp" />
+    <ClCompile Include="Commands\RevertCommand.cpp" />
+    <ClCompile Include="Commands\RevisionGraphCommand.cpp" />
+    <ClCompile Include="Commands\SettingsCommand.cpp" />
+    <ClCompile Include="Commands\ShelveCommand.cpp" />
+    <ClCompile Include="Commands\ShowCompareCommand.cpp" />
+    <ClCompile Include="Commands\SwitchCommand.cpp" />
+    <ClCompile Include="Commands\SyncCommand.cpp" />
+    <ClCompile Include="Commands\UnIgnoreCommand.cpp" />
+    <ClCompile Include="Commands\UnLockCommand.cpp" />
+    <ClCompile Include="Commands\UnshelveCommand.cpp" />
+    <ClCompile Include="Commands\UpdateCheckCommand.cpp" />
+    <ClCompile Include="Commands\UpdateCommand.cpp" />
+    <ClCompile Include="Commands\UrlDiffCommand.cpp" />
+    <ClCompile Include="CommitDlg.cpp" />
+    <ClCompile Include="CopyDlg.cpp" />
+    <ClCompile Include="CreateChangelistDlg.cpp" />
+    <ClCompile Include="CreatePatchDlg.cpp" />
+    <ClCompile Include="DeleteUnversionedDlg.cpp" />
+    <ClCompile Include="DiffOptionsDlg.cpp" />
+    <ClCompile Include="ExportDlg.cpp" />
+    <ClCompile Include="FileDiffDlg.cpp" />
+    <ClCompile Include="GoOffline.cpp" />
+    <ClCompile Include="HistoryDlg.cpp" />
+    <ClCompile Include="ImportDlg.cpp" />
+    <ClCompile Include="InputDlg.cpp" />
+    <ClCompile Include="InputLogDlg.cpp" />
+    <ClCompile Include="LockDlg.cpp" />
+    <ClCompile Include="LogCacheStatisticsDlg.cpp" />
+    <ClCompile Include="LogDialog\LogDlg.cpp" />
+    <ClCompile Include="LogDialog\LogDlgDataModel.cpp" />
+    <ClCompile Include="LogDialog\LogDlgFilter.cpp" />
+    <ClCompile Include="LogDialog\LogDlgHelper.cpp" />
+    <ClCompile Include="LogDialog\StatGraphDlg.cpp" />
+    <ClCompile Include="LogFile.cpp" />
+    <ClCompile Include="MergeAllDlg.cpp" />
+    <ClCompile Include="MergeWizard.cpp" />
+    <ClCompile Include="MergeWizardBasePage.cpp" />
+    <ClCompile Include="MergeWizardOptions.cpp" />
+    <ClCompile Include="MergeWizardRevRange.cpp" />
+    <ClCompile Include="MergeWizardStart.cpp" />
+    <ClCompile Include="MergeWizardTree.cpp" />
+    <ClCompile Include="MonitorOptionsDlg.cpp" />
+    <ClCompile Include="MonitorProjectDlg.cpp" />
+    <ClCompile Include="PropConflictEditorDlg.cpp" />
+    <ClCompile Include="Settings\SetWin11ContextMenu.cpp" />
+    <ClCompile Include="ShelveDlg.cpp" />
+    <ClCompile Include="TextConflictEditorDlg.cpp" />
+    <ClCompile Include="TreeConflictEditorDlg.cpp" />
+    <ClCompile Include="PasswordDlg.cpp" />
+    <ClCompile Include="ProjectProperties.cpp" />
+    <ClCompile Include="PromptDlg.cpp" />
+    <ClCompile Include="PropDlg.cpp" />
+    <ClCompile Include="Properties\EditPropBase.cpp" />
+    <ClCompile Include="Properties\EditPropBugtraq.cpp" />
+    <ClCompile Include="Properties\EditPropEOL.cpp" />
+    <ClCompile Include="Properties\EditPropertiesDlg.cpp" />
+    <ClCompile Include="Properties\EditPropertyValueDlg.cpp" />
+    <ClCompile Include="Properties\EditPropExecutable.cpp" />
+    <ClCompile Include="Properties\EditPropExternals.cpp" />
+    <ClCompile Include="Properties\EditPropExternalsValue.cpp" />
+    <ClCompile Include="Properties\EditPropKeywords.cpp" />
+    <ClCompile Include="Properties\EditPropMergeLogTemplate.cpp" />
+    <ClCompile Include="Properties\EditPropMimeType.cpp" />
+    <ClCompile Include="Properties\EditPropNeedsLock.cpp" />
+    <ClCompile Include="Properties\EditPropsLocalHooks.cpp" />
+    <ClCompile Include="Properties\EditPropTSVNLang.cpp" />
+    <ClCompile Include="Properties\EditPropTSVNSizes.cpp" />
+    <ClCompile Include="Properties\EditPropUserBool.cpp" />
+    <ClCompile Include="Properties\EditPropUserMultiLine.cpp" />
+    <ClCompile Include="Properties\EditPropUserSingleLine.cpp" />
+    <ClCompile Include="Properties\EditPropUserState.cpp" />
+    <ClCompile Include="Properties\UserProperties.cpp" />
+    <ClCompile Include="RecycleBinDlg.cpp" />
+    <ClCompile Include="RelocateDlg.cpp" />
+    <ClCompile Include="RenameDlg.cpp" />
+    <ClCompile Include="RepoCreationFinished.cpp" />
+    <ClCompile Include="RepoDrags.cpp" />
+    <ClCompile Include="RepositoryBar.cpp" />
+    <ClCompile Include="RepositoryBrowser.cpp" />
+    <ClCompile Include="RepositoryBrowserSelection.cpp" />
+    <ClCompile Include="RepositoryLister.cpp" />
+    <ClCompile Include="ResolveDlg.cpp" />
+    <ClCompile Include="RevertDlg.cpp" />
+    <ClCompile Include="RevisionDlg.cpp" />
+    <ClCompile Include="RevisionGraph\AllGraphOptions.cpp" />
+    <ClCompile Include="RevisionGraph\CollapseTreeDownward.cpp" />
+    <ClCompile Include="RevisionGraph\CollapseTreeUpward.cpp" />
+    <ClCompile Include="RevisionGraph\CopyFilterOptions.cpp" />
+    <ClCompile Include="RevisionGraph\CutTrees.cpp" />
+    <ClCompile Include="RevisionGraph\ExactCopyFroms.cpp" />
+    <ClCompile Include="RevisionGraph\FoldTags.cpp" />
+    <ClCompile Include="RevisionGraph\FullGraph.cpp" />
+    <ClCompile Include="RevisionGraph\FullGraphBuilder.cpp" />
+    <ClCompile Include="RevisionGraph\FullGraphFinalizer.cpp" />
+    <ClCompile Include="RevisionGraph\FullGraphNode.cpp" />
+    <ClCompile Include="RevisionGraph\FullHistory.cpp" />
+    <ClCompile Include="RevisionGraph\GraphNodeState.cpp" />
+    <ClCompile Include="RevisionGraph\LayoutOptions.cpp" />
+    <ClCompile Include="RevisionGraph\ModificationOptions.cpp" />
+    <ClCompile Include="RevisionGraph\PathClassificator.cpp" />
+    <ClCompile Include="RevisionGraph\RemoveDeletedBranches.cpp" />
+    <ClCompile Include="RevisionGraph\RemovePathsBySubString.cpp" />
+    <ClCompile Include="RevisionGraph\RemoveSimpleChanges.cpp" />
+    <ClCompile Include="RevisionGraph\RemoveTags.cpp" />
+    <ClCompile Include="RevisionGraph\RemoveUnchangedBranches.cpp" />
+    <ClCompile Include="RevisionGraph\RevGraphFilterDlg.cpp" />
+    <ClCompile Include="RevisionGraph\RevisionGraphDlg.cpp" />
+    <ClCompile Include="RevisionGraph\RevisionGraphDlgDraw.cpp" />
+    <ClCompile Include="RevisionGraph\RevisionGraphDlgFunc.cpp" />
+    <ClCompile Include="RevisionGraph\RevisionGraphOptions.cpp" />
+    <ClCompile Include="RevisionGraph\RevisionGraphState.cpp" />
+    <ClCompile Include="RevisionGraph\RevisionGraphWnd.cpp" />
+    <ClCompile Include="RevisionGraph\RevisionInRange.cpp" />
+    <ClCompile Include="RevisionGraph\SearchPathTree.cpp" />
+    <ClCompile Include="RevisionGraph\ShowHeads.cpp" />
+    <ClCompile Include="RevisionGraph\ShowPathsAsDiff.cpp" />
+    <ClCompile Include="RevisionGraph\ShowTreeStripes.cpp" />
+    <ClCompile Include="RevisionGraph\ShowWC.cpp" />
+    <ClCompile Include="RevisionGraph\ShowWCModification.cpp" />
+    <ClCompile Include="RevisionGraph\StandardLayout.cpp" />
+    <ClCompile Include="RevisionGraph\StandardLayoutConnectionList.cpp" />
+    <ClCompile Include="RevisionGraph\StandardLayoutNodeList.cpp" />
+    <ClCompile Include="RevisionGraph\StandardLayoutRectList.cpp" />
+    <ClCompile Include="RevisionGraph\StandardLayoutTextList.cpp" />
+    <ClCompile Include="RevisionGraph\StandardNodePositioning.cpp" />
+    <ClCompile Include="RevisionGraph\StandardNodeSizeAssignment.cpp" />
+    <ClCompile Include="RevisionGraph\StrictOrderNodePositioning.cpp" />
+    <ClCompile Include="RevisionGraph\TopAlignTrees.cpp" />
+    <ClCompile Include="RevisionGraph\UpsideDownLayout.cpp" />
+    <ClCompile Include="RevisionGraph\VisibleGraph.cpp" />
+    <ClCompile Include="RevisionGraph\VisibleGraphBuilder.cpp" />
+    <ClCompile Include="RevisionGraph\VisibleGraphNode.cpp" />
+    <ClCompile Include="RevisionRangeDlg.cpp" />
+    <ClCompile Include="Settings\SetBugTraq.cpp" />
+    <ClCompile Include="Settings\SetBugTraqAdv.cpp" />
+    <ClCompile Include="Settings\SetDialogs.cpp" />
+    <ClCompile Include="Settings\SetHooks.cpp" />
+    <ClCompile Include="Settings\SetHooksAdv.cpp" />
+    <ClCompile Include="Settings\SetLogCache.cpp" />
+    <ClCompile Include="Settings\SetLookAndFeelPage.cpp" />
+    <ClCompile Include="Settings\SetMainPage.cpp" />
+    <ClCompile Include="Settings\SetMisc.cpp" />
+    <ClCompile Include="Settings\SetOverlayHandlers.cpp" />
+    <ClCompile Include="Settings\SetOverlayIcons.cpp" />
+    <ClCompile Include="Settings\SetOverlayPage.cpp" />
+    <ClCompile Include="Settings\SetProgsAdvDlg.cpp" />
+    <ClCompile Include="Settings\SetProxyPage.cpp" />
+    <ClCompile Include="Settings\SetSavedDataPage.cpp" />
+    <ClCompile Include="Settings\Settings.cpp" />
+    <ClCompile Include="Settings\SettingsAdvanced.cpp" />
+    <ClCompile Include="Settings\SettingsClearAuth.cpp" />
+    <ClCompile Include="Settings\SettingsColors.cpp" />
+    <ClCompile Include="Settings\SettingsDialogs3.cpp" />
+    <ClCompile Include="Settings\SettingsLogCaches.cpp" />
+    <ClCompile Include="Settings\SettingsProgsDiff.cpp" />
+    <ClCompile Include="Settings\SettingsProgsMerge.cpp" />
+    <ClCompile Include="Settings\SettingsPropPage.cpp" />
+    <ClCompile Include="Settings\SettingsRevGraphColors.cpp" />
+    <ClCompile Include="Settings\SettingsRevisionGraph.cpp" />
+    <ClCompile Include="Settings\SettingsSync.cpp" />
+    <ClCompile Include="Settings\SettingsTBlame.cpp" />
+    <ClCompile Include="Settings\SettingsTUDiff.cpp" />
+    <ClCompile Include="Settings\ToolAssocDlg.cpp" />
+    <ClCompile Include="SimplePrompt.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="SVNDiffOptions.cpp" />
+    <ClCompile Include="SVNProgressDlg.cpp" />
+    <ClCompile Include="SwitchDlg.cpp" />
+    <ClCompile Include="TortoiseProc.cpp" />
+    <ClCompile Include="UnlockDlg.cpp" />
+    <ClCompile Include="UnshelveDlg.cpp" />
+    <ClCompile Include="UpdateDlg.cpp" />
+    <ClCompile Include="UrlDiffDlg.cpp" />
+    <ClCompile Include="URLDlg.cpp" />
+    <ClCompile Include="WaitDlg.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SVN\SVN.h" />
+    <ClInclude Include="..\SVN\SVNAdminDir.h" />
+    <ClInclude Include="..\SVN\SVNAuthData.h" />
+    <ClInclude Include="..\SVN\SVNBase.h" />
+    <ClInclude Include="..\SVN\SVNConfig.h" />
+    <ClInclude Include="..\SVN\SVNConflictInfo.h" />
+    <ClInclude Include="..\SVN\SVNDataObject.h" />
+    <ClInclude Include="..\SVN\SVNDiff.h" />
+    <ClInclude Include="..\SVN\SVNError.h" />
+    <ClInclude Include="..\SVN\SVNExternals.h" />
+    <ClInclude Include="..\SVN\SVNGlobal.h" />
+    <ClInclude Include="..\SVN\SVNHelpers.h" />
+    <ClInclude Include="..\SVN\SVNInfo.h" />
+    <ClInclude Include="..\SVN\SVNLogHelper.h" />
+    <ClInclude Include="..\SVN\SVNPrompt.h" />
+    <ClInclude Include="..\SVN\SVNProperties.h" />
+    <ClInclude Include="..\SVN\SVNReadProperties.h" />
+    <ClInclude Include="..\SVN\SVNRev.h" />
+    <ClInclude Include="..\SVN\SVNStatus.h" />
+    <ClInclude Include="..\SVN\SVNStatusListCtrl.h" />
+    <ClInclude Include="..\SVN\TSVNAuth.h" />
+    <ClInclude Include="..\SVN\TSVNPath.h" />
+    <ClInclude Include="..\Utils\AutoComplete.h" />
+    <ClInclude Include="..\Utils\BugTraqAssociations.h" />
+    <ClInclude Include="..\Utils\Callback.h" />
+    <ClInclude Include="..\Utils\ClipboardHelper.h" />
+    <ClInclude Include="..\Utils\CmdLineParser.h" />
+    <ClInclude Include="..\Utils\CmdUrlParser.h" />
+    <ClInclude Include="..\Utils\COMError.h" />
+    <ClInclude Include="..\Utils\CommonAppUtils.h" />
+    <ClInclude Include="..\Utils\CrashReport.h" />
+    <ClInclude Include="..\Utils\CreateProcessHelper.h" />
+    <ClInclude Include="..\Utils\DarkModeHelper.h" />
+    <ClInclude Include="..\Utils\DebugOutput.h" />
+    <ClInclude Include="..\Utils\DirFileEnum.h" />
+    <ClInclude Include="..\Utils\DPIAware.h" />
+    <ClInclude Include="..\Utils\DragDropImpl.h" />
+    <ClInclude Include="..\Utils\FormatMessageWrapper.h" />
+    <ClInclude Include="..\Utils\Hash.h" />
+    <ClInclude Include="..\Utils\HighResClock.h" />
+    <ClInclude Include="..\Utils\Hooks.h" />
+    <ClInclude Include="..\Utils\IconExtractor.h" />
+    <ClInclude Include="..\Utils\IInputValidator.h" />
+    <ClInclude Include="..\Utils\JumpListHelpers.h" />
+    <ClInclude Include="..\Utils\Libraries.h" />
+    <ClInclude Include="..\Utils\ListViewAccServer.h" />
+    <ClInclude Include="..\Utils\LoadIconEx.h" />
+    <ClInclude Include="..\Utils\LruCache.h" />
+    <ClInclude Include="..\Utils\MiscUI\AeroControls.h" />
+    <ClInclude Include="..\Utils\MiscUI\AnimationManager.h" />
+    <ClInclude Include="..\Utils\MiscUI\BrowseFolder.h" />
+    <ClInclude Include="..\Utils\MiscUI\BufferDC.h" />
+    <ClInclude Include="..\Utils\MiscUI\CommonDialogFunctions.h" />
+    <ClInclude Include="..\Utils\MiscUI\ControlsBridge.h" />
+    <ClInclude Include="..\Utils\MiscUI\DIB.h" />
+    <ClInclude Include="..\Utils\MiscUI\DragDropTreeCtrl.h" />
+    <ClInclude Include="..\Utils\MiscUI\EditWordBreak.h" />
+    <ClInclude Include="..\Utils\MiscUI\ExtTextOutFL.h" />
+    <ClInclude Include="..\Utils\MiscUI\FileDlgEventHandler.h" />
+    <ClInclude Include="..\Utils\MiscUI\FileDropEdit.h" />
+    <ClInclude Include="..\Utils\MiscUI\FilterEdit.h" />
+    <ClInclude Include="..\Utils\MiscUI\Gradient.h" />
+    <ClInclude Include="..\Utils\MiscUI\HighColorTab.hpp" />
+    <ClInclude Include="..\Utils\MiscUI\HintCtrl.h" />
+    <ClInclude Include="..\Utils\MiscUI\HistoryCombo.h" />
+    <ClInclude Include="..\Utils\MiscUI\HyperLink.h" />
+    <ClInclude Include="..\Utils\MiscUI\IconBitmapUtils.h" />
+    <ClInclude Include="..\Utils\MiscUI\IconMenu.h" />
+    <ClInclude Include="..\Utils\MiscUI\LinkControl.h" />
+    <ClInclude Include="..\Utils\MiscUI\MyGraph.h" />
+    <ClInclude Include="..\Utils\MiscUI\OddButton.h" />
+    <ClInclude Include="..\Utils\MiscUI\PathEdit.h" />
+    <ClInclude Include="..\Utils\MiscUI\ProgressDlg.h" />
+    <ClInclude Include="..\Utils\MiscUI\RegexEdit.h" />
+    <ClInclude Include="..\Utils\MiscUI\SciEdit.h" />
+    <ClInclude Include="..\Utils\MiscUI\SplitterControl.h" />
+    <ClInclude Include="..\Utils\MiscUI\StandAloneDlg.h" />
+    <ClInclude Include="..\Utils\MiscUI\SubTooltipListCtrl.h" />
+    <ClInclude Include="..\Utils\MiscUI\SVG.h" />
+    <ClInclude Include="..\Utils\MiscUI\ThemeControls.h" />
+    <ClInclude Include="..\Utils\MiscUI\ToastNotifications.h" />
+    <ClInclude Include="..\Utils\MiscUI\Tooltip.h" />
+    <ClInclude Include="..\Utils\MiscUI\TripleClick.h" />
+    <ClInclude Include="..\Utils\MiscUI\WaitCursorEx.h" />
+    <ClInclude Include="..\Utils\MiscUI\WaterEffect.h" />
+    <ClInclude Include="..\Utils\Monitor.h" />
+    <ClInclude Include="..\Utils\OnOutOfScope.h" />
+    <ClInclude Include="..\Utils\PathUtils.h" />
+    <ClInclude Include="..\Utils\PathWatcher.h" />
+    <ClInclude Include="..\Utils\PersonalDictionary.h" />
+    <ClInclude Include="..\Utils\PreserveChdir.h" />
+    <ClInclude Include="..\Utils\ProfilingInfo.h" />
+    <ClInclude Include="..\Utils\QuickHash.h" />
+    <ClInclude Include="..\Utils\QuickHashMap.h" />
+    <ClInclude Include="..\Utils\QuickHashSet.h" />
+    <ClInclude Include="..\Utils\ReaderWriterLock.h" />
+    <ClInclude Include="..\Utils\RegHistory.h" />
+    <ClInclude Include="..\Utils\registry.h" />
+    <ClInclude Include="..\Utils\SelectFileFilter.h" />
+    <ClInclude Include="..\Utils\ShellUpdater.h" />
+    <ClInclude Include="..\Utils\SmartHandle.h" />
+    <ClInclude Include="..\Utils\StdioFileT.h" />
+    <ClInclude Include="..\Utils\StringBuffer.h" />
+    <ClInclude Include="..\Utils\StringReferenceWrapper.h" />
+    <ClInclude Include="..\Utils\StringUtils.h" />
+    <ClInclude Include="..\Utils\SVNTrace.h" />
+    <ClInclude Include="..\Utils\SysImageList.h" />
+    <ClInclude Include="..\Utils\TaskbarUUID.h" />
+    <ClInclude Include="..\Utils\TempFile.h" />
+    <ClInclude Include="..\Utils\Theme.h" />
+    <ClInclude Include="..\Utils\UnicodeUtils.h" />
+    <ClInclude Include="AboutDlg.h" />
+    <ClInclude Include="AddDlg.h" />
+    <ClInclude Include="AppUtils.h" />
+    <ClInclude Include="AutoTextTestDlg.h" />
+    <ClInclude Include="Blame.h" />
+    <ClInclude Include="BlameDlg.h" />
+    <ClInclude Include="BstrSafeVector.h" />
+    <ClInclude Include="BugtraqRegexTestDlg.h" />
+    <ClInclude Include="ChangedDlg.h" />
+    <ClInclude Include="CheckForUpdatesDlg.h" />
+    <ClInclude Include="CheckoutDlg.h" />
+    <ClInclude Include="CleanupDlg.h" />
+    <ClInclude Include="CodeCollaborator.h" />
+    <ClInclude Include="CodeCollaboratorSettingsDlg.h" />
+    <ClInclude Include="Colors.h" />
+    <ClInclude Include="Commands\AboutCommand.h" />
+    <ClInclude Include="Commands\AddCommand.h" />
+    <ClInclude Include="Commands\AutoTextTestCommand.h" />
+    <ClInclude Include="Commands\BlameCommand.h" />
+    <ClInclude Include="Commands\CatCommand.h" />
+    <ClInclude Include="Commands\CheckoutCommand.h" />
+    <ClInclude Include="Commands\CleanupCommand.h" />
+    <ClInclude Include="Commands\Command.h" />
+    <ClInclude Include="Commands\CommitCommand.h" />
+    <ClInclude Include="Commands\ConflictEditorCommand.h" />
+    <ClInclude Include="Commands\CopyCommand.h" />
+    <ClInclude Include="Commands\CopyUrlsCommand.h" />
+    <ClInclude Include="Commands\CrashCommand.h" />
+    <ClInclude Include="Commands\CreatePatchCommand.h" />
+    <ClInclude Include="Commands\CreateRepositoryCommand.h" />
+    <ClInclude Include="Commands\DelUnversionedCommand.h" />
+    <ClInclude Include="Commands\DiffCommand.h" />
+    <ClInclude Include="Commands\DropCopyAddCommand.h" />
+    <ClInclude Include="Commands\DropCopyCommand.h" />
+    <ClInclude Include="Commands\DropExportCommand.h" />
+    <ClInclude Include="Commands\DropExternalCommand.h" />
+    <ClInclude Include="Commands\DropMoveCommand.h" />
+    <ClInclude Include="Commands\DropVendorCommand.h" />
+    <ClInclude Include="Commands\EditFileCommand.h" />
+    <ClInclude Include="Commands\ExportCommand.h" />
+    <ClInclude Include="Commands\HelpCommand.h" />
+    <ClInclude Include="Commands\IgnoreCommand.h" />
+    <ClInclude Include="Commands\ImportCommand.h" />
+    <ClInclude Include="Commands\LockCommand.h" />
+    <ClInclude Include="Commands\LogCommand.h" />
+    <ClInclude Include="Commands\MergeAllCommand.h" />
+    <ClInclude Include="Commands\MergeCommand.h" />
+    <ClInclude Include="Commands\MonitorCommand.h" />
+    <ClInclude Include="Commands\PasteCopyCommand.h" />
+    <ClInclude Include="Commands\PasteMoveCommand.h" />
+    <ClInclude Include="Commands\PrevDiffCommand.h" />
+    <ClInclude Include="Commands\PropertiesCommand.h" />
+    <ClInclude Include="Commands\RebuildIconCacheCommand.h" />
+    <ClInclude Include="Commands\RelocateCommand.h" />
+    <ClInclude Include="Commands\RemoveCommand.h" />
+    <ClInclude Include="Commands\RenameCommand.h" />
+    <ClInclude Include="Commands\RepositoryBrowserCommand.h" />
+    <ClInclude Include="Commands\RepoStatusCommand.h" />
+    <ClInclude Include="Commands\ResolveCommand.h" />
+    <ClInclude Include="Commands\RevertCommand.h" />
+    <ClInclude Include="Commands\RevisionGraphCommand.h" />
+    <ClInclude Include="Commands\RTFMCommand.h" />
+    <ClInclude Include="Commands\SettingsCommand.h" />
+    <ClInclude Include="Commands\ShelveCommand.h" />
+    <ClInclude Include="Commands\ShowCompareCommand.h" />
+    <ClInclude Include="Commands\SwitchCommand.h" />
+    <ClInclude Include="Commands\SyncCommand.h" />
+    <ClInclude Include="Commands\UnIgnoreCommand.h" />
+    <ClInclude Include="Commands\UnLockCommand.h" />
+    <ClInclude Include="Commands\UnshelveCommand.h" />
+    <ClInclude Include="Commands\UpdateCheckCommand.h" />
+    <ClInclude Include="Commands\UpdateCommand.h" />
+    <ClInclude Include="Commands\UrlDiffCommand.h" />
+    <ClInclude Include="Commands\WcUpgradeCommand.h" />
+    <ClInclude Include="CommitDlg.h" />
+    <ClInclude Include="CopyDlg.h" />
+    <ClInclude Include="CreateChangelistDlg.h" />
+    <ClInclude Include="CreatePatchDlg.h" />
+    <ClInclude Include="DeleteUnversionedDlg.h" />
+    <ClInclude Include="DiffOptionsDlg.h" />
+    <ClInclude Include="ExportDlg.h" />
+    <ClInclude Include="FileDiffDlg.h" />
+    <ClInclude Include="GoOffline.h" />
+    <ClInclude Include="HistoryDlg.h" />
+    <ClInclude Include="ImportDlg.h" />
+    <ClInclude Include="InputDlg.h" />
+    <ClInclude Include="InputLogDlg.h" />
+    <ClInclude Include="LockDlg.h" />
+    <ClInclude Include="LogCacheStatisticsDlg.h" />
+    <ClInclude Include="LogDialog\LogDlg.h" />
+    <ClInclude Include="LogDialog\LogDlgDataModel.h" />
+    <ClInclude Include="LogDialog\LogDlgFilter.h" />
+    <ClInclude Include="LogDialog\LogDlgHelper.h" />
+    <ClInclude Include="LogDialog\StatGraphDlg.h" />
+    <ClInclude Include="LogFile.h" />
+    <ClInclude Include="MergeAllDlg.h" />
+    <ClInclude Include="MergeWizard.h" />
+    <ClInclude Include="MergeWizardBasePage.h" />
+    <ClInclude Include="MergeWizardOptions.h" />
+    <ClInclude Include="MergeWizardRevRange.h" />
+    <ClInclude Include="MergeWizardStart.h" />
+    <ClInclude Include="MergeWizardTree.h" />
+    <ClInclude Include="MonitorOptionsDlg.h" />
+    <ClInclude Include="MonitorProjectDlg.h" />
+    <ClInclude Include="PropConflictEditorDlg.h" />
+    <ClInclude Include="Settings\SetWin11ContextMenu.h" />
+    <ClInclude Include="ShelveDlg.h" />
+    <ClInclude Include="TextConflictEditorDlg.h" />
+    <ClInclude Include="TreeConflictEditorDlg.h" />
+    <ClInclude Include="PasswordDlg.h" />
+    <ClInclude Include="ProjectProperties.h" />
+    <ClInclude Include="PromptDlg.h" />
+    <ClInclude Include="PropDlg.h" />
+    <ClInclude Include="Properties\EditPropBase.h" />
+    <ClInclude Include="Properties\EditPropBugtraq.h" />
+    <ClInclude Include="Properties\EditPropEOL.h" />
+    <ClInclude Include="Properties\EditPropertiesDlg.h" />
+    <ClInclude Include="Properties\EditPropertyValueDlg.h" />
+    <ClInclude Include="Properties\EditPropExecutable.h" />
+    <ClInclude Include="Properties\EditPropExternals.h" />
+    <ClInclude Include="Properties\EditPropExternalsValue.h" />
+    <ClInclude Include="Properties\EditPropKeywords.h" />
+    <ClInclude Include="Properties\EditPropMergeLogTemplate.h" />
+    <ClInclude Include="Properties\EditPropMimeType.h" />
+    <ClInclude Include="Properties\EditPropNeedsLock.h" />
+    <ClInclude Include="Properties\EditPropsLocalHooks.h" />
+    <ClInclude Include="Properties\EditPropTSVNLang.h" />
+    <ClInclude Include="Properties\EditPropTSVNSizes.h" />
+    <ClInclude Include="Properties\EditPropUserBool.h" />
+    <ClInclude Include="Properties\EditPropUserMultiLine.h" />
+    <ClInclude Include="Properties\EditPropUserSingleLine.h" />
+    <ClInclude Include="Properties\EditPropUserState.h" />
+    <ClInclude Include="Properties\UserProperties.h" />
+    <ClInclude Include="RecycleBinDlg.h" />
+    <ClInclude Include="RelocateDlg.h" />
+    <ClInclude Include="RenameDlg.h" />
+    <ClInclude Include="RepoCreationFinished.h" />
+    <ClInclude Include="RepoDrags.h" />
+    <ClInclude Include="RepositoryBar.h" />
+    <ClInclude Include="RepositoryBrowser.h" />
+    <ClInclude Include="RepositoryBrowserSelection.h" />
+    <ClInclude Include="RepositoryLister.h" />
+    <ClInclude Include="ResolveDlg.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RevertDlg.h" />
+    <ClInclude Include="RevisionDlg.h" />
+    <ClInclude Include="RevisionGraph\AllGraphOptions.h" />
+    <ClInclude Include="RevisionGraph\CollapseTreeDownward.h" />
+    <ClInclude Include="RevisionGraph\CollapseTreeUpward.h" />
+    <ClInclude Include="RevisionGraph\CopyFilterOptions.h" />
+    <ClInclude Include="RevisionGraph\CutTrees.h" />
+    <ClInclude Include="RevisionGraph\ExactCopyFroms.h" />
+    <ClInclude Include="RevisionGraph\FoldTags.h" />
+    <ClInclude Include="RevisionGraph\FullGraph.h" />
+    <ClInclude Include="RevisionGraph\FullGraphBuilder.h" />
+    <ClInclude Include="RevisionGraph\FullGraphFinalizer.h" />
+    <ClInclude Include="RevisionGraph\FullGraphNode.h" />
+    <ClInclude Include="RevisionGraph\FullHistory.h" />
+    <ClInclude Include="RevisionGraph\GraphNodeState.h" />
+    <ClInclude Include="RevisionGraph\IRevisionGraphLayout.h" />
+    <ClInclude Include="RevisionGraph\LayoutOptions.h" />
+    <ClInclude Include="RevisionGraph\ModificationOptions.h" />
+    <ClInclude Include="RevisionGraph\NodeClassification.h" />
+    <ClInclude Include="RevisionGraph\PathClassificator.h" />
+    <ClInclude Include="RevisionGraph\RemoveDeletedBranches.h" />
+    <ClInclude Include="RevisionGraph\RemovePathsBySubString.h" />
+    <ClInclude Include="RevisionGraph\RemoveSimpleChanges.h" />
+    <ClInclude Include="RevisionGraph\RemoveTags.h" />
+    <ClInclude Include="RevisionGraph\RemoveUnchangedBranches.h" />
+    <ClInclude Include="RevisionGraph\RevGraphFilterDlg.h" />
+    <ClInclude Include="RevisionGraph\RevisionGraphDlg.h" />
+    <ClInclude Include="RevisionGraph\RevisionGraphOptions.h" />
+    <ClInclude Include="RevisionGraph\RevisionGraphOptionsImpl.h" />
+    <ClInclude Include="RevisionGraph\RevisionGraphState.h" />
+    <ClInclude Include="RevisionGraph\RevisionGraphWnd.h" />
+    <ClInclude Include="RevisionGraph\RevisionInRange.h" />
+    <ClInclude Include="RevisionGraph\SearchPathTree.h" />
+    <ClInclude Include="RevisionGraph\ShowHeads.h" />
+    <ClInclude Include="RevisionGraph\ShowPathsAsDiff.h" />
+    <ClInclude Include="RevisionGraph\ShowTreeStripes.h" />
+    <ClInclude Include="RevisionGraph\ShowWC.h" />
+    <ClInclude Include="RevisionGraph\ShowWCModification.h" />
+    <ClInclude Include="RevisionGraph\SimpleList.h" />
+    <ClInclude Include="RevisionGraph\StandardLayout.h" />
+    <ClInclude Include="RevisionGraph\StandardLayoutConnectionList.h" />
+    <ClInclude Include="RevisionGraph\StandardLayoutNodeList.h" />
+    <ClInclude Include="RevisionGraph\StandardLayoutRectList.h" />
+    <ClInclude Include="RevisionGraph\StandardLayoutTextList.h" />
+    <ClInclude Include="RevisionGraph\StandardNodePositioning.h" />
+    <ClInclude Include="RevisionGraph\StandardNodeSizeAssignment.h" />
+    <ClInclude Include="RevisionGraph\StrictOrderNodePositioning.h" />
+    <ClInclude Include="RevisionGraph\TopAlignTrees.h" />
+    <ClInclude Include="RevisionGraph\UpsideDownLayout.h" />
+    <ClInclude Include="RevisionGraph\VisibleGraph.h" />
+    <ClInclude Include="RevisionGraph\VisibleGraphBuilder.h" />
+    <ClInclude Include="RevisionGraph\VisibleGraphNode.h" />
+    <ClInclude Include="RevisionRangeDlg.h" />
+    <ClInclude Include="Settings\SetBugTraq.h" />
+    <ClInclude Include="Settings\SetBugTraqAdv.h" />
+    <ClInclude Include="Settings\SetDialogs.h" />
+    <ClInclude Include="Settings\SetHooks.h" />
+    <ClInclude Include="Settings\SetHooksAdv.h" />
+    <ClInclude Include="Settings\SetLogCache.h" />
+    <ClInclude Include="Settings\SetLookAndFeelPage.h" />
+    <ClInclude Include="Settings\SetMainPage.h" />
+    <ClInclude Include="Settings\SetMisc.h" />
+    <ClInclude Include="Settings\SetOverlayHandlers.h" />
+    <ClInclude Include="Settings\SetOverlayIcons.h" />
+    <ClInclude Include="Settings\SetOverlayPage.h" />
+    <ClInclude Include="Settings\SetProgsAdvDlg.h" />
+    <ClInclude Include="Settings\SetProxyPage.h" />
+    <ClInclude Include="Settings\SetSavedDataPage.h" />
+    <ClInclude Include="Settings\Settings.h" />
+    <ClInclude Include="Settings\SettingsAdvanced.h" />
+    <ClInclude Include="Settings\SettingsClearAuth.h" />
+    <ClInclude Include="Settings\SettingsColors.h" />
+    <ClInclude Include="Settings\SettingsDialogs3.h" />
+    <ClInclude Include="Settings\SettingsLogCaches.h" />
+    <ClInclude Include="Settings\SettingsProgsDiff.h" />
+    <ClInclude Include="Settings\SettingsProgsMerge.h" />
+    <ClInclude Include="Settings\SettingsPropPage.h" />
+    <ClInclude Include="Settings\SettingsRevGraphColors.h" />
+    <ClInclude Include="Settings\SettingsRevisionGraph.h" />
+    <ClInclude Include="Settings\SettingsSync.h" />
+    <ClInclude Include="Settings\SettingsTBlame.h" />
+    <ClInclude Include="Settings\SettingsTUDiff.h" />
+    <ClInclude Include="Settings\ToolAssocDlg.h" />
+    <ClInclude Include="SimplePrompt.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="SVNDiffOptions.h" />
+    <ClInclude Include="SVNProgressDlg.h" />
+    <ClInclude Include="SwitchDlg.h" />
+    <ClInclude Include="TortoiseProc.h" />
+    <ClInclude Include="UnlockDlg.h" />
+    <ClInclude Include="UnshelveDlg.h" />
+    <ClInclude Include="UpdateDlg.h" />
+    <ClInclude Include="UrlDiffDlg.h" />
+    <ClInclude Include="URLDlg.h" />
+    <ClInclude Include="WaitDlg.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\TSVNHelpAlias.h" />
+    <None Include="..\Resources\TSVNHelpContext.h" />
+    <None Include="..\Resources\actionadded.ico" />
+    <None Include="..\Resources\actiondeleted.ico" />
+    <None Include="..\Resources\actionmerged.ico" />
+    <None Include="..\Resources\actionmodified.ico" />
+    <None Include="..\Resources\actionreplaced.ico" />
+    <None Include="..\Resources\actionreversemerged.ico" />
+    <None Include="..\Resources\AddBackground.ico" />
+    <None Include="..\Resources\aerobackground.ico" />
+    <None Include="..\Resources\backward.ico" />
+    <None Include="..\Resources\bugtraq.ico" />
+    <None Include="..\Resources\cache.ico" />
+    <None Include="..\Resources\CacheList.ico" />
+    <None Include="..\Resources\cancel-normal.ico" />
+    <None Include="..\Resources\cancel-pressed.ico" />
+    <None Include="..\Resources\CFMBackground.ico" />
+    <None Include="..\Resources\CheckoutBackground.ico" />
+    <None Include="..\Resources\CommitBackground.ico" />
+    <None Include="..\Resources\CommitBackgroundBranches.ico" />
+    <None Include="..\Resources\copy.ico" />
+    <None Include="..\Resources\CopyBackground.ico" />
+    <None Include="..\Resources\DelunversionedBackground.ico" />
+    <None Include="..\Resources\depthemptyovl.ico" />
+    <None Include="..\Resources\depthfilesovl.ico" />
+    <None Include="..\Resources\depthimmediatesovl.ico" />
+    <None Include="..\Resources\dialogs.ico" />
+    <None Include="..\Resources\Drives.ico" />
+    <None Include="..\Resources\explorer.ico" />
+    <None Include="..\Resources\ExportBackground.ico" />
+    <None Include="..\Resources\externalovl.ico" />
+    <None Include="..\Resources\externalpeggedovl.ico" />
+    <None Include="..\Resources\filteredit.ico" />
+    <None Include="..\Resources\forward.ico" />
+    <None Include="..\Resources\general.ico" />
+    <None Include="..\Resources\graph-bar.ico" />
+    <None Include="..\Resources\graph-bar-stacked.ico" />
+    <None Include="..\Resources\graph-line.ico" />
+    <None Include="..\Resources\graph-line-stacked.ico" />
+    <None Include="..\Resources\graph-pie.ico" />
+    <None Include="..\Resources\hook.ico" />
+    <None Include="..\Resources\iconset.ico" />
+    <None Include="..\Resources\ImportBackground.ico" />
+    <None Include="..\Resources\Library.ico" />
+    <None Include="..\Resources\lineadded.ico" />
+    <None Include="..\Resources\lineconflicted.ico" />
+    <None Include="..\Resources\lineremoved.ico" />
+    <None Include="..\Resources\link.ico" />
+    <None Include="..\Resources\LockBackground.ico" />
+    <None Include="..\Resources\logfilter.ico" />
+    <None Include="..\Resources\lookandfeel.ico" />
+    <None Include="..\Resources\menuabout.ico" />
+    <None Include="..\Resources\menuadd.ico" />
+    <None Include="..\Resources\menublame.ico" />
+    <None Include="..\Resources\menucheckout.ico" />
+    <None Include="..\Resources\menucleanup.ico" />
+    <None Include="..\Resources\menucommit.ico" />
+    <None Include="..\Resources\menucompare.ico" />
+    <None Include="..\Resources\menuconflict.ico" />
+    <None Include="..\Resources\menucopy.ico" />
+    <None Include="..\Resources\menucreaterepos.ico" />
+    <None Include="..\Resources\menudelete.ico" />
+    <None Include="..\Resources\menudiff.ico" />
+    <None Include="..\Resources\menuexport.ico" />
+    <None Include="..\Resources\menuhelp.ico" />
+    <None Include="..\Resources\menuignore.ico" />
+    <None Include="..\Resources\menuimport.ico" />
+    <None Include="..\Resources\menulog.ico" />
+    <None Include="..\Resources\menumerge.ico" />
+    <None Include="..\Resources\menupatch.ico" />
+    <None Include="..\Resources\menurelocate.ico" />
+    <None Include="..\Resources\menurename.ico" />
+    <None Include="..\Resources\menurepobrowse.ico" />
+    <None Include="..\Resources\menuresolve.ico" />
+    <None Include="..\Resources\menurevert.ico" />
+    <None Include="..\Resources\menusettings.ico" />
+    <None Include="..\Resources\menushowchanged.ico" />
+    <None Include="..\Resources\menuswitch.ico" />
+    <None Include="..\Resources\menuupdate.ico" />
+    <None Include="..\Resources\MergeBackground.ico" />
+    <None Include="..\Resources\mergeinfoovl.ico" />
+    <None Include="..\Resources\MergeWizardTitle.bmp" />
+    <None Include="..\Resources\misc.ico" />
+    <None Include="..\Resources\nestedovl.ico" />
+    <None Include="..\Resources\newfolder.ico" />
+    <None Include="..\Resources\open.ico" />
+    <None Include="..\Resources\Overlays.ico" />
+    <None Include="..\Resources\pan.cur" />
+    <None Include="..\Resources\pandown.cur" />
+    <None Include="..\Resources\proxy.ico" />
+    <None Include="..\Resources\refresh.ico" />
+    <None Include="..\Resources\RenameBackground.ico" />
+    <None Include="..\Resources\repo_file.ico" />
+    <None Include="..\Resources\repo_http.ico" />
+    <None Include="..\Resources\repo_https.ico" />
+    <None Include="..\Resources\repo_svn.ico" />
+    <None Include="..\Resources\repo_svn+ssh.ico" />
+    <None Include="..\Resources\repo_unknown.ico" />
+    <None Include="..\Resources\ResolveBackground.ico" />
+    <None Include="..\Resources\restore.ico" />
+    <None Include="..\Resources\restoreovl.ico" />
+    <None Include="..\Resources\RevertBackground.ico" />
+    <None Include="..\Resources\revgraph_added.ico" />
+    <None Include="..\Resources\revgraph_addedplus.ico" />
+    <None Include="..\Resources\revgraph_deleted.ico" />
+    <None Include="..\Resources\revgraph_lastcommit.ico" />
+    <None Include="..\Resources\revgraph_renamed.ico" />
+    <None Include="..\Resources\revgraph_replaced.ico" />
+    <None Include="..\Resources\revgraph_tag.ico" />
+    <None Include="..\Resources\revgraphbar.bmp" />
+    <None Include="..\Resources\revgraphglyphs.bmp" />
+    <None Include="..\Resources\RevisionGraph.ico" />
+    <None Include="..\Resources\save.ico" />
+    <None Include="..\Resources\saveas.ico" />
+    <None Include="..\Resources\saveddata.ico" />
+    <None Include="..\Resources\ssh.ico" />
+    <None Include="..\Resources\svnfolder.ico" />
+    <None Include="..\Resources\switch.ico" />
+    <None Include="..\Resources\SwitchBackground.ico" />
+    <None Include="..\Resources\Tortoise.ico" />
+    <None Include="..\Resources\TortoiseMerge.ico" />
+    <None Include="..\Resources\TortoiseProc.rc2" />
+    <None Include="..\Resources\TortoiseShell.rc2" />
+    <None Include="..\Resources\tortoisesvn_logoflipped.bmp" />
+    <None Include="..\Resources\ttf_glyph.bmp" />
+    <None Include="..\Resources\UnlockBackground.ico" />
+    <None Include="..\Resources\up.ico" />
+    <None Include="..\Resources\UpdateBackground.ico" />
+    <None Include="..\Resources\warning-general.ico" />
+    <None Include="..\TortoiseBlame\TortoiseBlame.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\Resources\TortoiseProcENG.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ext\ResizableLib\ResizableLib.vcxproj">
+      <Project>{4be529fb-c2f2-49f7-a897-054b955564cf}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ext\scintilla\Scintilla.vcxproj">
+      <Project>{5877b917-512b-49f5-b514-1b4159e7a9ca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ext\TreePropSheet\TreePropSheet.vcxproj">
+      <Project>{ab494732-ef6d-44d0-bcf8-80ff04858d10}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\..\ext\hunspell\hunspell.vcxproj">
+      <Project>{53609bb3-d874-465c-af7b-df626db0d89b}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\AsyncFramework\AsyncFramework.vcxproj">
+      <Project>{4fea9603-17c9-4254-82e2-761d99a3a519}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\IBugTraqProvider\IBugTraqProvider.vcxproj">
+      <Project>{2c879469-db8f-4bf0-b016-ae864d2a7bbc}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\LogCache\Access\LogCacheAccessLib.vcxproj">
+      <Project>{dd9856a3-e398-4367-c817-e4771ae1deca}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\LogCache\Containers\LogCacheContainers.vcxproj">
+      <Project>{4034f594-df25-4b3e-92f8-2795c263b483}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\LogCache\LogCacheLib.vcxproj">
+      <Project>{bd0854a3-e300-4e57-8c17-e4771ae1ca01}</Project>
+    </ProjectReference>
+    <ProjectReference Include="..\LogCache\Streams\LogCacheStreamsLib.vcxproj">
+      <Project>{f0d5506c-bb6b-43a7-a4ef-d4826f398185}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\actionmoved.ico" />
+    <Image Include="..\Resources\actionmovereplaced.ico" />
+    <Image Include="..\Resources\Bookmarks.ico" />
+    <Image Include="..\Resources\ccollabgui.ico" />
+    <Image Include="..\Resources\code.ico" />
+    <Image Include="..\Resources\file.ico" />
+    <Image Include="..\Resources\Icons\XPStyle\ModifiedIcon.ico" />
+    <Image Include="..\Resources\library-win10.ico" />
+    <Image Include="..\Resources\link2.ico" />
+    <Image Include="..\Resources\MonitorCommits.ico" />
+    <Image Include="..\Resources\MonitorNormal.ico" />
+    <Image Include="..\Resources\monitorurl.ico" />
+    <Image Include="..\Resources\monitorwc.ico" />
+    <Image Include="..\Resources\monitor_add.ico" />
+    <Image Include="..\Resources\monitor_clearerrors.ico" />
+    <Image Include="..\Resources\monitor_edit.ico" />
+    <Image Include="..\Resources\monitor_getall.ico" />
+    <Image Include="..\Resources\monitor_markallasread.ico" />
+    <Image Include="..\Resources\monitor_options.ico" />
+    <Image Include="..\Resources\monitor_remove.ico" />
+    <Image Include="..\Resources\monitor_update.ico" />
+    <Image Include="..\Resources\snippet.ico" />
+    <Image Include="..\Resources\spell.ico" />
+    <Image Include="..\Resources\sync.ico" />
+    <Image Include="..\TortoiseUDiff\TortoiseUDiff.ico" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\compatibility.manifest" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>

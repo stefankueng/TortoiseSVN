@@ -1,0 +1,93 @@
+---
+layout: default
+title: 下载
+id: downloads
+description: download TortoiseSVN
+lang: zh
+---
+
+<div class="post">
+    <h1 class="title">下载</h1>
+    <div class="entry">
+        <h1>当前版本是 {{ site.version.short }}</h1>
+        <p>最新更新内容，请查看
+        <a href="/Changelog.txt">changelog</a>
+        and the <a href="/tsvn_1.14_releasenotes.html">release notes</a>.
+        </p>
+        <p>当前版本 {{ site.version.short }} 连接的
+        Subversion 库是 {{ site.version.svn }}.</p>
+        <p>l请确认你选择了恰当的安装程序，否则可能造成安装失败.</p>
+
+        <table class="downloads-table">
+            <thead>
+            <tr>
+                <td><strong>32位系统</strong></td>
+                <td><strong>64位系统</strong></td>
+                <td><strong>ARM64 OS</strong></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version.short }}/Application/TortoiseSVN-{{ site.version.long }}-win32-svn-{{ site.version.svn }}.msi/"
+                       title="Download TortoiseSVN {{ site.version.short }} - 32-bit, linked to SVN {{ site.version.svn }}"
+                       class="btn">
+                       TortoiseSVN <span>{{ site.version.short }}</span> - 32-bit
+                    </a>
+                </td>
+                <td>
+                    <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version.short }}/Application/TortoiseSVN-{{ site.version.long }}-x64-svn-{{ site.version.svn }}.msi/"
+                       title="Download TortoiseSVN {{ site.version.short }} - 64-bit, linked to SVN {{ site.version.svn }}"
+                       class="btn">
+                       TortoiseSVN <span>{{ site.version.short }}</span> - 64-bit
+                    </a>
+                </td>
+                <td>
+                    <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version.short }}/Application/TortoiseSVN-{{ site.version.long }}-ARM64-svn-{{ site.version.svn }}.msi/"
+                       title="Download TortoiseSVN {{ site.version.short }} - ARM64, linked to SVN {{ site.version.svn }}"
+                       class="btn">
+                       TortoiseSVN <span>{{ site.version.short }}</span> - ARM64
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p>
+        验证文件完整性，请遵循以下
+        <a href="/msiverify.html">步骤说明</a>
+        </p>
+
+        <div class="important">
+        <h3>升级</h3>
+        <p>
+        如果你是从早前的版本升级 (早于 1.6.10),
+        你需要运行两次安装程序。 请在第二次时使用
+        <em>修复安装</em>
+        </p>
+        </div>
+        <br/>
+    </div>
+</div>
+
+<div class="post">
+    <h1 class="title">语言包</h1>
+    <div class="entry">
+        <table class="table-hover left-aligned">
+        <thead>
+        <tr>
+            <th>国家</th>
+            <th>32位t</th>
+            <th>64位</th>
+            <th>ARM64</th>
+            <th colspan="2">操作说明文档 (PDF)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% include translations.html %}
+
+        </tbody>
+        </table>
+    </div>
+</div>

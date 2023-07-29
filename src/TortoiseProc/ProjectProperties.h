@@ -1,0 +1,379 @@
+﻿// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2003-2017, 2021 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+#pragma once
+#include <iostream>
+#include <string>
+#include <regex>
+#include "TSVNPath.h"
+#include "SimpleIni.h"
+
+// when adding new properties, don't forget to change the
+// method AddAutoProps() so the new properties are automatically
+// added to new folders
+#define BUGTRAQPROPNAME_LABEL          "bugtraq:label"
+#define BUGTRAQPROPNAME_MESSAGE        "bugtraq:message"
+#define BUGTRAQPROPNAME_NUMBER         "bugtraq:number"
+#define BUGTRAQPROPNAME_LOGREGEX       "bugtraq:logregex"
+#define BUGTRAQPROPNAME_URL            "bugtraq:url"
+#define BUGTRAQPROPNAME_WARNIFNOISSUE  "bugtraq:warnifnoissue"
+#define BUGTRAQPROPNAME_APPEND         "bugtraq:append"
+#define BUGTRAQPROPNAME_PROVIDERUUID   "bugtraq:provideruuid"
+#define BUGTRAQPROPNAME_PROVIDERUUID64 "bugtraq:provideruuid64"
+#define BUGTRAQPROPNAME_PROVIDERPARAMS "bugtraq:providerparams"
+
+#define PROJECTPROPNAME_LOGTEMPLATE                  "tsvn:logtemplate"
+#define PROJECTPROPNAME_LOGTEMPLATECOMMIT            "tsvn:logtemplatecommit"
+#define PROJECTPROPNAME_LOGTEMPLATEBRANCH            "tsvn:logtemplatebranch"
+#define PROJECTPROPNAME_LOGTEMPLATEIMPORT            "tsvn:logtemplateimport"
+#define PROJECTPROPNAME_LOGTEMPLATEDEL               "tsvn:logtemplatedelete"
+#define PROJECTPROPNAME_LOGTEMPLATEMOVE              "tsvn:logtemplatemove"
+#define PROJECTPROPNAME_LOGTEMPLATEMKDIR             "tsvn:logtemplatemkdir"
+#define PROJECTPROPNAME_LOGTEMPLATEPROPSET           "tsvn:logtemplatepropset"
+#define PROJECTPROPNAME_LOGTEMPLATELOCK              "tsvn:logtemplatelock"
+#define PROJECTPROPNAME_MERGELOGTEMPLATETITLE        "tsvn:mergelogtemplatetitle"
+#define PROJECTPROPNAME_MERGELOGTEMPLATEREVERSETITLE "tsvn:mergelogtemplatereversetitle"
+#define PROJECTPROPNAME_MERGELOGTEMPLATEMSG          "tsvn:mergelogtemplatemsg"
+#define PROJECTPROPNAME_MERGELOGTEMPLATETITLEBOTTOM  "tsvn:mergelogtemplatemsgtitlebottom"
+
+#define PROJECTPROPNAME_LOGWIDTHLINE        "tsvn:logwidthmarker"
+#define PROJECTPROPNAME_LOGMINSIZE          "tsvn:logminsize"
+#define PROJECTPROPNAME_LOCKMSGMINSIZE      "tsvn:lockmsgminsize"
+#define PROJECTPROPNAME_LOGFILELISTLANG     "tsvn:logfilelistenglish"
+#define PROJECTPROPNAME_LOGSUMMARY          "tsvn:logsummary"
+#define PROJECTPROPNAME_PROJECTLANGUAGE     "tsvn:projectlanguage"
+#define PROJECTPROPNAME_USERFILEPROPERTY    "tsvn:userfileproperties"
+#define PROJECTPROPNAME_USERDIRPROPERTY     "tsvn:userdirproperties"
+#define PROJECTPROPNAME_AUTOPROPS           "tsvn:autoprops"
+#define PROJECTPROPNAME_LOGREVREGEX         "tsvn:logrevregex"
+#define PROJECTPROPNAME_STARTCOMMITHOOK     "tsvn:startcommithook"
+#define PROJECTPROPNAME_CHECKCOMMITHOOK     "tsvn:checkcommithook"
+#define PROJECTPROPNAME_PRECOMMITHOOK       "tsvn:precommithook"
+#define PROJECTPROPNAME_POSTCOMMITHOOK      "tsvn:postcommithook"
+#define PROJECTPROPNAME_STARTUPDATEHOOK     "tsvn:startupdatehook"
+#define PROJECTPROPNAME_PREUPDATEHOOK       "tsvn:preupdatehook"
+#define PROJECTPROPNAME_POSTUPDATEHOOK      "tsvn:postupdatehook"
+#define PROJECTPROPNAME_MANUALPRECOMMITHOOK "tsvn:manualprecommithook"
+#define PROJECTPROPNAME_PRELOCKHOOK         "tsvn:prelockhook"
+#define PROJECTPROPNAME_POSTLOCKHOOK        "tsvn:postlockhook"
+
+#define PROJECTPROPNAME_WEBVIEWER_REV     "webviewer:revision"
+#define PROJECTPROPNAME_WEBVIEWER_PATHREV "webviewer:pathrevision"
+
+class CTSVNPathList;
+// ReSharper disable once CppInconsistentNaming
+struct svn_config_t;
+
+/**
+ * \ingroup TortoiseProc
+ * Provides methods for retrieving information about bug/issue trackers
+ * associated with a Subversion repository/working copy and other project
+ * related properties.
+ */
+class ProjectProperties
+{
+public:
+    ProjectProperties();
+    ~ProjectProperties();
+
+    /**
+     * Reads the properties from a path. If the path is a file
+     * then the properties are read from the parent folder of that file.
+     * \param path path to a file or a folder
+     */
+    BOOL ReadProps(CTSVNPath path);
+    /**
+     * Reads the properties from all paths found in a path list.
+     * This method calls ReadProps() for each path .
+     * \param pathList list of paths
+     */
+    BOOL ReadPropsPathList(const CTSVNPathList& pathList);
+
+    /// returns true if ReadProps() or ReadPropsPathList() has been called before
+    bool PropsRead() const { return m_bPropsRead; }
+
+    /**
+     * Searches for the BugID inside a log message. If one is found,
+     * the method returns TRUE. The rich edit control is used to set
+     * the CFE_LINK effect on the BugID's.
+     * \param msg the log message
+     * \param pWnd Pointer to a rich edit control
+     */
+#ifdef _RICHEDIT_
+    std::vector<CHARRANGE> FindBugIDPositions(const CString& msg);
+#endif
+    BOOL FindBugID(const CString& msg, CWnd* pWnd);
+
+    CString           FindBugID(const CString& msg);
+    std::set<CString> FindBugIDs(const CString& msg);
+
+    /**
+     * Check whether calling \ref FindBugID or \ref FindBugIDPositions
+     * is worthwhile. If the result is @a false, those functions would
+     * return empty strings or sets, respectively.
+     */
+    bool MightContainABugID() const;
+
+    /**
+     * Searches for the BugID inside a log message. If one is found,
+     * that BugID is returned. If none is found, an empty string is returned.
+     * The \c msg is trimmed off the BugID.
+     */
+    CString GetBugIDFromLog(CString& msg) const;
+
+    /**
+     * Checks if the bug ID is valid. If bugtraq:number is 'true', then the
+     * functions checks if the bug ID doesn't contain any non-number chars in it.
+     */
+    BOOL CheckBugID(const CString& sID) const;
+
+    /**
+     * Checks if the log message \c sMessage contains a bug ID. This is done by
+     * using the bugtraq:checkre property.
+     */
+    BOOL HasBugID(const CString& sMsg);
+
+    /**
+     * Returns the URL pointing to the Issue in the issue tracker. The URL is
+     * created from the bugtraq:url property and the BugID found in the log message.
+     * \param sBugID the BugID extracted from the log message
+     */
+    CString GetBugIDUrl(const CString& sBugID) const;
+
+    /**
+     * Replaces %BUGID% in the provided URL with the sBugID after doing URL encoding
+     */
+    static void ReplaceBugIDPlaceholder(CString& url, const CString& sBugID);
+
+    /**
+     * Inserts the tsvn:autoprops into the Subversion config section.
+     * Call this before an import or an add operation.
+     */
+    void InsertAutoProps(svn_config_t* cfg) const;
+
+    /**
+     * Returns the log message summary if the tsvn:logsummaryregex property is
+     * set and there are actually some matches.
+     * Otherwise, an empty string is returned.
+     */
+    CString GetLogSummary(const CString& sMsg) const;
+
+    /**
+     * Transform the log message using \ref GetLogSummary and post-process it
+     * to be suitable for 1-line controls.
+     */
+    CString MakeShortMessage(const CString& message) const;
+
+    /**
+     * Returns the path from which the properties were read.
+     */
+    CTSVNPath GetPropsPath() const { return propsPath; }
+
+    /** replaces bNumer: a regular expression string to check the validity of
+      * the entered bug ID. */
+    const CString& GetCheckRe() const { return sCheckRe; }
+    void           SetCheckRe(const CString& s)
+    {
+        sCheckRe        = s;
+        regExNeedUpdate = true;
+        AutoUpdateRegex();
+    }
+
+    /** used to extract the bug ID from the string matched by sCheckRe */
+    const CString& GetBugIDRe() const { return sBugIDRe; }
+    void           SetBugIDRe(const CString& s)
+    {
+        sBugIDRe        = s;
+        regExNeedUpdate = true;
+        AutoUpdateRegex();
+    }
+
+    void SaveToIni(CSimpleIni& inifile, const CString& section, const CString& prefix = L"pp_") const;
+    void LoadFromIni(CSimpleIni& inifile, const CString& section, const CString& prefix = L"pp_");
+
+#ifdef _WIN64
+    const CString& GetProviderUUID() const
+    {
+        return (sProviderUuid64.IsEmpty() ? sProviderUuid : sProviderUuid64);
+    }
+#else
+    const CString& GetProviderUUID() const
+    {
+        return (sProviderUuid.IsEmpty() ? sProviderUuid64 : sProviderUuid);
+    }
+#endif
+    const CString& GetLogMsgTemplate(const CStringA& prop) const;
+
+    const CString& GetLogRevRegex() const;
+
+public:
+    /** The label to show in the commit dialog where the issue number/bug id
+     * is entered. Example: "Bug-ID: " or "Issue-No.:". Default is "Bug-ID :" */
+    CString sLabel;
+
+    /** The message string to add below the log message the user entered.
+     * It must contain the string "%BUGID%" which gets replaced by the client
+     * with the issue number / bug id the user entered. */
+    CString sMessage;
+
+    /** If this is set, then the bug-id / issue number must be a number, no text */
+    BOOL bNumber;
+
+    /** The url pointing to the issue tracker. If the url contains the string
+     * "%BUGID% the client has to replace it with the issue number / bug id
+     * the user entered. */
+    CString sUrl;
+
+    /** If set to TRUE, show a warning dialog if the user forgot to enter
+     * an issue number in the commit dialog. */
+    BOOL bWarnIfNoIssue;
+
+    /** If set to FALSE, then the bug tracking entry is inserted at the top of the
+       log message instead of at the bottom. Default is TRUE */
+    BOOL bAppend;
+
+    /** the parameters passed to the COM bugtraq provider which implements the
+        IBugTraqProvider interface */
+    CString sProviderParams;
+
+    /** The number of chars the width marker should be shown at. If the property
+     * is not set, then this value is 80 by default. */
+    int nLogWidthMarker;
+
+    /** Minimum size a log message must have in chars */
+    int nMinLogSize;
+
+    /** Minimum size a lock message must have in chars */
+    int nMinLockMsgSize;
+
+    /** TRUE if the file list to be inserted in the commit dialog should be in
+     * English and not in the localized language. Default is TRUE */
+    BOOL bFileListInEnglish;
+
+    /** The language identifier this project uses for log messages. */
+    LONG lProjectLanguage;
+
+    /** holds user defined properties for files. */
+    CString m_sFpPath;
+
+    /** holds user defined properties for directories. */
+    CString m_sDpPath;
+
+    /** The url pointing to the web viewer. The string %REVISION% is replaced
+     *  with the revision number, "HEAD", or a date */
+    CString sWebViewerRev;
+
+    /** The url pointing to the web viewer. The string %REVISION% is replaced
+     *  with the revision number, "HEAD", or a date. The string %PATH% is replaced
+     *  with the path relative to the repository root, e.g. "/trunk/src/file" */
+    CString sWebViewerPathRev;
+
+    /**
+     * The regex string to extract a summary from a log message. The summary
+     * is the first matching regex group.
+     */
+    CString sLogSummaryRe;
+
+    /// multi line string containing the data for a start-commit-hook
+    CString sStartCommitHook;
+    /// multi line string containing the data for a check-commit-hook
+    CString sCheckCommitHook;
+    /// multi line string containing the data for a pre-commit-hook
+    CString sPreCommitHook;
+    /// multi line string containing the data for a manual pre-commit-hook
+    CString sManualPreCommitHook;
+    /// multi line string containing the data for a post-commit-hook
+    CString sPostCommitHook;
+    /// multi line string containing the data for a start-update-hook
+    CString sStartUpdateHook;
+    /// multi line string containing the data for a pre-update-hook
+    CString sPreUpdateHook;
+    /// multi line string containing the data for a post-update-hook
+    CString sPostUpdateHook;
+    /// multi line string containing the data for a pre-connect-hook
+    CString sPreConnectHook;
+    /// multi line string containing the data for a pre-lock-hook
+    CString sPreLockHook;
+    /// multi line string containing the data for a post-lock-hook
+    CString sPostLockHook;
+
+    /// the repository root url
+    CString sRepositoryRootUrl;
+    /// the repository url of the directory for which the project properties
+    /// are meant for
+    CString sRepositoryPathUrl;
+
+    /// template for the first line (title) of the generated log message of a merge
+    CString sMergeLogTemplateTitle;
+    /// template for the first line (title) of the generated log message of a merge in case of a reverse merge
+    CString sMergeLogTemplateReverseTitle;
+    /// template for the messge lines of the generated log message of a merge
+    CString sMergeLogTemplateMsg;
+    /// true if the merge log message title should be inserted after the log message
+    BOOL bMergeLogTemplateMsgTitleBottom;
+
+private:
+    /**
+     * Constructing regex objects is expensive. Therefore, cache them here.
+     */
+    void AutoUpdateRegex();
+
+    bool CheckStringProp(CString& s, const std::string& propname, const CString& propval, LPCSTR prop);
+
+    bool        regExNeedUpdate;
+    std::wregex regCheck;
+    std::wregex regBugID;
+
+    CString   sAutoProps;
+    CTSVNPath propsPath;
+#ifdef DEBUG
+    friend class PropTest;
+#endif
+
+    /** the COM uuid of the bugtraq provider which implements the IBugTraqProvider
+    interface. */
+    CString sProviderUuid;
+    CString sProviderUuid64;
+
+    /** replaces bNumer: a regular expression string to check the validity of
+      * the entered bug ID. */
+    CString sCheckRe;
+
+    /** used to extract the bug ID from the string matched by sCheckRe */
+    CString sBugIDRe;
+
+    /** The template to use for log messages. */
+    CString sLogTemplate;
+    CString sLogTemplateCommit;
+    CString sLogTemplateBranch;
+    CString sLogTemplateImport;
+    CString sLogTemplateDelete;
+    CString sLogTemplateMove;
+    CString sLogTemplateMkDir;
+    CString sLogTemplatePropset;
+    CString sLogTemplateLock;
+    /**
+     * A regex string to extract revisions from a log message.
+     */
+    CString sLogRevRegex;
+
+    int nBugIdPos; ///< result of sMessage.Find(L"%BUGID%");
+
+    bool m_bFound;
+    bool m_bPropsRead;
+};

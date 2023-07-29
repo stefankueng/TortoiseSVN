@@ -1,0 +1,40 @@
+---
+layout: default
+title: Verify the MSI signature
+id: msi-verify
+description: how to verify the signatures
+keywords: verify, signature
+lang: en
+includeBaguetteBox: true
+---
+
+
+<div class="post">
+    <h1 class="title">Verify the MSI signature</h1>
+    <div class="entry">
+        <p>Since the TortoiseSVN MSI installer files are hosted on
+        external servers, we can't guarantee that they are not modified or
+        corrupted when you download them.</p>
+        <p>To verify that the files have not been tampered with,
+        you can verify the signature of the files yourself. All
+        files of TortoiseSVN are digitally signed
+        (since version 1.6.3).</p>
+        <p>After downloading the files, right-click on the files
+        and choose "Properties" from the explorer context menu.
+        In the properties dialog, go to the "signatures" tab and
+        verify that the file is signed by <em>Open Source Developer, Stefan KUENG</em> and that
+        the signature is valid. If you don't see the "signatures"
+        tab, you don't have a good file!</p>
+        <a href="/assets/img/propertiessignature.png" title="propertiessignature">
+            <img src="/assets/img/propertiessignature-small.png" alt="propertiessignature" width="289" height="287">
+        </a>
+
+        <p>Windows also verifies the signature during installation.
+        If the prompt dialog does not say that the signature is
+        valid, cancel the installation and download the file
+        again!</p>
+        <a href="/assets/img/InstallUAC.png" title="InstallUAC">
+            <img src="/assets/img/InstallUAC-small.png" alt="InstallUAC" width="254" height="198">
+        </a>
+    </div>
+</div>

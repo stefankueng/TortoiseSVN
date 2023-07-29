@@ -1,0 +1,116 @@
+﻿// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2010-2011, 2013-2014, 2021 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+#include "stdafx.h"
+#include "RepoCreationFinished.h"
+#include "TempFile.h"
+#include "SVN.h"
+#include "AppUtils.h"
+
+IMPLEMENT_DYNAMIC(CRepoCreationFinished, CStandAloneDialog)
+
+CRepoCreationFinished::CRepoCreationFinished(CWnd* pParent /*=NULL*/)
+    : CStandAloneDialog(CRepoCreationFinished::IDD, pParent)
+{
+}
+
+CRepoCreationFinished::~CRepoCreationFinished()
+{
+}
+
+void CRepoCreationFinished::DoDataExchange(CDataExchange* pDX)
+{
+    CStandAloneDialog::DoDataExchange(pDX);
+    DDX_Control(pDX, IDC_URL, m_repoUrl);
+}
+
+BEGIN_MESSAGE_MAP(CRepoCreationFinished, CStandAloneDialog)
+    ON_BN_CLICKED(IDC_CREATEFOLDERS, &CRepoCreationFinished::OnBnClickedCreatefolders)
+    ON_BN_CLICKED(IDC_REPOBROWSER, &CRepoCreationFinished::OnBnClickedRepobrowser)
+END_MESSAGE_MAP()
+
+void CRepoCreationFinished::OnBnClickedCreatefolders()
+{
+    // create the default folder structure in a temp folder
+    CTSVNPath tempDir = CTempFiles::Instance().GetTempDirPath(true);
+    if (tempDir.IsEmpty())
+    {
+        ::MessageBox(m_hWnd, CString(MAKEINTRESOURCE(IDS_ERR_CREATETEMPDIR)), CString(MAKEINTRESOURCE(IDS_APPNAME)), MB_ICONERROR);
+        return;
+    }
+    CTSVNPath tempDirSub = tempDir;
+    tempDirSub.AppendPathString(L"trunk");
+    CreateDirectory(tempDirSub.GetWinPath(), nullptr);
+    tempDirSub = tempDir;
+    tempDirSub.AppendPathString(L"branches");
+    CreateDirectory(tempDirSub.GetWinPath(), nullptr);
+    tempDirSub = tempDir;
+    tempDirSub.AppendPathString(L"tags");
+    CreateDirectory(tempDirSub.GetWinPath(), nullptr);
+
+    CString url;
+    if (m_repoPath.GetWinPathString().GetAt(0) == '\\') // starts with '\' means an UNC path
+    {
+        CString p = m_repoPath.GetWinPathString();
+        p.TrimLeft('\\');
+        url = L"file://" + p;
+    }
+    else
+        url = L"file:///" + m_repoPath.GetWinPathString();
+
+    // import the folder structure into the new repository
+    SVN svn;
+    if (!svn.Import(tempDir, CTSVNPath(url), CString(MAKEINTRESOURCE(IDS_MSG_IMPORTEDSTRUCTURE)), nullptr, svn_depth_infinity, true, true, false))
+    {
+        svn.ShowErrorDialog(m_hWnd);
+        return;
+    }
+    MessageBox(CString(MAKEINTRESOURCE(IDS_MSG_IMPORTEDSTRUCTUREFINISHED)), L"TortoiseSVN", MB_ICONINFORMATION);
+    DialogEnableWindow(IDC_CREATEFOLDERS, FALSE);
+}
+
+// ReSharper disable once CppMemberFunctionMayBeConst
+void CRepoCreationFinished::OnBnClickedRepobrowser()
+{
+    CString sCmd;
+    sCmd.Format(L"/command:repobrowser /path:\"%s\"",
+                static_cast<LPCWSTR>(m_repoPath.GetWinPath()));
+
+    CAppUtils::RunTortoiseProc(sCmd);
+}
+
+BOOL CRepoCreationFinished::OnInitDialog()
+{
+    CStandAloneDialog::OnInitDialog();
+    CAppUtils::MarkWindowAsUnpinnable(m_hWnd);
+
+    CString url;
+    if (m_repoPath.GetWinPathString().GetAt(0) == '\\') // starts with '\' means an UNC path
+    {
+        CString p = m_repoPath.GetWinPathString();
+        p.TrimLeft('\\');
+        url = L"file://" + p;
+    }
+    else
+        url = L"file:///" + m_repoPath.GetWinPathString();
+
+    m_repoUrl.SetWindowText(url);
+
+    return TRUE; // return TRUE unless you set the focus to a control
+    // EXCEPTION: OCX Property Pages should return FALSE
+}

@@ -1,0 +1,107 @@
+﻿// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2007-2013, 2018, 2023 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+
+import "wtypes.idl";
+
+[
+    uuid(40ACF49D-74FF-4165-94E9-0E002C448520),
+    helpstring("SubWCRev Type Library"),
+    version(1.0)
+]
+library LibSubWCRev
+{
+    importlib("stdole32.tlb");
+
+    [
+        uuid(2F5EA5B0-4DE7-4f96-8E6B-FC0C37D9C0D6),
+        dual,
+        oleautomation
+    ]
+    interface ISubWCRev : IDispatch
+    {
+        [helpstring("Fetches the status information. Call this to initialize all the properties. The properties then reflect the status of the specified path.")]
+        HRESULT GetWCInfo([in] BSTR wcPath, [in]VARIANT_BOOL folders, [in]VARIANT_BOOL externals);
+
+        [helpstring("Fetches the status information. Call this to initialize all the properties. The properties then reflect the status of the specified path.")]
+        HRESULT GetWCInfo2([in] BSTR wcPath, [in]VARIANT_BOOL folders, [in]VARIANT_BOOL externals, [in]VARIANT_BOOL externalsNoMixed);
+
+        [propget, helpstring("Returns the revision of the working copy path passed to GetWCInfo")]
+        HRESULT Revision([out, retval]VARIANT* rev);
+
+        [propget, helpstring("Returns the lowest revision number of the working copy path passed to GetWCInfo")]
+        HRESULT MinRev([out, retval]VARIANT* rev);
+
+        [propget, helpstring("Returns the highest revision number of the working copy path passed to GetWCInfo")]
+        HRESULT MaxRev([out, retval]VARIANT* rev);
+
+        [propget, helpstring("Returns the date as a string of the working copy path passed to GetWCInfo")]
+        HRESULT Date([out, retval]VARIANT* date);
+
+        [propget, helpstring("Returns the url of the working copy path passed to GetWCInfo")]
+        HRESULT Url([out, retval]VARIANT* url);
+
+        [propget, helpstring("Returns the author as a string of the working copy path passed to GetWCInfo")]
+        HRESULT Author([out, retval]VARIANT* author);
+
+        [propget, helpstring("TRUE if the working copy path passed to GetWCInfo has modifications")]
+        HRESULT HasModifications([out, retval]VARIANT_BOOL* modifications);
+
+        [propget, helpstring("TRUE if the working copy path passed to GetWCInfo has unversioned items")]
+        HRESULT HasUnversioned([out, retval]VARIANT_BOOL* modifications);
+
+        [propget, helpstring("TRUE if mixed update revisions found")]
+        HRESULT HasMixedRevisions([out, retval]VARIANT_BOOL* mixed);
+
+        [propget, helpstring("TRUE if all externals are fixed to an explicit revision")]
+        HRESULT HaveExternalsAllFixedRevision([out, retval]VARIANT_BOOL* modifications);
+
+        [propget, helpstring("TRUE if the repository URL contains the tags classification pattern")]
+        HRESULT IsWcTagged([out, retval]VARIANT_BOOL* modifications);
+
+        [propget, helpstring("TRUE if the file or folder is under SVN version control")]
+        HRESULT IsSvnItem([out, retval]VARIANT_BOOL* svn_item);
+
+        [propget, helpstring("TRUE if locking is generally required for the requested file / folder")]
+        HRESULT NeedsLocking([out, retval]VARIANT_BOOL* needs_locking);
+
+        [propget, helpstring("TRUE if the file or folder is locked")]
+        HRESULT IsLocked([out, retval]VARIANT_BOOL* locked);
+
+        [propget, helpstring("Returns the creation date of the lock")]
+        HRESULT LockCreationDate([out, retval]VARIANT* date);
+
+        [propget, helpstring("Returns the owner of the lock")]
+        HRESULT LockOwner([out, retval]VARIANT* owner);
+
+        [propget, helpstring("Returns the comment of the lock")]
+        HRESULT LockComment([out, retval]VARIANT* comment);
+
+        [propget, helpstring("Returns the url of the repository root")]
+        HRESULT RepoRoot([out, retval] VARIANT * url);
+    }
+
+
+    [ uuid(F26E2640-0CFF-43dc-8325-575A3261D885),
+        helpstring("SubWCRev object")
+    ]
+    coclass SubWCRev
+    {
+        [default] interface ISubWCRev;
+    }
+}
+

@@ -1,0 +1,382 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{D3AFBFBE-5501-4077-B3B4-3D28BBCA8F20}</ProjectGuid>
+    <RootNamespace>plink</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\..\..\src\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\bin\$(Configuration)\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\..\..\obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\..\bin\$(Configuration)64\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\..\..\obj\$(ProjectName)\$(Configuration)64\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">..\..\..\..\bin\$(Configuration)ARM64\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">..\..\..\..\obj\$(ProjectName)\$(Configuration)ARM64\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\bin\$(Configuration)\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\..\..\obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\..\bin\$(Configuration)64\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\..\..\obj\$(ProjectName)\$(Configuration)64\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">..\..\..\..\bin\$(Configuration)ARM64\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">..\..\..\..\obj\$(ProjectName)\$(Configuration)ARM64\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\.\;..\..\charset\;..\..\windows\;..\..\windows\TPlink;..\..\unix\;..\..\mac\;..\..\macosx\;..\..\terminal;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APPNAME=TortoisePlink;SSH;NO_HTMLHELP;HAVE_GETNAMEDPIPECLIENTPROCESSID;HAVE_ADDDLLDIRECTORY;HAVE_SETDEFAULTDLLDIRECTORIES;HAVE_STRTOUMAX;_CRT_SECURE_NO_WARNINGS;_CRT_SECURE_NO_DEPRECATE</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)'!='ARM64'">HAVE_AES_NI;HAVE_SHA_NI;HAVE_CLMUL;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions Condition="'$(Platform)'=='ARM64'">HAVE_NEON_CRYPTO;HAVE_NEON_SHA512_INTRINSICS;USE_ARM64_NEON_H;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <WarningLevel>TurnOffAllWarnings</WarningLevel>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <SDLCheck>false</SDLCheck>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>imm32.lib;winmm.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>true</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Debug'">
+    <ClCompile>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\be_list.c" />
+    <ClCompile Include="..\..\callback.c" />
+    <ClCompile Include="..\..\clicons.c" />
+    <ClCompile Include="..\..\cmdline.c" />
+    <ClCompile Include="..\..\console.c" />
+    <ClCompile Include="..\..\crypto\aes-common.c" />
+    <ClCompile Include="..\..\crypto\aes-neon.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='ARM64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\aes-ni.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\aes-select.c" />
+    <ClCompile Include="..\..\crypto\aes-sw.c" />
+    <ClCompile Include="..\..\crypto\aesgcm-clmul.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\aesgcm-common.c" />
+    <ClCompile Include="..\..\crypto\aesgcm-neon.c">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\aesgcm-ref-poly.c" />
+    <ClCompile Include="..\..\crypto\aesgcm-select.c" />
+    <ClCompile Include="..\..\crypto\aesgcm-sw.c" />
+    <ClCompile Include="..\..\crypto\arcfour.c" />
+    <ClCompile Include="..\..\crypto\argon2.c" />
+    <ClCompile Include="..\..\crypto\bcrypt.c" />
+    <ClCompile Include="..\..\crypto\blake2.c" />
+    <ClCompile Include="..\..\crypto\blowfish.c" />
+    <ClCompile Include="..\..\crypto\chacha20-poly1305.c" />
+    <ClCompile Include="..\..\crypto\crc32.c" />
+    <ClCompile Include="..\..\crypto\des.c" />
+    <ClCompile Include="..\..\crypto\diffie-hellman.c" />
+    <ClCompile Include="..\..\crypto\dsa.c" />
+    <ClCompile Include="..\..\crypto\ecc-arithmetic.c" />
+    <ClCompile Include="..\..\crypto\ecc-ssh.c" />
+    <ClCompile Include="..\..\crypto\hash_simple.c" />
+    <ClCompile Include="..\..\crypto\hmac.c" />
+    <ClCompile Include="..\..\crypto\mac.c" />
+    <ClCompile Include="..\..\crypto\mac_simple.c" />
+    <ClCompile Include="..\..\crypto\md5.c" />
+    <ClCompile Include="..\..\crypto\mpint.c" />
+    <ClCompile Include="..\..\crypto\ntru.c" />
+    <ClCompile Include="..\..\crypto\openssh-certs.c" />
+    <ClCompile Include="..\..\crypto\prng.c" />
+    <ClCompile Include="..\..\crypto\pubkey-pem.c" />
+    <ClCompile Include="..\..\crypto\pubkey-ppk.c" />
+    <ClCompile Include="..\..\crypto\pubkey-ssh1.c" />
+    <ClCompile Include="..\..\crypto\rsa.c" />
+    <ClCompile Include="..\..\crypto\sha1-common.c" />
+    <ClCompile Include="..\..\crypto\sha1-neon.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='ARM64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\sha1-ni.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\sha1-select.c" />
+    <ClCompile Include="..\..\crypto\sha1-sw.c" />
+    <ClCompile Include="..\..\crypto\sha256-common.c" />
+    <ClCompile Include="..\..\crypto\sha256-neon.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='ARM64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\sha256-ni.c">
+      <ExcludedFromBuild Condition="'$(Platform)'=='ARM64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\sha256-select.c" />
+    <ClCompile Include="..\..\crypto\sha256-sw.c" />
+    <ClCompile Include="..\..\crypto\sha3.c" />
+    <ClCompile Include="..\..\crypto\sha512-common.c" />
+    <ClCompile Include="..\..\crypto\sha512-neon.c">
+      <ExcludedFromBuild Condition="'$(Platform)'!='ARM64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\..\crypto\sha512-select.c" />
+    <ClCompile Include="..\..\crypto\sha512-sw.c" />
+    <ClCompile Include="..\..\crypto\xdmauth.c" />
+    <ClCompile Include="..\..\errsock.c" />
+    <ClCompile Include="..\..\ldisc.c" />
+    <ClCompile Include="..\..\logging.c" />
+    <ClCompile Include="..\..\pinger.c" />
+    <ClCompile Include="..\..\proxy\cproxy.c" />
+    <ClCompile Include="..\..\proxy\http.c" />
+    <ClCompile Include="..\..\proxy\interactor.c" />
+    <ClCompile Include="..\..\proxy\local.c" />
+    <ClCompile Include="..\..\proxy\proxy.c" />
+    <ClCompile Include="..\..\proxy\socks4.c" />
+    <ClCompile Include="..\..\proxy\socks5.c" />
+    <ClCompile Include="..\..\proxy\sshproxy.c" />
+    <ClCompile Include="..\..\proxy\telnet.c" />
+    <ClCompile Include="..\..\settings.c" />
+    <ClCompile Include="..\..\sshpubk.c" />
+    <ClCompile Include="..\..\sshrand.c" />
+    <ClCompile Include="..\..\ssh\agentf.c" />
+    <ClCompile Include="..\..\ssh\bpp-bare.c" />
+    <ClCompile Include="..\..\ssh\bpp1.c" />
+    <ClCompile Include="..\..\ssh\bpp2.c" />
+    <ClCompile Include="..\..\ssh\censor1.c" />
+    <ClCompile Include="..\..\ssh\censor2.c" />
+    <ClCompile Include="..\..\ssh\common.c" />
+    <ClCompile Include="..\..\ssh\connection1-client.c" />
+    <ClCompile Include="..\..\ssh\connection1.c" />
+    <ClCompile Include="..\..\ssh\connection2-client.c" />
+    <ClCompile Include="..\..\ssh\connection2.c" />
+    <ClCompile Include="..\..\ssh\crc-attack-detector.c" />
+    <ClCompile Include="..\..\ssh\gssc.c" />
+    <ClCompile Include="..\..\ssh\kex2-client.c" />
+    <ClCompile Include="..\..\ssh\login1.c" />
+    <ClCompile Include="..\..\ssh\mainchan.c" />
+    <ClCompile Include="..\..\ssh\pgssapi.c" />
+    <ClCompile Include="..\..\ssh\portfwd.c" />
+    <ClCompile Include="..\..\ssh\sharing.c" />
+    <ClCompile Include="..\..\ssh\ssh.c" />
+    <ClCompile Include="..\..\ssh\transient-hostkey-cache.c" />
+    <ClCompile Include="..\..\ssh\transport2.c" />
+    <ClCompile Include="..\..\ssh\userauth2-client.c" />
+    <ClCompile Include="..\..\ssh\verstring.c" />
+    <ClCompile Include="..\..\ssh\x11fwd.c" />
+    <ClCompile Include="..\..\ssh\zlib.c" />
+    <ClCompile Include="..\..\stubs\no-term.c" />
+    <ClCompile Include="..\..\stubs\null-cipher.c" />
+    <ClCompile Include="..\..\stubs\null-key.c" />
+    <ClCompile Include="..\..\stubs\null-lp.c" />
+    <ClCompile Include="..\..\stubs\null-mac.c" />
+    <ClCompile Include="..\..\stubs\null-opener.c" />
+    <ClCompile Include="..\..\stubs\null-plug.c" />
+    <ClCompile Include="..\..\stubs\null-seat.c" />
+    <ClCompile Include="..\..\timing.c" />
+    <ClCompile Include="..\..\utils\antispoof.c" />
+    <ClCompile Include="..\..\utils\backend_socket_log.c" />
+    <ClCompile Include="..\..\utils\base64_decode.c" />
+    <ClCompile Include="..\..\utils\base64_decode_atom.c" />
+    <ClCompile Include="..\..\utils\base64_encode.c" />
+    <ClCompile Include="..\..\utils\base64_encode_atom.c" />
+    <ClCompile Include="..\..\utils\base64_valid.c" />
+    <ClCompile Include="..\..\utils\bufchain.c" />
+    <ClCompile Include="..\..\utils\buildinfo.c" />
+    <ClCompile Include="..\..\utils\burnstr.c" />
+    <ClCompile Include="..\..\utils\cert-expr.c" />
+    <ClCompile Include="..\..\utils\chomp.c" />
+    <ClCompile Include="..\..\utils\cmdline_get_passwd_input_state_new.c" />
+    <ClCompile Include="..\..\utils\conf.c" />
+    <ClCompile Include="..\..\utils\conf_dest.c" />
+    <ClCompile Include="..\..\utils\conf_launchable.c" />
+    <ClCompile Include="..\..\utils\ctrlparse.c" />
+    <ClCompile Include="..\..\utils\ctrlset_normalise.c" />
+    <ClCompile Include="..\..\utils\decode_utf8.c" />
+    <ClCompile Include="..\..\utils\decode_utf8_to_wchar.c" />
+    <ClCompile Include="..\..\utils\default_description.c" />
+    <ClCompile Include="..\..\utils\dupcat.c" />
+    <ClCompile Include="..\..\utils\dupprintf.c" />
+    <ClCompile Include="..\..\utils\dupstr.c" />
+    <ClCompile Include="..\..\utils\dup_mb_to_wc.c" />
+    <ClCompile Include="..\..\utils\dup_wc_to_mb.c" />
+    <ClCompile Include="..\..\utils\encode_utf8.c" />
+    <ClCompile Include="..\..\utils\encode_wide_string_as_utf8.c" />
+    <ClCompile Include="..\..\utils\fgetline.c" />
+    <ClCompile Include="..\..\utils\host_ca_new_free.c" />
+    <ClCompile Include="..\..\utils\host_strchr.c" />
+    <ClCompile Include="..\..\utils\host_strchr_internal.c" />
+    <ClCompile Include="..\..\utils\host_strcspn.c" />
+    <ClCompile Include="..\..\utils\host_strduptrim.c" />
+    <ClCompile Include="..\..\utils\host_strrchr.c" />
+    <ClCompile Include="..\..\utils\key_components.c" />
+    <ClCompile Include="..\..\utils\log_proxy_stderr.c" />
+    <ClCompile Include="..\..\utils\make_spr_sw_abort_static.c" />
+    <ClCompile Include="..\..\utils\marshal.c" />
+    <ClCompile Include="..\..\utils\memory.c" />
+    <ClCompile Include="..\..\utils\memxor.c" />
+    <ClCompile Include="..\..\utils\nullstrcmp.c" />
+    <ClCompile Include="..\..\utils\out_of_memory.c" />
+    <ClCompile Include="..\..\utils\parse_blocksize.c" />
+    <ClCompile Include="..\..\utils\percent_decode.c" />
+    <ClCompile Include="..\..\utils\percent_encode.c" />
+    <ClCompile Include="..\..\utils\prompts.c" />
+    <ClCompile Include="..\..\utils\ptrlen.c" />
+    <ClCompile Include="..\..\utils\read_file_into.c" />
+    <ClCompile Include="..\..\utils\seat_connection_fatal.c" />
+    <ClCompile Include="..\..\utils\seat_dialog_text.c" />
+    <ClCompile Include="..\..\utils\sessprep.c" />
+    <ClCompile Include="..\..\utils\sk_free_peer_info.c" />
+    <ClCompile Include="..\..\utils\smemclr.c" />
+    <ClCompile Include="..\..\utils\smemeq.c" />
+    <ClCompile Include="..\..\utils\spr_get_error_message.c" />
+    <ClCompile Include="..\..\utils\ssh2_pick_fingerprint.c" />
+    <ClCompile Include="..\..\utils\sshutils.c" />
+    <ClCompile Include="..\..\utils\ssh_key_clone.c" />
+    <ClCompile Include="..\..\utils\strbuf.c" />
+    <ClCompile Include="..\..\utils\string_length_for_printf.c" />
+    <ClCompile Include="..\..\utils\stripctrl.c" />
+    <ClCompile Include="..\..\utils\tempseat.c" />
+    <ClCompile Include="..\..\utils\tree234.c" />
+    <ClCompile Include="..\..\utils\validate_manual_hostkey.c" />
+    <ClCompile Include="..\..\utils\version.c">
+      <ObjectFileName>$(IntDir)utils-%(Filename)</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\..\utils\wcwidth.c" />
+    <ClCompile Include="..\..\utils\wildcard.c" />
+    <ClCompile Include="..\..\utils\wordwrap.c" />
+    <ClCompile Include="..\..\utils\write_c_string_literal.c" />
+    <ClCompile Include="..\..\utils\x11authfile.c" />
+    <ClCompile Include="..\..\utils\x11authnames.c" />
+    <ClCompile Include="..\..\utils\x11_dehexify.c" />
+    <ClCompile Include="..\..\utils\x11_identify_auth_proto.c" />
+    <ClCompile Include="..\..\utils\x11_make_greeting.c" />
+    <ClCompile Include="..\..\utils\x11_parse_ip.c" />
+    <ClCompile Include="..\..\x11disp.c" />
+    <ClCompile Include="..\agent-client.c" />
+    <ClCompile Include="..\cliloop.c" />
+    <ClCompile Include="..\console.c">
+      <ObjectFileName>$(IntDir)windows-%(Filename)</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\gss.c" />
+    <ClCompile Include="..\handle-io.c" />
+    <ClCompile Include="..\handle-socket.c" />
+    <ClCompile Include="..\handle-wait.c" />
+    <ClCompile Include="..\local-proxy.c" />
+    <ClCompile Include="..\named-pipe-client.c" />
+    <ClCompile Include="..\named-pipe-server.c" />
+    <ClCompile Include="..\network.c" />
+    <ClCompile Include="..\no-jump-list.c" />
+    <ClCompile Include="..\nohelp.c" />
+    <ClCompile Include="..\noise.c" />
+    <ClCompile Include="..\plink.c" />
+    <ClCompile Include="..\select-cli.c" />
+    <ClCompile Include="..\sharing.c">
+      <ObjectFileName>$(IntDir)windows-%(Filename)</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\storage.c" />
+    <ClCompile Include="..\unicode.c" />
+    <ClCompile Include="..\utils\agent_mutex_name.c" />
+    <ClCompile Include="..\utils\agent_named_pipe_name.c" />
+    <ClCompile Include="..\utils\arm_arch_queries.c" />
+    <ClCompile Include="..\utils\aux_match_opt.c" />
+    <ClCompile Include="..\utils\centre_window.c" />
+    <ClCompile Include="..\utils\cryptoapi.c" />
+    <ClCompile Include="..\utils\defaults.c" />
+    <ClCompile Include="..\utils\dll_hijacking_protection.c" />
+    <ClCompile Include="..\utils\dputs.c" />
+    <ClCompile Include="..\utils\escape_registry_key.c" />
+    <ClCompile Include="..\utils\filename.c" />
+    <ClCompile Include="..\utils\fontspec.c" />
+    <ClCompile Include="..\utils\get_system_dir.c" />
+    <ClCompile Include="..\utils\get_username.c" />
+    <ClCompile Include="..\utils\interprocess_mutex.c" />
+    <ClCompile Include="..\utils\is_console_handle.c" />
+    <ClCompile Include="..\utils\load_system32_dll.c" />
+    <ClCompile Include="..\utils\ltime.c" />
+    <ClCompile Include="..\utils\make_spr_sw_abort_winerror.c" />
+    <ClCompile Include="..\utils\open_for_write_would_lose_data.c" />
+    <ClCompile Include="..\utils\platform_get_x_display.c" />
+    <ClCompile Include="..\utils\registry.c" />
+    <ClCompile Include="..\utils\request_file.c" />
+    <ClCompile Include="..\utils\security.c" />
+    <ClCompile Include="..\utils\shinydialogbox.c">
+      <ObjectFileName>$(IntDir)windows-%(Filename)</ObjectFileName>
+    </ClCompile>
+    <ClCompile Include="..\utils\win_strerror.c" />
+    <ClCompile Include="..\x11.c" />
+    <ClCompile Include="LoginDialog.cpp" />
+    <ClCompile Include="TortoisePlink.c" />
+    <ClCompile Include="version.c" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\charset\charset.h" />
+    <ClInclude Include="..\..\crypto\aesgcm-footer.h" />
+    <ClInclude Include="..\..\crypto\aesgcm.h" />
+    <ClInclude Include="..\..\crypto\ntru.h" />
+    <ClInclude Include="..\..\defs.h" />
+    <ClInclude Include="..\..\logindialog.h" />
+    <ClInclude Include="..\..\marshal.h" />
+    <ClInclude Include="..\..\misc.h" />
+    <ClInclude Include="..\..\mpint.h" />
+    <ClInclude Include="..\..\network.h" />
+    <ClInclude Include="..\..\pageant.h" />
+    <ClInclude Include="..\..\putty.h" />
+    <ClInclude Include="..\..\puttymem.h" />
+    <ClInclude Include="..\..\sshcr.h" />
+    <ClInclude Include="..\..\ssh.h" />
+    <ClInclude Include="..\..\storage.h" />
+    <ClInclude Include="..\..\tree234.h" />
+    <ClInclude Include="..\..\version.h" />
+    <ClInclude Include="..\putty-rc.h" />
+    <ClInclude Include="..\TortoisePlinkRes.h" />
+    <ClInclude Include="LoginDialog.h" />
+    <ClInclude Include="TortoisePlinkRes.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="PUTTY.ICO" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="TortoisePlink.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\..\..\..\src\compatibility.manifest" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

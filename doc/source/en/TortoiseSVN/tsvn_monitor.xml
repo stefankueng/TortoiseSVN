@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE chapter SYSTEM "../../dtd/dblite.dtd">
+<chapter id="tsvn-projectmonitor">
+  <title>Project Monitor</title>
+  <simplesect>
+    <indexterm>
+      <primary>commit monitor</primary>
+    </indexterm>
+    <indexterm>
+      <primary>project monitor</primary>
+    </indexterm>
+    <indexterm>
+      <primary>remote commits</primary>
+    </indexterm>
+    <indexterm>
+      <primary>monitoring projects</primary>
+    </indexterm>
+    <para>
+      The project monitor is a helpful tool that monitors repositories and
+      notifies you in case there are new commits.
+    </para>
+    <para>
+      The projects can be monitored via a working copy path or directly via
+      their repository URLs.
+    </para>
+    <para>
+      The project monitor scans each project in a configurable interval, and
+      every time new commits are detected a notification popup is shown.
+      Also the icon that is added to the system tray changes to indicate that
+      there are new commits.
+    </para>
+    <important>
+      <title>Snarl</title>
+      <para>
+        If <ulink url="https://snarl.fullphat.net/">
+          <citetitle>Snarl</citetitle>
+        </ulink> is installed and active, then the project monitor automatically
+        uses Snarl to show the notifications about newly detected commits.
+      </para>
+    </important>
+  </simplesect>
+  <!-- ================================================================= -->
+  <!-- ======================== SECTION 1 ============================== -->
+  <!-- ================================================================= -->
+  <sect1 id="tsvn-projectmonitor-addprojects">
+    <title>Adding projects to monitor</title>
+    <para>
+      If you first start the project monitor, the tree view on the left side
+      is empty. To add projects, click on the button at the top of the dialog
+      named <guibutton>Add Project</guibutton>.
+    </para>
+    <para>
+      <figure id="tsvn-projectmonitor-addprojects-dia-1">
+        <title>The edit project dialog of the project monitor</title>
+        <graphic fileref="images/monitor-editproject.png"/>
+      </figure>
+      To add a project for monitoring, fill in the required information.
+      The name of the project is not optional and must be filled in, all
+      other information is optional.
+    </para>
+    <para>
+      If the box for <literal>Path or Url</literal> is left empty, then
+      a folder is added. This is useful to group monitored projects.
+    </para>
+    <para>
+      If you want to monitor all repositories served via the
+      <ulink url="https://svnbook.red-bean.com/en/1.8/svn.serverconfig.httpd.html#svn.serverconfig.httpd.basic">
+        <citetitle>SVNParentPath</citetitle>
+      </ulink>
+      directive, enter the root Url for your repositories and check the box
+      <literal>Url points to SVNParentPath list</literal>.
+    </para>
+    <para>
+      The fields <literal>Username</literal> and <literal>Password</literal>
+      should only be filled in if the repository does not provide anonymous
+      read access, and only if the authentication is not stored by Subversion
+      itself. If you're accessing the monitored repository with TortoiseSVN
+      or other svn clients and you've stored the authentication already,
+      you should leave this empty: you won't have to edit those projects
+      manually if the password changes.
+    </para>
+    <para>
+      The <literal>Monitor interval in minutes</literal> specifies the minutes
+      to wait in between checks. The smallest interval is one minute.
+    </para>
+    <tip>
+      <title>check interval</title>
+      <para>
+        If there are a lot of users monitoring the same repository and the
+        bandwidth on the server is limited, a repository admin can set the
+        minimum for check intervals using an <filename>svnrobots.txt</filename> file.
+        A detailed explanation on how this works can be found on the project monitor
+        website:
+      </para>
+      <para condition="pot">
+        <ulink url="https://tools.stefankueng.com/svnrobots.html">
+          <citetitle>https://tools.stefankueng.com/svnrobots.html</citetitle>
+        </ulink>
+      </para>
+    </tip>
+  </sect1>
+  <!-- ================================================================= -->
+  <!-- ======================== SECTION 2 ============================== -->
+  <!-- ================================================================= -->
+  <sect1 id="tsvn-projectmonitor-maindialog">
+    <title>Monitor dialog</title>
+    <para>
+      <figure id="tsvn-projectmonitor-maindialog-dia-1">
+        <title>The main dialog of the project monitor</title>
+        <graphic fileref="images/monitor.png"/>
+      </figure>
+      The project monitor shows all monitored projects on the left in a tree
+      view. The projects can be moved around, for example one project can be moved
+      below another project, making it a child/subproject.
+    </para>
+    <para>
+      A click on a project shows all the log messages of that project on
+      the right.
+    </para>
+    <para>
+      Projects that have updates are shown in bold, with the number of
+      new commits in brackets at the right. A click on a project marks
+      it automatically as read.
+    </para>
+    <sect2 id="tsvn-projectmonitor-maindialog-buttons">
+      <title>Main operations</title>
+      <para>
+        The toolbar at the top of the dialog allows to configure
+        and operate the project monitor.
+      </para>
+      <para>
+        <variablelist>
+          <varlistentry>
+            <term>Check Now</term>
+            <listitem>
+              <para>
+                While each monitored project is checked according to the
+                interval that's set up, clicking this button will force
+                a check of all projects immediately. Note that if there
+                are updates, the notification won't show up until all
+                projects have been checked.
+              </para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>Add Project</term>
+            <listitem>
+              <para>
+                Opens a new dialog to set up a new project for monitoring.
+              </para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>Edit</term>
+            <listitem>
+              <para>
+                Opens the configuration dialog for the selected project.
+              </para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>Remove</term>
+            <listitem>
+              <para>
+                Removes the selected project after a confirmation dialog
+                is shown.
+              </para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>Mark all as read</term>
+            <listitem>
+              <para>
+                Marks all revisions in all projects as read. Note that if
+                you select a project with unread revisions, those revisions
+                are automatically marked as read when you select another
+                project.
+              </para>
+              <para>
+                If you hold down the <keycap>Shift</keycap> key when clicking
+                the button, all error states are also cleared if there are any.
+              </para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>Update all</term>
+            <listitem>
+              <para>
+                Runs an <command>Update</command> on all monitored working
+                copies. Projects that are monitored via an url are not
+                updated, only those that are set up with a working copy
+                path.
+              </para>
+            </listitem>
+          </varlistentry>
+          <varlistentry>
+            <term>Options</term>
+            <listitem>
+              <para>
+                Shows a dialog to configure the behavior of the project
+                monitor.
+              </para>
+            </listitem>
+          </varlistentry>
+        </variablelist>
+      </para>
+    </sect2>
+  </sect1>
+</chapter>

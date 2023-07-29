@@ -1,0 +1,5 @@
+﻿EXPORTS
+    TerminateCache
+    OpenDonatePage
+    MsgBox
+    SetLanguage

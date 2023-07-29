@@ -1,0 +1,59 @@
+﻿// TortoiseSVN - a Windows shell extension for easy version control
+
+// Copyright (C) 2010-2011, 2014, 2021 - TortoiseSVN
+
+// This program is free software; you can redistribute it and/or
+// modify it under the terms of the GNU General Public License
+// as published by the Free Software Foundation; either version 2
+// of the License, or (at your option) any later version.
+
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU General Public License for more details.
+
+// You should have received a copy of the GNU General Public License
+// along with this program; if not, write to the Free Software Foundation,
+// 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+//
+#include "stdafx.h"
+#include "CreateRepositoryCommand.h"
+#include "SVN.h"
+#include "TempFile.h"
+#include "IconExtractor.h"
+#include "RepoCreationFinished.h"
+#include "SmartHandle.h"
+
+bool CreateRepositoryCommand::Execute()
+{
+    if (!SVN::CreateRepository(cmdLinePath))
+    {
+        TaskDialog(GetExplorerHWND(), AfxGetResourceHandle(), MAKEINTRESOURCE(IDS_APPNAME), MAKEINTRESOURCE(IDS_ERR_ERROROCCURED), MAKEINTRESOURCE(IDS_PROC_REPOCREATEERR), TDCBF_OK_BUTTON, TD_ERROR_ICON, nullptr);
+        return false;
+    }
+    else
+    {
+        // create a desktop.ini file which sets our own icon for the repo folder
+        // we extract the icon to use from the resources and write it to disk
+        // so even those who don't have TSVN installed can benefit from it.
+        CIconExtractor svnIconResource;
+        if (svnIconResource.ExtractIcon(nullptr, MAKEINTRESOURCE(IDI_SVNFOLDER), cmdLinePath.GetWinPathString() + L"\\svn.ico") == 0)
+        {
+            DWORD     dwWritten = 0;
+            CAutoFile hFile     = CreateFile(cmdLinePath.GetWinPathString() + L"\\Desktop.ini", GENERIC_WRITE, 0, nullptr, CREATE_ALWAYS, FILE_ATTRIBUTE_SYSTEM | FILE_ATTRIBUTE_HIDDEN, nullptr);
+            if (hFile)
+            {
+                CString sIni = L"[.ShellClassInfo]\nConfirmFileOp=0\nIconFile=svn.ico\nIconIndex=0\nInfoTip=Subversion Repository\n";
+                WriteFile(hFile, static_cast<LPCWSTR>(sIni), sIni.GetLength() * sizeof(wchar_t), &dwWritten, nullptr);
+            }
+            PathMakeSystemFolder(cmdLinePath.GetWinPath());
+        }
+
+        CWnd parent;
+        parent.FromHandle(GetExplorerHWND());
+        CRepoCreationFinished finDlg(&parent);
+        finDlg.SetRepoPath(cmdLinePath);
+        finDlg.DoModal();
+    }
+    return true;
+}

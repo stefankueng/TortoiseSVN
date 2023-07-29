@@ -1,0 +1,269 @@
+<?xml version="1.0"?>
+<!--
+============================================================
+ $Date$
+ $Author$
+ $Rev$
+============================================================
+
+NAnt build script for the TortoiseSVN language pack installers
+
+-->
+
+<project name="LanguagePack" default="all" basepath=".">
+  <description>
+    Builds the Language pack installers
+  </description>
+
+  <include buildfile="../default.build.user" if="${file::exists('../default.build.user')}" />
+
+  <property name="SpellCheckDir"
+    value="..\ext\Spell\"
+    unless="${property::exists('SpellCheckDir')}"
+  />
+
+  <target name="clean">
+    <description>
+      Removes all previously built language pack installers.
+    </description>
+    <if test="${cleanup == 'yes'}">
+      <delete>
+        <fileset>
+          <include name="..\bin\Tortoise*.dll" />
+          <include name="..\bin\LanguagePack_*-${platform}-*.msi" />
+        </fileset>
+      </delete>
+    </if>
+  </target>
+
+  <target name="all" depends="clean,resourcedlls">
+    <description>
+      Builds the installers.
+    </description>
+
+    <if test="${platform == 'x64'}">
+      <setenv>
+        <variable name="Platform" value="x64" />
+      </setenv>
+    </if>
+    <if test="${platform == 'ARM64'}">
+      <setenv>
+        <variable name="Platform" value="arm64" />
+      </setenv>
+    </if>
+    <if test="${platform == 'win32'}">
+      <setenv>
+        <variable name="Platform" value="win32" />
+      </setenv>
+    </if>
+
+    <loadfile file="Languages.txt" property="languagelines" encoding="utf-8" />
+    <!-- the next line is split in two because we need the newline in the string -->
+    <foreach item="String" in="${languagelines}" delim="
+" property="langline">
+      <call target="doit" unless="${string::starts-with(langline, '#') or string::get-length(langline)==0}" failonerror="false" />
+    </foreach>
+  </target>
+
+  <target name="doit">
+    <property name="platformfolder" value="${configuration}${bindirextension}" />
+
+    <property name="ResTextFileName" value="..\bin\Release${bindirextension}\bin\restext.exe" />
+    <property name="ResTextFileName" value="..\bin\Release\bin\restext.exe" if="${crosscompile == 'yes'}" />
+
+    <regex
+      pattern="^(?'langISO'[A-z_@]+);[ \t]*(?'langWIX'[A-z\-]+);[ \t]*(?'langCC'\d+);[ \t]*(?'spellcheck'\d);[ \t]*(?'langUI'.+);[ \t]*(?'translatornames'.+)"
+      input="${langline}"
+    />
+    <echo message="Building ${langUI} dlls and installer" />
+    <delete>
+      <fileset>
+        <include name="..\bin\Tortoise*.dll" />
+      </fileset>
+    </delete>
+
+    <!-- create the dlls -->
+    <exec program="${ResTextFileName}" failonerror="false">
+      <arg value="apply" />
+      <arg value="..\bin\${platformfolder}\bin\TortoiseProcLang.dll" />
+      <arg value="..\bin\TortoiseProc${langCC}.dll" />
+      <arg value="${langISO}\TortoiseUI.po" />
+      <arg value="-adjusteols" />
+    </exec>
+    <exec program="${ResTextFileName}" failonerror="false" if="${platform == 'x64'}">
+      <arg value="apply" />
+      <arg value="..\bin\Release\bin\TortoiseProcLang.dll" />
+      <arg value="..\bin\TortoiseProc32${langCC}.dll" />
+      <arg value="${langISO}\TortoiseUI.po" />
+      <arg value="-adjusteols" />
+    </exec>
+    <exec program="${ResTextFileName}" failonerror="false">
+      <arg value="apply" />
+      <arg value="..\bin\${platformfolder}\bin\TortoiseMergeLang.dll" />
+      <arg value="..\bin\TortoiseMerge${langCC}.dll" />
+      <arg value="${langISO}\TortoiseUI.po" />
+      <arg value="-adjusteols" />
+    </exec>
+    <exec program="${ResTextFileName}" failonerror="false">
+      <arg value="apply" />
+      <arg value="..\bin\${platformfolder}\bin\TortoiseBlameLang.dll" />
+      <arg value="..\bin\TortoiseBlame${langCC}.dll" />
+      <arg value="${langISO}\TortoiseUI.po" />
+      <arg value="-adjusteols" />
+    </exec>
+    <exec program="${ResTextFileName}" failonerror="false">
+      <arg value="apply" />
+      <arg value="..\bin\${platformfolder}\bin\TortoiseIDiffLang.dll" />
+      <arg value="..\bin\TortoiseIDiff${langCC}.dll" />
+      <arg value="${langISO}\TortoiseUI.po" />
+      <arg value="-adjusteols" />
+    </exec>
+    <exec program="${ResTextFileName}" failonerror="false">
+      <arg value="apply" />
+      <arg value="..\bin\${platformfolder}\bin\TortoiseUDiffLang.dll" />
+      <arg value="..\bin\TortoiseUDiff${langCC}.dll" />
+      <arg value="${langISO}\TortoiseUI.po" />
+      <arg value="-adjusteols" />
+    </exec>
+
+    <!-- create the mo files -->
+    <property name="PoFileName" value="..\ext\Subversion\Subversion\po\${langISO}.po" />
+    <exec program="msgfmt" if="${file::exists(PoFileName)}" failonerror="false">
+      <arg value="..\ext\Subversion\Subversion\po\${langISO}.po" />
+      <arg value="-o" />
+      <arg value="subversion.mo" />
+    </exec>
+
+    <!--
+    Build the <Files></Files> parts for the spell checker files and thesauri.
+    -->
+    <property name="SpellCheckFiles" value="" />
+    <foreach item="File" property="filename">
+      <in>
+        <items>
+          <include name="${SpellCheckDir}${langISO}*.*" />
+        </items>
+      </in>
+      <do>
+        <property name="SpellCheckFiles" value="&lt;File Id='${path::get-file-name(filename)}' Name='${path::get-file-name(filename)}' DiskId='1' Source='${filename}' Vital='no'&gt;&lt;/File&gt;${SpellCheckFiles}" />
+        <echo message="${filename}" />
+      </do>
+    </foreach>
+
+    <if test="${file::exists('..\signinfo.txt')}">
+      <foreach item="File" property="filename">
+        <in>
+          <items>
+            <include name="..\bin\*.dll" />
+          </items>
+        </in>
+        <do>
+          <exec program="${signtool}" failonerror="${devrelease != '-dev'}">
+            <arg value="sign" />
+            <arg value="${signinfo}" />
+            <arg value="${filename}" />
+          </exec>
+        </do>
+      </foreach>
+    </if>
+    <!-- create the files for the installer -->
+    <if test="${environment::variable-exists('MajorVersion')}">
+      <loadfile file="LanguagePack.wxs" property="versionwxsfile" encoding="utf-8">
+        <filterchain>
+          <replacetokens begintoken="$" endtoken="$">
+            <token key="MajorVersion" value="${environment::get-variable('MajorVersion')}" />
+            <token key="MinorVersion" value="${environment::get-variable('MinorVersion')}" />
+            <token key="MicroVersion" value="${environment::get-variable('Microversion')}" />
+            <token key="WCREV" value="${environment::get-variable('WCREV')}" />
+            <token key="DEVRELEASE" value="${devrelease}" />
+            <token key="PLATFORM" value="${platform}" />
+            <token key="LANGUI" value="${langUI}" />
+            <token key="COUNTRYCODE" value="${langISO}" />
+            <token key="COUNTRYID" value="${langCC}" />
+            <token key="SPELLCHECKFILES" value="${SpellCheckFiles}" />
+          </replacetokens>
+        </filterchain>
+      </loadfile>
+      <echo file="LanguagePack_${langISO}.wxs" message="${versionwxsfile}" />
+    </if>
+
+    <setenv>
+      <variable name="TSVNHelpFile" value=" " />
+      <variable name="TMergeHelpFile" value=" " />
+      <variable name="TSVNMoFile" value=" " />
+    </setenv>
+
+    <if test="${file::exists('subversion.mo')}">
+      <setenv>
+        <variable name="TSVNMoFile" value="${langISO}" />
+      </setenv>
+    </if>
+
+    <property name="chmFileName" value="..\doc\output\TortoiseSVN_${langISO}.chm" />
+    <setenv if="${file::exists(chmFileName)}">
+      <variable name="TSVNHelpFile" value="${langISO}" />
+    </setenv>
+
+    <property name="chmFileName" value="..\doc\output\TortoiseMerge_${langISO}.chm" />
+    <setenv if="${file::exists(chmFileName)}">
+      <variable name="TMergeHelpFile" value="${langISO}" />
+    </setenv>
+
+    <exec program="candle">
+      <arg value="-nologo" />
+      <arg value="-arch" if="${platform == 'ARM64'}" />
+      <arg value="arm64" if="${platform == 'ARM64'}" />
+      <arg value="-out" />
+      <arg value="..\bin\" />
+      <arg value="LanguagePack_${langISO}.wxs" />
+      <arg value="WixUI_LanguagePacks.wxs" />
+    </exec>
+    <exec program="light">
+      <arg value="-nologo" />
+      <arg value="-sw1008" />
+      <arg value="-sice:ICE61" />
+      <arg value="-sice:ICE82" />
+      <arg value="-sval" if="${schedule == 'yes'}" />
+      <arg value="-out" />
+      <arg value="..\bin\LanguagePack_${verstring}${devrelease}-${platform}-${langISO}.msi" />
+      <arg value="..\bin\LanguagePack_${langISO}.wixobj" />
+      <arg value="..\bin\WixUI_LanguagePacks.wixobj" />
+      <arg value="-ext" />
+      <arg value="WixUIExtension" />
+      <arg value="-cultures:${langWIX}" />
+    </exec>
+    <delete>
+      <fileset>
+        <include name="..\bin\*.wixobj" />
+        <include name="..\bin\*.wixpdb" />
+      </fileset>
+    </delete>
+    <if test="${file::exists('..\signinfo.txt')}">
+      <exec program="${signtool}" failonerror="${devrelease != '-dev'}">
+        <arg value="sign" />
+        <arg value="${signinfo}" />
+        <arg value="..\bin\LanguagePack_${verstring}${devrelease}-${platform}-${langISO}.msi" />
+      </exec>
+    </if>
+
+    <delete file="LanguagePack_${langISO}.wxs" failonerror="false" />
+    <delete file="..\bin\TortoiseProc${langCC}.dll" failonerror="false" />
+    <delete file="..\bin\TortoiseProc32${langCC}.dll" failonerror="false" />
+    <delete file="..\bin\TortoiseMerge${langCC}.dll" failonerror="false" />
+    <delete file="..\bin\TortoiseBlame${langCC}.dll" failonerror="false" />
+    <delete file="..\bin\TortoiseIDiff${langCC}.dll" failonerror="false" />
+    <delete file="..\bin\TortoiseUDiff${langCC}.dll" failonerror="false" />
+    <delete file="subversion.mo" failonerror="false" />
+  </target>
+
+  <target name="resourcedlls">
+    <property name="verstring" value="${environment::get-variable('MajorVersion')}.${environment::get-variable('MinorVersion')}.${environment::get-variable('MicroVersion')}.${environment::get-variable('WCREV')}" />
+
+    <zip zipfile="..\bin\TortoiseSVN_${verstring}${devrelease}_${platform}_LanguageDlls.zip" ziplevel="9">
+      <fileset>
+        <include name="..\bin\Release${bindirextension}\bin\*Lang.dll" />
+      </fileset>
+    </zip>
+  </target>
+</project>
+

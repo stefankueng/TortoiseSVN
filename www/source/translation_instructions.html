@@ -1,0 +1,174 @@
+---
+layout: default
+title: Translation instructions
+description: how to help translate TortoiseSVN
+keywords: translation, instruction
+lang: en
+---
+
+
+<div class="post">
+    <h1 class="title">Translation instructions</h1>
+    <div class="entry">
+        <p>TortoiseSVN is still in development so the translation
+        of all resources is also a work 'in progress'.</p>
+
+        <h2>General</h2>
+        <p>The TortoiseSVN project uses gettext PO (portable object)
+        files for its translation. PO files are plain text, so you
+        can even translate using a normal text editor. The only
+        thing you have to take care of is that the editor can handle
+        the UTF-8 charset. There is a wide range of tools out there
+        that can handle and manipulate PO files.</p>
+        <p>There are two ways to add to the translations in TortoiseSVN</p>
+        <ul>
+            <li>The new way using transifex.com</li>
+            <li>The old manual way (deprecated)</li>
+        </ul>
+
+        <h3>Offline translation editing</h3>
+        <p>No matter whether you follow the old or the new path, both ways allow you to edit your
+            translations offline. We recommend that you use
+            <a href="https://poedit.net/">poEdit</a> (Windows only) or
+            <a href="https://virtaal.translatehouse.org/?id=virtaal/index">Virtaal</a> (Multi-platform).
+        </p>
+
+        <h3 id="thenewway">The new way using transifex.com</h3>
+        <p>
+            Visit <a href="https://transifex.com">transifex.com</a> and register an account there.
+            After having done this, go to the <a href="https://explore.transifex.com/luebbe/tortoisesvn/">TortoiseSVN translation project</a>
+            and request to join a language team of your choice.
+        </p>
+        <p>
+            Transifex has a nice web interface. You can edit everything there, but you can also download
+            the .po file, work offline using your preferred editor and upload the .po file to transifex again.
+        </p>
+        <p>
+            We take care of synchronizing the translations between transifex.com and our repository.
+        </p>
+
+        <h3 id="theoldway">The old manual way (deprecated)</h3>
+
+        <p>This description assumes that you use poEdit.</p>
+
+        <h3>Getting started</h3>
+        <p>If you want to implement a new language for TortoiseSVN
+        do the following.</p>
+
+        <ol>
+            <li><p>Use TortoiseSVN (or any other SubVersion client) to
+            check out:<br/>
+            <a href="https://svn.code.sf.net/p/tortoisesvn/code/trunk/Languages">https://svn.code.sf.net/p/tortoisesvn/code/trunk/Languages</a>
+            (You will get more than one file).</p>
+            <p>Or point your browser to:<br/>
+            <a href="https://sourceforge.net/p/tortoisesvn/code/HEAD/tree/trunk/Languages">https://sourceforge.net/p/tortoisesvn/code/HEAD/tree/trunk/Languages</a>,
+            select <strong>Tortoise.pot</strong> and save this file
+            to your local harddisk. Tortoise.pot is the portable
+            object template (hence .pot) for the translation.</p>
+            </li>
+            <li>Rename Tortoise.pot to Tortoise_xx.po, where xx is
+            your two letter ISO-639-1 language code. Look up your
+            language code here:
+            <a href="https://www.loc.gov/standards/iso639-2/langcodes.html">https://www.loc.gov/standards/iso639-2/langcodes.html</a>.
+            <p>Please keep in mind that we would like to have as few
+            translations as possible that cover as many languages
+            as possible. We would not be very happy at having to
+            maintain a (de_CH) Swiss German, (de_AT) Austrian German
+            and (de_DE) German German translation. :-)<br/>
+            But if it's necessary like in Chinese, sure go ahead.
+            We are happy with simplified (zh_CN) and traditional
+            (zh_TW) Chinese.</p>
+            </li>
+            <li>It would also be nice, if you sent us your four
+            digit locale ID along with the file. The list of locale
+            IDs as defined by Microsoft can be found here:
+            <a href="https://www.microsoft.com/globaldev/reference/lcid-all.mspx">https://www.microsoft.com/globaldev/reference/lcid-all.mspx</a>
+            </li>
+            <li>Now translate what you can using poEdit. If you are
+            not sure with one or the other translation, mark it
+            as <em>fuzzy</em>. You can enter a comment in poEdit to
+            give some information about your thoughts to other
+            translators.<br/>
+
+            If you are not sure about the meaning of the original
+            sentence ask on the list.
+            </li>
+            <li>Add a header with '#' comments to the PO file using
+            a normal text editor that explains which language you
+            translated and the terminology you used, like:<br/>
+            <code><br/>
+               #<br/>
+               # German translations for TortoiseSVN<br/>
+               # This file is distributed under the same license as the subversion package.<br/>
+               #<br/>
+
+               # Translation dictionary:<br/>
+               #<br/>
+               # argument    parameter<br/>
+               # bogus      ungültig<br/>
+               # checkout    auschecken (denglisch, ich weiss, aber akzeptabel)<br/>
+               # client    Client, des Client<br/>
+
+               # commit    Übertragen<br/>
+               # item        Objekt<br/>
+               # label      Marke / Markierung<br/>
+            </code>
+            </li>
+            <li>Make sure your file is saved in UTF-8 encoding and
+            that it does <strong>not</strong> begin with UTF-8 BOMs
+            (Byte Order Marks)
+            </li>
+            <li>Send your Tortoise_xx.po to the mailing list
+            (https://groups.google.com/forum/#!forum/tortoisesvn) or, if you have a
+            <a href="https://sourceforge.net">Sourceforge account</a>,
+            request commit access to the project via the translators
+            mailing list, you may commit your translations directly
+            into the TortoiseSVN repository.
+            </li>
+        </ol>
+
+        <h3>Adding to an existing translation</h3>
+        <ol>
+            <li>Get hold of Tortoise.pot and the Tortoise_xx.po you
+            want to improve
+            </li>
+            <li>Start poEdit with Tortoise_xx.po and select
+            <cite>Update from .pot file</cite> from the "Catalog" Menu
+            </li>
+            <li>Select Tortoise.pot and wait until poEdit has
+            finished merging the template and the current translation.
+            </li>
+            <li>The untranslated strings (and fuzzy translations)
+            are always at the top of the list.
+            </li>
+            <li>Translate what you can and send the resulting PO
+            file back to the mailing list (https://groups.google.com/g/tortoisesvn).
+            </li>
+        </ol>
+
+        <h3>Important</h3>
+        <p>Please pay special attention to cases where placeholders
+        for variables like <code>%s</code> or <code>%d</code> appear in the original text.
+        They have to appear in in the translation again. If the
+        parameters are numbered, like <code>%1!s! files copied to %2!s!</code>,
+        you may reverse the order in your translation if you need
+        to do so to form a proper phrase in your language.</p>
+
+        <h3>What now?</h3>
+        <p>That's all you have to do. We'll take care of creating
+        the resource dlls and installers for the different
+        language packs.</p>
+
+        <h3>Testing your translation</h3>
+        <p>If you want to test the translations you made yourself,
+        just wait for the next
+        <a href="https://nightlybuilds.tortoisesvn.net/">nightly build</a>.<br/>
+
+        The nightly build is done every night at 0:00 GMT+1. The
+        Language Packs however are only built twice a week (on
+        Sunday and Wednesday).
+        The whole build takes about an hour. After the build is done,
+        the installers (including the language packs) are uploaded
+        for you to use.</p>
+    </div>
+</div>

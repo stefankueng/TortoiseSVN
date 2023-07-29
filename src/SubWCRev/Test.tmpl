@@ -1,0 +1,37 @@
+// Test file for SubWCRev
+
+char *Revision      = "$WCREV$";
+char *Revision16    = "$WCREV&0xFF$";
+char *Revisionp100  = "$WCREV+100$";
+char *Revisionm100  = "$WCREV-100$";
+char *Modified      = "$WCMODS?Modified:Not modified$";
+char *Unversioned   = "$WCUNVER?Unversioned items found:no unversioned items$";
+char *Date          = "$WCDATE$";
+char *CustDate      = "$WCDATE=%a, %d %B %Y$";
+char *CustDateEmpty = "$WCDATE=$";
+char *CustDateInval = "$WCDATE=%a, %q %B %Y$";
+char *DateUTC       = "$WCDATEUTC$";
+char *CustDateUTC   = "$WCDATEUTC=%a, %d %B %Y$";
+char *TimeNow       = "$WCNOW$";
+char *TimeNowUTC    = "$WCNOWUTC$";
+char *RevRange      = "$WCRANGE$";
+char *Mixed         = "$WCMIXED?Mixed revision WC:Not mixed$";
+char *ExtAllFixed   = "$WCEXTALLFIXED?All externals fixed:Not all externals fixed$";
+char *IsTagged      = "$WCISTAGGED?Tagged:Not tagged$";
+char *URL           = "$WCURL$";
+char *isInSVN       = "$WCINSVN?versioned:not versioned$";
+char *needslck      = "$WCNEEDSLOCK?TRUE:FALSE$";
+char *islocked      = "$WCISLOCKED?locked:not locked$";
+char *lockdateutc   = "$WCLOCKDATEUTC$";
+char *lockdate      = "$WCLOCKDATE$";
+char *lockcustutc   = "$WCLOCKDATEUTC=%a, %d %B %Y$";
+char *lockcust      = "$WCLOCKDATE=%a, %d %B %Y$";
+char *lockown       = "$WCLOCKOWNER$";
+char *lockcmt       = "$WCLOCKCOMMENT$";
+
+#if $WCMODS?1:0$
+#error Source is modified
+#endif
+
+// EndOfFile
+

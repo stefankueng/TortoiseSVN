@@ -1,0 +1,68 @@
+Index: yourShoppingCart.cfc
+===================================================================
+--- yourShoppingCart.cfc	(revision 25)
++++ yourShoppingCart.cfc	(working copy)
+@@ -1,13 +0,0 @@
+-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+-
+-<html>
+-<head>
+-	<title>Untitled</title>
+-</head>
+-
+-<body>
+-
+-
+-
+-</body>
+-</html>
+Index: ShellCache.h
+===================================================================
+--- ShellCache.h	(revision 906)
++++ ShellCache.h	(working copy)
+@@ -30,6 +30,7 @@
+ public:
+ 	ShellCache()
+ 	{
++    debug = CRegDWORD(_T("Software\\TortoiseSVN\\DebugShellCache"),0, false, HKEY_LOCAL_MACHINE);
+ 		showrecursive = CRegStdWORD(_T("Software\\TortoiseSVN\\RecursiveOverlay"));
+ 		driveremote = CRegStdWORD(_T("Software\\TortoiseSVN\\DriveMaskRemote"));
+ 		drivefixed = CRegStdWORD(_T("Software\\TortoiseSVN\\DriveMaskFixed"));
+@@ -120,8 +121,9 @@
+ 				_tcscpy(pathbuf, path);
+ 				PathRemoveFileSpec(pathbuf);
+ 				PathAddBackslash(pathbuf);
+-				ATLTRACE2(_T("GetDriveType for %s, Drive %d\n"), pathbuf, drivenumber);
+ 				drivetype = GetDriveType(pathbuf);
++        if (debug) 
++          AfxTrace(_T("TSVN: GetDriveType for %s, Drive %d is %d\n"), pathbuf, drivenumber, drivetype);
+ 				drivetypecache[drivenumber] = drivetype;
+ 			} // if (drivetype == -1)
+ 		} // if ((drivenumber >=0)&&(drivenumber < 25)) 
+@@ -135,7 +137,8 @@
+ 				drivetype = drivetypecache[26];
+ 			else
+ 			{
+-				ATLTRACE2(_T("GetDriveType for %s\n"), pathbuf);
++        if (debug) 
++          AfxTrace(_T("TSVN: GetDriveType for %s, Drive %d is %d\n"), pathbuf, drivenumber, drivetype);
+ 				drivetype = GetDriveType(pathbuf);
+ 				drivetypecache[26] = drivetype;
+ 				_tcsncpy(drivetypepathcache, pathbuf, MAX_PATH);
+@@ -193,6 +196,7 @@
+ 	DWORD layoutticker;
+ 	DWORD langticker;
+ 	DWORD blockstatusticker;
++  DWORD debug;
+ 	UINT  drivetypecache[27];
+ 	TCHAR drivetypepathcache[MAX_PATH];
+-};
+\ No newline at end of file
++};
+Index: file1.txt
+===================================================================
+--- file1.txt	(revision 20)
++++ file1.txt	(working copy)
+@@ -0,0 +1 @@
++vhjhgf
+\ No newline at end of file

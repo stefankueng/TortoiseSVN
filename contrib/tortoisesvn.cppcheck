@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="1">
+    <root name="."/>
+    <importproject>../src/TortoiseSVN.sln</importproject>
+    <paths>
+        <dir name="../"/>
+    </paths>
+    <exclude>
+        <path name="ext/"/>
+    </exclude>
+    <libraries>
+        <library>windows</library>
+    </libraries>
+    <suppressions>
+        <suppression>cstyleCast</suppression>
+        <suppression>noExplicitConstructor</suppression>
+        <suppression>unusedPrivateFunction</suppression>
+        <suppression>unusedStructMember</suppression>
+        <suppression>variableScope</suppression>
+    </suppressions>
+</project>

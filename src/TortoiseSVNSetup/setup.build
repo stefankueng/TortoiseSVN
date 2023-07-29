@@ -1,0 +1,229 @@
+﻿<?xml version="1.0"?>
+<project name="Setup" default="setup" basedir=".">
+
+  <target name="versioninfo">
+    <nant target="versioninfo">
+      <buildfiles>
+        <include name="..\..\versioninfo.build" />
+      </buildfiles>
+    </nant>
+    <loadfile file="VersionNumberInclude.in.wxi" property="versionwixfile">
+      <filterchain>
+        <replacetokens begintoken="$" endtoken="$">
+          <token key="MajorVersion" value="${environment::get-variable('MajorVersion')}" />
+          <token key="MinorVersion" value="${environment::get-variable('MinorVersion')}" />
+          <token key="MicroVersion" value="${environment::get-variable('Microversion')}" />
+          <token key="WCREV" value="${environment::get-variable('WCREV')}" />
+        </replacetokens>
+      </filterchain>
+    </loadfile>
+    <echo file="VersionNumberInclude.wxi" message="${versionwixfile}" />
+    <property name="verstring" value="${environment::get-variable('MajorVersion')}.${environment::get-variable('MinorVersion')}.${environment::get-variable('MicroVersion')}.${environment::get-variable('WCREV')}" />
+    <property name="svnverstring" value="${environment::get-variable('SVNMajorVersion')}.${environment::get-variable('SVNMinorVersion')}.${environment::get-variable('SVNMicroVersion')}" />
+    <property name="msifilename" value="TortoiseSVN-${verstring}${devrelease}-${platform}-svn-${svnverstring}" />
+    <property name="publisher" value="Publisher" />
+    <if test="${file::exists('..\..\signpublisher.txt')}">
+      <!-- the file "signpublisher.txt" in the root dir must contain the publisher string of the certificate
+           that's used to sign the binaries. Also the string must be xml escaped. -->
+      <loadfile file="..\..\signpublisher.txt" property="publisher" encoding="utf-8"/>
+    </if>
+    <loadfile file="AppXManifest.xml.in" property="appxmanifest64" encoding="utf-8">
+      <filterchain>
+        <replacetokens begintoken="$" endtoken="$">
+          <token key="Publisher" value="${publisher}" />
+            <token key="Version" value="${verstring}" />
+          </replacetokens>
+      </filterchain>
+    </loadfile>
+    <echo file="x64\AppxManifest.xml" message="${appxmanifest64}" encoding="utf-8" if="${platform == 'x64'}"/>
+    <echo file="ARM64\AppxManifest.xml" message="${appxmanifest64}" encoding="utf-8" if="${platform == 'ARM64'}"/>
+  </target>
+
+  <target name="setup" depends="versioninfo">
+    <if test="${configuration == 'debug'}">
+      <echo message="Cannot create an installer from debug binaries." />
+    </if>
+    <if test="${configuration == 'release'}">
+      <setenv>
+        <variable name="IncludeCrashReportDll" value="0" />
+      </setenv>
+
+      <if test="${file::exists('..\..\MYBUILD') and platform != 'ARM64'}">
+        <setenv>
+          <variable name="IncludeCrashReportDll" value="1" />
+        </setenv>
+      </if>
+      <if test="${platform == 'x64'}">
+        <setenv>
+          <variable name="Platform" value="x64" />
+        </setenv>
+      </if>
+      <if test="${platform == 'ARM64'}">
+        <setenv>
+          <variable name="Platform" value="arm64" />
+        </setenv>
+      </if>
+      <if test="${platform == 'win32'}">
+        <setenv>
+          <variable name="Platform" value="win32" />
+        </setenv>
+      </if>
+
+      <!-- we're using VS2022 -->
+      <setenv>
+        <variable name="VCVERSION" value="143" />
+      </setenv>
+
+      <!-- find the path to the merge modules -->
+      <script language="C#">
+        <code>
+          <![CDATA[
+            public static void ScriptMain(Project project)
+            {
+              project.Properties.Add("mergemodulepath", System.Environment.GetFolderPath(System.Environment.SpecialFolder.CommonProgramFilesX86)+"\\Merge Modules");
+            }
+          ]]>
+        </code>
+      </script>
+      <setenv>
+        <variable name="MergeModules" value="${mergemodulepath}" />
+      </setenv>
+      <setenv>
+        <variable name="HasSparse" value="no" />
+      </setenv>
+
+      <exec program="MakeAppX.exe" if="${platform != 'win32' and configuration == 'release' and file::exists('..\..\signpublisher.txt')}">
+        <arg value="pack" />
+        <arg value="/o" />
+        <arg value="/d" />
+        <arg value="x64" if="${platform == 'x64'}"/>
+        <arg value="ARM64" if="${platform == 'ARM64'}"/>
+        <arg value="-p" />
+        <arg value="..\..\bin\release64\bin\package.msix" if="${platform == 'x64'}"/>
+        <arg value="..\..\bin\releaseARM64\bin\package.msix" if="${platform == 'ARM64'}"/>
+        <arg value="/nv" />
+      </exec>
+      <if test="${file::exists('..\..\signinfo.txt') and file::exists('..\..\signpublisher.txt') and platform != 'win32' and configuration == 'release'}">
+        <exec program="${signtool}">
+          <arg value="sign" />
+          <arg value="${signinfo}" />
+          <arg value="..\..\bin\release64\bin\package.msix" if="${platform == 'x64'}"/>
+          <arg value="..\..\bin\releaseARM64\bin\package.msix" if="${platform == 'ARM64'}"/>
+        </exec>
+        <setenv>
+          <!-- set the env variable so Wix includes the custom actions to register the package.
+               we don't want the custom actions to fail if the package is not signed properly'
+          -->
+          <variable name="HasSparse" value="yes" />
+        </setenv>
+      </if>
+      <echo message="TortoiseSVN will be built without support for the Windows 11 context menu" level="Warning" if="${not file::exists('..\..\signinfo.txt') or not file::exists('..\..\signpublisher.txt')}"/>
+
+      <!-- sign all binaries -->
+      <if test="${file::exists('..\..\signinfo.txt')}">
+        <foreach item="File" property="filename">
+          <in>
+            <items>
+              <include name="..\..\bin\${configuration}${bindirextension}\bin\*.dll" />
+              <include name="..\..\bin\${configuration}${bindirextension}\bin\*.exe" />
+              <!-- the language dll are signed after they're treated with ResText (translated) -->
+              <exclude name="..\..\bin\${configuration}${bindirextension}\bin\*lang.dll" />
+              <!-- the overlays dll is signed by the 'Overlays' build target when the msm/msi are built -->
+              <exclude name="..\..\bin\${configuration}${bindirextension}\bin\TortoiseOverlays.dll" />
+            </items>
+          </in>
+          <do>
+            <trycatch>
+              <try>
+                <exec program="${signtool}">
+                  <arg value="sign" />
+                  <arg value="${signinfo}" />
+                  <arg value="${filename}" />
+                </exec>
+              </try>
+              <catch>
+                <sleep minutes="1" />
+                <exec program="${signtool}" failonerror="${devrelease != '-dev'}">
+                  <arg value="sign" />
+                  <arg value="${signinfo}" />
+                  <arg value="${filename}" />
+                </exec>
+              </catch>
+            </trycatch>
+          </do>
+        </foreach>
+      </if>
+
+      <exec program="candle">
+        <arg value="-nologo" />
+        <arg value="-arch" if="${platform == 'ARM64'}" />
+        <arg value="arm64" if="${platform == 'ARM64'}" />
+        <arg value="-out" />
+        <arg value="..\..\bin\" />
+        <arg value="TortoiseSVN.wxs" />
+        <arg value="FeaturesFragment.wxs" />
+        <arg value="StructureFragment.wxs" />
+        <arg value="UIFragment.wxs" />
+        <arg value="-ext" />
+        <arg value="WixUtilExtension" />
+      </exec>
+      <exec program="light">
+        <arg value="-nologo" />
+        <arg value="-sw1055" />
+        <arg value="-sice:ICE03" />
+        <arg value="-sice:ICE61" />
+        <arg value="-sice:ICE82" />
+        <arg value="-sice:ICE83" />
+        <arg value="-sval" if="${schedule == 'yes'}" />
+        <arg value="-out" />
+        <arg value="..\..\bin\${msifilename}.msi" />
+        <arg value="..\..\bin\TortoiseSVN.wixobj" />
+        <arg value="..\..\bin\FeaturesFragment.wixobj" />
+        <arg value="..\..\bin\StructureFragment.wixobj" />
+        <arg value="..\..\bin\UIFragment.wixobj" />
+        <arg value="-ext" />
+        <arg value="WixUtilExtension" />
+      </exec>
+      <delete>
+        <fileset>
+          <include name="..\..\bin\*.wixobj" />
+          <include name="..\..\bin\*.wixpdb" />
+        </fileset>
+      </delete>
+
+      <if test="${file::exists('..\..\signinfo.txt')}">
+        <trycatch>
+          <try>
+            <exec program="${signtool}">
+              <arg value="sign" />
+              <arg value="${signinfo}" />
+              <arg value="..\..\bin\${msifilename}.msi" />
+            </exec>
+          </try>
+          <catch>
+            <sleep minutes="1" />
+            <exec program="${signtool}" failonerror="${devrelease != '-dev'}">
+              <arg value="sign" />
+              <arg value="${signinfo}" />
+              <arg value="..\..\bin\${msifilename}.msi" />
+            </exec>
+          </catch>
+        </trycatch>
+      </if>
+
+      <if test="${devrelease == ''}">
+        <if test="${file::exists(sevenzip)}">
+          <echo message="compressing debug symbols" />
+          <exec program="${sevenzip}">
+            <arg value="a" />
+            <arg value="-t7z" />
+            <arg value="..\..\bin\${msifilename}-pdbs.7z" />
+            <arg value="..\..\bin\${configuration}${bindirextension}\bin\*.pdb" />
+          </exec>
+        </if>
+      </if>
+
+    </if>
+  </target>
+
+</project>

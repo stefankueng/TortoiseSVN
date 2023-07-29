@@ -1,0 +1,122 @@
+Index: include/Scintilla.h
+===================================================================
+--- include/Scintilla.h	(revision 29226)
++++ include/Scintilla.h	(working copy)
+@@ -1242,6 +1242,8 @@
+ 
+ #endif
+ 
++#define SCN_GETBKCOLOR 5000
++
+ /* These structures are defined to be exactly the same shape as the Win32
+  * CHARRANGE, TEXTRANGE, FINDTEXTEX, FORMATRANGE, and NMHDR structs.
+  * So older code that treats Scintilla as a RichEdit will work. */
+Index: src/Editor.cxx
+===================================================================
+--- src/Editor.cxx	(revision 29226)
++++ src/Editor.cxx	(working copy)
+@@ -117,6 +117,7 @@
+ }
+ 
+ Editor::Editor() : durationWrapOneByte(0.000001, 0.0000001, 0.00001) {
++	view.editor = this;
+ 	ctrlID = 0;
+ 
+ 	stylesValid = false;
+Index: src/Editor.h
+===================================================================
+--- src/Editor.h	(revision 29226)
++++ src/Editor.h	(working copy)
+@@ -7,6 +7,7 @@
+ 
+ #ifndef EDITOR_H
+ #define EDITOR_H
++#include "Scintilla.h"
+ 
+ namespace Scintilla::Internal {
+ 
+@@ -663,6 +664,7 @@
+ public:
+ 	~Editor() override;
+ 
++	virtual void NotifyParent(SCNotification *scn) = 0;
+ 	// Public so the COM thunks can access it.
+ 	bool IsUnicodeMode() const noexcept;
+ 	// Public so scintilla_send_message can use it.
+Index: src/EditView.cxx
+===================================================================
+--- src/EditView.cxx	(revision 29226)
++++ src/EditView.cxx	(working copy)
+@@ -61,6 +61,7 @@
+ #include "MarginView.h"
+ #include "EditView.h"
+ #include "ElapsedPeriod.h"
++#include "Editor.h"
+ 
+ using namespace Scintilla;
+ using namespace Scintilla::Internal;
+@@ -187,6 +188,7 @@
+ 	tabArrowHeight = 4;
+ 	customDrawTabArrow = nullptr;
+ 	customDrawWrapMarker = nullptr;
++	editor = NULL;
+ }
+ 
+ EditView::~EditView() = default;
+@@ -2200,7 +2202,17 @@
+ 	}
+ 
+ 	// See if something overrides the line background colour.
+-	const std::optional<ColourRGBA> background = vsDraw.Background(model.pdoc->GetMark(line), model.caret.active, ll->containsCaret);
++	std::optional<ColourRGBA> background = vsDraw.Background(model.pdoc->GetMark(line), model.caret.active, ll->containsCaret);
++	SCNotification scn = { 0 };
++	scn.nmhdr.code = SCN_GETBKCOLOR;
++	scn.line = line;
++	scn.lParam = -1;
++	if (editor)
++		((Editor*)editor)->NotifyParent(&scn);
++	if (scn.lParam != -1)
++	{
++		background = ColourRGBA::FromRGB(scn.lParam);
++	}
+ 
+ 	const Sci::Position posLineStart = model.pdoc->LineStart(line);
+ 
+Index: src/EditView.h
+===================================================================
+--- src/EditView.h	(revision 29226)
++++ src/EditView.h	(working copy)
+@@ -78,6 +78,7 @@
+ 	std::unique_ptr<Surface> pixmapLine;
+ 	std::unique_ptr<Surface> pixmapIndentGuide;
+ 	std::unique_ptr<Surface> pixmapIndentGuideHighlight;
++	void	*editor;
+ 
+ 	LineLayoutCache llc;
+ 	PositionCache posCache;
+Index: win32/ScintillaWin.cxx
+===================================================================
+--- win32/ScintillaWin.cxx	(revision 29226)
++++ win32/ScintillaWin.cxx	(working copy)
+@@ -436,6 +436,7 @@
+ 	void SetCtrlID(int identifier) override;
+ 	int GetCtrlID() override;
+ 	void NotifyParent(NotificationData scn) override;
++	virtual void NotifyParent(SCNotification * scn);
+ 	void NotifyDoubleClick(Point pt, KeyMod modifiers) override;
+ 	std::unique_ptr<CaseFolder> CaseFolderForEncoding() override;
+ 	std::string CaseMapString(const std::string &s, CaseMapping caseMapping) override;
+@@ -2336,6 +2337,13 @@
+ 	              GetCtrlID(), reinterpret_cast<LPARAM>(&scn));
+ }
+ 
++void ScintillaWin::NotifyParent(SCNotification *scn) {
++	scn->nmhdr.hwndFrom = MainHWND();
++	scn->nmhdr.idFrom = GetCtrlID();
++	::SendMessage(::GetParent(MainHWND()), WM_NOTIFY,
++		GetCtrlID(), reinterpret_cast<LPARAM>(scn));
++}
++
+ void ScintillaWin::NotifyDoubleClick(Point pt, KeyMod modifiers) {
+ 	//Platform::DebugPrintf("ScintillaWin Double click 0\n");
+ 	ScintillaBase::NotifyDoubleClick(pt, modifiers);

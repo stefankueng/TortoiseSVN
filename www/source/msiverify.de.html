@@ -1,0 +1,45 @@
+---
+layout: default
+title: Verify the MSI signature
+id: msi-verify
+description: how to verify the signatures
+keywords: verify, signature
+lang: de
+includeBaguetteBox: true
+---
+
+
+<div class="post">
+    <h1 class="title">Überprüfen der Signatur</h1>
+    <div class="entry">
+        <p>Da die TortoiseSVN MSI Installationsdateien auf
+        externen Servern gespeichert sind können wir nicht garantieren
+        dass die Dateien nicht verändert werden oder beschädigt werden
+        beim Download.</p>
+        <p>Um sicherzustellen dass die Dateien nicht verändert oder
+        beschädigt wurden können Sie die digitale Signatur der Dateien
+        überprüfen. Wenn die Signatur in Ordnung ist bedeutet das,
+        dass die Datei unverändert ist.</p>
+        <p>Nach dem Download der Dateien, klicken Sie mit der
+        rechten Maustaste auf die Datei und wählen Sie dann den
+        Punkt <em>Eigenschaften</em> im Explorer-Kontextmenu aus.
+        Im Eigenschaftsdialog wählen Sie dann die Seite <em>Signatur</em>
+        aus und überprüfen Sie dass die Signatur von <em>Open Source Developer, Stefan KUENG</em> stammt und dass die Signatur
+        gültig ist.</p>
+        <p>Wenn die Seite <em>Signatur</em> im Eigenschaftsdialog
+        nicht angezeigt wird, dann ist die Signatur nicht gültig
+        und die Datei ist nicht in Ordnung!</p>
+        <a href="/assets/img/propertiessignature.png" title="propertiessignature">
+            <img src="/assets/img/propertiessignature-small.png" alt="propertiessignature" width="289" height="287">
+        </a>
+
+        <p>Windows überprüft die Signatur auch während der
+        Installation selbst. Wenn der Sicherheitsdialog nicht
+        anzeigt dass die Signatur gültig ist, brechen Sie die
+        Installation ab und laden Sie die Datei erneut herunter, am
+        besten von einem anderen Spiegelserver.</p>
+        <a href="/assets/img/InstallUAC.png" title="InstallUAC">
+            <img src="/assets/img/InstallUAC-small.png" alt="InstallUAC" width="254" height="198">
+        </a>
+    </div>
+</div>

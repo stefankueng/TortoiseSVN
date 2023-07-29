@@ -1,0 +1,32 @@
+markdown:           kramdown
+highlighter:        rouge
+plugins:
+    - jekyll-sitemap
+
+# we generate those files ourselves
+exclude:
+    - "*.css"
+    - "*.js"
+
+# permalinks
+permalink:          date
+
+# server
+source:             source
+destination:        dist
+port:               8000
+url:                https://tortoisesvn.net
+encoding:           UTF-8
+
+# custom variables
+version:
+  short:            1.14.5
+  long:             1.14.5.29465
+  svn:              1.14.2
+
+version-pre:
+  short:            1.10.5
+  long:             1.10.5.28651
+  svn:              1.10.6
+
+description:        The coolest interface to (Sub)version control

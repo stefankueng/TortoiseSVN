@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sect2 SYSTEM "../../../dtd/dblite.dtd">
+<sect2 id="tsvn-dug-settings-export">
+  <title>Exporting TSVN Settings</title>
+  <para>
+    <figure id="tsvn-dug-settings-dia-export">
+      <title>The Settings Dialog, Sync Page</title>
+      <graphic fileref="../images/SettingsSync.png"/>
+    </figure>
+    You can sync all TortoiseSVN settings to and from an encrypted file.
+    The file is encrypted with the password you enter so you don't have to
+    worry if you store that file on a cloud folder like OneDrive, GDrive,
+    DropBox, ...
+  </para>
+  <para>
+    When a path and password is specified, TortoiseSVN will sync all settings
+    automatically and keep them in sync.
+  </para>
+  <para>
+    You can also export/import an encrypted files with all the settings manually.
+    When you do that, you're asked for the path of the file and the password
+    to encrypt/decrypt the settings file.
+  </para>
+  <para>
+    When exporting the settings manually, you can also optionally include
+    all local settings which are not included in a normal export or in a
+    sync. Local settings are settings which include local paths which usually
+    vary between computers. These local settings include the configured
+    diff and merge tools and hook scripts.
+  </para>
+</sect2>

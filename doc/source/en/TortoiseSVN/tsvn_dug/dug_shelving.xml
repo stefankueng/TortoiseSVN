@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sect1 SYSTEM "../../../dtd/dblite.dtd">
+<sect1 id="tsvn-dug-shelving">
+  <title>Shelving</title>
+  <?dbhh topicname="HIDD_SHELVE"?>
+  <?dbhh topicname="HIDD_UNSHELVE"?>
+  <indexterm>
+    <primary>shelve</primary>
+  </indexterm>
+  <indexterm>
+    <primary>unshelve</primary>
+  </indexterm>
+  <para>
+    More often than wanted, it's necessary to stop what you were working on
+    and work on something else. For example a serious problem needs immediate
+    dealing with and you have to stop working on the new feature.
+    If possible, you should commit the changes you have done so far and then
+    start working on the urgent issue, but often those changes would break
+    the build or are just not ready for committing yet.
+  </para>
+  <para>
+    So if you can't commit your local changes yet, you have to put them
+    aside while you're working on the urgent issue. The <firstterm>shelving</firstterm>
+    feature helps you do exactly that: you can store your local changes on
+    a shelve, get your working copy in a clean state again and work on the
+    issue. After you're finished with the urgent issue and you've committed
+    those changes, you can <firstterm>unshelve</firstterm> your shelved
+    work and continue working on your previous task again.
+  </para>
+  <para>
+    Two new commands are implemented for this. One for shelving and one for
+    unshelving.
+  </para>
+  <para>
+    To shelve your local changes, select your working copy and use
+    <menuchoice>
+      <guimenu>Context Menu</guimenu>
+      <guimenuitem>Shelve</guimenuitem>
+    </menuchoice>
+    The following dialog allows you to select the files you want to shelve and
+    give a name under which you want to store them.
+    <figure id="tsvn-dug-shelve-dlg">
+      <title>Shelve dialog</title>
+      <graphic fileref="../images/Shelve.png"/>
+    </figure>
+    If you select an existing shelf, then a new version is created for that shelf.
+    If you provide a new name, a new shelf is created for the selected files.
+  </para>
+  <para>
+    If you click the <guibutton>Shelve</guibutton> button, the shelf is created
+    and your working copy files are reset to a clean state.
+    If you click the <guibutton>Checkpoint</guibutton> button, the shelf
+    is created but your local modifications are kept.
+  </para>
+  <para>
+    To unshelve your changes, use
+    <menuchoice>
+      <guimenu>Context Menu</guimenu>
+      <guimenuitem>Unshelve</guimenuitem>
+    </menuchoice>
+    to get the unshelve dialog. This dialog shows you a list of all shelved
+    items. Select the shelved item you want and the version to apply back to your working copy
+    and click <guibutton>Apply</guibutton>.
+    <figure id="tsvn-dug-unshelve-dlg">
+      <title>Unshelve dialog</title>
+      <graphic fileref="../images/Unshelve.png"/>
+    </figure>
+  </para>
+  <tip>
+    <para>
+      Shelves are purely a local client feature. Creating and removing
+      Shelves will not affect the repository, nor anyone else's working
+      copy.
+    </para>
+  </tip>
+  <warning>
+    <title>Experimental</title>
+    <para>
+      The shelving feature is still marked as <literal>experimental</literal>.
+    </para>
+    <para>
+      That means that while shelving works as advertised, it is still in a stage where
+      it's heavily improved and worked on. That also means that there's no guarantee that
+      the shelves you create are upwards compatible and future versions might not be able
+      to use them. And of course the UI might change as well in future versions to accommodate
+      new features and behaviors.
+    </para>
+  </warning>
+</sect1>

@@ -1,0 +1,190 @@
+---
+layout: default
+title: Downloads
+id: downloads
+description: download TortoiseSVN
+lang: en
+---
+
+<div class="post">
+    <h1 class="title">Downloads</h1>
+    <div class="entry">
+        <h1>The current version is {{ site.version.short }}</h1>
+        <p>For detailed info on what's new, read the
+        <a href="/Changelog.txt">changelog</a>
+        and the <a href="/tsvn_1.14_releasenotes.html">release notes</a>.
+        </p>
+
+        {% include adsense_inpage.html %}
+
+        <p>The current version {{ site.version.short }} is linked against
+        the Subversion library {{ site.version.svn }}.</p>
+        <p>Please make sure that you choose the
+        right installer for your PC, otherwise the setup will fail.
+        </p>
+
+        <table class="downloads-table">
+            <thead>
+            <tr>
+                <td><strong>for 32-bit OS</strong></td>
+                <td><strong>for 64-bit OS</strong></td>
+                <td><strong>for ARM64 OS</strong></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version.short }}/Application/TortoiseSVN-{{ site.version.long }}-win32-svn-{{ site.version.svn }}.msi/"
+                       title="Download TortoiseSVN {{ site.version.short }} - 32-bit, linked to SVN {{ site.version.svn }}"
+                       class="btn">
+                       TortoiseSVN <span>{{ site.version.short }}</span> - 32-bit
+                    </a>
+                </td>
+                <td>
+                    <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version.short }}/Application/TortoiseSVN-{{ site.version.long }}-x64-svn-{{ site.version.svn }}.msi/"
+                       title="Download TortoiseSVN {{ site.version.short }} - 64-bit, linked to SVN {{ site.version.svn }}"
+                       class="btn">
+                       TortoiseSVN <span>{{ site.version.short }}</span> - 64-bit
+                    </a>
+                </td>
+                <td>
+                    <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version.short }}/Application/TortoiseSVN-{{ site.version.long }}-ARM64-svn-{{ site.version.svn }}.msi/"
+                       title="Download TortoiseSVN {{ site.version.short }} - ARM64, linked to SVN {{ site.version.svn }}"
+                       class="btn">
+                       TortoiseSVN <span>{{ site.version.short }}</span> - ARM64
+                    </a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+		<p>old LTS release is also available:</p>
+        <table class="downloads-table" style="table-layout: fixed;">
+            <thead>
+            <tr>
+                <td><strong>for 32-bit OS</strong></td>
+                <td><strong>for 64-bit OS</strong></td>
+                <td></td>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>
+                    <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version-pre.short }}/Application/TortoiseSVN-{{ site.version-pre.long }}-win32-svn-{{ site.version-pre.svn }}.msi/"
+                       title="Download TortoiseSVN {{ site.version-pre.short }} - 32-bit, linked to SVN {{ site.version-pre.svn }}"
+                       class="btn">
+                       TortoiseSVN <span>{{ site.version-pre.short }}</span> - 32-bit
+                    </a>
+                </td>
+                <td>
+                    <a href="https://sourceforge.net/projects/tortoisesvn/files/{{ site.version-pre.short }}/Application/TortoiseSVN-{{ site.version-pre.long }}-x64-svn-{{ site.version-pre.svn }}.msi/"
+                       title="Download TortoiseSVN {{ site.version-pre.short }} - 64-bit, linked to SVN {{ site.version-pre.svn }}"
+                       class="btn">
+                       TortoiseSVN <span>{{ site.version-pre.short }}</span> - 64-bit
+                    </a>
+                </td>
+				<td></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <p>
+        To verify the file integrity follow
+        <a href="/msiverify.html">these instructions</a>.
+        </p>
+        <div class="important">
+        <h3>Context menu in file-open/save dialogs on x64 OS</h3>
+        <p>
+        On x64 versions of Windows 7 and 8, the TortoiseSVN context menu and overlays
+        won't show for 32-bit applications in their file-open/save dialogs until
+        you install the
+        <a href="https://aka.ms/vs/17/release/vc_redist.x86.exe">2022 C-runtime for x86</a>.
+        (select the <em>vc_redist.x86.exe</em> file for download).
+        </p>
+        <p>
+        Note: this only applies to 32-bit applications on x64 OS. The Windows explorer
+        is not affected by this.
+        </p>
+        </div>
+
+        <div class="important">
+        <h3>Pre-Release Builds</h3>
+        <p>
+        If there is a bug in the latest released version which you really cannot live with,
+        and which has already been reported as fixed, then you can try installing a pre-release
+        build from the stable release branch.
+        </p>
+        </div>
+        <br/>
+    </div>
+</div>
+
+<div class="post">
+    <h1 class="title">Language packs</h1>
+    <div class="entry">
+        <table class="table-hover left-aligned">
+        <thead>
+        <tr>
+            <th>Country</th>
+            <th>32 Bit</th>
+            <th>64 Bit</th>
+            <th>ARM64</th>
+            <th colspan="2">Separate manual (PDF)</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        {% include translations.html %}
+
+        </tbody>
+        </table>
+    </div>
+</div>
+
+{% include adsense_inpage.html %}
+
+<div class="post">
+    <h1 class="title">Other Releases</h1>
+    <div class="entry">
+        <h1>Forthcoming Releases</h1>
+        <p>To find out what is happening with the project and when
+        you can expect the next major release, take a look at our
+        <a href="/status.html">project status</a> page.</p>
+
+        <h1>Trunk Nightly Builds</h1>
+        <p><a href="https://nightlybuilds.tortoisesvn.net/latest/">Nightly Builds</a> are
+        available too. They are built from the current development head and are for testing only.
+        This represents the bleeding edge and may be linked against a newer version of the subversion
+        libraries than is used for the current release. Working copies may be upgraded automatically
+        and become incompatible with the official release and with other subversion clients.
+        We would love you to test these builds, but you should be aware of the potential problems
+        and install only on a machine where your working copies are not critical.
+        <div class="important">
+        Note: the nightly builds are not digitally signed, which means there is no entry in the
+        Win11 context menu!
+        </div>
+        </p>
+
+        <h1>Older Releases</h1>
+        <p>Older releases are available from the
+        <a href="https://sourceforge.net/projects/tortoisesvn/files/">Sourceforge.net files</a> section.</p>
+
+        <h1>Source Code</h1>
+        <p>TortoiseSVN is under the GPL license. That means you can
+        get the whole source code and build the program yourself.
+        <br/>
+        The source code is hosted on
+        <a href="https://sourceforge.net/">Sourceforge.net</a>
+        in our own Subversion repository. You can browse the
+        source code with your favorite web browser directly on the
+        <a href="https://sourceforge.net/p/tortoisesvn/code/HEAD/tree/trunk/www/">repository</a>.
+        <br/>
+        If you have TortoiseSVN installed, you can check out the
+        whole source code by clicking on the tortoise icon below:
+        <br/>
+        <a href="tsvn:https://svn.code.sf.net/p/tortoisesvn/code/trunk">
+            <img src="/assets/img/TortoiseCheckout.png" alt="Tortoise logo" title="Click me to get the source code!" width="48" height="48">
+        </a>
+        </p>
+    </div>
+</div>

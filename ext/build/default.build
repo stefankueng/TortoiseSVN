@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<project name="SubversionLib" default="build">
+
+  <!-- ====================================================================== -->
+  <!-- Project targets                                                        -->
+  <!-- ====================================================================== -->
+  <target name="clean">
+    <description>
+      Cleans every subproject.
+    </description>
+    <if test="${cleanup == 'yes'}">
+      <nant target="clean">
+        <buildfiles>
+          <include name="*.build" />
+          <!-- avoid recursion -->
+          <exclude name="default.build" />
+          <!-- cleaned separately -->
+          <exclude name="OpenSSL.build" />
+        </buildfiles>
+      </nant>
+    </if>
+  </target>
+
+  <target name="build" depends="clean">
+    <nant target="build" buildfile="apr.build" />
+    <nant target="build" buildfile="aprutil.build" />
+    <nant target="build" buildfile="zlib.build" />
+    <nant target="build" buildfile="sqlite.build" />
+    <nant target="build" buildfile="gssapi.build" />
+    <nant target="build" buildfile="sasl.build" />
+    <nant target="build" buildfile="serf.build" />
+    <nant target="build" buildfile="libintl.build" />
+    <nant target="build" buildfile="subversion.build" />
+    <nant target="build" buildfile="crashserver.build" />
+    <!-- Don't build editorconfig here, it is built using the TortoiseSVN target in the root directory default.build file -->
+  </target>
+
+</project>

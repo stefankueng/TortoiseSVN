@@ -1,0 +1,448 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|ARM64">
+      <Configuration>Debug</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|ARM64">
+      <Configuration>Release</Configuration>
+      <Platform>ARM64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8ABB4F84-891A-4748-8507-F5494842173E}</ProjectGuid>
+    <RootNamespace>TortoiseMerge</RootNamespace>
+    <Keyword>MFCProj</Keyword>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseOfMfc>Dynamic</UseOfMfc>
+    <CharacterSet>Unicode</CharacterSet>
+    <PlatformToolset>v143</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\TortoiseSVN.common.props" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\bin\$(Configuration)\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">..\..\obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\bin\$(Configuration)\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">..\..\obj\$(ProjectName)\$(Configuration)\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\bin\$(Configuration)64\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">..\..\obj\$(ProjectName)\$(Configuration)64\</IntDir>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\bin\$(Configuration)64\bin\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">..\..\obj\$(ProjectName)\$(Configuration)64\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <OutDir>..\..\bin\$(Configuration)ARM64\bin\</OutDir>
+    <IntDir>..\..\obj\$(ProjectName)\$(Configuration)ARM64\</IntDir>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <OutDir>..\..\bin\$(Configuration)ARM64\bin\</OutDir>
+    <IntDir>..\..\obj\$(ProjectName)\$(Configuration)ARM64\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\SubVersion\subversion\include;..\..\ext\SubVersion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;shlwapi.lib;Version.lib;editorconfig.lib;libsvn_tsvn32.lib;libapr_tsvn.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;..\..\ext\editorconfig\$(Configuration)_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;shlwapi.lib;Version.lib;editorconfig.lib;libsvn_tsvn32.lib;libapr_tsvn.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;..\..\ext\editorconfig\$(Configuration)_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\SubVersion\subversion\include;..\..\ext\SubVersion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;shlwapi.lib;Version.lib;editorconfig.lib;libsvn_tsvn.lib;libapr_tsvn.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;..\..\ext\editorconfig\$(Configuration)_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\SubVersion\subversion\include;..\..\ext\SubVersion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;shlwapi.lib;Version.lib;editorconfig.lib;libsvn_tsvn.lib;libapr_tsvn.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;..\..\ext\editorconfig\$(Configuration)_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;shlwapi.lib;Version.lib;editorconfig.lib;libsvn_tsvn.lib;libapr_tsvn.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;..\..\ext\editorconfig\$(Configuration)_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+    <ClCompile>
+      <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ClCompile>
+    <ResourceCompile>
+      <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ResourceCompile>
+    <Link>
+      <AdditionalDependencies>Crypt32.lib;shlwapi.lib;Version.lib;editorconfig.lib;libsvn_tsvn.lib;libapr_tsvn.lib;libaprutil_tsvn.lib;intl3_tsvn.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>..\..\ext\Subversion\$(Configuration)_$(Platform);..\..\ext\apr\$(Configuration)_$(Platform);..\..\ext\apr-util\$(Configuration)_$(Platform);..\..\ext\libintl\$(Configuration)_$(Platform)\lib;..\..\ext\editorconfig\$(Configuration)_$(Platform);%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <Manifest>
+      <EnableDpiAwareness>PerMonitorHighDPIAware</EnableDpiAwareness>
+    </Manifest>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="..\SVN\SVNAdminDir.cpp" />
+    <ClCompile Include="..\SVN\SVNConfig.cpp" />
+    <ClCompile Include="..\SVN\SVNGlobal.cpp" />
+    <ClCompile Include="..\SVN\SVNHelpers.cpp" />
+    <ClCompile Include="..\SVN\SVNLineDiff.cpp" />
+    <ClCompile Include="..\SVN\SVNPatch.cpp" />
+    <ClCompile Include="..\SVN\SVNRev.cpp" />
+    <ClCompile Include="..\SVN\TSVNPath.cpp" />
+    <ClCompile Include="..\Utils\accHelper.cpp">
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="..\Utils\CmdLineParser.cpp" />
+    <ClCompile Include="..\Utils\CommonAppUtils.cpp" />
+    <ClCompile Include="..\Utils\DarkModeHelper.cpp" />
+    <ClCompile Include="..\Utils\DebugOutput.cpp" />
+    <ClCompile Include="..\Utils\DirFileEnum.cpp" />
+    <ClCompile Include="..\Utils\DragDropImpl.cpp" />
+    <ClCompile Include="..\Utils\Hash.cpp" />
+    <ClCompile Include="..\Utils\LoadIconEx.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\AeroControls.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\BrowseFolder.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\DIB.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\EditWordBreak.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\FileDlgEventHandler.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\FileDropEdit.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\HistoryCombo.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\HyperLink.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\IconBitmapUtils.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\IconMenu.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\ProgressDlg.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\ScrollTool.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\StandAloneDlg.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\ThemeMFCVisualManager.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\Tooltip.cpp" />
+    <ClCompile Include="..\Utils\MiscUI\WaterEffect.cpp" />
+    <ClCompile Include="..\Utils\Monitor.cpp" />
+    <ClCompile Include="..\Utils\PathUtils.cpp" />
+    <ClCompile Include="..\Utils\PreserveChdir.cpp" />
+    <ClCompile Include="..\Utils\ProfilingInfo.cpp" />
+    <ClCompile Include="..\Utils\Registry.cpp" />
+    <ClCompile Include="..\Utils\StringUtils.cpp" />
+    <ClCompile Include="..\Utils\SysImageList.cpp" />
+    <ClCompile Include="..\Utils\TaskbarUUID.cpp" />
+    <ClCompile Include="..\Utils\TempFile.cpp" />
+    <ClCompile Include="..\Utils\Theme.cpp" />
+    <ClCompile Include="..\Utils\UnicodeUtils.cpp" />
+    <ClCompile Include="..\Utils\Windows10Colors.cpp" />
+    <ClCompile Include="AboutDlg.cpp" />
+    <ClCompile Include="AppUtils.cpp" />
+    <ClCompile Include="BaseView.cpp" />
+    <ClCompile Include="BottomView.cpp" />
+    <ClCompile Include="NativeRibbonApp.cpp" />
+    <ClCompile Include="DiffColors.cpp" />
+    <ClCompile Include="DiffData.cpp" />
+    <ClCompile Include="EditorConfigWrapper.cpp" />
+    <ClCompile Include="EncodingDlg.cpp" />
+    <ClCompile Include="EOL.cpp" />
+    <ClCompile Include="FilePatchesDlg.cpp" />
+    <ClCompile Include="FileTextLines.cpp" />
+    <ClCompile Include="FindDlg.cpp" />
+    <ClCompile Include="GotoLineDlg.cpp" />
+    <ClCompile Include="LeftView.cpp" />
+    <ClCompile Include="LineDiffBar.cpp" />
+    <ClCompile Include="LocatorBar.cpp" />
+    <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MovedBlocks.cpp" />
+    <ClCompile Include="OpenDlg.cpp" />
+    <ClCompile Include="RegexFilterDlg.cpp" />
+    <ClCompile Include="RegexFiltersDlg.cpp" />
+    <ClCompile Include="RightView.cpp" />
+    <ClCompile Include="SetColorPage.cpp" />
+    <ClCompile Include="SetMainPage.cpp" />
+    <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="stdafx.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TortoiseMerge.cpp" />
+    <ClCompile Include="Undo.cpp" />
+    <ClCompile Include="ViewData.cpp" />
+    <ClCompile Include="WorkingFile.cpp" />
+    <ClCompile Include="XSplitter.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\SVN\SVNAdminDir.h" />
+    <ClInclude Include="..\SVN\SVNConfig.h" />
+    <ClInclude Include="..\SVN\SVNGlobal.h" />
+    <ClInclude Include="..\SVN\SVNHelpers.h" />
+    <ClInclude Include="..\SVN\SVNLineDiff.h" />
+    <ClInclude Include="..\SVN\SVNPatch.h" />
+    <ClInclude Include="..\SVN\SVNRev.h" />
+    <ClInclude Include="..\SVN\TSVNPath.h" />
+    <ClInclude Include="..\Utils\CmdLineParser.h" />
+    <ClInclude Include="..\Utils\CommonAppUtils.h" />
+    <ClInclude Include="..\Utils\DarkModeHelper.h" />
+    <ClInclude Include="..\Utils\DebugOutput.h" />
+    <ClInclude Include="..\Utils\DirFileEnum.h" />
+    <ClInclude Include="..\Utils\DpiScale.h" />
+    <ClInclude Include="..\Utils\DragDropImpl.h" />
+    <ClInclude Include="..\Utils\Hash.h" />
+    <ClInclude Include="..\Utils\LoadIconEx.h" />
+    <ClInclude Include="..\Utils\MiscUI\AeroControls.h" />
+    <ClInclude Include="..\Utils\MiscUI\BrowseFolder.h" />
+    <ClInclude Include="..\Utils\MiscUI\DIB.h" />
+    <ClInclude Include="..\Utils\MiscUI\EditWordBreak.h" />
+    <ClInclude Include="..\Utils\MiscUI\FileDlgEventHandler.h" />
+    <ClInclude Include="..\Utils\MiscUI\FileDropEdit.h" />
+    <ClInclude Include="..\Utils\MiscUI\HistoryCombo.h" />
+    <ClInclude Include="..\Utils\MiscUI\HyperLink.h" />
+    <ClInclude Include="..\Utils\MiscUI\IconBitmapUtils.h" />
+    <ClInclude Include="..\Utils\MiscUI\IconMenu.h" />
+    <ClInclude Include="..\Utils\MiscUI\LineColors.h" />
+    <ClInclude Include="..\Utils\MiscUI\ProgressDlg.h" />
+    <ClInclude Include="..\Utils\MiscUI\ScrollTool.h" />
+    <ClInclude Include="..\Utils\MiscUI\StandAloneDlg.h" />
+    <ClInclude Include="..\Utils\MiscUI\ThemeMFCVisualManager.h" />
+    <ClInclude Include="..\Utils\MiscUI\Tooltip.h" />
+    <ClInclude Include="..\Utils\MiscUI\TripleClick.h" />
+    <ClInclude Include="..\Utils\MiscUI\WaterEffect.h" />
+    <ClInclude Include="..\Utils\Monitor.h" />
+    <ClInclude Include="..\Utils\PathUtils.h" />
+    <ClInclude Include="..\Utils\PreserveChdir.h" />
+    <ClInclude Include="..\Utils\ProfilingInfo.h" />
+    <ClInclude Include="..\Utils\registry.h" />
+    <ClInclude Include="..\Utils\SimpleIni.h" />
+    <ClInclude Include="..\Utils\StringUtils.h" />
+    <ClInclude Include="..\Utils\SysImageList.h" />
+    <ClInclude Include="..\Utils\TaskbarUUID.h" />
+    <ClInclude Include="..\Utils\TempFile.h" />
+    <ClInclude Include="..\Utils\Theme.h" />
+    <ClInclude Include="..\Utils\UnicodeUtils.h" />
+    <ClInclude Include="..\Utils\Windows10Colors.h" />
+    <ClInclude Include="AboutDlg.h" />
+    <ClInclude Include="AppUtils.h" />
+    <ClInclude Include="BaseView.h" />
+    <ClInclude Include="BottomView.h" />
+    <ClInclude Include="NativeRibbonApp.h" />
+    <ClInclude Include="CustomMFCRibbonStatusBar.h" />
+    <ClInclude Include="DiffColors.h" />
+    <ClInclude Include="DiffData.h" />
+    <ClInclude Include="DiffStates.h" />
+    <ClInclude Include="EditorConfigWrapper.h" />
+    <ClInclude Include="EncodingDlg.h" />
+    <ClInclude Include="EOL.h" />
+    <ClInclude Include="FilePatchesDlg.h" />
+    <ClInclude Include="FileTextLines.h" />
+    <ClInclude Include="FindDlg.h" />
+    <ClInclude Include="GotoLineDlg.h" />
+    <ClInclude Include="LeftView.h" />
+    <ClInclude Include="LineDiffBar.h" />
+    <ClInclude Include="LocatorBar.h" />
+    <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MovedBlocks.h" />
+    <ClInclude Include="OpenDlg.h" />
+    <ClInclude Include="RegexFilterDlg.h" />
+    <ClInclude Include="RegexFiltersDlg.h" />
+    <ClInclude Include="resource.h" />
+    <ClInclude Include="RightView.h" />
+    <ClInclude Include="SetColorPage.h" />
+    <ClInclude Include="SetMainPage.h" />
+    <ClInclude Include="Settings.h" />
+    <ClInclude Include="stdafx.h" />
+    <ClInclude Include="TortoiseMerge.h" />
+    <ClInclude Include="Undo.h" />
+    <ClInclude Include="ViewData.h" />
+    <ClInclude Include="WorkingFile.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\Resources\TMergeHelpAlias.h" />
+    <None Include="..\Resources\TMergeHelpContext.h" />
+    <None Include="..\Resources\aerobackground.ico" />
+    <None Include="..\Resources\ignorecomments.txt" />
+    <None Include="..\Resources\lineadded.ico" />
+    <None Include="..\Resources\lineconflicted.ico" />
+    <None Include="..\Resources\lineconflictedignored.ico" />
+    <None Include="..\Resources\lineedited.ico" />
+    <None Include="..\Resources\LineEndingCR.ico" />
+    <None Include="..\Resources\LineEndingCRLF.ico" />
+    <None Include="..\Resources\LineEndingLF.ico" />
+    <None Include="..\Resources\lineequal.ico" />
+    <None Include="..\Resources\linemarked.ico" />
+    <None Include="..\Resources\lineremoved.ico" />
+    <None Include="..\Resources\linewhitespace.ico" />
+    <None Include="..\Resources\Margin.cur" />
+    <None Include="..\Resources\moved.ico" />
+    <None Include="..\Resources\RegexFilter.ini" />
+    <None Include="..\Resources\ribbon\TortoiseMerge.png" />
+    <None Include="..\Resources\Toolbar.bmp" />
+    <None Include="..\Resources\TortoiseMerge.ico" />
+    <None Include="..\Resources\TortoiseMerge.rc2" />
+    <None Include="..\Resources\tortoisemerge_logoflipped.bmp" />
+    <None Include="..\Resources\tortoisesvn_logoflipped.bmp" />
+    <None Include="..\Resources\ttf_glyph.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="..\Resources\TortoiseMergeENG.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\ext\ResizableLib\ResizableLib.vcxproj">
+      <Project>{4be529fb-c2f2-49f7-a897-054b955564cf}</Project>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Manifest Include="..\compatibility.manifest" />
+    <Manifest Include="..\perMonitorV2DpiAware.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="..\Resources\TortoiseMergeRibbon.xml">
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">uicc.exe %(FullPath) $(IntDir)TortoiseMergeRibbon.bml /header:$(IntDir)TortoiseMergeRibbon.h /res:$(IntDir)TortoiseMergeRibbon.rc /name:TortoiseMergeRibbon</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">uicc.exe %(FullPath) $(IntDir)TortoiseMergeRibbon.bml /header:$(IntDir)TortoiseMergeRibbon.h /res:$(IntDir)TortoiseMergeRibbon.rc /name:TortoiseMergeRibbon</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">uicc.exe %(FullPath) $(IntDir)TortoiseMergeRibbon.bml /header:$(IntDir)TortoiseMergeRibbon.h /res:$(IntDir)TortoiseMergeRibbon.rc /name:TortoiseMergeRibbon</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">uicc.exe %(FullPath) $(IntDir)TortoiseMergeRibbon.bml /header:$(IntDir)TortoiseMergeRibbon.h /res:$(IntDir)TortoiseMergeRibbon.rc /name:TortoiseMergeRibbon</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">uicc.exe %(FullPath) $(IntDir)TortoiseMergeRibbon.bml /header:$(IntDir)TortoiseMergeRibbon.h /res:$(IntDir)TortoiseMergeRibbon.rc /name:TortoiseMergeRibbon</Command>
+      <Command Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">uicc.exe %(FullPath) $(IntDir)TortoiseMergeRibbon.bml /header:$(IntDir)TortoiseMergeRibbon.h /res:$(IntDir)TortoiseMergeRibbon.rc /name:TortoiseMergeRibbon</Command>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(IntDir)TortoiseMergeRibbon.bml;$(IntDir)TortoiseMergeRibbon.rc;$(IntDir)TortoiseMergeRibbon.h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">$(IntDir)TortoiseMergeRibbon.bml;$(IntDir)TortoiseMergeRibbon.rc;$(IntDir)TortoiseMergeRibbon.h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">$(IntDir)TortoiseMergeRibbon.bml;$(IntDir)TortoiseMergeRibbon.rc;$(IntDir)TortoiseMergeRibbon.h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">$(IntDir)TortoiseMergeRibbon.bml;$(IntDir)TortoiseMergeRibbon.rc;$(IntDir)TortoiseMergeRibbon.h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(IntDir)TortoiseMergeRibbon.bml;$(IntDir)TortoiseMergeRibbon.rc;$(IntDir)TortoiseMergeRibbon.h;%(Outputs)</Outputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">$(IntDir)TortoiseMergeRibbon.bml;$(IntDir)TortoiseMergeRibbon.rc;$(IntDir)TortoiseMergeRibbon.h;%(Outputs)</Outputs>
+      <SubType>Designer</SubType>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Resources\ribbon\Filter16.bmp" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ProjectExtensions>
+    <VisualStudio>
+      <UserProperties RESOURCE_FILE="\Development\SVN\TortoiseSVN\src\Resources\TortoiseMergeENG.rc" />
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
