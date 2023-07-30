@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2009-2015, 2018-2022 - TortoiseSVN
+// Copyright (C) 2009-2015, 2018-2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -138,6 +138,10 @@ CSettingsAdvanced::CSettingsAdvanced()
     settings[i].sName   = L"MergeLogSeparator";
     settings[i].type    = CSettingsAdvanced::SettingTypeString;
     settings[i++].def.s = L"........";
+
+    settings[i].sName   = L"MergeAllowMixedRevisionsDefault";
+    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
+    settings[i++].def.b = false;
 
     settings[i].sName   = L"NumDiffWarning";
     settings[i].type    = CSettingsAdvanced::SettingTypeNumber;
