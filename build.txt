@@ -41,8 +41,8 @@ You need to perform most steps only once.
 (\b 2) right-click on the installer file and "run as administrator" to install it.
 (\b 3) use 32 bit installer (even on x64 OS)
 (\b 4) OpenSSL contains assembler code using optimized hardware instructions to
-    increase performance. Use the no-asm to avoid the assembler code in OpenSSL
-    if NASM is not installed
+    increase performance. Add the path of the exe to the PATH environment variable.
+    Use the no-asm to avoid the assembler code in OpenSSL if NASM is not installed.
 
 
 \subsection Requirements3 Finally, you may need to install some fonts.
