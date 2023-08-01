@@ -200,7 +200,7 @@ msgid "TortoiseSVN is an Open Source project developed under the GNU General Pub
 msgstr ""
 
 #. (para)
-msgid "Although most people just download the installer, you also have full read access to the source code of this program. You can browse it on this link <ulink url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>. The current development line is located under <filename>/trunk/</filename>, and the released versions are located under <filename>/tags/</filename>."
+msgid "Although most people just download the installer, you also have full read access to the source code of this program. You can browse it on this link <ulink url=\"https://sourceforge.net/p/tortoisesvn/code/HEAD/tree\"><citetitle>https://sourceforge.net/p/tortoisesvn/code/HEAD/tree</citetitle></ulink>. The current development line is located under <filename>/trunk/</filename>, and the released versions are located under <filename>/tags/</filename>."
 msgstr ""
 
 #. (title)
@@ -1447,7 +1447,7 @@ msgid ""
 msgstr ""
 
 #. (para)
-msgid "Of course it would look even better if you included a suitable picture. You can use the <ulink url=\"https://svn.osdn.net/svnroot/tortoisesvn/trunk/www/source/assets/img/TortoiseCheckout.png\"><citetitle>TortoiseSVN logo</citetitle></ulink> or you can provide your own image. <placeholder-1/>"
+msgid "Of course it would look even better if you included a suitable picture. You can use the <ulink url=\"https://svn.code.sf.net/p/tortoisesvn/code/trunk/www/source/assets/img/TortoiseCheckout.png\"><citetitle>TortoiseSVN logo</citetitle></ulink> or you can provide your own image. <placeholder-1/>"
 msgstr ""
 
 #. (programlisting)
@@ -6175,6 +6175,10 @@ msgid "The checkbox marked <guilabel>Force the merge</guilabel> is used to avoid
 msgstr ""
 
 #. (para)
+msgid "The checkbox marked <guilabel>Allow mixed revisions (not recommended)</guilabel> is used to allow merging into mixed-revision working copies (corresponding to the command line option <literal>--allow-mixed-revisions</literal>). The default since Subversion 1.7 is to disallow merging into mixed-revision working copies. The reasons are described in the Subversion book towards the end of the section <ulink url=\"https://svnbook.red-bean.com/en/1.8/svn.branchmerge.basicmerging.html#svn.branchmerge.basicmerging.stayinsync\"><citetitle>Keeping a Branch in Sync</citetitle></ulink> . If you understand the possible problems of merging into a mixed-revision working copy you may select this checkbox to perform the merge anyway."
+msgstr ""
+
+#. (para)
 msgid "If you are using merge tracking and you want to mark a revision as having been merged, without actually doing the merge here, check the <guilabel>Only record the merge</guilabel> checkbox. There are two possible reasons you might want to do this. It may be that the merge is too complicated for the merge algorithms, so you code the changes by hand, then mark the change as merged so that the merge tracking algorithm is aware of it. Or you might want to prevent a particular revision from being merged. Marking it as already merged will prevent the merge occurring with merge-tracking-aware clients."
 msgstr ""
 
@@ -9692,6 +9696,10 @@ msgstr ""
 
 #. (para)
 msgid "When you merge revisions from another branch, and merge tracking information is available, the log messages from the revisions you merge will be collected to make up a commit log message. A pre-defined string is used to separate the individual log messages of the merged revisions. If you prefer, you can set this to a value containing a separator string of your choice."
+msgstr ""
+
+#. (para)
+msgid "By setting to <literal>true</literal> you can set the default value of the <guilabel>Allow mixed revisions (not recommended)</guilabel> checkbox in the Merge option dialog. Please be aware of the limitations and potentional problems of merges into mixed-revision working copies before configuring this setting."
 msgstr ""
 
 #. (para)
@@ -13563,7 +13571,7 @@ msgid "TortoiseMerge is free. You don't have to pay for it, you can use it any w
 msgstr ""
 
 #. (para)
-msgid "TortoiseMerge is an Open Source project. That means you have full read access to the source code of this program. You can browse it on this link <ulink url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>. The most recent version (where we're currently working) is located under <filename>/trunk/</filename>, and the released versions are located under <filename>/tags/</filename>."
+msgid "TortoiseMerge is an Open Source project. That means you have full read access to the source code of this program. You can browse it on this link <ulink url=\"https://sourceforge.net/p/tortoisesvn/code/HEAD/tree\"><citetitle>https://sourceforge.net/p/tortoisesvn/code/HEAD/tree</citetitle></ulink>. The most recent version (where we're currently working) is located under <filename>/trunk/</filename>, and the released versions are located under <filename>/tags/</filename>."
 msgstr ""
 
 #. (para)
