@@ -3381,11 +3381,7 @@ bool CSVNProgressDlg::CmdMerge(CString& sWindowTitle, bool& /*localoperation*/)
                 bFailed = true;
             }
         }
-        //store the old error (if any) since GenerateMergeLogMessage() reset it. Otherwise we can't check for SVN_ERR_CLIENT_MERGE_UPDATE_REQUIRED in CheckUpdateAndRetry.
-        auto oldError = svn_error_dup(m_err);
         GenerateMergeLogMessage();
-        svn_error_clear(m_err);
-        m_err = oldError;
     }
     else
     {
@@ -3412,6 +3408,7 @@ bool CSVNProgressDlg::CmdMerge(CString& sWindowTitle, bool& /*localoperation*/)
 
 bool CSVNProgressDlg::CmdMergeAll(CString& sWindowTitle, bool& /*localoperation*/)
 {
+    bool bFailed = false;
     ASSERT(m_targetPathList.GetCount() == 1);
     sWindowTitle.LoadString(IDS_PROGRS_TITLE_MERGE);
     SetBackgroundImage(IDI_MERGE_BKG);
@@ -3458,16 +3455,17 @@ bool CSVNProgressDlg::CmdMergeAll(CString& sWindowTitle, bool& /*localoperation*
                   m_targetPathList[0], !!(m_options & ProgOptForce), m_depth, m_diffOptions, !!(m_options & ProgOptIgnoreAncestry), FALSE, !!(m_options & ProgOptRecordOnly), !!(m_options & ProgOptAllowMixedRev)))
     {
         ReportSVNError();
-        return false;
+        bFailed = true;
     }
 
     GenerateMergeLogMessage();
 
-    return true;
+    return !bFailed;
 }
 
 bool CSVNProgressDlg::CmdMergeReintegrate(CString& sWindowTitle, bool& /*localoperation*/)
 {
+    bool bFailed = false;
     ASSERT(m_targetPathList.GetCount() == 1);
     sWindowTitle.LoadString(IDS_PROGRS_TITLE_MERGEAUTOMATIC);
     SetBackgroundImage(IDI_MERGE_BKG);
@@ -3502,16 +3500,17 @@ bool CSVNProgressDlg::CmdMergeReintegrate(CString& sWindowTitle, bool& /*localop
                   !!(m_options & ProgOptAllowMixedRev)))
     {
         ReportSVNError();
-        return false;
+        bFailed = true;
     }
 
     GenerateMergeLogMessage();
 
-    return true;
+    return !bFailed;
 }
 
 bool CSVNProgressDlg::CmdMergeReintegrateOldStyle(CString& sWindowTitle, bool& /*localoperation*/)
 {
+    bool bFailed = false;
     ASSERT(m_targetPathList.GetCount() == 1);
     sWindowTitle.LoadString(IDS_PROGRS_TITLE_MERGEREINTEGRATE);
     SetBackgroundImage(IDI_MERGE_BKG);
@@ -3535,12 +3534,12 @@ bool CSVNProgressDlg::CmdMergeReintegrateOldStyle(CString& sWindowTitle, bool& /
     if (!MergeReintegrate(m_url, SVNRev::REV_HEAD, m_targetPathList[0], !!(m_options & ProgOptDryRun), m_diffOptions))
     {
         ReportSVNError();
-        return false;
+        bFailed = true;
     }
 
     GenerateMergeLogMessage();
 
-    return true;
+    return !bFailed;
 }
 
 bool CSVNProgressDlg::CmdRename(CString& sWindowTitle, bool& localoperation)
@@ -4204,6 +4203,9 @@ void CSVNProgressDlg::MergeAfterCommit()
 
 void CSVNProgressDlg::GenerateMergeLogMessage()
 {
+    // store the old error (if any) since code here can reset it. Otherwise we can't check for SVN_ERR_CLIENT_MERGE_UPDATE_REQUIRED in CheckUpdateAndRetry.
+    auto    oldError        = svn_error_dup(m_err);
+
     CString sUuid           = GetUUIDFromPath(m_targetPathList[0]);
     CString sRepositoryRoot = GetRepositoryRoot(m_targetPathList[0]);
     CString escapedUrl      = CUnicodeUtils::GetUnicode(m_url.GetSVNApiPath(m_pool));
@@ -4320,6 +4322,10 @@ void CSVNProgressDlg::GenerateMergeLogMessage()
     history.Load(reg, L"logmsgs");
     history.AddEntry(sSuggestedMessage);
     history.Save();
+
+    //restore the previous error
+    svn_error_clear(m_err);
+    m_err = oldError;
 }
 
 void CSVNProgressDlg::CompareWithWC(NotificationData* data)
