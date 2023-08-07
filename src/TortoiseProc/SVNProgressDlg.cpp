@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2022 - TortoiseSVN
+// Copyright (C) 2003-2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -3381,7 +3381,11 @@ bool CSVNProgressDlg::CmdMerge(CString& sWindowTitle, bool& /*localoperation*/)
                 bFailed = true;
             }
         }
+        //store the old error (if any) since GenerateMergeLogMessage() reset it. Otherwise we can't check for SVN_ERR_CLIENT_MERGE_UPDATE_REQUIRED in CheckUpdateAndRetry.
+        auto oldError = svn_error_dup(m_err);
         GenerateMergeLogMessage();
+        svn_error_clear(m_err);
+        m_err = oldError;
     }
     else
     {
