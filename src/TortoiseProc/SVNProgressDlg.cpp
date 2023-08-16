@@ -92,6 +92,7 @@ CSVNProgressDlg::CSVNProgressDlg(CWnd* pParent /*=NULL*/)
     , m_revision(L"HEAD")
     , m_revisionEnd(0)
     , m_keepChangeList(false)
+    , m_hydratingData(std::nullopt)
     , m_dwCloseOnEnd(static_cast<DWORD>(-1))
     , m_bCloseLocalOnEnd(static_cast<DWORD>(-1))
     , m_hidden(false)
@@ -125,6 +126,9 @@ CSVNProgressDlg::CSVNProgressDlg(CWnd* pParent /*=NULL*/)
     , sDryRun(MAKEINTRESOURCE(IDS_PROGRS_DRYRUN))
     , sRecordOnly(MAKEINTRESOURCE(IDS_MERGE_RECORDONLY))
     , sForce(MAKEINTRESOURCE(IDS_MERGE_FORCE))
+    , sHydrating(MAKEINTRESOURCE(IDS_SVNACTION_HYDRATING))
+    , sHydratingSingularForm(MAKEINTRESOURCE(IDS_SVNACTION_HYDRATING_FILE_SINGULAR_FORM))
+    , sHydratingPluralForm(MAKEINTRESOURCE(IDS_SVNACTION_HYDRATING_FILE_PLURAL_FORM))
 {
     m_bHideExternalInfo = !!CRegStdDWORD(L"Software\\TortoiseSVN\\HideExternalInfo", TRUE);
     m_columnBuf[0]      = 0;
@@ -904,6 +908,60 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, const CTSVNPath& url, svn_wc
             data->sActionColumnText.LoadString(IDS_SVNACTION_COMMITTINGTRANSACTION);
             data->sPathColumnText.Empty();
             break;
+        case svn_wc_notify_hydrating_start:
+            m_hydratingData = std::nullopt;
+            bNoNotify       = true;
+            break;
+        case svn_wc_notify_hydrating_file:
+        {
+            if (m_bHideExternalInfo && m_extStack.GetCount())
+            {
+                // This is a notification from "External" and the HideExternalInfo option is enabled.
+                bNoNotify = true;
+                break;
+            }
+
+            if (!m_hydratingData)
+            {
+                // This is the first hydrating file notification.
+                data->sActionColumnText = sHydrating;
+                data->sPathColumnText   = sHydratingSingularForm;
+            }
+            else
+            {
+                bNoNotify                  = true;
+
+                NotificationData* pOldData = m_arData[m_hydratingData->index];
+                if (pOldData)
+                {
+                    m_hydratingData->fileCount++;
+
+                    CString newText;
+                    newText.Format(sHydratingPluralForm, m_hydratingData->fileCount);
+
+                    // Try to satisfy the column width if the text length has increased.
+                    bool resizeColumns;
+                    if (newText.GetLength() > pOldData->sPathColumnText.GetLength())
+                    {
+                        resizeColumns = true;
+                    }
+                    else
+                    {
+                        resizeColumns = false;
+                    }
+
+                    pOldData->sPathColumnText = newText;
+                    m_progList.Update(static_cast<int>(m_hydratingData->index));
+
+                    if (resizeColumns)
+                    {
+                        ResizeColumns();
+                    }
+                }
+            }
+        }
+        break;
+        case svn_wc_notify_hydrating_end:
         case svn_wc_notify_upgraded_path:
         case svn_wc_notify_failed_conflict:
         case svn_wc_notify_failed_missing:
@@ -932,6 +990,13 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, const CTSVNPath& url, svn_wc
                     (action != svn_wc_notify_update_external))
                     m_bExtDataAdded = true;
             }
+
+            // Remember the hydrating notification data for future updates.
+            if (action == svn_wc_notify_hydrating_file && !m_hydratingData)
+            {
+                m_hydratingData = HydratingNotificationData(data->id, m_arData.size() - 1, 1);
+            }
+
             if ((!data->bAuxItem) && (m_itemCount > 0))
             {
                 m_itemCount--;
@@ -2084,6 +2149,19 @@ void CSVNProgressDlg::Sort()
         actionBlockEnd = std::find_if(actionBlockBegin + 1, m_arData.end(), [](const auto& pData) { return CSVNProgressDlg::NotificationDataIsAux(pData); });
         // Now sort the block
         std::sort(actionBlockBegin, actionBlockEnd, &CSVNProgressDlg::SortCompare);
+    }
+
+    // Update the hydrating notification index after sorting.
+    if (m_hydratingData)
+    {
+        for (size_t i = 0; i < m_arData.size(); i++)
+        {
+            if (m_arData[i]->id == m_hydratingData->id)
+            {
+                m_hydratingData->index = i;
+                break;
+            }
+        }
     }
 }
 
@@ -4122,6 +4200,7 @@ void CSVNProgressDlg::ResetVars()
     m_bHooksAreOptional          = true;
     m_bExternalStartInfoShown    = false;
     m_bAuthorizationError        = false;
+    m_hydratingData              = std::nullopt;
 
     m_progList.SetRedraw(FALSE);
     m_progList.DeleteAllItems();
@@ -4323,7 +4402,7 @@ void CSVNProgressDlg::GenerateMergeLogMessage()
     history.AddEntry(sSuggestedMessage);
     history.Save();
 
-    //restore the previous error
+    // restore the previous error
     svn_error_clear(m_err);
     m_err = oldError;
 }

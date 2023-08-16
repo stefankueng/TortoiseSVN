@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2015, 2017, 2020-2022 - TortoiseSVN
+// Copyright (C) 2003-2015, 2017, 2020-2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -151,7 +151,7 @@ public:
      * beforehand, that number can be set here. It is then used to show a more
      * accurate progress bar during the operation.
      */
-    void SetItemCount(INT_PTR count)
+    void                                            SetItemCount(INT_PTR count)
     {
         if (count)
             m_itemCountTotal = count;
@@ -195,12 +195,12 @@ private:
 
     public:
         // The text we put into the first column (the SVN action for normal items, just text for aux items)
-        CString   sActionColumnText;
-        CTSVNPath path;
-        CTSVNPath basePath;
-        CTSVNPath url;
-        CString   changeListName;
-        CString   propertyName;
+        CString                    sActionColumnText;
+        CTSVNPath                  path;
+        CTSVNPath                  basePath;
+        CTSVNPath                  url;
+        CString                    changeListName;
+        CString                    propertyName;
 
         svn_wc_notify_action_t     action;
         svn_node_kind_t            kind;
@@ -223,23 +223,38 @@ private:
         long                       id;     ///< used to identify an entry even after sorting
     };
 
-protected:
-    //implement the virtual methods from SVN base class
-    BOOL Notify(const CTSVNPath& path, const CTSVNPath& url, svn_wc_notify_action_t action,
-                svn_node_kind_t kind, const CString& mimeType,
-                svn_wc_notify_state_t contentState,
-                svn_wc_notify_state_t propState, LONG rev,
-                const svn_lock_t* lock, svn_wc_notify_lock_state_t lockState,
-                const CString&     changeListName,
-                const CString&     propertyName,
-                svn_merge_range_t* range,
-                svn_error_t* err, apr_pool_t* pool) override;
-    BOOL Cancel() override;
+    class HydratingNotificationData
+    {
+    public:
+        explicit HydratingNotificationData(long id, size_t index, int fileCount)
+            : id(id)
+            , index(index)
+            , fileCount(fileCount)
+        {
+        }
 
-    BOOL OnInitDialog() override;
-    void OnCancel() override;
-    BOOL PreTranslateMessage(MSG* pMsg) override;
-    void DoDataExchange(CDataExchange* pDX) override;
+        long   id;
+        size_t index;
+        int    fileCount;
+    };
+
+protected:
+    // implement the virtual methods from SVN base class
+    BOOL            Notify(const CTSVNPath& path, const CTSVNPath& url, svn_wc_notify_action_t action,
+                           svn_node_kind_t kind, const CString& mimeType,
+                           svn_wc_notify_state_t contentState,
+                           svn_wc_notify_state_t propState, LONG rev,
+                           const svn_lock_t* lock, svn_wc_notify_lock_state_t lockState,
+                           const CString&     changeListName,
+                           const CString&     propertyName,
+                           svn_merge_range_t* range,
+                           svn_error_t* err, apr_pool_t* pool) override;
+    BOOL            Cancel() override;
+
+    BOOL            OnInitDialog() override;
+    void            OnCancel() override;
+    BOOL            PreTranslateMessage(MSG* pMsg) override;
+    void            DoDataExchange(CDataExchange* pDX) override;
 
     afx_msg void    OnNMCustomdrawSvnprogress(NMHDR* pNMHDR, LRESULT* pResult);
     afx_msg void    OnLvnGetdispinfoSvnprogress(NMHDR* pNMHDR, LRESULT* pResult);
@@ -303,43 +318,43 @@ private:
     /**
      * Resizes the columns of the progress list so that the headings are visible.
      */
-    void ResizeColumns();
+    void          ResizeColumns();
 
     /// Predicate function to tell us if a notification data item is auxiliary or not
-    static bool NotificationDataIsAux(const NotificationData* pData);
+    static bool   NotificationDataIsAux(const NotificationData* pData);
 
     // the commands to execute
-    bool CmdAdd(CString& sWindowTitle, bool& localOperation);
-    bool CmdCheckout(CString& sWindowTitle, bool& localoperation);
-    bool CmdSparseCheckout(CString& sWindowTitle, bool& localoperation);
-    bool CmdSingleFileCheckout(CString& sWindowTitle, bool& localOperation);
-    bool CmdCommit(CString& sWindowTitle, bool& localoperation);
-    bool CmdCopy(CString& sWindowTitle, bool& localoperation);
-    bool CmdExport(CString& sWindowTitle, bool& localoperation);
-    bool CmdImport(CString& sWindowTitle, bool& localoperation);
-    bool CmdLock(CString& sWindowTitle, bool& localoperation);
-    bool CmdMerge(CString& sWindowTitle, bool& localoperation);
-    bool CmdMergeAll(CString& sWindowTitle, bool& localoperation);
-    bool CmdMergeReintegrate(CString& sWindowTitle, bool& localoperation);
-    bool CmdMergeReintegrateOldStyle(CString& sWindowTitle, bool& localoperation);
-    bool CmdRename(CString& sWindowTitle, bool& localoperation);
-    bool CmdResolve(CString& sWindowTitle, bool& localoperation);
-    bool CmdRevert(CString& sWindowTitle, bool& localoperation);
-    bool CmdSwitch(CString& sWindowTitle, bool& localoperation);
-    bool CmdSwitchBackToParent(CString& sWindowTitle, bool& localoperation);
-    bool CmdUnlock(CString& sWindowTitle, bool& localoperation);
-    bool CmdUpdate(CString& sWindowTitle, bool& localoperation);
+    bool          CmdAdd(CString& sWindowTitle, bool& localOperation);
+    bool          CmdCheckout(CString& sWindowTitle, bool& localoperation);
+    bool          CmdSparseCheckout(CString& sWindowTitle, bool& localoperation);
+    bool          CmdSingleFileCheckout(CString& sWindowTitle, bool& localOperation);
+    bool          CmdCommit(CString& sWindowTitle, bool& localoperation);
+    bool          CmdCopy(CString& sWindowTitle, bool& localoperation);
+    bool          CmdExport(CString& sWindowTitle, bool& localoperation);
+    bool          CmdImport(CString& sWindowTitle, bool& localoperation);
+    bool          CmdLock(CString& sWindowTitle, bool& localoperation);
+    bool          CmdMerge(CString& sWindowTitle, bool& localoperation);
+    bool          CmdMergeAll(CString& sWindowTitle, bool& localoperation);
+    bool          CmdMergeReintegrate(CString& sWindowTitle, bool& localoperation);
+    bool          CmdMergeReintegrateOldStyle(CString& sWindowTitle, bool& localoperation);
+    bool          CmdRename(CString& sWindowTitle, bool& localoperation);
+    bool          CmdResolve(CString& sWindowTitle, bool& localoperation);
+    bool          CmdRevert(CString& sWindowTitle, bool& localoperation);
+    bool          CmdSwitch(CString& sWindowTitle, bool& localoperation);
+    bool          CmdSwitchBackToParent(CString& sWindowTitle, bool& localoperation);
+    bool          CmdUnlock(CString& sWindowTitle, bool& localoperation);
+    bool          CmdUpdate(CString& sWindowTitle, bool& localoperation);
 
 private:
     using StringRevMap         = std::map<CStringA, svn_revnum_t>;
     using StringWRevMap        = std::map<CString, svn_revnum_t>;
     using NotificationDataDeck = std::deque<NotificationData*>;
 
-    CString              m_mergedfile;
-    NotificationDataDeck m_arData;
+    CString                                         m_mergedfile;
+    NotificationDataDeck                            m_arData;
 
-    CWinThread*   m_pThread;
-    volatile LONG m_bThreadRunning;
+    CWinThread*                                     m_pThread;
+    volatile LONG                                   m_bThreadRunning;
 
     ProjectProperties                               m_projectProperties;
     CListCtrl                                       m_progList;
@@ -364,60 +379,64 @@ private:
     SVNExternals                                    m_externals;
     std::map<CString, svn_depth_t>                  m_pathDepths;
     std::map<CString, std::tuple<CString, CString>> m_restorePaths;
+    std::optional<HydratingNotificationData>        m_hydratingData;
 
-    DWORD m_dwCloseOnEnd;
-    DWORD m_bCloseLocalOnEnd;
-    bool  m_hidden;
-    bool  m_bRetryDone;
+    DWORD                                           m_dwCloseOnEnd;
+    DWORD                                           m_bCloseLocalOnEnd;
+    bool                                            m_hidden;
+    bool                                            m_bRetryDone;
 
-    CTSVNPath    m_basePath;
-    StringRevMap m_updateStartRevMap;
-    StringRevMap m_finishedRevMap;
+    CTSVNPath                                       m_basePath;
+    StringRevMap                                    m_updateStartRevMap;
+    StringRevMap                                    m_finishedRevMap;
 
-    wchar_t m_columnBuf[MAX_PATH];
+    wchar_t                                         m_columnBuf[MAX_PATH];
 
-    BOOL m_bCancelled;
-    int  m_nConflicts;
-    int  m_nTotalConflicts;
-    bool m_bConflictWarningShown;
-    bool m_bWarningShown;
-    bool m_bErrorsOccurred;
-    bool m_bMergesAddsDeletesOccurred;
-    bool m_bHookError;
-    bool m_bNoHooks;
-    bool m_bHooksAreOptional;
-    bool m_bAuthorizationError;
+    BOOL                                            m_bCancelled;
+    int                                             m_nConflicts;
+    int                                             m_nTotalConflicts;
+    bool                                            m_bConflictWarningShown;
+    bool                                            m_bWarningShown;
+    bool                                            m_bErrorsOccurred;
+    bool                                            m_bMergesAddsDeletesOccurred;
+    bool                                            m_bHookError;
+    bool                                            m_bNoHooks;
+    bool                                            m_bHooksAreOptional;
+    bool                                            m_bAuthorizationError;
 
-    int  iFirstResized;
-    BOOL bSecondResized;
-    int  nEnsureVisibleCount;
+    int                                             iFirstResized;
+    BOOL                                            bSecondResized;
+    int                                             nEnsureVisibleCount;
 
-    CString      m_sTotalBytesTransferred;
-    CLinkControl m_jumpConflictControl;
+    CString                                         m_sTotalBytesTransferred;
+    CLinkControl                                    m_jumpConflictControl;
 
-    CColors m_colors;
-    CFont   m_boldFont;
+    CColors                                         m_colors;
+    CFont                                           m_boldFont;
 
-    bool m_bLockWarning;
-    bool m_bLockExists;
-    bool m_bFinishedItemAdded;
-    bool m_bLastVisible;
+    bool                                            m_bLockWarning;
+    bool                                            m_bLockExists;
+    bool                                            m_bFinishedItemAdded;
+    bool                                            m_bLastVisible;
 
-    INT_PTR m_itemCount;
-    INT_PTR m_itemCountTotal;
+    INT_PTR                                         m_itemCount;
+    INT_PTR                                         m_itemCountTotal;
 
-    CComPtr<IBugTraqProvider> m_bugTraqProvider;
-    CComPtr<ITaskbarList3>    m_pTaskbarList;
+    CComPtr<IBugTraqProvider>                       m_bugTraqProvider;
+    CComPtr<ITaskbarList3>                          m_pTaskbarList;
 
     // some strings different methods can use
-    CString sIgnoredIncluded;
-    CString sExtExcluded;
-    CString sExtIncluded;
-    CString sIgnoreAncestry;
-    CString sRespectAncestry;
-    CString sDryRun;
-    CString sRecordOnly;
-    CString sForce;
+    CString                                         sIgnoredIncluded;
+    CString                                         sExtExcluded;
+    CString                                         sExtIncluded;
+    CString                                         sIgnoreAncestry;
+    CString                                         sRespectAncestry;
+    CString                                         sDryRun;
+    CString                                         sRecordOnly;
+    CString                                         sForce;
+    CString                                         sHydrating;
+    CString                                         sHydratingSingularForm;
+    CString                                         sHydratingPluralForm;
 };
 
 static UINT WM_TASKBARBTNCREATED       = RegisterWindowMessage(L"TaskbarButtonCreated");
