@@ -172,51 +172,12 @@ module.exports = function(grunt) {
         svgmin: {
             options: {
                 multipass: true,
-                plugins: [
-                    { cleanupAttrs: true },
-                    { cleanupEnableBackground: true },
-                    { cleanupIDs: true },
-                    { cleanupListOfValues: true },
-                    { cleanupNumericValues: true },
-                    { collapseGroups: true },
-                    { convertColors: true },
-                    { convertPathData: true },
-                    { convertShapeToPath: true },
-                    { convertStyleToAttrs: true },
-                    { convertTransform: true },
-                    { inlineStyles: true },
-                    { mergePaths: true },
-                    { minifyStyles: true },
-                    { moveElemsAttrsToGroup: true },
-                    { moveGroupAttrsToElems: true },
-                    {
-                        removeAttrs: {
-                            attrs: 'data-name'
+                plugins: [ {
+                        name: 'preset-default',
+                        params: {
+                            overrides: {}
+                            }
                         }
-                    },
-                    { removeComments: true },
-                    { removeDesc: true },
-                    { removeDoctype: true },
-                    { removeEditorsNSData: true },
-                    { removeEmptyAttrs: true },
-                    { removeEmptyContainers: true },
-                    { removeEmptyText: true },
-                    { removeHiddenElems: true },
-                    { removeMetadata: true },
-                    { removeNonInheritableGroupAttrs: true },
-                    { removeTitle: true },
-                    {
-                        removeUnknownsAndDefaults: {
-                            keepRoleAttr: true
-                        }
-                    },
-                    { removeUnusedNS: true },
-                    { removeUselessDefs: true },
-                    { removeUselessStrokeAndFill: true },
-                    { removeViewBox: false },
-                    { removeXMLNS: false },
-                    { removeXMLProcInst: true },
-                    { sortAttrs: true }
                 ]
             },
             dist: {

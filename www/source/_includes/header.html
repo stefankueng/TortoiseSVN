@@ -51,6 +51,7 @@
     <meta itemprop="description" content="{{ meta_description }}">
     <meta itemprop="image" content="/assets/img/logo-256x256.png">
 
+    {% unless page.noAds %}
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
     <script>
          (adsbygoogle = window.adsbygoogle || []).push({
@@ -58,6 +59,7 @@
               enable_page_level_ads: true
          });
     </script>
+    {% endunless %}
 </head>
 {% capture body_class %}{{ page.layout }}{% if page.body_class %} page-{{ page.body_class }}{% elsif page.slug %} page-{{ page.slug | slugify }}{% endif %}{% endcapture %}
 <body class="{{ body_class }}">
