@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2017-2022 - TortoiseSVN
+// Copyright (C) 2017-2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -86,7 +86,7 @@ BOOL CUnshelve::OnInitDialog()
     while (c >= 0)
         m_cFileList.DeleteColumn(c--);
     m_cFileList.InsertColumn(0, CString(MAKEINTRESOURCE(IDS_SHELF_UNSHELVE_FILECOL)));
-    //m_cFileList.InsertColumn(1, CString(MAKEINTRESOURCE(IDS_SHELF_UNSHELVE_STATUSCOL)));
+    // m_cFileList.InsertColumn(1, CString(MAKEINTRESOURCE(IDS_SHELF_UNSHELVE_STATUSCOL)));
 
     int maxCol = m_cFileList.GetHeaderCtrl()->GetItemCount() - 1;
     for (int col = 0; col <= maxCol; col++)
@@ -267,6 +267,22 @@ void CUnshelve::OnBnClickedDelete()
     if (selectedName >= 0)
     {
         m_cShelvesCombo.GetLBText(selectedName, m_sShelveName);
+
+        CString message;
+        message.Format(CString(MAKEINTRESOURCE(IDS_SHELF_DELETE_CONFIRM_TASK1)), m_sShelveName);
+        CTaskDialog taskDlg(CString(MAKEINTRESOURCE(IDS_SHELF_DELETE_CONFIRM_TASK2)),
+                            message,
+                            L"TortoiseSVN",
+                            0,
+                            TDF_ENABLE_HYPERLINKS | TDF_USE_COMMAND_LINKS | TDF_ALLOW_DIALOG_CANCELLATION | TDF_POSITION_RELATIVE_TO_WINDOW | TDF_SIZE_TO_CONTENT);
+        taskDlg.AddCommandControl(100, CString(MAKEINTRESOURCE(IDS_SHELF_DELETE_CONFIRM_TASK3)));
+        taskDlg.AddCommandControl(200, CString(MAKEINTRESOURCE(IDS_SHELF_DELETE_CONFIRM_TASK4)));
+        taskDlg.SetCommonButtons(TDCBF_CANCEL_BUTTON);
+        taskDlg.SetDefaultCommandControl(200);
+        taskDlg.SetMainIcon(TD_WARNING_ICON);
+        if (taskDlg.DoModal(m_hWnd) != 100)
+            return;
+
         SVN svn;
         if (!svn.DropShelf(m_sShelveName, m_pathList.GetCommonRoot()))
         {
