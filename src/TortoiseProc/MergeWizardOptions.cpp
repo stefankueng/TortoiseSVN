@@ -221,12 +221,12 @@ void CMergeWizardOptions::OnBnClickedDryrun()
             }
             else
             {
-                SVNRevRangeArray tempRevArray;
-                tempRevArray.AddRevRange(1, SVNRev::REV_HEAD);
-                progDlg.SetRevisionRanges(tempRevArray);
+                if (pWizard->m_bReintegrate)
+                    progDlg.SetCommand(CSVNProgressDlg::SVNProgress_MergeReintegrateOldStyle);
+                else
+                    progDlg.SetCommand(CSVNProgressDlg::SVNProgress_MergeReintegrate);
             }
-            if (pWizard->m_bReintegrate)
-                progDlg.SetCommand(CSVNProgressDlg::SVNProgress_MergeReintegrateOldStyle);
+            progDlg.SetPegRevision(pWizard->m_pegRev);
         }
         break;
         case MERGEWIZARD_TREE:
