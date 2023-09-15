@@ -1166,13 +1166,6 @@ void CLogDlg::GetAll(bool bForceAll /* = false */)
     if (bForceAll)
         entry = ID_CMD_SHOWALL;
 
-    CRegDWORD reg = CRegDWORD(L"Software\\TortoiseSVN\\ShowAllEntry");
-
-    if (entry == ID_CMD_DEFAULT)
-        entry = static_cast<LONG>(reg);
-
-    reg = static_cast<DWORD>(entry);
-
     switch (entry)
     {
         default:
@@ -1208,6 +1201,10 @@ void CLogDlg::GetAll(bool bForceAll /* = false */)
         }
         break;
     }
+
+    CRegDWORD reg = CRegDWORD(L"Software\\TortoiseSVN\\ShowAllEntry");
+    reg           = static_cast<DWORD>(entry);
+
     m_changedFileListCtrl.SetItemCountEx(0);
     m_changedFileListCtrl.Invalidate();
     // We need to create CStoreSelection on the heap or else
@@ -1481,7 +1478,7 @@ void CLogDlg::MonitorHideDlg()
     // remove selection, show empty log list
     m_projTree.SelectItem(nullptr);
     MonitorShowProject(nullptr, nullptr);
-    CLogCachePool::ReleaseLocks();// do not keep the cache files locked!
+    CLogCachePool::ReleaseLocks(); // do not keep the cache files locked!
     ShowWindow(SW_HIDE);
     SaveMonitorProjects(true);
     SaveSplitterPos();
@@ -2292,8 +2289,8 @@ void CLogDlg::CopySelectionToClipBoardBugId()
 
 void CLogDlg::CopySelectionToClipBoardBugUrl()
 {
-    std::set<CString>           selectedBugIDs = GetSelectedBugIds();
-    CString                     sClipdata;
+    std::set<CString> selectedBugIDs = GetSelectedBugIds();
+    CString           sClipdata;
     for (auto it = selectedBugIDs.begin(); it != selectedBugIDs.end(); ++it)
     {
         if (!sClipdata.IsEmpty())
