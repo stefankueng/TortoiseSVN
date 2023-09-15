@@ -187,6 +187,11 @@ msgstr ""
 msgid "%Ts\n%Ts"
 msgstr ""
 
+#. Resource IDs: (4250)
+#, c-format
+msgid "%d files"
+msgstr ""
+
 #. Resource IDs: (1022)
 #, c-format
 msgid "%d projects have updates:"
@@ -1601,6 +1606,10 @@ msgstr ""
 msgid "...and %d more paths."
 msgstr ""
 
+#. Resource IDs: (4249)
+msgid "1 file"
+msgstr ""
+
 #. Resource IDs: (2403)
 #, c-format
 msgid ": Revision %d"
@@ -2287,7 +2296,7 @@ msgstr ""
 msgid "Can't copy \n%1!ls!\nto\n%2!ls!"
 msgstr ""
 
-#. Resource IDs: (1383, 2, 5302, Dialog IDD_ENCODING: Control id 2, Dialog IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog IDD_GOTODLG: Control id 2, Dialog IDD_OPEN: Control id 2, Dialog IDD_OPENDLG: Control id 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog IDD_REGEXFILTERS: Control id 2)
+#. Resource IDs: (1068, 1383, 2, 5302, Dialog IDD_ENCODING: Control id 2, Dialog IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog IDD_GOTODLG: Control id 2, Dialog IDD_OPEN: Control id 2, Dialog IDD_OPENDLG: Control id 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog IDD_REGEXFILTERS: Control id 2)
 msgid "Cancel"
 msgstr ""
 
@@ -3326,7 +3335,7 @@ msgstr ""
 msgid "Default to UTF-8 encoding"
 msgstr ""
 
-#. Resource IDs: (1542)
+#. Resource IDs: (1067, 1542)
 msgid "Delete"
 msgstr ""
 
@@ -3621,6 +3630,11 @@ msgstr ""
 
 #. Resource IDs: (2358)
 msgid "Do this for all unversioned/modified items"
+msgstr ""
+
+#. Resource IDs: (1065)
+#, c-format
+msgid "Do you really want to delete the shelve \"%s\"?"
 msgstr ""
 
 #. Resource IDs: (1464)
@@ -4278,6 +4292,10 @@ msgstr ""
 #. Resource IDs: (2363)
 #, c-format
 msgid "Fetching status of %1!ls!"
+msgstr ""
+
+#. Resource IDs: (4248)
+msgid "Fetching text bases"
 msgstr ""
 
 #. Resource IDs: (1237)
@@ -9937,6 +9955,10 @@ msgstr ""
 
 #. Resource IDs: (2756)
 msgid "You selected an unversioned folder for a commit!"
+msgstr ""
+
+#. Resource IDs: (1066)
+msgid "You will lose all data of the shelve.\nThis action cannot be undone."
 msgstr ""
 
 #. Resource IDs: (1412)
