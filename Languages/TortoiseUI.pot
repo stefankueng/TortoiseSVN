@@ -3634,7 +3634,7 @@ msgstr ""
 
 #. Resource IDs: (1065)
 #, c-format
-msgid "Do you really want to delete the shelve \"%s\"?"
+msgid "Do you really want to delete the shelf \"%s\"?"
 msgstr ""
 
 #. Resource IDs: (1464)
@@ -9958,7 +9958,7 @@ msgid "You selected an unversioned folder for a commit!"
 msgstr ""
 
 #. Resource IDs: (1066)
-msgid "You will lose all data of the shelve.\nThis action cannot be undone."
+msgid "You will lose all data of the shelf.\nThis action cannot be undone."
 msgstr ""
 
 #. Resource IDs: (1412)
