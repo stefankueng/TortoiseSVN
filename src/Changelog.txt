@@ -21,6 +21,7 @@
 - NEW: added an advanced setting to control the default value
        of Allow mixed revisions (not recommended) in the Merge
        options dialog. (Daniel Sahlberg)
+- BUG: TortoiseBlame didn't restore saved window position. (Stefan)
 
 Version 1.14.5
 - BUG: 1.14.4 was wrongly linked against svn 1.14.1

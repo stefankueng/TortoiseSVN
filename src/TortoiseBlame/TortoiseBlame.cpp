@@ -1,6 +1,6 @@
 ﻿// TortoiseBlame - a Viewer for Subversion Blames
 
-// Copyright (C) 2003-2022 - TortoiseSVN
+// Copyright (C) 2003-2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -2130,9 +2130,9 @@ BOOL InitInstance(HINSTANCE hResource, int nCmdShow)
     }
 
     auto         monHash = GetMonitorSetupHash();
-    CRegStdDWORD pos(L"Software\\TortoiseSVN\\TBlamePos" + monHash, 0);
-    CRegStdDWORD width(L"Software\\TortoiseSVN\\TBlameSize" + monHash, 0);
-    CRegStdDWORD state(L"Software\\TortoiseSVN\\TBlameState" + monHash, 0);
+    CRegStdDWORD pos(L"Software\\TortoiseSVN\\TBlamePos_" + monHash, 0);
+    CRegStdDWORD width(L"Software\\TortoiseSVN\\TBlameSize_" + monHash, 0);
+    CRegStdDWORD state(L"Software\\TortoiseSVN\\TBlameState_" + monHash, 0);
     if (static_cast<DWORD>(pos) && static_cast<DWORD>(width))
     {
         RECT rc;
