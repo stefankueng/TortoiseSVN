@@ -46,7 +46,7 @@ m_ListCtrl.SetBkImage(hbm, FALSE, 100, 100);
         was shown. Stepping through the code of <code>SetBkImage</code>
         shows that it's simply a wrapper around the
         <a href="https://msdn.microsoft.com/library/en-us/shellcc/platform/commctls/listview/messages/lvm_setbkimage.asp">LVM_SETBKIMAGE</a>
-        message. Reading the MSDN docs about that message reviled
+        message. Reading the MSDN docs about that message revealed
         something that was missing completely from the
         documentation of <code>SetBkImage</code>: the parameter <code>hbm</code> of the
         <a href="https://msdn.microsoft.com/library/default.asp?url=/library/en-us/shellcc/platform/commctls/listview/structures/lvbkimage.asp">LVBKIMAGE</a>

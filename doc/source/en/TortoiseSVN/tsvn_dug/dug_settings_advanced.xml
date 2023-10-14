@@ -453,6 +453,18 @@
       </listitem>
     </varlistentry>
     <varlistentry>
+      <term condition="pot">MergeAllowMixedRevisionsDefault</term>
+      <listitem>
+        <para>
+          By setting to <literal>true</literal> you can set the default
+          value of the <guilabel>Allow mixed revisions (not recommended)</guilabel>
+          checkbox in the Merge option dialog. Please be aware of the limitations
+          and potentional problems of merges into mixed-revision working copies
+          before configuring this setting.
+        </para>
+      </listitem>
+    </varlistentry>
+    <varlistentry>
       <term condition="pot">NumDiffWarning</term>
       <listitem>
         <para>

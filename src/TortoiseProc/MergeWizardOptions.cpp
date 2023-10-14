@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2007-2009, 2012-2014, 2020-2021 - TortoiseSVN
+// Copyright (C) 2007-2009, 2012-2014, 2020-2021, 2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -64,10 +64,7 @@ BOOL CMergeWizardOptions::OnInitDialog()
     CString   sRegOptionIgnoreAncestry = L"Software\\TortoiseSVN\\Merge\\IgnoreAncestry_" + pWizard->m_sUuid;
     CRegDWORD regIgnoreAncestryOpt(sRegOptionIgnoreAncestry, FALSE);
     pWizard->m_bIgnoreAncestry = static_cast<DWORD>(regIgnoreAncestryOpt);
-    if ((pWizard->m_nRevRangeMerge == MERGEWIZARD_REVRANGE) && (!pWizard->m_bReintegrate))
-    {
-        pWizard->m_bAllowMixed = false;
-    }
+    pWizard->m_bAllowMixed = static_cast<BOOL>(static_cast<DWORD>(CRegDWORD(L"Software\\TortoiseSVN\\MergeAllowMixedRevisionsDefault", FALSE)));
 
     m_depthCombo.AddString(CString(MAKEINTRESOURCE(IDS_SVN_DEPTH_WORKING)));
     m_depthCombo.AddString(CString(MAKEINTRESOURCE(IDS_SVN_DEPTH_INFINITE)));
@@ -224,12 +221,12 @@ void CMergeWizardOptions::OnBnClickedDryrun()
             }
             else
             {
-                SVNRevRangeArray tempRevArray;
-                tempRevArray.AddRevRange(1, SVNRev::REV_HEAD);
-                progDlg.SetRevisionRanges(tempRevArray);
+                if (pWizard->m_bReintegrate)
+                    progDlg.SetCommand(CSVNProgressDlg::SVNProgress_MergeReintegrateOldStyle);
+                else
+                    progDlg.SetCommand(CSVNProgressDlg::SVNProgress_MergeReintegrate);
             }
-            if (pWizard->m_bReintegrate)
-                progDlg.SetCommand(CSVNProgressDlg::SVNProgress_MergeReintegrateOldStyle);
+            progDlg.SetPegRevision(pWizard->m_pegRev);
         }
         break;
         case MERGEWIZARD_TREE:

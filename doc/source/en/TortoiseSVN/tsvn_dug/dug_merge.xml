@@ -336,6 +336,19 @@
       is not checked by default.
     </para>
     <para>
+      The checkbox marked <guilabel>Allow mixed revisions (not recommended)</guilabel>
+      is used to allow merging into mixed-revision working copies (corresponding
+      to the command line option <literal>--allow-mixed-revisions</literal>).
+      The default since Subversion 1.7 is to disallow merging into mixed-revision
+      working copies. The reasons are described in the Subversion book towards
+      the end of the section
+      <ulink url="https://svnbook.red-bean.com/en/1.8/svn.branchmerge.basicmerging.html#svn.branchmerge.basicmerging.stayinsync">
+        <citetitle>Keeping a Branch in Sync</citetitle>
+      </ulink>
+      . If you understand the possible problems of merging into a mixed-revision
+      working copy you may select this checkbox to perform the merge anyway.
+    </para>
+    <para>
       If you are using merge tracking and you want to mark a revision as
       having been merged, without actually doing the merge here, check the
       <guilabel>Only record the merge</guilabel> checkbox. There are two
