@@ -114,20 +114,20 @@
     <property name="schedule" value="yes" />
     <!-- As of 230603 the build server for the nightly builds doesn't have NASM. So build OpenSSL with the no-asm option -->
     <property name="no-asm" value="yes" />
-    <echo message="trying to fix nightly builds..." />
-    <exec program="svn.exe">
+    <echo message="trying to fix nightly builds..." level="Warning" />
+    <exec program="svn.exe" verbose="true">
       <arg value="resolve" />
       <arg value="-R" />
       <arg value="--accept" />
       <arg value="r" />
       <arg value="." />
     </exec>
-    <exec program="svn.exe">
+    <exec program="svn.exe" verbose="true">
       <arg value="revert" />
       <arg value="-R" />
       <arg value="." />
     </exec>
-    <exec program="svn.exe">
+    <exec program="svn.exe" verbose="true">
       <arg value="up" />
       <arg value="." />
     </exec>
