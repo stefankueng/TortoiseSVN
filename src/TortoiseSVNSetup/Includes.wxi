@@ -10,7 +10,7 @@
 
   <?define PackageKeywords="Sourcecontrol;Subversion;TortoiseSVN;Shell" ?>
   <?define PackageDescription="Subversion Client" ?>
-  <?define PackageComments="Windows Shell Integration For SubVersion Source Control, v$(var.VersionNumberUserVisible)" ?>
+  <?define PackageComments="Windows Shell Integration For Subversion Source Control, v$(var.VersionNumberUserVisible)" ?>
   <?define PackageManufacturer="Stefan Kueng" ?>
   <?define TortoiseSvnOrg="https://tortoisesvn.net/"?>
 
