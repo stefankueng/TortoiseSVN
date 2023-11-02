@@ -1334,7 +1334,7 @@ void CSVNProgressDlg::ReportError(const CString& sError)
 {
     if (CRegDWORD(L"Software\\TortoiseSVN\\PlaySound", TRUE) != 0)
         PlaySound(reinterpret_cast<LPCWSTR>(SND_ALIAS_SYSTEMEXCLAMATION), nullptr, SND_ALIAS_ID | SND_ASYNC);
-    ReportString(sError, CString(MAKEINTRESOURCE(IDS_ERR_ERROR)), m_colors.GetColor(CColors::Conflict));
+    ReportString(sError, CString(MAKEINTRESOURCE(IDS_ERR_ERROR)), true, m_colors.GetColor(CColors::Conflict));
     m_bErrorsOccurred = true;
 }
 
