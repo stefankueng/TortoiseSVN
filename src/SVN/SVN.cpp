@@ -740,13 +740,14 @@ bool SVN::DropShelf(const CString& shelveName, const CTSVNPath& localAbspath)
 
 bool SVN::Checkout(const CTSVNPath& moduleName, const CTSVNPath& destPath, const SVNRev& pegRev,
                    const SVNRev& revision, svn_depth_t depth, bool bIgnoreExternals,
-                   bool bAllowUnverObstructions, const svn_version_t* wcFormatVersion, svn_tristate_t storePristine)
+                   bool bAllowUnverObstructions, [[maybe_unused]] const svn_version_t* wcFormatVersion, [[maybe_unused]] svn_tristate_t storePristine)
 {
     SVNPool subPool(m_pool);
     Prepare();
 
     CHooks::Instance().PreConnect(CTSVNPathList(moduleName));
     const char* svnPath = moduleName.GetSVNApiPath(subPool);
+#if SVN_VER_MAJOR >= 1 && SVN_VER_MINOR > 14
     SVNTRACE(
         m_err = svn_client_checkout4(NULL, // we don't need the resulting revision
                                      svnPath,
@@ -761,6 +762,20 @@ bool SVN::Checkout(const CTSVNPath& moduleName, const CTSVNPath& destPath, const
                                      m_pCtx,
                                      subPool),
         svnPath);
+#else
+    SVNTRACE(
+        m_err = svn_client_checkout3(NULL, // we don't need the resulting revision
+                                     svnPath,
+                                     destPath.GetSVNApiPath(subPool),
+                                     pegRev,
+                                     revision,
+                                     depth,
+                                     bIgnoreExternals,
+                                     bAllowUnverObstructions,
+                                     m_pCtx,
+                                     subPool),
+        svnPath);
+#endif
     ClearCAPIAuthCacheOnError();
 
     return (m_err == nullptr);
@@ -2735,7 +2750,7 @@ svn_revnum_t SVN::GetHEADRevision(const CTSVNPath& path, bool cacheAllowed)
             return -1;
 
         /* Check if path actually exist */
-        svn_dirent_t *dirent;
+        svn_dirent_t* dirent;
         SVNTRACE(
             svn_ra_stat(raSession, "", rev, &dirent, localPool),
             urla);
@@ -2935,13 +2950,16 @@ bool SVN::GetWCMinMaxRevs(const CTSVNPath& wcPath, bool committed, svn_revnum_t&
     return (m_err == nullptr);
 }
 
-bool SVN::Upgrade(const CTSVNPath& wcpath, const svn_version_t* wcFormatVersion)
+bool SVN::Upgrade(const CTSVNPath& wcpath, [[maybe_unused]] const svn_version_t* wcFormatVersion)
 {
     SVNPool localPool(m_pool);
     Prepare();
 
+#if SVN_VER_MAJOR >= 1 && SVN_VER_MINOR > 14
     m_err = svn_client_upgrade2(nullptr, wcpath.GetSVNApiPath(localPool), wcFormatVersion, m_pCtx, nullptr, localPool);
-
+#else
+    m_err = svn_client_upgrade(wcpath.GetSVNApiPath(localPool), m_pCtx, localPool);
+#endif
     return (m_err == nullptr);
 }
 
@@ -3000,7 +3018,7 @@ CString SVN::RevPropertyGet(const CString& sName, const CTSVNPath& url, const SV
     return CUnicodeUtils::GetUnicode(propVal->data);
 }
 
-CTSVNPath SVN::GetPristinePath(HWND hParent, const CTSVNPath& wcPath)
+CTSVNPath SVN::GetPristinePath([[maybe_unused]] HWND hParent, const CTSVNPath& wcPath)
 {
     SVNPool     localPool;
 
@@ -3021,10 +3039,11 @@ CTSVNPath SVN::GetPristinePath(HWND hParent, const CTSVNPath& wcPath)
 
     if (err != nullptr)
     {
+#if SVN_VER_MAJOR >= 1 && SVN_VER_MINOR > 14
         if (hParent && (err->apr_err == SVN_ERR_WC_PRISTINE_DEHYDRATED ||
                         err->apr_err == SVN_ERR_WC_DEPRECATED_API_STORE_PRISTINE))
         {
-            SVN svn;
+            SVN          svn;
             CProgressDlg progressDlg;
             progressDlg.SetTitle(IDS_APPNAME);
             progressDlg.SetTime(false);
@@ -3043,7 +3062,7 @@ CTSVNPath SVN::GetPristinePath(HWND hParent, const CTSVNPath& wcPath)
             }
             progressDlg.Stop();
         }
-
+#endif
         svn_error_clear(err);
         return returnPath;
     }
