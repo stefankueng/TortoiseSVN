@@ -51,7 +51,6 @@ void ViewState::Clear()
 
 void CUndo::MarkAsOriginalState(bool bLeft, bool bRight, bool bBottom)
 {
-    // TODO reduce code duplication
     // find highest index of changing step
     if (bLeft) // left is selected for mark
         m_savedStateIndexLeft = 0;
@@ -112,48 +111,7 @@ bool CUndo::Undo(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom)
     else
         UndoOne(pLeft, pRight, pBottom);
 
-    CBaseView* pActiveView = nullptr;
-
-    if (pBottom && pBottom->IsTarget())
-    {
-        pActiveView = pBottom;
-    }
-    else if (pRight && pRight->IsTarget())
-    {
-        pActiveView = pRight;
-    }
-    else
-    // if (pLeft && pLeft->IsTarget())
-    {
-        pActiveView = pLeft;
-    }
-
-    if (pActiveView)
-    {
-        pActiveView->ClearSelection();
-        pActiveView->BuildAllScreen2ViewVector();
-        pActiveView->RecalcAllVertScrollBars();
-        pActiveView->RecalcAllHorzScrollBars();
-        pActiveView->EnsureCaretVisible();
-        pActiveView->UpdateCaret();
-
-        if (pLeft)
-        {
-            pLeft->SetModified(m_savedStateIndexLeft != 0);
-            pLeft->ClearStepModifiedMark();
-        }
-        if (pRight)
-        {
-            pRight->SetModified(m_savedStateIndexRight != 0);
-            pRight->ClearStepModifiedMark();
-        }
-        if (pBottom)
-        {
-            pBottom->SetModified(m_savedStateIndexBottom != 0);
-            pBottom->ClearStepModifiedMark();
-        }
-        pActiveView->RefreshViews();
-    }
+    updateActiveView(pLeft, pRight, pBottom);
 
     return true;
 }
@@ -205,6 +163,41 @@ bool CUndo::Redo(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom)
     else
         RedoOne(pLeft, pRight, pBottom);
 
+    updateActiveView(pLeft, pRight, pBottom);
+
+    return true;
+}
+
+void CUndo::RedoOne(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom)
+{
+    AllViewState allstate = m_redoViewStates.back();
+    POINT        pt       = m_redoCaretPoints.back();
+
+    if (pLeft->IsTarget())
+        m_undoCaretPoints.push_back(pLeft->GetCaretPosition());
+    else if (pRight->IsTarget())
+        m_undoCaretPoints.push_back(pRight->GetCaretPosition());
+    else if (pBottom->IsTarget())
+        m_undoCaretPoints.push_back(pBottom->GetCaretPosition());
+
+    if (allstate.left.modifies)
+        ++m_savedStateIndexLeft;
+    if (allstate.right.modifies)
+        ++m_savedStateIndexRight;
+    if (allstate.bottom.modifies)
+        ++m_savedStateIndexBottom;
+
+    allstate.left   = Do(allstate.left, pLeft, pt);
+    allstate.right  = Do(allstate.right, pRight, pt);
+    allstate.bottom = Do(allstate.bottom, pBottom, pt);
+
+    m_undoViewStates.push_back(allstate);
+
+    m_redoViewStates.pop_back();
+    m_redoCaretPoints.pop_back();
+}
+void CUndo::updateActiveView(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom) const
+{
     CBaseView* pActiveView = nullptr;
 
     if (pBottom && pBottom->IsTarget())
@@ -247,37 +240,6 @@ bool CUndo::Redo(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom)
         }
         pActiveView->RefreshViews();
     }
-
-    return true;
-}
-
-void CUndo::RedoOne(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom)
-{
-    AllViewState allstate = m_redoViewStates.back();
-    POINT        pt       = m_redoCaretPoints.back();
-
-    if (pLeft->IsTarget())
-        m_undoCaretPoints.push_back(pLeft->GetCaretPosition());
-    else if (pRight->IsTarget())
-        m_undoCaretPoints.push_back(pRight->GetCaretPosition());
-    else if (pBottom->IsTarget())
-        m_undoCaretPoints.push_back(pBottom->GetCaretPosition());
-
-    if (allstate.left.modifies)
-        ++m_savedStateIndexLeft;
-    if (allstate.right.modifies)
-        ++m_savedStateIndexRight;
-    if (allstate.bottom.modifies)
-        ++m_savedStateIndexBottom;
-
-    allstate.left   = Do(allstate.left, pLeft, pt);
-    allstate.right  = Do(allstate.right, pRight, pt);
-    allstate.bottom = Do(allstate.bottom, pBottom, pt);
-
-    m_undoViewStates.push_back(allstate);
-
-    m_redoViewStates.pop_back();
-    m_redoCaretPoints.pop_back();
 }
 ViewState CUndo::Do(const ViewState& state, CBaseView* pView, const POINT& pt)
 {

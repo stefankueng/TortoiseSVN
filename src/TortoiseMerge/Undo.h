@@ -107,6 +107,7 @@ protected:
     static ViewState                     Do(const ViewState& state, CBaseView* pView, const POINT& pt);
     void                                 UndoOne(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom);
     void                                 RedoOne(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom);
+    void                                 updateActiveView(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom) const;
     std::list<AllViewState>              m_undoViewStates;
     std::list<POINT>                     m_undoCaretPoints;
     std::list<std::list<int>::size_type> m_undoGroups;
