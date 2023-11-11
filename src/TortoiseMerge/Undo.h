@@ -116,9 +116,9 @@ protected:
     std::list<POINT>                     m_redoCaretPoints;
     std::list<std::list<int>::size_type> m_redoGroups;
 
-    size_t                               m_savedStateIndexLeft;
-    size_t                               m_savedStateIndexRight;
-    size_t                               m_savedStateIndexBottom;
+    __int64                              m_savedStateIndexLeft;
+    __int64                              m_savedStateIndexRight;
+    __int64                              m_savedStateIndexBottom;
 
 private:
     CUndo();
