@@ -5282,7 +5282,7 @@ void CBaseView::SetViewLineNumber(int index, int linenumber) const
     int oldLineNumber = m_pViewData->GetLineNumber(index);
     if (oldLineNumber != linenumber)
     {
-        m_pState->linelines[index] = oldLineNumber;
+        m_pState->lineLines[index] = oldLineNumber;
         m_pViewData->SetLineNumber(index, linenumber);
     }
 }
