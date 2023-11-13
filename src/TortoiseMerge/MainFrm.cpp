@@ -146,6 +146,8 @@ BEGIN_MESSAGE_MAP(CMainFrame, CFrameWndEx)
     ON_WM_TIMER()
     ON_COMMAND(ID_VIEW_IGNORECOMMENTS, &CMainFrame::OnViewIgnorecomments)
     ON_UPDATE_COMMAND_UI(ID_VIEW_IGNORECOMMENTS, &CMainFrame::OnUpdateViewIgnorecomments)
+    ON_COMMAND(ID_VIEW_IGNOREEOL, &CMainFrame::OnViewIgnoreEOL)
+    ON_UPDATE_COMMAND_UI(ID_VIEW_IGNOREEOL, &CMainFrame::OnUpdateViewIgnoreEOL)
     ON_COMMAND_RANGE(ID_REGEXFILTER, ID_REGEXFILTER + 400, &CMainFrame::OnRegexfilter)
     ON_UPDATE_COMMAND_UI_RANGE(ID_REGEXFILTER, ID_REGEXFILTER + 400, &CMainFrame::OnUpdateViewRegexFilter)
     ON_COMMAND(ID_REGEX_NO_FILTER, &CMainFrame::OnRegexNoFilter)
@@ -214,6 +216,7 @@ CMainFrame::CMainFrame()
     , m_regUseRibbons(L"Software\\TortoiseMerge\\UseRibbons", TRUE)
     , m_regUseTaskDialog(L"Software\\TortoiseMerge\\UseTaskDialog", TRUE)
     , m_regIgnoreComments(L"Software\\TortoiseMerge\\IgnoreComments", FALSE)
+    , m_regIgnoreEOL(L"Software\\TortoiseMerge\\IgnoreEOL", TRUE)
     , m_regexIndex(-1)
     , m_pwndLeftView(nullptr)
     , m_pwndRightView(nullptr)
@@ -1931,6 +1934,7 @@ void CMainFrame::OnViewOptions()
     auto      oldDpiAwareness = SetThreadDpiAwarenessContext(DPI_AWARENESS_CONTEXT_SYSTEM_AWARE);
     CSettings dlg(sTemp);
     dlg.DoModal();
+    m_regIgnoreEOL.read();
     SetThreadDpiAwarenessContext(oldDpiAwareness);
     CTheme::Instance().SetDarkTheme(dlg.IsDarkMode());
     if (dlg.IsReloadNeeded())
@@ -3287,6 +3291,22 @@ void CMainFrame::OnUpdateViewIgnorecomments(CCmdUI *pCmdUI)
     pCmdUI->Enable(sC != m_ignoreCommentsMap.end());
 
     pCmdUI->SetCheck(static_cast<DWORD>(m_regIgnoreComments) != 0);
+}
+
+void CMainFrame::OnViewIgnoreEOL()
+{
+    if (CheckForSave(ECheckForSaveReason::CHFSR_OPTIONS) == IDCANCEL)
+        return;
+    bool      bIgnoreEOL = static_cast<DWORD>(m_regIgnoreEOL) != 0;
+    bIgnoreEOL           = !bIgnoreEOL;
+    m_regIgnoreEOL         = bIgnoreEOL;
+    LoadViews();
+}
+
+void CMainFrame::OnUpdateViewIgnoreEOL(CCmdUI *pCmdUI)
+{
+    bool      bIgnoreEOL = static_cast<DWORD>(m_regIgnoreEOL) != 0;
+    pCmdUI->SetCheck(bIgnoreEOL);
 }
 
 void CMainFrame::OnRegexfilter(UINT cmd)
