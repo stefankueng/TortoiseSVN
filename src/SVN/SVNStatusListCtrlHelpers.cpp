@@ -791,7 +791,7 @@ void CSVNStatusListCtrl::ColumnManager::ApplyColumnOrder() const
     assert(gridColumnOrder.size() == columns.size());
     assert(GetColumnCount() == control->GetHeaderCtrl()->GetItemCount());
 
-    // o.k., apply our column ordering)
+    // o.k., apply our column ordering
 
     control->SetColumnOrderArray(GetColumnCount(), order);
 }
