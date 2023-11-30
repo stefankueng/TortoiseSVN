@@ -112,8 +112,6 @@
       run this task if the whole build is done via task scheduler
     </description>
     <property name="schedule" value="yes" />
-    <!-- As of 230603 the build server for the nightly builds doesn't have NASM. So build OpenSSL with the no-asm option -->
-    <property name="no-asm" value="yes" />
     <echo message="trying to fix nightly builds..." level="Warning" />
     <exec program="svn.exe" verbose="true">
       <arg value="resolve" />
