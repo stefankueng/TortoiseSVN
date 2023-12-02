@@ -22,6 +22,9 @@ All user/site specific configuration is stored in doc.build.user.
   <property name="cleanup" value="" overwrite="false" />
 
   <include buildfile="doc.build.include" />
+  
+  <!-- we don't translate the docs anymore -->
+  <property name="languages" value="en" overwrite="true" />
 
   <!-- ====================================================================== -->
   <!-- Loop over all languages                                                -->
@@ -61,9 +64,6 @@ All user/site specific configuration is stored in doc.build.user.
       <echo message="------------------------------------------------------------" />
       <echo message="Creating '${doc.target.name}' documentation" />
 
-      <if test="${file::exists(lang.pofile)}">
-        <call target="translate" unless="${lang.base==lang.target}" />
-      </if>
       <if test="${lang.base==lang.target or file::exists(lang.pofile)}">
         <!-- update version info in version.xml -->
         <call target="UpdateVersionInfo" />
@@ -239,156 +239,6 @@ All user/site specific configuration is stored in doc.build.user.
     </if>
   </target>
 
-  <!-- ====================================================================== -->
-  <!-- Create po template for each application from sources                   -->
-  <!-- ====================================================================== -->
-
-  <target name="potfile" description="Create po template from sources">
-    <property name="lang.target" value="${lang.base}" />
-
-    <!-- ensure "Version" translation invariant -->
-    <copy file="source\${lang.base}\version.in" tofile="source\${lang.base}\version.xml" overwrite="true" />
-
-    <foreach item="String" in="${potemplates}" delim="," property="app">
-
-      <property name="potfile" value="${app}.pot" />
-      <property name="xslt.source" value="source/${lang.base}/${app}/${app}.xml" />
-      <property name="file.target" value="source/${app}_${lang.base}.xml" />
-
-      <echo message="------------------------------------------------------------" />
-      <echo message="Checking if ${potfile} is up to date" />
-
-      <call target="profile" />
-
-      <if test="${not file::up-to-date(file.target, potfile)}">
-        <echo message="Creating po template from sources" />
-        <exec program="python"
-              commandline="xml2po.py -e -o ${potfile}.tmp ${file.target}"
-              verbose="false" />
-
-        <!-- Adjust path to source file -->
-        <move file="${potfile}.tmp" tofile="${potfile}" overwrite="true">
-          <filterchain>
-            <replacestring from="#: ${file.target}" to="#: ../${file.target}" />
-          </filterchain>
-        </move>
-      </if>
-      <property name="lang.target" value="en" />
-      <property name="lang.target.code" value="1033" />
-      <property name="languagebuildfile" value="${path.user.xsl}/${lang.target}/lang.build" />
-      <if test="${file::exists(languagebuildfile)}">
-          <include buildfile="${languagebuildfile}" />
-      </if>
-      <foreach item="String" in="${applications}" delim="," property="app">
-          <property name="doc.source.file" value="source/${lang.base}/${app}.xml" />
-          <property name="doc.base.name" value="${app}_${lang.base}" />
-          <property name="doc.base.work" value="output/${doc.base.name}" />
-
-          <property name="doc.target.name" value="${app}_${lang.target}" />
-          <property name="doc.target.work" value="output/${doc.target.name}" />
-          <property name="doc.target.source" value="source/${lang.target}/${app}/${app}.xml" />
-          <property name="lang.pofile" value="../Languages/${lang.target}/TortoiseDoc.po" />
-
-          <echo message="------------------------------------------------------------" />
-          <echo message="Creating '${doc.target.name}' documentation" />
-          <delete file="${doc.target.work}.chm" />
-          <delete file="${doc.target.work}.chm" />
-
-          <if test="${file::exists(lang.pofile)}">
-              <call target="translate" unless="${lang.base==lang.target}" />
-          </if>
-          <if test="${lang.base==lang.target or file::exists(lang.pofile)}">
-              <property name="xslt.source" value="${doc.target.source}" />
-              <call target="copyimages"/>
-              <call target="chm" />
-              <delete file="${doc.target.work}.chm" />
-              <delete file="${doc.target.work}.chm" />
-          </if>
-      </foreach>
-
-    </foreach>
-
-    <!-- Create a common .pot file for both applications -->
-    <!-- Could be smart to replace the comma delimiters in potemplates by spaces
-         and use this instead on the command line -->
-    <exec program="msgcat"
-          commandline="../Languages/TortoiseDocPotHeader.txt TortoiseSVN.pot TortoiseMerge.pot --use-first --no-wrap -o ../Languages/TortoiseDoc.pot"
-          basedir="${path.gettext}"
-          verbose="false" />
-
-    <exec program="unix2dos"
-          commandline="../Languages/TortoiseDoc.pot"
-          basedir="../Languages/"
-          verbose="false" />
-
-    <delete file="TortoiseSVN.pot" />
-    <delete file="TortoiseMerge.pot" />
-
-  </target>
-
-  <!-- ====================================================================== -->
-  <!-- Create translated source files                                         -->
-  <!-- ====================================================================== -->
-
-  <target name="translate" description="Create translated source file">
-
-    <echo message="Translating: '${app} ${lang.target}' This may take a few minutes" />
-
-    <exec program="msgfmt"
-          commandline="${lang.pofile} -o ${lang.target}.mo"
-          basedir="${path.gettext}"
-          verbose="false" />
-
-    <foreach item="File" property="file.base">
-      <in>
-        <items>
-          <include name="source/${lang.base}/${app}/**/*.xml" />
-          <include name="source/${lang.base}/pubdate.xml" />
-          <include name="source/${lang.base}/glossary.xml" />
-          <include name="source/${lang.base}/wishlist.xml" />
-          <include name="source/${lang.base}/version.in" />
-        </items>
-      </in>
-      <do>
-        <property name="file.target" value="${string::replace(file.base,'\'+lang.base+'\','\'+lang.target+'\')}" />
-
-        <uptodate property="file.target.uptodate">
-          <sourcefiles>
-            <include name="${file.base}" />
-            <include name="${lang.pofile}" />
-          </sourcefiles>
-          <targetfiles>
-            <include name="${file.target}" />
-          </targetfiles>
-        </uptodate>
-
-        <if test="${not file.target.uptodate}">
-
-          <echo message="Translating: ${path::get-file-name(file.target)}" />
-          <property name="dir.target" value="${path::get-directory-name(file.target)}" />
-          <mkdir dir="${dir.target}" unless="${directory::exists(dir.target)}" />
-          <exec program="python"
-                commandline='xml2po.py -t "${lang.target}.mo" -o "${file.target}" "${file.base}"'
-                verbose="false" />
-        </if>
-
-      </do>
-    </foreach>
-
-    <!--
-    <foreach item="File" property="file.base">
-      <in>
-        <items refid="files.exclude" />
-      </in>
-      <do>
-        <property name="file.target" value="${string::replace(file.base,'\'+lang.base+'\','\'+lang.target+'\')}" />
-        <copy file="${file.base}" tofile="${file.target}" overwrite="true" />
-      </do>
-    </foreach>
--->
-
-    <delete file="${lang.target}.mo" />
-  </target>
 
   <!-- ====================================================================== -->
   <!-- Try to update version info in the version file                         -->
