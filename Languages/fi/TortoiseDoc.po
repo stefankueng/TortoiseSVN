@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN manuals
-# Copyright (C) 2004-2020 the TortoiseSVN team
+# Copyright (C) 2004-2023 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -20,7 +20,7 @@ msgstr ""
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
 "PO-Revision-Date: 2010-11-30 05:04+0000\n"
 "Last-Translator: Kari Granö <kari.grano@gmail.com>, 2011-2018,2020-2021\n"
-"Language-Team: Finnish (http://www.transifex.com/luebbe/tortoisesvn/language/fi/)\n"
+"Language-Team: Finnish (http://app.transifex.com/luebbe/tortoisesvn/language/fi/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -289,10 +289,10 @@ msgid ""
 "Although most people just download the installer, you also have full read "
 "access to the source code of this program. You can browse it on this link "
 "<ulink "
-"url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>."
+"url=\"https://sourceforge.net/p/tortoisesvn/code/HEAD/tree\"><citetitle>https://sourceforge.net/p/tortoisesvn/code/HEAD/tree</citetitle></ulink>."
 " The current development line is located under <filename>/trunk/</filename>,"
 " and the released versions are located under <filename>/tags/</filename>."
-msgstr "Vaikka useimmat ihmiset noutavat vain asennusohjelman, voit myös vapaasti tutkia itse ohjelmatekstiä. Lähdekoodi on saatavissa osoitteesta <ulink url=\"http://code.google.com/p/tortoisesvn/source/browse/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>. Viimeisin kehitysversio sijaitsee hakemistossa <filename>/trunk/</filename>.  Julkaistut versiot sijaitsevat puolestaan hakemistossa <filename>/tags/</filename>."
+msgstr ""
 
 #. (title)
 msgid "Development"
@@ -1005,9 +1005,9 @@ msgstr "Subversion-kirja"
 msgid ""
 "This chapter is a slightly modified version of the same chapter in the "
 "Subversion book. An online version of the Subversion book is available here:"
-" <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>http://svnbook.red-"
-"bean.com/</citetitle></ulink>."
-msgstr "Tämä luku on hieman muunneltu versio samasta luvusta Subversion-kirjassa. Elektroninen versio Subversion-kirjasta on saatavilla osoitteesta <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>http://svnbook.red-bean.com/</citetitle></ulink>."
+" <ulink url=\"https://svnbook.red-"
+"bean.com/\"><citetitle>https://svnbook.red-bean.com/</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -2196,11 +2196,11 @@ msgid ""
 "target(s) it's operating on, and the username of the person who triggered "
 "the event. Depending on the hook's output or return status, the hook program"
 " may continue the action, stop it, or suspend it in some way. Please refer "
-"to the chapter on <ulink url=\"http://svnbook.red-"
+"to the chapter on <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook"
 " Scripts</citetitle></ulink> in the Subversion Book for full details about "
 "the hooks which are implemented."
-msgstr "Toimintokomento (engl. hook script) on ohjelma, joka käynnistyy jonkin arkistotapahtuman (esim. uuden version luonti tai versioimattoman ominaisuuden muokkaus) takia. Toimintokomento saa parametreinaan tiedot arkistotapahtumasta,  sen kohteesta sekä tekijästä. Toimintokomennon tuloksista tai paluuarvosta riippuen komento voi jatkaa tapahtumaa, keskeyttää sen tai viivästyttää sitä jollain tavoin.  Lue Subversion-kirjan kappaleesta <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts</citetitle></ulink> yksityiskohtaisempaa tietoa tuetuista toimintokomentotyypeistä."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -2297,10 +2297,10 @@ msgstr "\n&lt;a href=\"tsvn:http://project.domain.org/svn/trunk\"&gt;\n&lt;img s
 msgid ""
 "Of course it would look even better if you included a suitable picture. You "
 "can use the <ulink "
-"url=\"https://tortoisesvn.net/images/TortoiseCheckout.png\"><citetitle>TortoiseSVN"
+"url=\"https://svn.code.sf.net/p/tortoisesvn/code/trunk/www/source/assets/img/TortoiseCheckout.png\"><citetitle>TortoiseSVN"
 " logo</citetitle></ulink> or you can provide your own image. "
 "<placeholder-1/>"
-msgstr "Tietysti sopiva kuva parantaa linkin ulkonäköä vielä entisestään.  Voit käyttää kuvaa <ulink url=\"https://tortoisesvn.net/images/TortoiseCheckout.png\"><citetitle>TortoiseSVN logo</citetitle></ulink> tai lisätä omasi. <placeholder-1/>"
+msgstr ""
 
 #. (programlisting)
 #, no-wrap
@@ -2362,10 +2362,10 @@ msgstr "Jos ajattelit ottaa käyttöön usean käyttäjän arkiston verkkojaolla
 msgid ""
 "More detailed information on the Subversion server options, and how to "
 "choose the best architecture for your situation, can be found in the "
-"Subversion book under <ulink url=\"http://svnbook.red-"
+"Subversion book under <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.serverconfig.html\"><citetitle>Server "
 "Configuration</citetitle></ulink>."
-msgstr "Tarkempaa tietoa Subversionin palvelinvaihtoehdoista ja vinkkejä sinulle parhaiten sopivaan kokoonpanoon löydät Subversion-kirjan kappaleesta <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.serverconfig.html\"><citetitle>Server Configuration</citetitle></ulink>."
+msgstr ""
 
 #. (citetitle)
 msgid "VisualSVN"
@@ -2411,9 +2411,9 @@ msgstr "Tämä luku kuvaa TortoiseSVN-asiakkaan päivittäisen käytön. Se <emp
 #. (para)
 msgid ""
 "If you need an introduction to version control with Subversion, then we "
-"recommend you read the fantastic book: <ulink url=\"http://svnbook.red-"
+"recommend you read the fantastic book: <ulink url=\"https://svnbook.red-"
 "bean.com/\"><citetitle>Version Control with Subversion</citetitle></ulink>."
-msgstr "Jos tarvitset johdantoa versionhallintaan Subversionin avulla, suosittelemme, että luet mainion kirjan <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>Version Control with Subversion</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -2664,12 +2664,22 @@ msgid ""
 msgstr "Mikäli haluat tyhjentää talletetut tunnistetiedot, voit tehdä sen TortoiseSVN:n asetusikkunan <guilabel>Tallennetut tiedot</guilabel> -sivulla. Painike  <guibutton>Tyhjennä kaikki</guibutton> poistaa talletetut tunnistetiedot kaikista arkistoista. Painike  <guibutton>Tyhjennä...</guibutton> puolestaan avaa ikkunan, josta voit valita poistettavat yksittäiset tunnistetiedot. Katso myös <xref linkend=\"tsvn-dug-settings-saved-data\"/>."
 
 #. (para)
+msgid "Run <literal>gpedit.msc</literal> (Local Policies)"
+msgstr ""
+
+#. (para)
+msgid ""
+"User Configuration -&gt; Windows Settings -&gt; Scripts -&gt; Logon or "
+"Logoff -&gt; Properties -&gt; Add"
+msgstr ""
+
+#. (para)
 msgid ""
 "Some people like to have the authentication data deleted when they log off Windows, or on shutdown. The way to do that is to use a shutdown script to delete the <filename>%APPDATA%\\Subversion\\auth</filename> directory, e.g. <screen>\n"
 "@echo off\n"
 "rmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n"
-"      </screen> You can find a description of how to install such scripts at <ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>http://www.windows-help-central.com/windows-shutdown-script.html</citetitle></ulink>."
-msgstr "Jotkut käyttäjät haluavat, että tunnistustiedot poistetaan, kun Windows suljetaan tai siitä kirjaudiutaan ulos. Tämä voidaan tehdä uloskirjautumiskomentojonolla, joka poistaa kansion <filename>%APPDATA%\\Subversion\\auth</filename>, esim. <screen>\n@echo off\nrmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n</screen> Verkkosivusto <ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>http://www.windows-help-central.com/windows-shutdown-script.html</citetitle></ulink> sisältää ohjeita tällaisten komentojonojen käyttämiseen."
+"      </screen> You can install such a script on Windows like this: <placeholder-1/>"
+msgstr ""
 
 #. (para)
 msgid ""
@@ -2929,6 +2939,10 @@ msgstr "epätäydellinen työkopio"
 msgid "partial checkout"
 msgstr "osittainen työkopio"
 
+#. (primary)
+msgid "pristines on demand"
+msgstr ""
+
 #. (para)
 msgid ""
 "To obtain a working copy you need to do a <firstterm>checkout</firstterm> "
@@ -2949,6 +2963,44 @@ msgid ""
 "folder name that does not yet exist, then a directory with that name is "
 "created."
 msgstr "Valitse Windowsin Resurssienhallinnasta hakemisto, johon haluat sijoittaa työkopiosi. <action>Oikea-napsauta</action> avataksesi kontekstivalikon ja anna sitten komento <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Hae työkopio...</guimenuitem></menuchoice>, joka avaa seuraavan ikkunan: <placeholder-1/> Jos syötät kansionimen, jota ei vielä ole olemassa, se luodaan automaattisesti."
+
+#. (para)
+msgid ""
+"If the project contains references to external projects which you do "
+"<emphasis>not</emphasis> want checked out at the same time, use the "
+"<guilabel>Omit externals</guilabel> checkbox."
+msgstr "Mikäli projekti viittaa ulkoisiin projekteihin, joita <emphasis>et</emphasis> halua noutaa samalla kertaa, ruksaa valintaruutu <guilabel>Ohita ulkoiset polut</guilabel>."
+
+#. (para)
+msgid ""
+"If <guilabel>Omit externals</guilabel> is checked, or if you wish to "
+"increase the depth value, you will have to perform updates to your working "
+"copy using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to "
+"Revision...</guimenuitem></menuchoice> instead of "
+"<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice>."
+" The standard update will include all externals and keep the existing depth."
+msgstr "Kun <guilabel>Ohita ulkoiset polut</guilabel> on valittu, tai kun haluat kasvattaa haun syvyyttä, sinun on päivitettävä työkopiotasi käyttämällä komentoa <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Päivitä versioon...</guimenuitem></menuchoice> komennon <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Päivitä</guimenuitem></menuchoice> sijaan. Normaali päivitys ottaa mukaan kaikki ulkoiset viitteet ja säilyttää työkopion nykyisen hakusyvyyden."
+
+#. (para)
+msgid ""
+"It is recommended that you check out only the <literal>trunk</literal> part "
+"of the directory tree, or lower. If you specify the parent path of the "
+"directory tree in the URL then you might end up with a full hard disk since "
+"you will get a copy of the entire repository tree including every branch and"
+" tag of your project!"
+msgstr "Suositamme, että haet työkopion vain tiedostopuun <literal>trunk</literal>-haarasta tai alempaa. Jos haet koko tiedostopuun, kiintolevysi saattaa täyttyä, koska saat kopion koko arkistosta, mukaan lukien kaikki projektin haarat ja merkityt versiot!"
+
+#. (title)
+msgid "Exporting"
+msgstr "Vienti"
+
+#. (para)
+msgid ""
+"Sometimes you may want to create a local copy without any of those "
+"<filename>.svn</filename> directories, e.g. to create a zipped tarball of "
+"your source. Read <xref linkend=\"tsvn-dug-export\"/> to find out how to do "
+"that."
+msgstr "Saatat joskus haluta luoda työkopiosta kopion ilman Subversion-metatietoja (<filename>.svn</filename>-hakemistot), esim. luodaksesi lähdekoodeista zip-paketin. Luvussa <xref linkend=\"tsvn-dug-export\"/> kerrotaan, miten se onnistuu."
 
 #. (title)
 msgid "Checkout Depth"
@@ -3156,43 +3208,44 @@ msgid ""
 "you should upgrade your server to at least 1.5."
 msgstr "Palvelimet, joiden versio on 1.4.x tai vanhempi, eivät tue työkopion syvyysominaisuutta, joten ne eivät aina optimaalisesti. Komennot toki toimivat, mutta vanhemmat palvelimet saattavat lähettää kaiken tiedon, jolloin verkkoliikennettä tulee paljon.  Jos mahdollista, kannattaa palvelin päivittää ainakin versioon 1.5."
 
-#. (para)
-msgid ""
-"If the project contains references to external projects which you do "
-"<emphasis>not</emphasis> want checked out at the same time, use the "
-"<guilabel>Omit externals</guilabel> checkbox."
-msgstr "Mikäli projekti viittaa ulkoisiin projekteihin, joita <emphasis>et</emphasis> halua noutaa samalla kertaa, ruksaa valintaruutu <guilabel>Ohita ulkoiset polut</guilabel>."
-
-#. (para)
-msgid ""
-"If <guilabel>Omit externals</guilabel> is checked, or if you wish to "
-"increase the depth value, you will have to perform updates to your working "
-"copy using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to "
-"Revision...</guimenuitem></menuchoice> instead of "
-"<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice>."
-" The standard update will include all externals and keep the existing depth."
-msgstr "Kun <guilabel>Ohita ulkoiset polut</guilabel> on valittu, tai kun haluat kasvattaa haun syvyyttä, sinun on päivitettävä työkopiotasi käyttämällä komentoa <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Päivitä versioon...</guimenuitem></menuchoice> komennon <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Päivitä</guimenuitem></menuchoice> sijaan. Normaali päivitys ottaa mukaan kaikki ulkoiset viitteet ja säilyttää työkopion nykyisen hakusyvyyden."
-
-#. (para)
-msgid ""
-"It is recommended that you check out only the <literal>trunk</literal> part "
-"of the directory tree, or lower. If you specify the parent path of the "
-"directory tree in the URL then you might end up with a full hard disk since "
-"you will get a copy of the entire repository tree including every branch and"
-" tag of your project!"
-msgstr "Suositamme, että haet työkopion vain tiedostopuun <literal>trunk</literal>-haarasta tai alempaa. Jos haet koko tiedostopuun, kiintolevysi saattaa täyttyä, koska saat kopion koko arkistosta, mukaan lukien kaikki projektin haarat ja merkityt versiot!"
-
 #. (title)
-msgid "Exporting"
-msgstr "Vienti"
+msgid "Store pristine copies"
+msgstr ""
 
 #. (para)
 msgid ""
-"Sometimes you may want to create a local copy without any of those "
-"<filename>.svn</filename> directories, e.g. to create a zipped tarball of "
-"your source. Read <xref linkend=\"tsvn-dug-export\"/> to find out how to do "
-"that."
-msgstr "Saatat joskus haluta luoda työkopiosta kopion ilman Subversion-metatietoja (<filename>.svn</filename>-hakemistot), esim. luodaksesi lähdekoodeista zip-paketin. Luvussa <xref linkend=\"tsvn-dug-export\"/> kerrotaan, miten se onnistuu."
+"The checkbox <guilabel>Store pristine copies in working copy</guilabel> is "
+"checked by default. With this option enabled, Subversion caches each file's "
+"<literal>BASE</literal> revision (the <literal>pristine</literal>) inside "
+"the working copy. This is so that operations such as diffing and reverting "
+"work offline, and a commit can just send the modified versions parts of a "
+"file to the repo server rather than the whole file. This design optimizes "
+"the speed and availability of these operations on the assumption that "
+"network connectivity to the repository may be the bottleneck while local "
+"storage is cheap. For version pre 1.15 this was the only way Subversion "
+"worked."
+msgstr ""
+
+#. (para)
+msgid ""
+"Since Subversion 1.15, you can avoid having a copy of each file stored in "
+"the working copy. Subversion will then download the pristine copy only when "
+"needed (\"<literal>on demand</literal>\"). This can be useful if you have "
+"really large files to work with or if you have a lot of binary files which "
+"rarely change."
+msgstr ""
+
+#. (para)
+msgid ""
+"To avoid storing the pristine copies for all files, uncheck the checkbox "
+"<guilabel>Store pristine copies in working copy</guilabel>."
+msgstr ""
+
+#. (para)
+msgid ""
+"If <guilabel>Store pristine copies in working copy</guilabel> is unchecked, "
+"the resulting working copy will be unusable by pre 1.15 Subversion clients."
+msgstr ""
 
 #. (title)
 msgid "Committing Your Changes To The Repository"
@@ -3574,9 +3627,10 @@ msgid ""
 "at the introduction at <ulink "
 "url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink>,"
 " and the online documentation and tutorial at <ulink "
-"url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-"
+"url=\"https://www.regular-"
+"expressions.info/\"><citetitle>https://www.regular-"
 "expressions.info/</citetitle></ulink>."
-msgstr "Lokiviesti-ikkunassa on myös tiedosto- ja funktionimien automaattinen täydennys. Työkalu käyttää säännöllisiä lausekkeita hakeakseen luokkien ja funktioiden nimiä niistä tekstitiedostoista, joita olet toimittamassa arkistoon. Jos sana, jota olet kirjoittamassa, täsmää minkään listalla olevan kanssa (kirjoitettuasi vähintään kolme merkkiä tai painettuasi <keycap>Ctrl+Välilyönti</keycap>), näkyviin ilmestyy pudotusvalikko, josta voit valita koko nimen. TortoiseSVN:n mukana tulevat säännölliset lausekkeet sijaitsevat TortoiseSVN-asennuksen <filename>bin</filename>-hakemistossa. Voit määritellä omia lausekkeitasi ja tallettaa ne tiedostoon <filename>%APPDATA%\\TortoiseSVN\\autolist.txt</filename>. Tämä tiedosto ei häviä, jos päivität TortoiseSVN-asennuksen. Jos et tunne säännöllisiä lausekkeita, tutustu niihin osoitteessa <ulink url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink>. Käyttöohjeen ja aloittelijan oppaan löydät osoitteesta <ulink url=\"https://www.regular-expressions.info/\"><citetitle>https://www.regular-expressions.info/</citetitle></ulink>. "
+msgstr ""
 
 #. (para)
 msgid ""
@@ -5969,12 +6023,13 @@ msgid ""
 "Subversion lets you change revision properties any time you want. But since "
 "such changes can't be undone (those changes are not versioned) this feature "
 "is disabled by default. To make this work, you must set up a pre-revprop-"
-"change hook. Please refer to the chapter on <ulink url=\"http://svnbook.red-"
+"change hook. Please refer to the chapter on <ulink "
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook"
 " Scripts</citetitle></ulink> in the Subversion Book for details about how to"
 " do that. Read <xref linkend=\"tsvn-repository-hooks\"/> to find some "
 "further notes on implementing hooks on a Windows machine."
-msgstr "Sekä lokiviestiä että tekijätietoja voidaan muuttaa milloin vain. Koska tällaisia muutoksia ei voi perua (muutokset eivät versioidu), ominaisuus on oletusarvoisesti estetty. Salliaksesi sen sinun on määriteltävä pre-revprop-change -toimintokomento. Katso lisätietoa Subversion-kirjan kappaleesta <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook Scripts</citetitle></ulink>. Luvussa <xref linkend=\"tsvn-repository-hooks\"/> on tietoa toimintokomentojen ottamisesta käyttöön Windows-ympäristössä."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -6055,9 +6110,10 @@ msgstr "Yksinkertainen osamerkkijonohaku toimii samaan tapaan kuin hakukone. Ets
 msgid ""
 "Describing the use of regular expression searches is beyond the scope of "
 "this manual, but you can find online documentation and a tutorial at <ulink "
-"url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-"
+"url=\"https://www.regular-"
+"expressions.info/\"><citetitle>https://www.regular-"
 "expressions.info/</citetitle></ulink>."
-msgstr "Säännölliset lausekkeet eivät mahdu tämän oppaan aihepiiriin, mutta löydät johdantomateriaalia osoitteesta<ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -6761,8 +6817,8 @@ msgstr "KDiff3"
 msgid ""
 "KDiff3 is a free diff tool which can also handle directories. You can "
 "download it from <ulink "
-"url=\"http://kdiff3.sf.net/\"><citetitle>here</citetitle></ulink>."
-msgstr "KDiff3 on ilmainen vertailutyökalu, joka osaa myös käsitellä hakemistoja. Voit noutaa sen osoitteesta <ulink url=\"http://kdiff3.sf.net/\"><citetitle>http://kdiff3.sf.net/</citetitle></ulink>."
+"url=\"https://download.kde.org/stable/kdiff3/\"><citetitle>here</citetitle></ulink>."
+msgstr ""
 
 #. (term)
 msgid "SourceGear DiffMerge"
@@ -6785,8 +6841,8 @@ msgid ""
 "ExamDiff Pro is shareware and adds a number of goodies including directory "
 "diff and editing capability. In both flavours, version 3.2 and above can "
 "handle unicode. You can download them from <ulink "
-"url=\"http://www.prestosoft.com/\"><citetitle>PrestoSoft</citetitle></ulink>."
-msgstr "ExamDiff Standard on ilmaisohjelma. Se osaa käsitellä tiedostoja, muttei hakemistoja. ExamDiff Pro on maksullinen julkisohjelma (shareware), joka lisää tähän joukon lisäominaisuuksia (mm.  hakemistojen käsittely ja tiedostojen muokkaus). Molemmat ohjelmat tuntevat Unicode-merkistön versiosta 3.2 eteenpäin. Void ladata ne yrityksen sivuilta osoitteesta <ulink url=\"http://www.prestosoft.com/\"><citetitle>http://www.prestosoft.com/</citetitle></ulink>."
+"url=\"https://www.prestosoft.com/\"><citetitle>PrestoSoft</citetitle></ulink>."
+msgstr ""
 
 #. (term)
 msgid "Beyond Compare"
@@ -7162,9 +7218,9 @@ msgstr "Hahmontäsmäys riippuu merkkien tasosta, mikä voi aiheuttaa ongelmia W
 msgid ""
 "If you want an official definition for globbing, you can find it in the IEEE"
 " specifications for the shell command language <ulink "
-"url=\"http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13\"><citetitle>Pattern"
+"url=\"https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13\"><citetitle>Pattern"
 " Matching Notation</citetitle></ulink>."
-msgstr "Jos olet kiinnostunut yleistyksen virallisestä määrittelystä, voit tutkia komentotulkin IEEE-määrittelyä dokumentissa <ulink url=\"http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13\"><citetitle>Pattern Matching Notation</citetitle></ulink>."
+msgstr ""
 
 #. (title)
 msgid "No Paths in Global Ignore List"
@@ -7776,19 +7832,19 @@ msgstr "Subversion tukee CVS-tyyppistä avainsanojen laajentamista, jota voi kä
 #. (para)
 msgid ""
 "To find out how to use these keywords, look at the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.props.special.keywords.html\"><citetitle>svn:keywords"
 " section</citetitle></ulink> in the Subversion book, which gives a full "
 "description of these keywords and how to enable and use them."
-msgstr "Oppiaksesi lisää avainsanojen käytöstä, lue Subversion-kirjan luku <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.props.special.keywords.html\"><citetitle>svn:keywords section</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
 "For more information about properties in Subversion see the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.props.html\"><citetitle>Special "
 "Properties</citetitle></ulink>."
-msgstr "Lisätietoa Subversion-ominaisuuksista löydät Subversion-kirjan luvusta <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.props.html\"><citetitle>Special Properties</citetitle></ulink>."
+msgstr ""
 
 #. (title)
 msgid "Adding and Editing Properties"
@@ -8982,10 +9038,10 @@ msgstr "Merkkijonolla <literal>/</literal> alkavat paikantimet jättävät yhtey
 msgid ""
 "You can also specify a peg and operative revision for the URL if required. "
 "To learn more about peg and operative revisions, please read the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.pegrevs.html\"><citetitle>corresponding "
 "chapter</citetitle></ulink> in the Subversion book."
-msgstr "Voit myös tarvittaessa määrittää ankkuri- ja operatiivisen version paikantimelle. Lue lisää näistä tavoista <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.pegrevs.html\"><citetitle>Subversion-kirjasta</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9129,11 +9185,11 @@ msgstr "Jos olet tuonut projektisi arkistoon käyttäen suositeltua hakemistorak
 #. (para)
 msgid ""
 "The default destination URL for the new branch will be the source URL on which your working copy is based. You will need to edit that URL to the new path for your branch/tag. So instead of <screen>\n"
-"http://svn.collab.net/repos/ProjectName/trunk\n"
+"https://svn.example.com/repos/ProjectName/trunk\n"
 "      </screen> you might now use something like <screen>\n"
-"http://svn.collab.net/repos/ProjectName/tags/Release_1.10\n"
+"https://svn.example.com/repos/ProjectName/tags/Release_1.10\n"
 "      </screen> If you can't remember the naming convention you used last time, click the button on the right to open the repository browser so you can view the existing repository structure."
-msgstr "Uuden haaran oletusarvoinen kohde on sama kuin se, mistä työkopio on noudettu. Joudut siis muokkaamaan kohdepaikantimen haluamaksesi.  Niinpä alkuperäinen paikannin <screen>\n    http://svn.collab.net/repos/ProjectName/trunk\n</screen> muuttuisi esim. muotoon <screen>\n    http://svn.collab.net/repos/ProjectName/tags/Release_1.10\n</screen> Jos et muista edellisellä kerralla käyttämääsi nimeämistapaa, napsauta oikealla olevaa \"...\"-näppäintä, joka avaa arkistoselaimen, jolla voit tutkia arkiston nykyistä rakennetta."
+msgstr ""
 
 #. (title)
 msgid "intermediate folders"
@@ -9143,9 +9199,9 @@ msgstr "välihakemistot"
 msgid ""
 "When you specify the target URL, all the folders up to the last one must "
 "already exist or you will get an error message. In the above example, the "
-"URL <literal>http://svn.collab.net/repos/ProjectName/tags/</literal> must "
+"URL <literal>https://svn.example.com/repos/ProjectName/tags/</literal> must "
 "exist to create the <literal>Release_1.10</literal> tag."
-msgstr "Kun määrität kohdepaikantimen, kaikkiensen  välihakemistojen on oltava olemassa, muuten toiminto päättyy virheeseen. Yllä olevassa esimerkissä paikantimen <literal>http://svn.collab.net/repos/ProjectName/tags/</literal> on oltava olemassa, jotta nimetty versio <literal>Release_1.10</literal> voidaan luoda."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9159,14 +9215,14 @@ msgstr "Tarvittaessa voit luoda puuttuvat välihakemistot automaattisesti ikkuna
 msgid ""
 "Note that this option is disabled by default to avoid typos. For example, if"
 " you typed the target URL as "
-"<literal>http://svn.collab.net/repos/ProjectName/Tags/Release_1.10</literal>"
+"<literal>https://svn.example.com/repos/ProjectName/Tags/Release_1.10</literal>"
 " instead of "
-"<literal>http://svn.collab.net/repos/ProjectName/tags/Release_1.10</literal>,"
+"<literal>https://svn.example.com/repos/ProjectName/tags/Release_1.10</literal>,"
 " you would get an error with the option disabled, but with the option "
 "enabled a folder <literal>Tags</literal> would be automatically created, and"
 " you would end up with a folder <literal>Tags</literal> and a folder "
 "<literal>tags</literal>."
-msgstr "Huomaa, että valinta on oletusarvoisesti pois päältä kirjoitusvirheiden välttämiseksi. Jos esimerkiksi kirjoitat kohdepaikantimen muodossa <literal>http://svn.collab.net/repos/ProjectName/Tags/Release_1.10</literal> muodon <literal>http://svn.collab.net/repos/ProjectName/tags/Release_1.10</literal> sijaan, saat virheilmoituksen, kun valinta on pois päältä. Jos valinta kuitenkin on päällä, kansio <literal>Tags</literal> luodaan automaattisesti ja lopputuloksena on kaksi kansiota, <literal>Tags</literal> ja <literal>tags</literal>."
+msgstr ""
 
 #. (term)
 #. (entry)
@@ -9448,11 +9504,11 @@ msgstr "Kun haaroja käytetään erillisten kehityspolkujen hallintaan, tulee en
 msgid ""
 "It is important to understand how branching and merging works in Subversion "
 "before you start using it, as it can become quite complex. It is highly "
-"recommended that you read the chapter <ulink url=\"http://svnbook.red-"
+"recommended that you read the chapter <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.branchmerge.html\"><citetitle>Branching and "
 "Merging</citetitle></ulink> in the Subversion book, which gives a full "
 "description and many examples of how it is used."
-msgstr "On oleellista ymmärtää, miten haarautuminen ja yhdistäminen toimivat Subversionissa ennen kuin alat käyttää niitä - yhdistäminen voi joskus olla varsin mutkikasta. Kannattaa lukea Subversion-kirjan kappale <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.branchmerge.html\"><citetitle>Branching and Merging</citetitle></ulink>, jossa on hyvä kuvaus asiasta sekä lukuisia käyttöesimerkkejä."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9524,10 +9580,10 @@ msgid ""
 "only way to merge a branch back to trunk. Another use case occurs when you "
 "are using vendor branches and you need to merge the changes following a new "
 "vendor drop into your trunk code. For more information read the chapter on "
-"<ulink url=\"http://svnbook.red-"
+"<ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.vendorbr.html\"><citetitle>vendor "
 "branches</citetitle></ulink> in the Subversion Book."
-msgstr "Jos palvelimesi/arkistosi ei tue tehtyjen yhdistämisten jäljitystä, tämä on ainoa tapa yhdistää kehityshaara takaisin päähaaraan. Toinen käyttötapaus on se, että käytät ulkoisia komponentteja (engl. vendor branches) ja joudut yhdistämään ulkoisen komponentin uuden version muutokset päähaaraasi. Lue lisää tästä Subversion-kirjan luvusta <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.vendorbr.html\"><citetitle>vendor branches</citetitle></ulink>."
+msgstr ""
 
 #. (title)
 msgid "Merging a Range of Revisions"
@@ -9773,10 +9829,10 @@ msgid ""
 " would see a complete removal followed by a complete add. To make Subversion"
 " use only path-based differences rather than history-based differences, "
 "check the <guilabel>Ignore ancestry</guilabel> box. Read more about this "
-"topic in the Subversion book, <ulink url=\"http://svnbook.red-"
+"topic in the Subversion book, <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.branchmerge.advanced.html#svn.branchmerge.advanced.ancestry\"><citetitle>Noticing"
 " or Ignoring Ancestry</citetitle></ulink>."
-msgstr "Useimmiten yhdistäminen kannattaa suorittaa ottamalla tiedoston historia huomioon siten, että yhdistettävuksi valitaan muutokset suhteessa yhteiseen edeltäjään.  Joskus kuitenkin voi olla tarpeen yhdistää tiedostoja, jotka ovat suhteessa toisiinsa, mutta joilla ei ole yhteistä versiohistoriaa arkistossa. Olet esimerkiksi saattanut tuoda jonkun kirjaston versiot 1 ja 2 kahteen eri hakemistoon. Vaikka ne ovat loogisesti suhteessa keskenään, Subversion ei tiedä sitä, koska se näkee vain tuomasi tiedostot.  Jos yrität yhdistää nämä puut, havaitset, että ensin kaikki tiedostot poistetaan ja sitten lisätään uudestaan. Ohjataksesi Subversionin käyttämään polkuihin perustuvia eroja historiaan pohjautuvien erojen sijaan, ruksaa valinta <guilabel>Ohita edeltäjät</guilabel>. Tästä aiheesta löydät lisätietoa Subversion-kirjan luvusta <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.branchmerge.advanced.html#svn.branchmerge.advanced.ancestry\"><citetitle>Noticing or Ignoring Ancestry</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9793,6 +9849,21 @@ msgid ""
 "modified locally or not versioned at all. If the file is deleted then there "
 "is no way to recover it, which is why that option is not checked by default."
 msgstr "Valinta <guilabel>Pakotettu yhdistäminen</guilabel> estää puuristiriidan, joka syntyy, kun yhdistettävä poisto koskee tiedostoa, jossa on paikallisia muutoksia tai jota ei ole versioitu ollenkaan. Tiedoston poistoa ei ole mahdollista perua, mistä syystä valinta ei ole oletusarvoisesti päällä."
+
+#. (para)
+msgid ""
+"The checkbox marked <guilabel>Allow mixed revisions (not "
+"recommended)</guilabel> is used to allow merging into mixed-revision working"
+" copies (corresponding to the command line option <literal>--allow-mixed-"
+"revisions</literal>). The default since Subversion 1.7 is to disallow "
+"merging into mixed-revision working copies. The reasons are described in the"
+" Subversion book towards the end of the section <ulink "
+"url=\"https://svnbook.red-"
+"bean.com/en/1.8/svn.branchmerge.basicmerging.html#svn.branchmerge.basicmerging.stayinsync\"><citetitle>Keeping"
+" a Branch in Sync</citetitle></ulink> . If you understand the possible "
+"problems of merging into a mixed-revision working copy you may select this "
+"checkbox to perform the merge anyway."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9860,10 +9931,10 @@ msgid ""
 "been ported in the merge. If you want to apply another merge at a later time"
 " you will need to know what you have already merged, as you do not want to "
 "port a change more than once. For more information about this, refer to "
-"<ulink url=\"http://svnbook.red-"
+"<ulink url=\"https://svnbook.red-"
 "bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle>Best"
 " Practices for Merging</citetitle></ulink> in the Subversion book."
-msgstr "Versiota 1.5 aiemmat Subversion-asiakkaat ja palvelimet eivät talleta tietoa tehdyistä yhdistämisistä, vaan niistä on pidettävä kirjaa käsin.  Kun olet testannut muutokset ja toimitat ne arkistoon, lokiviestisi tulisi <emphasis>aina</emphasis> sisältää ne versionumerot, jotka yhdistettiin. Jos haluat myöhemmin suorittaa toisen yhdistämisen, sinun on tiedettävä mitä olet jo yhdistänyt, koska samaa versiota ei voi ilman ristiriitoja yhdistää kahdesti. Lisää yksityiskohtia yhdistämisestä löydät Subversion-kirjan luvusta <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle>Best Practices for Merging</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9962,10 +10033,10 @@ msgstr "Tieto tehdyistä yhdistämisistä talletetaan <literal>svn:mergeinfo</li
 #. (para)
 msgid ""
 "Find out more about merge tracking from Subversion's <ulink "
-"url=\"http://svn.apache.org/repos/asf/Subversion/trunk/notes/merge-"
+"url=\"https://svn.apache.org/repos/asf/subversion/trunk/notes/merge-"
 "tracking/index.html\"><citetitle>Merge tracking "
 "documentation</citetitle></ulink>."
-msgstr "Lisätietoa tehtyjen yhdistämisten jäljittämisestä löydät dokumentista <ulink url=\"http://svn.apache.org/repos/asf/subversion/trunk/notes/merge-tracking/index.html\"><citetitle>Merge tracking documentation</citetitle></ulink>."
+msgstr ""
 
 #. (title)
 msgid "Handling Conflicts after Merge"
@@ -12066,10 +12137,8 @@ msgid ""
 "This allows TortoiseSVN to display a link in the log dialog, so when you are"
 " looking at the revision log you can jump directly to your bug tracking "
 "tool. You do not have to provide this property, but then TortoiseSVN shows "
-"only the issue number and not the link to it. e.g the TortoiseSVN project is"
-" using <systemitem "
-"class=\"url\">http://issues.tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>."
-msgstr "Aseta tämä ominaisuus vikaseurantaohjelmasi paikantimeen. Sen on oltava oikein URI-koodattu ja sisällettävä symboli <literal>%BUGID%</literal>. <literal>%BUGID%</literal> korvataan syöttämälläsi vikatunnuksella. Tämän tiedon avulla TortoiseSVN osaa näyttää linkin loki-ikkunassa, joten voit hypätä suoraan versiolokista vikaseurantaohjelmaasi. Ominaisuutta ei ole pakko määritellä, mutta silloin TortoiseSVN näyttää vain vikatunnuksen eikä linkkiä siihen. Esim. TortoiseSVN-projekti käyttää asetusta <systemitem class=\"url\">http://issues.tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>"
+"only the issue number and not the link to it."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -12086,20 +12155,20 @@ msgid ""
 "relative to the repository root. For example, "
 "<literal>^/../?do=details&amp;id=%BUGID%</literal> will resolve to "
 "<systemitem "
-"class=\"url\">https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>"
-" if your repository is located on <systemitem "
-"class=\"url\">https://tortoisesvn.net/svn/trunk/</systemitem>."
-msgstr "Jos se alkaa merkkijonolla <literal>^/</literal>, sen oletetaan olevan suhteellinen arkiston juureen nähden. Esimerkiksi <literal>^/../?do=details&amp;id=%BUGID%</literal> laventuu muotoon <systemitem class=\"url\">https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem> mikäli arkistosi osoite on <systemitem class=\"url\">https://tortoisesvn.net/svn/trunk/</systemitem>."
+"class=\"url\">https://example.com/?do=details&amp;id=%BUGID%</systemitem> if"
+" your repository is located on <systemitem "
+"class=\"url\">https://example.com/svn/trunk/</systemitem>."
+msgstr ""
 
 #. (para)
 msgid ""
 "A URL beginning with the string <literal>/</literal> is assumed to be "
 "relative to the server's hostname. For example "
 "<literal>/?do=details&amp;id=%BUGID%</literal> will resolve to <systemitem "
-"class=\"url\">https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>"
-" if your repository is located anywhere on <systemitem "
-"class=\"url\">https://tortoisesvn.net</systemitem>."
-msgstr "Merkkijonolla <literal>/</literal> alkavan paikantimen oletetaan olevan suhteellinen palvelimen nimeen nähden. Esimerkiksi <literal>/?do=details&amp;id=%BUGID%</literal> laventuu muotoon <systemitem class=\"url\">https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem> mikäli arkistosi osoite on https://tortoisesvn.net</systemitem>."
+"class=\"url\">https://example.com/?do=details&amp;id=%BUGID%</systemitem> if"
+" your repository is located anywhere on <systemitem "
+"class=\"url\">https://example.com</systemitem>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -12231,9 +12300,10 @@ msgid ""
 "introduction at <ulink "
 "url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink>,"
 " and the online documentation and tutorial at <ulink "
-"url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-"
+"url=\"https://www.regular-"
+"expressions.info/\"><citetitle>https://www.regular-"
 "expressions.info/</citetitle></ulink>."
-msgstr "Jos et ole perehtynyt säännöllisiin lausekkeisiin, katso johdanto osoitteesta <ulink url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink>, sekä muita dokumentteja osoitteesta <ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -12370,11 +12440,12 @@ msgid ""
 "(<xref linkend=\"tsvn-preface-source\"/> explains how to access the "
 "repository.) A summary of the API is also given in <xref linkend=\"tsvn-"
 "ibugtraqprovider\"/>. Another (working) example plugin in C# is <ulink "
-"url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle</citetitle></ulink>"
+"url=\"https://code.google.com/p/gurtle/\"><citetitle>Gurtle</citetitle></ulink>"
 " which implements the required COM interface to interact with the <ulink "
-"url=\"http://code.google.com/hosting/\"><citetitle>Google "
-"Code</citetitle></ulink> issue tracker."
-msgstr "Tällainen rajapinta on tietysti tiukasti sidoksissa käyttämääsi vikaseurantajärjestelmään, eikä sitä toimitetan TortoiseSVN:n mukana. Rajapinnan määritys sekä C#/C++ -esimerkkiohjelmia löytyy <ulink url=\"https://svn.code.sf.net/p/tortoisesvn/code/trunk/contrib/issue-tracker-plugins\"><citetitle>TortoiseSVN -arkiston</citetitle></ulink> <literal>contrib</literal> -hakemistosta (<xref linkend=\"tsvn-preface-source\"/> kertoo, miten arkistoon kytkeydytään). Rajapinnan API-yhteenveto löytyy myös osoitteesta  <xref linkend=\"tsvn-ibugtraqprovider\"/>. <ulink url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle</citetitle></ulink> on (toimiva) C#-kielellä toteutettu ohjelma, joka toteuttaa  <ulink url=\"http://code.google.com/hosting/\"><citetitle>Google Code</citetitle></ulink> -vikaseurannan vaatiman COM-rajapinnan."
+"url=\"https://code.google.com/hosting/\"><citetitle>Google "
+"Code</citetitle></ulink> issue tracker. Google Code itself is turned down as"
+" of 2016, but the plugin is still available as an example implementation."
+msgstr ""
 
 #. (title)
 msgid "Example issue tracker query dialog"
@@ -12416,11 +12487,11 @@ msgstr "WebSVN"
 msgid ""
 "There are several web-based repository viewers available for use with "
 "Subversion such as <ulink "
-"url=\"http://www.viewvc.org/\"><citetitle>ViewVC</citetitle></ulink> and "
+"url=\"https://www.viewvc.org/\"><citetitle>ViewVC</citetitle></ulink> and "
 "<ulink "
 "url=\"https://websvnphp.github.io/\"><citetitle>WebSVN</citetitle></ulink>. "
 "TortoiseSVN provides a means to link with these viewers."
-msgstr "Subversionin yhteyteen on saatavilla useita web-pohjaisia arkistoselaimia, esim. <ulink url=\"http://www.viewvc.org/\"><citetitle>ViewVC</citetitle></ulink> ja <ulink url=\"https://websvnphp.github.io/\"></citetitle>WebSVN</citetitle></ulink>. TortoiseSVN tukee kytkeytymistä näihin selaimiin."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -12648,19 +12719,19 @@ msgid ""
 "Use <guibutton>Edit</guibutton> to edit the Subversion configuration file "
 "directly. Some settings cannot be modified directly by TortoiseSVN, and need"
 " to be set here instead. For more information about the Subversion "
-"<filename>config</filename> file see the <ulink url=\"http://svnbook.red-"
+"<filename>config</filename> file see the <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Runtime "
 "Configuration Area</citetitle></ulink>. The section on <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.props.html#svn.advanced.props.auto\"><citetitle>Automatic"
 " Property Setting</citetitle></ulink> is of particular interest, and that is"
 " configured here. Note that Subversion can read configuration information "
 "from several places, and you need to know which one takes priority. Refer to"
-" <ulink url=\"http://svnbook.red-"
+" <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.confarea.html#svn.advanced.confarea.windows-"
 "registry\"><citetitle>Configuration and the Windows "
 "Registry</citetitle></ulink> to find out more."
-msgstr "Käytä painiketta <guibutton>Muokkaa</guibutton> muokataksesi Subversionin määrittelytiedostoa suoraan. Joitain asetuksia ei voi muuttaa suoraan TortoiseSVN:n avulla, vaan ne on asetettava tällä tavalla. Katso lisätietoa <filename>config</filename>-tiedoston rakenteesta Subversion-kirjan luvusta <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Runtime Configuration Area</citetitle></ulink>. Kappale <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.props.html#svn.advanced.props.auto\"><citetitle>Automatic Property Setting</citetitle></ulink> on erityisen kiinnostava, ja sen tiedot määritellään tässä. Huomaa, että Subversion voi lukea asetuksia useasta paikasta, ja sinun on tiedettävä, mikä asetus voittaa. Kannattaa lukaista myös <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.confarea.html#svn.advanced.confarea.windows-registry\"><citetitle>Configuration and the Windows Registry</citetitle></ulink>."
+msgstr ""
 
 #. (term)
 msgid "Apply local modifications to svn:externals when updating"
@@ -12719,6 +12790,13 @@ msgid ""
 "TortoiseSVN's context menu to appear at all, you can list them in the box at"
 " the bottom."
 msgstr "Jos et haluat TortoiseSVN-kontekstivalikkoa näkyville ollenkaan tiettyjen polkujen yhteydessä, voit luetella ne alhaalla olevaan kenttään."
+
+#. (para)
+msgid ""
+"There's a different settings page for the Windows 11 context menu. That page"
+" also has a button to register the TortoiseSVN entries in the context menu. "
+"You only have to do this if TortoiseSVN was installed as a different user."
+msgstr ""
 
 #. (title)
 msgid "TortoiseSVN Dialog Settings 1"
@@ -13753,10 +13831,10 @@ msgid ""
 "If you need to set up per-repository proxy settings, you will need to use "
 "the Subversion <filename>servers</filename> file to configure this. Use "
 "<guibutton>Edit</guibutton> to get there directly. Consult the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Runtime "
 "Configuration Area</citetitle></ulink> for details on how to use this file."
-msgstr "Jos tarvitset arkistokohtaisia välityspalvelinasaetuksia, joudut muokkaamaan Subversionin <filename>servers</filename>-tiedostoa. Napsauta <guibutton>Muokkaa</guibutton> avataksesi sen suoraan. Katso lisätietoa Subversion-kirjan luvusta <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Runtime Configuration Area</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -14847,13 +14925,13 @@ msgstr "<placeholder-1/> Napsauta <guibutton>Lisää...</guibutton> ottaaksesi m
 #. (para)
 msgid ""
 "This property specifies the COM UUID of the IBugtraqProvider, for example "
-"<literal>{91974081-2DC7-4FB1-B3BE-0DE1C8D6CE4E}</literal>. (This example is "
+"<literal>{0044f6c0-b999-11e1-afa6-0800200c9a66}</literal>. (This example is "
 "the UUID of the <ulink "
-"url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle bugtraq "
+"url=\"https://github.com/scottiemc7/YurtleTrack\"><citetitle>YurtleTrack "
 "provider</citetitle></ulink>, which is a provider for the <ulink "
-"url=\"http://code.google.com/hosting/\"><citetitle>Google "
-"Code</citetitle></ulink> issue tracker.)"
-msgstr "Tämä ominaisuus määrittää IBugTraqProvider-komponentin COM-tunnisteen (UUID). Esimerkiksi UUID <literal>{91974081-2DC7-4FB1-B3BE-0DE1C8D6CE4E}</literal> kuuluu komponentille <ulink url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle bugtraq provider</citetitle></ulink>, joka toteuttaa kytkennän <ulink url=\"http://code.google.com/hosting/\"><citetitle>Google Code</citetitle></ulink> -vikaseurantaan."
+"url=\"http://www.jetbrains.com/youtrack/\"><citetitle>JetBrains YouTrack "
+"6.0</citetitle></ulink> issue tracker.)"
+msgstr ""
 
 #. (para)
 msgid ""
@@ -15306,11 +15384,8 @@ msgid ""
 "If this option is set to <literal>true</literal> then TortoiseSVN tries to "
 "find the revision where the branch was created from and hide all the "
 "revisions that are beyond that revision. Since this can take quite a while, "
-"this option is disabled by default. Also this option doesn't work with some "
-"SVN servers (e.g., Google Code Hosting, see <ulink "
-"url=\"http://code.google.com/p/support/issues/detail?id=5471\"><citetitle>issue"
-" #5471</citetitle></ulink>)."
-msgstr "Mikäli tämä valinta on asetettu arvoon <literal>true</literal>, TortoiseSVN koettaa löytää version, jollon haara luotiin, ja piilottaa kaikki sitä edeltävät versiot. Koska tähän voi mennä aikaa, valinta on oletusarvoisesti kytketty pois. Valinta ei myöskään toimi kaikkien SVN-palvelimien kanssa (esim. Google Code Hosting, ks. <ulink url=\"http://code.google.com/p/support/issues/detail?id=5471\"><citetitle>issue #5471</citetitle></ulink>)."
+"this option is disabled by default."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -15355,6 +15430,15 @@ msgid ""
 "separate the individual log messages of the merged revisions. If you prefer,"
 " you can set this to a value containing a separator string of your choice."
 msgstr "Kun yhdistät versioita toisesta haarasta ja yhdistämisjäljitystiedot ovat saatavilla, yhdistettävien versioiden lokiviestit kerätään yhteen muodostamaan lokiviesti itse yhdistämiselle. Yhdistettyjen versioiden lokiviestit erotellaan ennalta määritellyllä merkkijonolla, jonka voit määrittää tässä."
+
+#. (para)
+msgid ""
+"By setting to <literal>true</literal> you can set the default value of the "
+"<guilabel>Allow mixed revisions (not recommended)</guilabel> checkbox in the"
+" Merge option dialog. Please be aware of the limitations and potentional "
+"problems of merges into mixed-revision working copies before configuring "
+"this setting."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -15609,11 +15693,11 @@ msgstr "Mikäli kenttä <literal>Polku tai paikannin</literal> on tyhjä, lisät
 #. (para)
 msgid ""
 "If you want to monitor all repositories served via the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.serverconfig.httpd.html#svn.serverconfig.httpd.basic\"><citetitle>SVNParentPath</citetitle></ulink>"
 " directive, enter the root Url for your repositories and check the box "
 "<literal>Url points to SVNParentPath list</literal>."
-msgstr "Mikäli haluat seurata kaikkia arkistoja, jotka ovat käytettävissä <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.serverconfig.httpd.html#svn.serverconfig.httpd.basic\"><citetitle>SVNParentPath</citetitle></ulink> direktiivin kautta, syötä arkistojesi juuripaikannin ja valitse asetus<literal>Paikannin viittaa SVNParentPath-listaan</literal>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -16124,9 +16208,9 @@ msgid ""
 "default, international format is used: <placeholder-1/>. Alternatively, you "
 "can specify a custom format which will be used with <placeholder-2/>, for "
 "example: <placeholder-3/>. For a list of available formatting characters, "
-"look at the <ulink url=\"http://msdn.microsoft.com/en-"
+"look at the <ulink url=\"https://msdn.microsoft.com/en-"
 "us/library/fe06s4ak.aspx\"><placeholder-4/></ulink>."
-msgstr "Korvataan korkeimman version toimitusaikaleimalla. Oletusarvoisesti käytetään kansainvälistä muotoa <placeholder-1/>. Vaihtoehtoisesti voit määritellä oman muodon, jota käytetään funktion <placeholder-2/> kanssa. Esimerkki: <placeholder-3/>. Luettelo tuetuista ohjausmerkeistä löytyy osoitteesta  <ulink url=\"http://msdn.microsoft.com/en-us/library/fe06s4ak.aspx\"><placeholder-4/></ulink>."
+msgstr ""
 
 #. (literal)
 #. (literal)
@@ -16229,6 +16313,10 @@ msgid ""
 "Replaced with the repository URL of the working copy path passed to "
 "SubWCRev."
 msgstr "Korvataan sen arkiston paikantimella, josta tiedoston työkopio on peräisin."
+
+#. (entry)
+msgid "Replaced with the URL of the repository root."
+msgstr ""
 
 #. (literal)
 msgid "$WCINSVN?TText:FText$"
@@ -16520,6 +16608,16 @@ msgid ""
 "Replaced with the repository URL of the working copy path used in "
 "<placeholder-1/>. Equivalent to <placeholder-2/>."
 msgstr "Korvataan <placeholder-1/> käytetyn työkopiopolun arkistopaikantimella. Sama kuin <placeholder-2/>."
+
+#. (literal)
+msgid "$REPOROOT$"
+msgstr ""
+
+#. (entry)
+msgid ""
+"Replaced with the URL of the repository root. Equivalent to "
+"<placeholder-1/>."
+msgstr ""
 
 #. (entry)
 msgid "True if the item is versioned."
@@ -17438,10 +17536,10 @@ msgstr "Koska TortoiseSVN ei koskaan hävitä tietoa, <quote>perumasi</quote> ve
 msgid ""
 "The only way to remove data from the repository is to use the Subversion "
 "command line tool <literal>svnadmin</literal>. You can find a description of"
-" how this works in the <ulink url=\"http://svnbook.red-"
+" how this works in the <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.reposadmin.maint.html\"><citetitle>Repository "
 "Maintenance</citetitle></ulink>."
-msgstr "Ainut keino poistaa tietoa arkistosta on käyttää Subversionin <literal>svnadmin</literal>-komentorivityökalua. Löydät kuvauksen sen toiminnasta Subversion-kirjan luvusta <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.reposadmin.maint.html\"><citetitle>Repository Maintenance</citetitle></ulink>."
+msgstr ""
 
 #. (title)
 msgid "Compare two revisions of a file or folder"
@@ -17744,10 +17842,13 @@ msgstr "TortoiseSVN-asennusohjelma on MSI-tiedosto, mikä tarkoittaa, että sen 
 
 #. (para)
 msgid ""
-"A good walk-through on how to do that can be found in the knowledge base "
-"article 314934 from Microsoft: <ulink "
-"url=\"http://support.microsoft.com/?kbid=314934\"><citetitle>http://support.microsoft.com/?kbid=314934</citetitle></ulink>."
-msgstr "Hyvä ohje tämän tekemiseen löytyy knowledge base -artikkelista 314934 Microsoftin sivustosta: <ulink url=\"http://support.microsoft.com/?kbid=314934\"><citetitle>http://support.microsoft.com/?kbid=314934</citetitle></ulink>."
+"A good walk-through on how to do that can be found in this article from "
+"Microsoft: <ulink url=\"https://learn.microsoft.com/en-"
+"us/troubleshoot/windows-server/group-policy/use-group-policy-to-install-"
+"software\"><citetitle>https://learn.microsoft.com/en-"
+"us/troubleshoot/windows-server/group-policy/use-group-policy-to-install-"
+"software</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -20153,8 +20254,8 @@ msgid ""
 "Mozilla installed, you can copy those dictionaries, which are located in the"
 " installation folders for those applications. Otherwise, you need to "
 "download the required dictionary files from <ulink "
-"url=\"http://wiki.services.openoffice.org/wiki/Dictionaries\"><citetitle>http://wiki.services.openoffice.org/wiki/Dictionaries</citetitle></ulink>."
-msgstr "Voit myös asentaa sanastot itse. Mikäli OpenOffice tai Mozilla on asennettu, voit kopioida sanastot näiden ohjelmien asennushakemistoista. Muuten tarvittavat sanakirjat on noudettava osoitteesta <ulink url=\"http://wiki.services.openoffice.org/wiki/Dictionaries\"><citetitle>http://wiki.services.openoffice.org/wiki/Dictionaries</citetitle></ulink>."
+"url=\"https://cgit.freedesktop.org/libreoffice/dictionaries/tree/\"><citetitle>https://cgit.freedesktop.org/libreoffice/dictionaries/tree/</citetitle></ulink>."
+msgstr ""
 
 #. (filename)
 msgid "en_US.aff"
@@ -20607,11 +20708,11 @@ msgid ""
 "TortoiseMerge is an Open Source project. That means you have full read "
 "access to the source code of this program. You can browse it on this link "
 "<ulink "
-"url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>."
+"url=\"https://sourceforge.net/p/tortoisesvn/code/HEAD/tree\"><citetitle>https://sourceforge.net/p/tortoisesvn/code/HEAD/tree</citetitle></ulink>."
 " The most recent version (where we're currently working) is located under "
 "<filename>/trunk/</filename>, and the released versions are located under "
 "<filename>/tags/</filename>."
-msgstr "TortoiseMerge on avoimen lähdekoodin projekti, johon voi perehtyä osoitteessa <ulink url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>projektit. Pääkehityshaara sijaitsee hakemistossa <filename>/trunk/</filename> ja julkaistut versiot hakemistossa <filename>/tags/</filename>."
+msgstr ""
 
 #. (para)
 msgid "for the hard work on TortoiseMerge"

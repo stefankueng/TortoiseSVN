@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2020 the TortoiseSVN team
+# Copyright (C) 2004-2023 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -16,7 +16,7 @@
 # ibrahim YENER <jdavide222@hotmail.com>, 2014
 # Kaya Kucuk <kaya.kucuk@gmail.com>, 2018
 # Lübbe Onken <luebbe.opensource@gmail.com>, 2011
-# Mehmet Keçeci <mk@mehmetkececi.com>, 2016
+# Mehmet Keçeci <bilginomi@gmail.com>, 2016
 # Muhammed Yasin Erdoğan <obsessio@gmail.com>, 2015
 # Muhammet Kara <muhammetk@gmail.com>, 2011-2012,2014
 # Muhammet Kara <muhammetk@gmail.com>, 2014
@@ -25,16 +25,16 @@
 # Vural Göze <turinhurinov@yahoo.com>, 2011
 # Utku GARIP <utku.garip@gmail.com>, 2021
 # Vural Göze <turinhurinov@yahoo.com>, 2011
-# Vural Göze <turinhurinov@yahoo.com>, 2016-2018
+# Vural Göze <turinhurinov@yahoo.com>, 2016-2018,2023
 # Vural Göze <turinhurinov@yahoo.com>, 2012-2013,2015
 msgid ""
 msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2022-01-29 10:23+0000\n"
-"Last-Translator: Transifex Bot <>\n"
-"Language-Team: Turkish (http://www.transifex.com/luebbe/tortoisesvn/language/tr/)\n"
+"PO-Revision-Date: 2010-11-30 05:14+0000\n"
+"Last-Translator: Vural Göze <turinhurinov@yahoo.com>, 2016-2018,2023\n"
+"Language-Team: Turkish (http://app.transifex.com/luebbe/tortoisesvn/language/tr/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -91,7 +91,7 @@ msgstr "%1 hatalı bir şema içeriyor."
 #. Resource IDs: (61877)
 #, c-format
 msgid "%1 has a bad format."
-msgstr "%1 'in formatı kötü."
+msgstr "%1 'in formatı geçerli değil."
 
 #. Resource IDs: (61858)
 #, c-format
@@ -216,6 +216,11 @@ msgid ""
 "%Ts\n"
 "%Ts"
 msgstr "%Ts\n%Ts"
+
+#. Resource IDs: (4250)
+#, c-format
+msgid "%d files"
+msgstr "%d adet dosya"
 
 #. Resource IDs: (1022)
 #, c-format
@@ -595,6 +600,10 @@ msgstr "&Kapat"
 msgid "&Collaborator username"
 msgstr "%Ortak kullanıcı"
 
+#. Resource IDs: (1542)
+msgid "&Commit"
+msgstr ""
+
 #. Resource IDs: (122)
 msgid "&Commit..."
 msgstr "&Teslim et..."
@@ -649,7 +658,7 @@ msgstr "&Özel"
 
 #. Resource IDs: (ID_VIEW_DARKMODE - Menu)
 msgid "&Dark Mode"
-msgstr ""
+msgstr "&Karanlık Mod"
 
 #. Resource IDs: (ID_VIEW_DARKMODE - Menu)
 msgid "&Dark Mode\t(D)"
@@ -1743,6 +1752,10 @@ msgstr "... çalışan kopya durumu okunuyor"
 msgid "...and %d more paths."
 msgstr ""
 
+#. Resource IDs: (4249)
+msgid "1 file"
+msgstr "1 dosya"
+
 #. Resource IDs: (2403)
 #, c-format
 msgid ": Revision %d"
@@ -2219,6 +2232,12 @@ msgstr "Olduğu &gibi (belirli bir EOL yok)"
 msgid "Ask the user"
 msgstr "Kullanıcıya sor"
 
+#. Resource IDs: (291)
+msgid ""
+"Asks for a specific revision, then shows the log for that revision no matter"
+" what branch it is in."
+msgstr ""
+
 #. Resource IDs: (4210)
 #, c-format
 msgid "Assigned to changelist '%ls'"
@@ -2502,11 +2521,11 @@ msgid ""
 "%2!ls!"
 msgstr "%1!ls!\n%2!ls! a \nkopyalanamıyor"
 
-#. Resource IDs: (1383, 2, 5302, Dialog IDD_ENCODING: Control id 2, Dialog
-#. IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog IDD_GOTODLG:
-#. Control id 2, Dialog IDD_OPEN: Control id 2, Dialog IDD_OPENDLG: Control id
-#. 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog IDD_REGEXFILTERS: Control
-#. id 2)
+#. Resource IDs: (1068, 1383, 2, 5302, Dialog IDD_ENCODING: Control id 2,
+#. Dialog IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog
+#. IDD_GOTODLG: Control id 2, Dialog IDD_OPEN: Control id 2, Dialog
+#. IDD_OPENDLG: Control id 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog
+#. IDD_REGEXFILTERS: Control id 2)
 msgid "Cancel"
 msgstr "İptal"
 
@@ -2673,6 +2692,10 @@ msgstr "Güncellemeleri kontrol et"
 #. Resource IDs: (136)
 msgid "Check out a working copy from a repository"
 msgstr "Depodan çalışan kopya dosyasını al"
+
+#. Resource IDs: (1064)
+msgid "Check project now"
+msgstr "Projeyi şimdi kontrol et<br>"
 
 #. Resource IDs: (1536)
 msgid "Check the authentication items you want to delete below"
@@ -3164,6 +3187,10 @@ msgstr ""
 msgid "Context lines for patches"
 msgstr "Yamalar için bağlam satırları"
 
+#. Resource IDs: (9915)
+msgid "Context menu successfully registered!"
+msgstr ""
+
 #. Resource IDs: (1543)
 msgid "Continue &Merge"
 msgstr ""
@@ -3634,7 +3661,7 @@ msgstr "Varsayılan dizin:"
 msgid "Default to UTF-8 encoding"
 msgstr "UTF-8 kodlamasına dön"
 
-#. Resource IDs: (1542)
+#. Resource IDs: (1067, 1542)
 msgid "Delete"
 msgstr "Sil"
 
@@ -3944,6 +3971,11 @@ msgstr "Tüm versiyonlandırılmamış öğeler için uygula"
 msgid "Do this for all unversioned/modified items"
 msgstr "Bunu tüm versiyonlanmamış/değiştirilmemiş öğeler için yap"
 
+#. Resource IDs: (1065)
+#, c-format
+msgid "Do you really want to delete the shelf \"%s\"?"
+msgstr ""
+
 #. Resource IDs: (1464)
 #, c-format
 msgid "Do you want to drop the vendor branch into the working copy \"%ls\"?"
@@ -4237,7 +4269,7 @@ msgstr "EditorConfig'i etkinleştir"
 
 #. Resource IDs: (1648)
 msgid "Enable drag context menu"
-msgstr ""
+msgstr "Bağlam menüsünü taşımayı etkinleştir "
 
 #. Resource IDs: (5500)
 msgid "Enable log caching to speed up log and revision graph dialogs"
@@ -4663,6 +4695,10 @@ msgstr "Dosyanın %ls revizyonuna ulaşılıyor:"
 msgid "Fetching status of %1!ls!"
 msgstr "%1!ls! öğesinin durumunu alıyor"
 
+#. Resource IDs: (4248)
+msgid "Fetching text bases"
+msgstr ""
+
 #. Resource IDs: (1237)
 msgid "Fetching tree conflict information..."
 msgstr "Çakışan ağaç bilgisi alınıyor..."
@@ -4837,11 +4873,11 @@ msgstr "BAŞ revizyonları bul"
 
 #. Resource IDs: (cmdFindNext_LabelTitle_RESID)
 msgid "Find Next"
-msgstr ""
+msgstr "Sonrakini Bul"
 
 #. Resource IDs: (cmdFindPrev_LabelTitle_RESID)
 msgid "Find Previous"
-msgstr ""
+msgstr "Öncekini Bul"
 
 #. Resource IDs: (cmdFindPrev)
 msgid ""
@@ -4991,6 +5027,11 @@ msgstr "K&ilidi elde et..."
 #. Resource IDs: (1820)
 msgid "Get merge logs"
 msgstr "Birleşme günlüklerini getir"
+
+#. Resource IDs: (1901)
+#, c-format
+msgid "Getting BASE of file %1!ls!"
+msgstr ""
 
 #. Resource IDs: (1900)
 #, c-format
@@ -5318,6 +5359,14 @@ msgstr "ID:32825:VA  +D"
 #. Accelerator Entry for Menu ID:32870; 'Collapse'
 msgid "ID:32870:V C +L"
 msgstr "ID:32870:V C +L"
+
+#. Accelerator Entry for Menu ID:32880; ''
+msgid "ID:32880:V C +R"
+msgstr ""
+
+#. Accelerator Entry for Menu ID:32880; ''
+msgid "ID:32880:VAC +C"
+msgstr ""
 
 #. Accelerator Entry for Menu ID:32881; 'Wrap long lines'
 msgid "ID:32881:V C +P"
@@ -7723,6 +7772,10 @@ msgstr ""
 msgid "Regex:"
 msgstr "Düzenli İfade:"
 
+#. Resource IDs: (1542)
+msgid "Register context menu"
+msgstr ""
+
 #. Resource IDs: (1576)
 msgid "Regular Expression"
 msgstr "Düzenli İfade"
@@ -8047,7 +8100,7 @@ msgstr "\"Onların\" 'ı kullanarak çakışmayı çözümle"
 
 #. Resource IDs: (3681)
 msgid "Resolve conflicts"
-msgstr ""
+msgstr "Çakışmaları çözümle"
 
 #. Resource IDs: (1168, 3332)
 msgid "Resolved"
@@ -8917,6 +8970,10 @@ msgstr "Satır numaralarasını/larını &s goster"
 msgid "Show lo&g"
 msgstr "Günlüğü &göster"
 
+#. Resource IDs: (290)
+msgid "Show log of repo at revision…"
+msgstr ""
+
 #. Resource IDs: (1013)
 msgid "Show multiple &changes..."
 msgstr ""
@@ -9298,6 +9355,10 @@ msgstr "Kilidi çal"
 #. Resource IDs: (65535)
 msgid "Stefan Küng, Lübbe Onken"
 msgstr "Stefan Küng, Lübbe Onken"
+
+#. Resource IDs: (1685)
+msgid "Store pristine copies in working copy"
+msgstr ""
 
 #. Resource IDs: (270)
 msgid ""
@@ -10294,6 +10355,11 @@ msgstr "&Güncelle"
 msgid "URL"
 msgstr "URL"
 
+#. Resource IDs: (387)
+#, c-format
+msgid "URL '%s' non-existent in revision %ld"
+msgstr ""
+
 #. Resource IDs: (1272)
 msgid "URL history"
 msgstr "URL geçmişi "
@@ -11115,6 +11181,12 @@ msgstr "Değişikliklerin etkin olması için sisteminizi tekrar başlatmalısı
 #. Resource IDs: (2756)
 msgid "You selected an unversioned folder for a commit!"
 msgstr "Teslim etmek için versiyonlanmamış bir klasör seçtiniz!"
+
+#. Resource IDs: (1066)
+msgid ""
+"You will lose all data of the shelf.\n"
+"This action cannot be undone."
+msgstr ""
 
 #. Resource IDs: (1412)
 #, c-format

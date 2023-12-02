@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2020 the TortoiseSVN team
+# Copyright (C) 2004-2023 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -11,8 +11,8 @@
 # Authors:
 # Translators:
 # Alessandro Menti <alessandro.menti@hotmail.it>, 2015-2016
-# Alessio <alessio@alessiodamato.com>, 2014-2015
-# Alessio <alessio@alessiodamato.com>, 2014
+# 6c7639643113f417e64b423c44ddddd3_03da136 <3eff6850819f407025770f211cd4f0d7_158026>, 2014-2015
+# 6c7639643113f417e64b423c44ddddd3_03da136 <3eff6850819f407025770f211cd4f0d7_158026>, 2014
 # Alex Rigato <alex.rigato@gmail.com>, 2020
 # Andrea Tuscano <andrea.tuscano1997@gmail.com>, 2016
 # Cecilia Saltori <csaltori@gmail.com>, 2011
@@ -25,7 +25,7 @@
 # Michele Locati <mlocati@gmail.com>, 2012
 # 43e8222b3be8174d9b39e58a02616ea6_2d981e6 <f7f11e626526fcf8e9a9a6903fb04e7f_345563>, 2015
 # Paolo Crocetti <crocettipaolo@gmail.com>, 2017
-# ROBERTO BORIOTTI <roberto.boriotti@canon.it>, 2021
+# ROBERTO BORIOTTI <roberto.boriotti@canon.it>, 2021-2023
 # Roberto Casazza <roberto.casazza@alice.it>, 2011
 # SebastianoPistore <SebastianoPistore.info@protonmail.ch>, 2016-2017
 # Silvia, 2013
@@ -35,14 +35,14 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2022-01-29 10:23+0000\n"
-"Last-Translator: SebastianoPistore <SebastianoPistore.info@protonmail.ch>\n"
-"Language-Team: Italian (http://www.transifex.com/luebbe/tortoisesvn/language/it/)\n"
+"PO-Revision-Date: 2010-11-30 05:14+0000\n"
+"Last-Translator: ROBERTO BORIOTTI <roberto.boriotti@canon.it>, 2021-2023\n"
+"Language-Team: Italian (http://app.transifex.com/luebbe/tortoisesvn/language/it/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: it\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #. Resource IDs: (IDS_STATUSBAR_CONFLICTEDLINES)
 # msgid/msgstr fields for Accelerator keys
@@ -219,6 +219,11 @@ msgid ""
 "%Ts\n"
 "%Ts"
 msgstr "%Ts\n%Ts"
+
+#. Resource IDs: (4250)
+#, c-format
+msgid "%d files"
+msgstr "%d file"
 
 #. Resource IDs: (1022)
 #, c-format
@@ -597,6 +602,10 @@ msgstr "&Chiudi"
 #. Resource IDs: (65535)
 msgid "&Collaborator username"
 msgstr "&Username del collaboratore"
+
+#. Resource IDs: (1542)
+msgid "&Commit"
+msgstr "&Commit"
 
 #. Resource IDs: (122)
 msgid "&Commit..."
@@ -1746,6 +1755,10 @@ msgstr "...lettura stato della copia di lavoro in corso"
 msgid "...and %d more paths."
 msgstr "...ed altri %dpercorsi."
 
+#. Resource IDs: (4249)
+msgid "1 file"
+msgstr "1 file"
+
 #. Resource IDs: (2403)
 #, c-format
 msgid ": Revision %d"
@@ -2222,6 +2235,12 @@ msgstr "&Così com'è (nessuno specifico EOL)"
 msgid "Ask the user"
 msgstr "Chiedi all'utente"
 
+#. Resource IDs: (291)
+msgid ""
+"Asks for a specific revision, then shows the log for that revision no matter"
+" what branch it is in."
+msgstr "Richiede una revisione specifica, quindi visualizza il registro per quella revisione, indipendentemente dal branch in cui si trova."
+
 #. Resource IDs: (4210)
 #, c-format
 msgid "Assigned to changelist '%ls'"
@@ -2505,11 +2524,11 @@ msgid ""
 "%2!ls!"
 msgstr "Impossibile copiare \n%1!ls!\nin\n%2!ls!"
 
-#. Resource IDs: (1383, 2, 5302, Dialog IDD_ENCODING: Control id 2, Dialog
-#. IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog IDD_GOTODLG:
-#. Control id 2, Dialog IDD_OPEN: Control id 2, Dialog IDD_OPENDLG: Control id
-#. 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog IDD_REGEXFILTERS: Control
-#. id 2)
+#. Resource IDs: (1068, 1383, 2, 5302, Dialog IDD_ENCODING: Control id 2,
+#. Dialog IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog
+#. IDD_GOTODLG: Control id 2, Dialog IDD_OPEN: Control id 2, Dialog
+#. IDD_OPENDLG: Control id 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog
+#. IDD_REGEXFILTERS: Control id 2)
 msgid "Cancel"
 msgstr "Annulla"
 
@@ -2676,6 +2695,10 @@ msgstr "Controlla aggiornamenti"
 #. Resource IDs: (136)
 msgid "Check out a working copy from a repository"
 msgstr "Estrai una copia di lavoro da un repository"
+
+#. Resource IDs: (1064)
+msgid "Check project now"
+msgstr "Controlla il progetto ora"
 
 #. Resource IDs: (1536)
 msgid "Check the authentication items you want to delete below"
@@ -3161,11 +3184,15 @@ msgstr "Dimensione dei contenitori"
 
 #. Resource IDs: (195)
 msgid "Context Menu"
-msgstr ""
+msgstr "Menu contestuale"
 
 #. Resource IDs: (Dialog IDD_SETMAINPAGE: Control id 65535)
 msgid "Context lines for patches"
 msgstr "Linee contesto per le patch"
+
+#. Resource IDs: (9915)
+msgid "Context menu successfully registered!"
+msgstr "Menu contestuale registrato correttamente!"
 
 #. Resource IDs: (1543)
 msgid "Continue &Merge"
@@ -3637,7 +3664,7 @@ msgstr "Percorso predefinito"
 msgid "Default to UTF-8 encoding"
 msgstr "Codifica preefinita UTF-8"
 
-#. Resource IDs: (1542)
+#. Resource IDs: (1067, 1542)
 msgid "Delete"
 msgstr "Elimina"
 
@@ -3766,15 +3793,15 @@ msgstr "Dimensione e posizione delle finestre di dialogo"
 
 #. Resource IDs: (196)
 msgid "Dialogs 1"
-msgstr ""
+msgstr "Finestra dialogo 1"
 
 #. Resource IDs: (213)
 msgid "Dialogs 2"
-msgstr ""
+msgstr "Finestra dialogo 2"
 
 #. Resource IDs: (332)
 msgid "Dialogs 3"
-msgstr ""
+msgstr "Finestra dialogo 3"
 
 #. Resource IDs: (cmdGroupDiff_LabelTitle_RESID)
 msgid "Diff"
@@ -3946,6 +3973,11 @@ msgstr "Esegui per tutti gli elementi senza versione"
 #. Resource IDs: (2358)
 msgid "Do this for all unversioned/modified items"
 msgstr "Esegui per tutti gli elementi senza versione/modificati"
+
+#. Resource IDs: (1065)
+#, c-format
+msgid "Do you really want to delete the shelf \"%s\"?"
+msgstr "Vuoi eliminare lo scaffale \"%s\"?"
 
 #. Resource IDs: (1464)
 #, c-format
@@ -4666,6 +4698,10 @@ msgstr "Recupero della revisione %ls del file:"
 msgid "Fetching status of %1!ls!"
 msgstr "Recupero dello stato di %1!ls!"
 
+#. Resource IDs: (4248)
+msgid "Fetching text bases"
+msgstr "Recupero basi testo"
+
 #. Resource IDs: (1237)
 msgid "Fetching tree conflict information..."
 msgstr "Raccolta delle informazioni dei conflitti dell'albero..."
@@ -4995,6 +5031,11 @@ msgstr "&Blocca..."
 msgid "Get merge logs"
 msgstr "Richiedi registri attività di fusione"
 
+#. Resource IDs: (1901)
+#, c-format
+msgid "Getting BASE of file %1!ls!"
+msgstr "Recupero del file %1!ls della BASE!"
+
 #. Resource IDs: (1900)
 #, c-format
 msgid "Getting file %1!ls!"
@@ -5322,6 +5363,14 @@ msgstr "ID:32825:VA  +D"
 msgid "ID:32870:V C +L"
 msgstr "ID:32870:V C +L"
 
+#. Accelerator Entry for Menu ID:32880; ''
+msgid "ID:32880:V C +R"
+msgstr "ID:32880:V C +R"
+
+#. Accelerator Entry for Menu ID:32880; ''
+msgid "ID:32880:VAC +C"
+msgstr "ID:32880:VAC +C"
+
 #. Accelerator Entry for Menu ID:32881; 'Wrap long lines'
 msgid "ID:32881:V C +P"
 msgstr "ID:32881:V C +P"
@@ -5398,7 +5447,7 @@ msgstr "Sovrapposizione icona/colonne di stato"
 
 #. Resource IDs: (184)
 msgid "Icon Set"
-msgstr ""
+msgstr "Set icone"
 
 #. Resource IDs: (Dialog IDD_ABOUT: Control id 65535)
 msgid "Icons/Design/Code:\t\tLuebbe Onken"
@@ -5831,7 +5880,7 @@ msgstr "Intervallo di revisioni non valido!\nLe revisioni valide sono numeri e H
 
 #. Resource IDs: (283)
 msgid "Issue Tracker Integration"
-msgstr ""
+msgstr "Integrazione tracker problemi"
 
 #. Resource IDs: (1571)
 msgid "Issue tracker"
@@ -7094,7 +7143,7 @@ msgstr "Output.prn"
 
 #. Resource IDs: (308)
 msgid "Overlay Handlers"
-msgstr ""
+msgstr "Gestione sovrapposizione"
 
 #. Resource IDs: (65535)
 msgid "Overlays"
@@ -7725,6 +7774,10 @@ msgstr "Messaggio di corrispondenza regex:"
 #. Resource IDs: (Dialog IDD_REGEXFILTER: Control id 65535)
 msgid "Regex:"
 msgstr "Regex:"
+
+#. Resource IDs: (1542)
+msgid "Register context menu"
+msgstr "Registra menu contestuale"
 
 #. Resource IDs: (1576)
 msgid "Regular Expression"
@@ -8920,6 +8973,10 @@ msgstr "Mo&stra i numeri di linea"
 msgid "Show lo&g"
 msgstr "Visualizza lo&g"
 
+#. Resource IDs: (290)
+msgid "Show log of repo at revision…"
+msgstr "Visualizza registro repository alla revisione..."
+
 #. Resource IDs: (1013)
 msgid "Show multiple &changes..."
 msgstr "Mostra più cambiamenti..."
@@ -9301,6 +9358,10 @@ msgstr "Ruba il bloccaggio"
 #. Resource IDs: (65535)
 msgid "Stefan Küng, Lübbe Onken"
 msgstr "Stefan Küng, Lübbe Onken"
+
+#. Resource IDs: (1685)
+msgid "Store pristine copies in working copy"
+msgstr "Archivia le copie incontaminate nella copia di lavoro"
 
 #. Resource IDs: (270)
 msgid ""
@@ -10297,6 +10358,11 @@ msgstr "A&ggiorna"
 msgid "URL"
 msgstr "URL"
 
+#. Resource IDs: (387)
+#, c-format
+msgid "URL '%s' non-existent in revision %ld"
+msgstr "URL '%s' non esistente nella revisione %ld"
+
 #. Resource IDs: (1272)
 msgid "URL history"
 msgstr "Cronologia URL"
@@ -11011,7 +11077,7 @@ msgstr "Spaziature"
 
 #. Resource IDs: (197)
 msgid "Win 11 Context Menu"
-msgstr ""
+msgstr "Menu contestuale Win 11"
 
 #. Resource IDs: (1493, 1496, 158)
 msgid "Working Copy"
@@ -11118,6 +11184,12 @@ msgstr "È necessario riavviare il sistema affinchè i cambiamenti abbiano effet
 #. Resource IDs: (2756)
 msgid "You selected an unversioned folder for a commit!"
 msgstr "Hai selezionato una cartella non versionata da inviare!"
+
+#. Resource IDs: (1066)
+msgid ""
+"You will lose all data of the shelf.\n"
+"This action cannot be undone."
+msgstr "Perderai tutti i dati dello scaffale.\nQuesta azione non può essere annullata."
 
 #. Resource IDs: (1412)
 #, c-format

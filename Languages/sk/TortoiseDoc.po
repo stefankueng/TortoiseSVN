@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN manuals
-# Copyright (C) 2004-2020 the TortoiseSVN team
+# Copyright (C) 2004-2023 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -10,7 +10,7 @@
 # 
 # Authors:
 # Translators:
-# Jozef Matta <jozef.m923@gmail.com>, 2020-2021
+# Jozef Matta <jozef.m923@gmail.com>, 2020-2021,2023
 # Michal Nosál <a2.nosal@gmail.com>, 2011
 # otik <otik@printflow.eu>, 2012
 # Oto BREZINA <otik@e-posta.sk>, 2011-2013
@@ -20,8 +20,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
 "PO-Revision-Date: 2010-11-30 05:04+0000\n"
-"Last-Translator: Jozef Matta <jozef.m923@gmail.com>, 2020-2021\n"
-"Language-Team: Slovak (http://www.transifex.com/luebbe/tortoisesvn/language/sk/)\n"
+"Last-Translator: Jozef Matta <jozef.m923@gmail.com>, 2020-2021,2023\n"
+"Language-Team: Slovak (http://app.transifex.com/luebbe/tortoisesvn/language/sk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,7 +35,7 @@ msgstr "TortoiseSVN"
 
 #. (subtitle)
 msgid "A Subversion client for Windows"
-msgstr "Windows klient pre Subversion"
+msgstr "Klient Subversion pre Windows"
 
 #. (edition)
 msgid "First"
@@ -290,10 +290,10 @@ msgid ""
 "Although most people just download the installer, you also have full read "
 "access to the source code of this program. You can browse it on this link "
 "<ulink "
-"url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>."
+"url=\"https://sourceforge.net/p/tortoisesvn/code/HEAD/tree\"><citetitle>https://sourceforge.net/p/tortoisesvn/code/HEAD/tree</citetitle></ulink>."
 " The current development line is located under <filename>/trunk/</filename>,"
 " and the released versions are located under <filename>/tags/</filename>."
-msgstr "Aj keď si väčšina ľudí stiahne iba inštalátor, máte tiež plný prístup na čítanie zdrojového kódu tohto programu. Môžete ich prehliadať na tomto odkaze <ulink url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink> . Aktuálna vývojová línia sa nachádza pod <filename>/trunk/</filename> a vydané verzie sú umiestnené pod <filename>/tags/</filename> ."
+msgstr "Hoci väčšina ľudí si len stiahne inštalačný program, máte aj úplný prístup k zdrojovému kódu tohto programu. Môžete si ho prezrieť na tomto odkaze <ulink url=\"https://sourceforge.net/p/tortoisesvn/code/HEAD/tree\"><citetitle>https://sourceforge.net/p/tortoisesvn/code/HEAD/tree</citetitle></ulink>. Aktuálna vývojová línia sa nachádza v adresári <filename>/trunk/</filename> a vydané verzie sa nachádzajú v priečinku <filename>/tags/</filename>."
 
 #. (title)
 msgid "Development"
@@ -1006,9 +1006,9 @@ msgstr "Kniha Subversion"
 msgid ""
 "This chapter is a slightly modified version of the same chapter in the "
 "Subversion book. An online version of the Subversion book is available here:"
-" <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>http://svnbook.red-"
-"bean.com/</citetitle></ulink>."
-msgstr "Táto kapitola je mierne upravenou verziou tej istej kapitoly v knihe Subversion. Online verzia knihy Subversion je k dispozícii tu: <ulink url=\"http://svnbook.red-bean.com/\"><citetitle> http://svnbook.red-bean.com/</citetitle></ulink>."
+" <ulink url=\"https://svnbook.red-"
+"bean.com/\"><citetitle>https://svnbook.red-bean.com/</citetitle></ulink>."
+msgstr "Táto kapitola je mierne upravenou verziou tej istej kapitoly v knihe Subversion. Online verzia knihy Subversion je k dispozícii tu: <ulink url=\"https://svnbook.red-bean.com/\"><citetitle>https://svnbook.red-bean.com/.</citetitle></ulink>."
 
 #. (para)
 msgid ""
@@ -2197,11 +2197,11 @@ msgid ""
 "target(s) it's operating on, and the username of the person who triggered "
 "the event. Depending on the hook's output or return status, the hook program"
 " may continue the action, stop it, or suspend it in some way. Please refer "
-"to the chapter on <ulink url=\"http://svnbook.red-"
+"to the chapter on <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook"
 " Scripts</citetitle></ulink> in the Subversion Book for full details about "
 "the hooks which are implemented."
-msgstr "Skript háku je program spustený nejakou udalosťou úložiska, napríklad vytvorením novej revízie alebo úpravou neoverenej vlastnosti. Každému háku je odovzdaných dostatok informácií na to, aby ste zistili, o čo ide, na aký cieľ (ciele) operuje a používateľské meno osoby, ktorá udalosť spustila. V závislosti od stavu výstupu alebo návratu háku môže program háku pokračovať v akcii, zastaviť ju alebo ju nejakým spôsobom pozastaviť. Prečítajte si kapitolu o <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>skriptoch háku</citetitle></ulink> v knihe Subversion Book pre všetky podrobnosti o implementovaných hákoch."
+msgstr "Skript háku je program spustený nejakou udalosťou v úložisku, napríklad vytvorením novej revízie alebo zmenou vlastnosti bez verzie. Každému háku sa odovzdáva dostatok informácií, aby bolo možné povedať, o akú udalosť ide, na akom cieli (cieľoch) sa prevádzkuje a užívateľské meno osoby, ktorá udalosť spustila. V závislosti od výstupného alebo návratového stavu háku môže program háku pokračovať v činnosti, zastaviť ju alebo ju nejakým spôsobom pozastaviť. Všetky podrobnosti o <ulink url=\"https://svnbook.red-bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>skriptoch hákov</citetitle></ulink>, ktoré sú implementované, nájdete v kapitole o skriptoch hákov v knihe Subversion."
 
 #. (para)
 msgid ""
@@ -2298,10 +2298,10 @@ msgstr "\n&lt;a href=\"tsvn:http://project.domain.org/svn/trunk\"&gt;\n&lt;img s
 msgid ""
 "Of course it would look even better if you included a suitable picture. You "
 "can use the <ulink "
-"url=\"https://tortoisesvn.net/images/TortoiseCheckout.png\"><citetitle>TortoiseSVN"
+"url=\"https://svn.code.sf.net/p/tortoisesvn/code/trunk/www/source/assets/img/TortoiseCheckout.png\"><citetitle>TortoiseSVN"
 " logo</citetitle></ulink> or you can provide your own image. "
 "<placeholder-1/>"
-msgstr "Samozrejme, vyzeralo by to ešte lepšie, keby ste vložili vhodný obrázok. Môžete použiť <ulink url=\"https://tortoisesvn.net/images/TortoiseCheckout.png\"><citetitle>logo TortoiseSVN</citetitle></ulink> alebo môžete poskytnúť svoj vlastný obrázok.<placeholder-1/>"
+msgstr "Samozrejme, že by to vyzeralo ešte lepšie, keby ste priložili vhodný obrázok. Môžete použiť logo <ulink url=\"https://svn.code.sf.net/p/tortoisesvn/code/trunk/www/source/assets/img/TortoiseCheckout.png\"><citetitle>TortoiseSVN</citetitle></ulink> alebo môžete poskytnúť vlastný obrázok. <placeholder-1/>"
 
 #. (programlisting)
 #, no-wrap
@@ -2363,10 +2363,10 @@ msgstr "Ak ste uvažovali o nastavení úložiska pre viacerých používateľov
 msgid ""
 "More detailed information on the Subversion server options, and how to "
 "choose the best architecture for your situation, can be found in the "
-"Subversion book under <ulink url=\"http://svnbook.red-"
+"Subversion book under <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.serverconfig.html\"><citetitle>Server "
 "Configuration</citetitle></ulink>."
-msgstr "Podrobnejšie informácie o možnostiach servera Subversion a o tom, ako zvoliť najlepšiu architektúru pre vašu situáciu, nájdete v knihe Subversion pod <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.serverconfig.html\"><citetitle>Konfigurácia servera</citetitle></ulink> ."
+msgstr "Podrobnejšie informácie o možnostiach servera Subversion a o tom, ako vybrať najlepšiu architektúru pre vašu situáciu, nájdete v knihe Subversion v časti <ulink url=\"https://svnbook.red-bean.com/en/1.8/svn.serverconfig.html\"><citetitle>Konfigurácia servera</citetitle></ulink>."
 
 #. (citetitle)
 msgid "VisualSVN"
@@ -2412,9 +2412,9 @@ msgstr "Tento dokument popisuje každodenné používanie klienta TortoiseSVN. T
 #. (para)
 msgid ""
 "If you need an introduction to version control with Subversion, then we "
-"recommend you read the fantastic book: <ulink url=\"http://svnbook.red-"
+"recommend you read the fantastic book: <ulink url=\"https://svnbook.red-"
 "bean.com/\"><citetitle>Version Control with Subversion</citetitle></ulink>."
-msgstr "Ak potrebujete úvod do správy verzií pomocou Subversion, odporúčame vám prečítať si fantastickú knihu: <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>Version Control with Subversion</citetitle></ulink>(Správa verzií so Subversion)."
+msgstr "Ak potrebujete úvod do správy verzií pomocou Subversion, odporúčame vám prečítať si túto fantastickú knihu: <ulink url=\"https://svnbook.red-bean.com/\"><citetitle>Riadenie verzií pomocou Subversion</citetitle></ulink>."
 
 #. (para)
 msgid ""
@@ -2665,12 +2665,22 @@ msgid ""
 msgstr "Ak chcete vyčistiť zásobník autentifikácie, môžete to urobiť zo stránky <guilabel>Uložené údaje</guilabel> dialógového okna nastavení TortoiseSVN. Tlačidlo<guibutton>Vyčistiť všetko</guibutton> vyčistí autentifikačné údaje zo zásobníka pre všetky úložiská. Tlačidlo <guibutton>Vyčistiť...</guibutton> zobrazí však dialógové okno, v ktorom môžete zvoliť, ktoré údaje z autentifikácie uložené v zásobníku sa majú vyčistiť. Odkazujú na <xref linkend=\"tsvn-dug-settings-saved-data\"/> ."
 
 #. (para)
+msgid "Run <literal>gpedit.msc</literal> (Local Policies)"
+msgstr "Spustite súbor <literal>gpedit.msc</literal> (Miestna politika)"
+
+#. (para)
+msgid ""
+"User Configuration -&gt; Windows Settings -&gt; Scripts -&gt; Logon or "
+"Logoff -&gt; Properties -&gt; Add"
+msgstr "Konfigurácia užívateľa -&gt; Nastavenia systému Windows -&gt; Skripty -&gt; Prihlásenie alebo odhlásenie -&gt; Vlastnosti -&gt; Pridať"
+
+#. (para)
 msgid ""
 "Some people like to have the authentication data deleted when they log off Windows, or on shutdown. The way to do that is to use a shutdown script to delete the <filename>%APPDATA%\\Subversion\\auth</filename> directory, e.g. <screen>\n"
 "@echo off\n"
 "rmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n"
-"      </screen> You can find a description of how to install such scripts at <ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>http://www.windows-help-central.com/windows-shutdown-script.html</citetitle></ulink>."
-msgstr "Niektorí ľudia radi odstraňujú autentifikačné údaje pri odhlásení zo systému Windows alebo pri vypnutí. Spôsob, ako to urobiť, je použiť vypínací skript na odstránenie priečinka <filename>%APPDATA%\\Subversion\\auth</filename>, napr. <screen>\n@echo off\nrmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n      </screen> Popis spôsobu inštalácie týchto skriptov nájdete na stránke <ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>http://www.windows-help-central.com/windows-shutdown-script.html</citetitle></ulink>."
+"      </screen> You can install such a script on Windows like this: <placeholder-1/>"
+msgstr "Niektorí ľudia chcú, aby sa autentifikačné údaje vymazali pri odhlásení zo systému Windows alebo pri jeho vypnutí. Spôsob, ako to urobiť, je použiť skript na vypnutie, ktorý odstráni priečinok <filename>PPDATA%\\Subversion\\auth</filename>, napr. <screen>\n@echo off\nrmdir /s /q \"PPDATA%\\Subversion\\auth\"\n        </screen>Takýto skript môžete v systéme Windows nainštalovať takto: <placeholder-1/>"
 
 #. (para)
 msgid ""
@@ -2930,6 +2940,10 @@ msgstr "overiť roztrúsene"
 msgid "partial checkout"
 msgstr "overiť čiastočne"
 
+#. (primary)
+msgid "pristines on demand"
+msgstr "neporušené na požiadanie"
+
 #. (para)
 msgid ""
 "To obtain a working copy you need to do a <firstterm>checkout</firstterm> "
@@ -2950,6 +2964,44 @@ msgid ""
 "folder name that does not yet exist, then a directory with that name is "
 "created."
 msgstr "V prehliadači Windows vyberte priečinok, kam chcete umiestniť svoju pracovnú kópiu. Kliknutím <action>pravým tlačidlom myši</action> rozbalíte kontextovú ponuku a vyberte príkaz <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Overiť...</guimenuitem></menuchoice>, ktoré vyvolá nasledujúce dialógové okno: <placeholder-1/> Ak zadáte názov priečinka, ktorý ešte neexistuje, vytvorí sa priečinok s týmto názvom."
+
+#. (para)
+msgid ""
+"If the project contains references to external projects which you do "
+"<emphasis>not</emphasis> want checked out at the same time, use the "
+"<guilabel>Omit externals</guilabel> checkbox."
+msgstr "Ak projekt obsahuje odkazy na externé projekty, ktoré robíte <emphasis>bez</emphasis> možnosti súčasného overenia, použite zaškrtávacie políčko <guilabel>Vynechať externé</guilabel>."
+
+#. (para)
+msgid ""
+"If <guilabel>Omit externals</guilabel> is checked, or if you wish to "
+"increase the depth value, you will have to perform updates to your working "
+"copy using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to "
+"Revision...</guimenuitem></menuchoice> instead of "
+"<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice>."
+" The standard update will include all externals and keep the existing depth."
+msgstr "Ak je zaškrtnuté políčko <guilabel>Vynechať externé</guilabel>, alebo ak chcete zvýšiť hodnotu hĺbky, budete musieť vykonať aktualizáciu svojej pracovnej kópie použitím <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Aktualizovať na verziu...</guimenuitem></menuchoice> namiesto <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Aktualizácia</guimenuitem></menuchoice>. Štandardná aktualizácia bude obsahovať všetky externé zdroje a zachová existujúcu hĺbku."
+
+#. (para)
+msgid ""
+"It is recommended that you check out only the <literal>trunk</literal> part "
+"of the directory tree, or lower. If you specify the parent path of the "
+"directory tree in the URL then you might end up with a full hard disk since "
+"you will get a copy of the entire repository tree including every branch and"
+" tag of your project!"
+msgstr "Odporúča sa skontrolovať iba časť <literal>kmeňa</literal> stromu priečinkov alebo nižšiu. Ak v URL zadáte nadradenú cestu k stromu priečinkov, môžete skončiť s zaplnením pevného disku, pretože získate kópiu celého stromu úložiska vrátane každej vetvy a príznaku vášho projektu!"
+
+#. (title)
+msgid "Exporting"
+msgstr "Exportovanie"
+
+#. (para)
+msgid ""
+"Sometimes you may want to create a local copy without any of those "
+"<filename>.svn</filename> directories, e.g. to create a zipped tarball of "
+"your source. Read <xref linkend=\"tsvn-dug-export\"/> to find out how to do "
+"that."
+msgstr "Niekedy možno budete chcieť vytvoriť lokálnu kópiu bez toho, aby ste použili niektorý z <filename>.svn</filename> priečinkov, napr. aby ste vytvorili komprimovaný tarball vášho zdroja. Ako na to si prečítajte <xref linkend=\"tsvn-dug-export\"/>."
 
 #. (title)
 msgid "Checkout Depth"
@@ -3157,43 +3209,44 @@ msgid ""
 "you should upgrade your server to at least 1.5."
 msgstr "Servery pred verziou 1.5 nerozumejú požiadavkám na hĺbku pracovnej kópie, takže nemôžu vždy efektívne vybavovať požiadavky. Príkaz bude stále fungovať, ale starší server môže odoslať všetky údaje a ponechať klienta na odfiltrovanie toho, čo sa nevyžaduje, čo môže znamenať množstvo sieťovej prevádzky. Pokiaľ je to možné, mali by ste upgradovať server na verziu najmenej 1.5."
 
-#. (para)
-msgid ""
-"If the project contains references to external projects which you do "
-"<emphasis>not</emphasis> want checked out at the same time, use the "
-"<guilabel>Omit externals</guilabel> checkbox."
-msgstr "Ak projekt obsahuje odkazy na externé projekty, ktoré robíte <emphasis>bez</emphasis> možnosti súčasného overenia, použite zaškrtávacie políčko <guilabel>Vynechať externé</guilabel>."
-
-#. (para)
-msgid ""
-"If <guilabel>Omit externals</guilabel> is checked, or if you wish to "
-"increase the depth value, you will have to perform updates to your working "
-"copy using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to "
-"Revision...</guimenuitem></menuchoice> instead of "
-"<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice>."
-" The standard update will include all externals and keep the existing depth."
-msgstr "Ak je zaškrtnuté políčko <guilabel>Vynechať externé</guilabel>, alebo ak chcete zvýšiť hodnotu hĺbky, budete musieť vykonať aktualizáciu svojej pracovnej kópie použitím <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Aktualizovať na verziu...</guimenuitem></menuchoice> namiesto <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Aktualizácia</guimenuitem></menuchoice>. Štandardná aktualizácia bude obsahovať všetky externé zdroje a zachová existujúcu hĺbku."
-
-#. (para)
-msgid ""
-"It is recommended that you check out only the <literal>trunk</literal> part "
-"of the directory tree, or lower. If you specify the parent path of the "
-"directory tree in the URL then you might end up with a full hard disk since "
-"you will get a copy of the entire repository tree including every branch and"
-" tag of your project!"
-msgstr "Odporúča sa skontrolovať iba časť <literal>kmeňa</literal> stromu priečinkov alebo nižšiu. Ak v URL zadáte nadradenú cestu k stromu priečinkov, môžete skončiť s zaplnením pevného disku, pretože získate kópiu celého stromu úložiska vrátane každej vetvy a príznaku vášho projektu!"
-
 #. (title)
-msgid "Exporting"
-msgstr "Exportovanie"
+msgid "Store pristine copies"
+msgstr "Ukladanie neporušených kópií"
 
 #. (para)
 msgid ""
-"Sometimes you may want to create a local copy without any of those "
-"<filename>.svn</filename> directories, e.g. to create a zipped tarball of "
-"your source. Read <xref linkend=\"tsvn-dug-export\"/> to find out how to do "
-"that."
-msgstr "Niekedy možno budete chcieť vytvoriť lokálnu kópiu bez toho, aby ste použili niektorý z <filename>.svn</filename> priečinkov, napr. aby ste vytvorili komprimovaný tarball vášho zdroja. Ako na to si prečítajte <xref linkend=\"tsvn-dug-export\"/>."
+"The checkbox <guilabel>Store pristine copies in working copy</guilabel> is "
+"checked by default. With this option enabled, Subversion caches each file's "
+"<literal>BASE</literal> revision (the <literal>pristine</literal>) inside "
+"the working copy. This is so that operations such as diffing and reverting "
+"work offline, and a commit can just send the modified versions parts of a "
+"file to the repo server rather than the whole file. This design optimizes "
+"the speed and availability of these operations on the assumption that "
+"network connectivity to the repository may be the bottleneck while local "
+"storage is cheap. For version pre 1.15 this was the only way Subversion "
+"worked."
+msgstr "Zaškrtávacie políčko <guilabel>Ukladať neporušené kópie</guilabel> v pracovnej kópii je predvolene zaškrtnuté. Ak je táto možnosť povolená, Subversion ukladá do zásobníka <literal>BASE</literal> revíziu každého súboru (<literal>neporušenú</literal>) v pracovnej kópii. Je to preto, aby operácie, ako je porovnávanie a vracanie, fungovali offline a aby odovzdanie mohlo posielať na server repozitára len časti zmenených verzií súboru a nie celý súbor. Tento návrh optimalizuje rýchlosť a dostupnosť týchto operácií za predpokladu, že sieťové pripojenie k úložisku môže byť úzkym miestom, zatiaľ čo miestne úložisko je lacné. Vo verziách pred 1.15 to bol jediný spôsob, akým Subversion fungoval."
+
+#. (para)
+msgid ""
+"Since Subversion 1.15, you can avoid having a copy of each file stored in "
+"the working copy. Subversion will then download the pristine copy only when "
+"needed (\"<literal>on demand</literal>\"). This can be useful if you have "
+"really large files to work with or if you have a lot of binary files which "
+"rarely change."
+msgstr "Od verzie Subversion 1.15 sa môžete vyhnúť tomu, aby bola kópia každého súboru uložená v pracovnej kópii. Subversion potom stiahne pôvodnú kópiu len v prípade potreby (\"<literal>on demand</literal>\"). To môže byť užitočné, ak máte rozpracované naozaj veľké súbory alebo ak máte veľa binárnych súborov, ktoré sa menia len zriedkavo."
+
+#. (para)
+msgid ""
+"To avoid storing the pristine copies for all files, uncheck the checkbox "
+"<guilabel>Store pristine copies in working copy</guilabel>."
+msgstr "Ak chcete zabrániť ukladaniu pôvodných kópií pre všetky súbory, zrušte zaškrtnutie políčka <guilabel>Ukladať pôvodné kópie v pracovnej kópii</guilabel>."
+
+#. (para)
+msgid ""
+"If <guilabel>Store pristine copies in working copy</guilabel> is unchecked, "
+"the resulting working copy will be unusable by pre 1.15 Subversion clients."
+msgstr "Ak nie je zaškrtnuté políčko <guilabel>Ukladanie neporušených kópií v pracovnej kópii</guilabel>, výsledná pracovná kópia bude nepoužiteľná pre klientov Subversion pred verziou 1.15."
 
 #. (title)
 msgid "Committing Your Changes To The Repository"
@@ -3575,9 +3628,10 @@ msgid ""
 "at the introduction at <ulink "
 "url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink>,"
 " and the online documentation and tutorial at <ulink "
-"url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-"
+"url=\"https://www.regular-"
+"expressions.info/\"><citetitle>https://www.regular-"
 "expressions.info/</citetitle></ulink>."
-msgstr "Okno správy záznamu obsahuje tiež názov a funkciu automatického dokončovania funkcií. Toto používa regulárne výrazy na extrahovanie názvov tried a funkcií z (textových) súborov, ktoré odovzdávate, ako aj samotných názvov súborov. Ak slovo, ktoré píšete, sa zhoduje s čímkoľvek v zozname (po napísaní minimálne 3 znakov alebo stlačení <keycap>Ctrl+medzerník</keycap>) sa zobrazí rozvinovacia ponuka, ktorá vám umožní vybrať si celý názov. Regulárne výrazy dodávané s TortoiseSVN sa nachádzajú v priečinku <filename>bin</filename> pri inštalácii TortoiseSVN. Môžete tiež definovať svoje vlastné regulárne výrazy a uložiť ich do <filename>%APPDATA%\\TortoiseSVN\\autolist.txt</filename>. Váš súkromný automatický zoznam samozrejme nebude prepísaný pri aktualizácii svojej inštalácie TortoiseSVN. Ak vám regulárne výrazy nie sú známe, pozrite sa na úvod na <ulink url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink> a online dokumentáciu a manuál na stránke <ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>."
+msgstr "Okno správy denníka obsahuje aj funkciu automatického dopĺňania názvu súboru a funkcie. Ten používa regulárne výrazy na extrakciu názvov tried a funkcií z (textových) súborov, ktoré odovzdávate, ako aj samotných názvov súborov. Ak sa slovo, ktoré zadávate, zhoduje s niečím v zozname (po zadaní aspoň 3 znakov alebo po stlačení klávesovej skratky <keycap>Ctrl+medzerník</keycap>), zobrazí sa rozvinovacie okno, ktoré vám umožní vybrať celý názov. Regulárne výrazy dodávané s TortoiseSVN sa nachádzajú v priečinku TortoiseSVN <filename>bin</filename> inštalácie. Môžete si tiež definovať vlastné regresné výrazy a uložiť ich do súboru PPDATA%\\TortoiseSVN\\autolist.txt. Samozrejme, že váš súkromný automatický záznam nebude prepísaný pri aktualizácii inštalácie TortoiseSVN. Ak nepoznáte regulárne výrazy, pozrite si úvod na adrese <ulink url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression a online dokumentáciu a výukový program</citetitle></ulink> na adrese <ulink url=\"https://www.regular-expressions.info/\"><citetitle>https://www.regular-expressions.info/</citetitle></ulink>."
 
 #. (para)
 msgid ""
@@ -5970,12 +6024,13 @@ msgid ""
 "Subversion lets you change revision properties any time you want. But since "
 "such changes can't be undone (those changes are not versioned) this feature "
 "is disabled by default. To make this work, you must set up a pre-revprop-"
-"change hook. Please refer to the chapter on <ulink url=\"http://svnbook.red-"
+"change hook. Please refer to the chapter on <ulink "
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook"
 " Scripts</citetitle></ulink> in the Subversion Book for details about how to"
 " do that. Read <xref linkend=\"tsvn-repository-hooks\"/> to find some "
 "further notes on implementing hooks on a Windows machine."
-msgstr "Subversion vám umožňuje kedykoľvek zmeniť vlastnosti revízie. Ale keďže také zmeny nie je možné vrátiť späť (tieto zmeny nemajú verziu), táto funkcia je v predvolenom nastavení zakázaná. Aby to fungovalo, musíte nastaviť pre-revprop-change hák. Prečítajte si kapitolu <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Skripty háku</citetitle></ulink> v knihe Subversion Book, kde nájdete podrobnosti o tom, ako to urobiť. Prečítajte si <xref linkend=\"tsvn-repository-hooks\"/> pre nájdenie ďalších poznámok k implementácii hákov na počítači so systémom Windows."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -6056,9 +6111,10 @@ msgstr "Jednoduché vyhľadávanie čiastkových reťazcov funguje podobným sp�
 msgid ""
 "Describing the use of regular expression searches is beyond the scope of "
 "this manual, but you can find online documentation and a tutorial at <ulink "
-"url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-"
+"url=\"https://www.regular-"
+"expressions.info/\"><citetitle>https://www.regular-"
 "expressions.info/</citetitle></ulink>."
-msgstr "Opis použitia vyhľadávania použitím regulárneho výrazu je nad rámec tejto príručky, ale online dokumentáciu a návod nájdete na stránke <ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -6762,8 +6818,8 @@ msgstr "KDiff3"
 msgid ""
 "KDiff3 is a free diff tool which can also handle directories. You can "
 "download it from <ulink "
-"url=\"http://kdiff3.sf.net/\"><citetitle>here</citetitle></ulink>."
-msgstr "KDiff3 je bezplatný nástroj na porovnávanie, ktorý dokáže spracovať aj priečinky. Môžete si ho stiahnuť <ulink url=\"http://kdiff3.sf.net/\"><citetitle>tu</citetitle></ulink> ."
+"url=\"https://download.kde.org/stable/kdiff3/\"><citetitle>here</citetitle></ulink>."
+msgstr ""
 
 #. (term)
 msgid "SourceGear DiffMerge"
@@ -6786,8 +6842,8 @@ msgid ""
 "ExamDiff Pro is shareware and adds a number of goodies including directory "
 "diff and editing capability. In both flavours, version 3.2 and above can "
 "handle unicode. You can download them from <ulink "
-"url=\"http://www.prestosoft.com/\"><citetitle>PrestoSoft</citetitle></ulink>."
-msgstr "ExamDiff Standard je freeware. Dokáže spracovať súbory, ale nie priečinky. ExamDiff Pro je shareware a pridáva množstvo vylepšení vrátane porovnania odlišností priečinkov a schopnosti úprav. V oboch činnostiach verzia 3.2 a vyššia zvládne kódovanie Unicode. Môžete si ich stiahnuť zo stránky <ulink url=\"http://www.prestosoft.com/\"><citetitle>PrestoSoft</citetitle></ulink> ."
+"url=\"https://www.prestosoft.com/\"><citetitle>PrestoSoft</citetitle></ulink>."
+msgstr ""
 
 #. (term)
 msgid "Beyond Compare"
@@ -7163,9 +7219,9 @@ msgstr "Pri porovnávaní vzorov sa rozlišujú veľké a malé písmená, čo m
 msgid ""
 "If you want an official definition for globbing, you can find it in the IEEE"
 " specifications for the shell command language <ulink "
-"url=\"http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13\"><citetitle>Pattern"
+"url=\"https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13\"><citetitle>Pattern"
 " Matching Notation</citetitle></ulink>."
-msgstr "Ak chcete oficiálnu definíciu zovšeobecnenia, nájdete ju v špecifikáciách IEEE pre prostredie príkazového jazyka <ulink url=\"http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13\"><citetitle>Poznámka zodpovedajúceho vzoru</citetitle></ulink> ."
+msgstr ""
 
 #. (title)
 msgid "No Paths in Global Ignore List"
@@ -7777,19 +7833,19 @@ msgstr "Subversion podporuje rozšírenie kľúčových slov podobné CVS, ktor�
 #. (para)
 msgid ""
 "To find out how to use these keywords, look at the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.props.special.keywords.html\"><citetitle>svn:keywords"
 " section</citetitle></ulink> in the Subversion book, which gives a full "
 "description of these keywords and how to enable and use them."
-msgstr "Ak chcete zistiť, ako používať tieto kľúčové slová, pozrite si sekciu <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.props.special.keywords.html\"><citetitle>svn:keywords</citetitle></ulink> v knihe Subversion, ktorá poskytuje úplný popis týchto kľúčových slov a informácií o tom, ako ich povoliť a používať."
+msgstr ""
 
 #. (para)
 msgid ""
 "For more information about properties in Subversion see the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.props.html\"><citetitle>Special "
 "Properties</citetitle></ulink>."
-msgstr "Viac informácií o vlastnostiach v Subversion nájdete na <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.props.html\"><citetitle>Špeciálne vlastnosti</citetitle></ulink>."
+msgstr ""
 
 #. (title)
 msgid "Adding and Editing Properties"
@@ -8983,10 +9039,10 @@ msgstr "Adresy URL začínajúce reťazcom <literal>/</literal> kopírujú sché
 msgid ""
 "You can also specify a peg and operative revision for the URL if required. "
 "To learn more about peg and operative revisions, please read the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.pegrevs.html\"><citetitle>corresponding "
 "chapter</citetitle></ulink> in the Subversion book."
-msgstr "V prípade potreby môžete tiež určiť naviazanú a operatívnu revíziu ak sú požadované pre adresu URL. Ak sa chcete dozvedieť viac o naviazaných a operatívnych revíziách, prečítajte si <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.pegrevs.html\"><citetitle>zodpovedajúca kapitola </citetitle></ulink> v knihe Subversion."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9130,11 +9186,11 @@ msgstr "Ak ste importovali svoj projekt s odporúčanou štruktúrou priečinkov
 #. (para)
 msgid ""
 "The default destination URL for the new branch will be the source URL on which your working copy is based. You will need to edit that URL to the new path for your branch/tag. So instead of <screen>\n"
-"http://svn.collab.net/repos/ProjectName/trunk\n"
+"https://svn.example.com/repos/ProjectName/trunk\n"
 "      </screen> you might now use something like <screen>\n"
-"http://svn.collab.net/repos/ProjectName/tags/Release_1.10\n"
+"https://svn.example.com/repos/ProjectName/tags/Release_1.10\n"
 "      </screen> If you can't remember the naming convention you used last time, click the button on the right to open the repository browser so you can view the existing repository structure."
-msgstr "Predvolená cieľová adresa URL pre novú vetvu bude zdrojová adresa URL, na ktorej je založená vaša pracovná kópia. Túto adresu URL budete musieť upraviť na novú cestu k svojej vetve/príznaku. Takže namiesto<screen>\nhttp://svn.collab.net/repos/ProjectName/trunk\n      </screen> teraz môžete použiť niečo ako <screen>\nhttp://svn.collab.net/repos/ProjectName/tags/Release_1.10\n      </screen> Ak si nepamätáte, aké pomenovanie ste použili naposledy, kliknutím pravým tlačidlom otvoríte prehľadávač úložiska, aby ste si mohli prezrieť existujúcu štruktúru úložiska."
+msgstr ""
 
 #. (title)
 msgid "intermediate folders"
@@ -9144,9 +9200,9 @@ msgstr "medziľahlé priečinky"
 msgid ""
 "When you specify the target URL, all the folders up to the last one must "
 "already exist or you will get an error message. In the above example, the "
-"URL <literal>http://svn.collab.net/repos/ProjectName/tags/</literal> must "
+"URL <literal>https://svn.example.com/repos/ProjectName/tags/</literal> must "
 "exist to create the <literal>Release_1.10</literal> tag."
-msgstr "Keď zadáte cieľovú adresu URL, musia už existovať všetky priečinky až po posledný, inak sa zobrazí chybové hlásenie. Vo vyššie uvedenom príklade musí existovať na vytvorenie príznaku <literal>Release_1.10</literal> adresa URL <literal>http://svn.collab.net/repos/ProjectName/tags/</literal>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9160,14 +9216,14 @@ msgstr "Ak však chcete vytvoriť vetvu/príznak na adrese URL, ktorá má medzi
 msgid ""
 "Note that this option is disabled by default to avoid typos. For example, if"
 " you typed the target URL as "
-"<literal>http://svn.collab.net/repos/ProjectName/Tags/Release_1.10</literal>"
+"<literal>https://svn.example.com/repos/ProjectName/Tags/Release_1.10</literal>"
 " instead of "
-"<literal>http://svn.collab.net/repos/ProjectName/tags/Release_1.10</literal>,"
+"<literal>https://svn.example.com/repos/ProjectName/tags/Release_1.10</literal>,"
 " you would get an error with the option disabled, but with the option "
 "enabled a folder <literal>Tags</literal> would be automatically created, and"
 " you would end up with a folder <literal>Tags</literal> and a folder "
 "<literal>tags</literal>."
-msgstr "Upozorňujeme, že táto možnosť je v predvolenom nastavení zakázaná, aby nedošlo k preklepom. Napríklad, ak ste zadali cieľovú adresu URL ako <literal>http://svn.collab.net/repos/ProjectName/Tags/Release_1.10</literal> namiesto <literal> http://svn.collab.net/repos/ProjectName/tags/Release_1.10</literal>, pri vypnutej možnosti by sa vyskytla chyba, ale pri zapnutej možnosti zapnutej by sa priečinok <literal>Tags</literal> vytvoril automaticky a vy by ste skončili s priečinkom <literal>Tags</literal> a priečinkom <literal>tags</literal> ."
+msgstr ""
 
 #. (term)
 #. (entry)
@@ -9449,11 +9505,11 @@ msgstr "Tam, kde sa vetvy používajú na udržiavanie samostatných vývojovýc
 msgid ""
 "It is important to understand how branching and merging works in Subversion "
 "before you start using it, as it can become quite complex. It is highly "
-"recommended that you read the chapter <ulink url=\"http://svnbook.red-"
+"recommended that you read the chapter <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.branchmerge.html\"><citetitle>Branching and "
 "Merging</citetitle></ulink> in the Subversion book, which gives a full "
 "description and many examples of how it is used."
-msgstr "Je dôležité pochopiť, ako v Subversion funguje rozvetvenie a zlúčenie, skôr ako ho začnete používať, pretože sa to môže stať pomerne zložitým. Dôrazne sa odporúča prečítať si kapitolu <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.branchmerge.html\"><citetitle>Vetvenie a zlúčenie</citetitle></ulink> v knihe Subversion, ktorá poskytuje úplný popis a veľa príkladov toho, ako sa používa."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9525,10 +9581,10 @@ msgid ""
 "only way to merge a branch back to trunk. Another use case occurs when you "
 "are using vendor branches and you need to merge the changes following a new "
 "vendor drop into your trunk code. For more information read the chapter on "
-"<ulink url=\"http://svnbook.red-"
+"<ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.vendorbr.html\"><citetitle>vendor "
 "branches</citetitle></ulink> in the Subversion Book."
-msgstr "Ak váš server/úložisko nepodporuje trasovanie zlúčenia, je to jediný spôsob, ako zlúčiť vetvu späť do kmeňa. Iný prípad použitia nastáva, keď používate vetvy dodávateľa a musíte následne zlúčiť zmeny po páde nového dodávateľa do kódu kmeňa. Viac informácií nájdete v kapitole <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.vendorbr.html\"><citetitle>dodávateľské vetvy</citetitle></ulink> v knihe Subversion."
+msgstr ""
 
 #. (title)
 msgid "Merging a Range of Revisions"
@@ -9774,10 +9830,10 @@ msgid ""
 " would see a complete removal followed by a complete add. To make Subversion"
 " use only path-based differences rather than history-based differences, "
 "check the <guilabel>Ignore ancestry</guilabel> box. Read more about this "
-"topic in the Subversion book, <ulink url=\"http://svnbook.red-"
+"topic in the Subversion book, <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.branchmerge.advanced.html#svn.branchmerge.advanced.ancestry\"><citetitle>Noticing"
 " or Ignoring Ancestry</citetitle></ulink>."
-msgstr "Väčšinou chcete zlúčením zohľadniť históriu súboru, aby sa zlúčili zmeny týkajúce sa spoločného predka. Niekedy bude možno potrebné zlúčiť súbory, ktoré možno súvisia, ale nie vo vašom úložisku. Napríklad môžete mať importované verzie 1 a 2 knižnice tretej strany do dvoch samostatných priečinkov. Aj keď logicky súvisia, Subversion o tom nevie, pretože vidí iba importované dechtové lopty. Ak sa pokúsite zlúčiť odlišnosti medzi týmito dvoma stromami, uvidíte úplné odstránenie a úplné pridanie. Ak chcete, aby Subversion používal iba odlišnosti založené na ceste a nie odlišnosti založené na histórii, zaškrtnite políčko <guilabel>Ignorovať predkov</guilabel>. Prečítajte si viac o tejto téme v knihe Subversion, časť <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.branchmerge.advanced.html#svn.branchmerge.advanced.ancestry\"><citetitle>Všímať si alebo ignorovať predkov</citetitle></ulink> ."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9794,6 +9850,21 @@ msgid ""
 "modified locally or not versioned at all. If the file is deleted then there "
 "is no way to recover it, which is why that option is not checked by default."
 msgstr "Zaškrtávacie políčko je označené <guilabel>Vynútiť zlúčenie</guilabel> sa používa na zabránenie konfliktu stromov, pri ktorom prichádzajúce odstránenie ovplyvňuje súbor, ktorý je buď lokálne upravený, alebo je bezverziový. Ak je súbor odstránený, neexistuje žiadny spôsob, ako ho obnoviť a preto táto možnosť nie je predvolene zaškrtnutá."
+
+#. (para)
+msgid ""
+"The checkbox marked <guilabel>Allow mixed revisions (not "
+"recommended)</guilabel> is used to allow merging into mixed-revision working"
+" copies (corresponding to the command line option <literal>--allow-mixed-"
+"revisions</literal>). The default since Subversion 1.7 is to disallow "
+"merging into mixed-revision working copies. The reasons are described in the"
+" Subversion book towards the end of the section <ulink "
+"url=\"https://svnbook.red-"
+"bean.com/en/1.8/svn.branchmerge.basicmerging.html#svn.branchmerge.basicmerging.stayinsync\"><citetitle>Keeping"
+" a Branch in Sync</citetitle></ulink> . If you understand the possible "
+"problems of merging into a mixed-revision working copy you may select this "
+"checkbox to perform the merge anyway."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9861,10 +9932,10 @@ msgid ""
 "been ported in the merge. If you want to apply another merge at a later time"
 " you will need to know what you have already merged, as you do not want to "
 "port a change more than once. For more information about this, refer to "
-"<ulink url=\"http://svnbook.red-"
+"<ulink url=\"https://svnbook.red-"
 "bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle>Best"
 " Practices for Merging</citetitle></ulink> in the Subversion book."
-msgstr "Pre klientov a servery Subversion pred 1.5 sa neukladajú žiadne informácie o zlúčení a zlúčené revízie sa musia sledovať ručne. Keď ste zmeny otestovali a vykonali ste odovzdanie tejto revízie, mala by vaša správa záznamu odovzdania <emphasis>vždy</emphasis> obsahovať čísla revízií, ktoré boli prenesené do zlúčenia. Ak chcete neskôr použiť ďalšie zlúčenie, budete potrebovať vedieť, čo ste už zlúčili, pretože nechcete preniesť zmenu viackrát. Viac informácií o tomto nájdete na <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle> Osvedčené postupy pre zlúčenie </citetitle></ulink> v knihe Subversion."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9963,10 +10034,10 @@ msgstr "Informácie o sledovaní zlúčenia sú uložené vo vlastnosti <literal
 #. (para)
 msgid ""
 "Find out more about merge tracking from Subversion's <ulink "
-"url=\"http://svn.apache.org/repos/asf/Subversion/trunk/notes/merge-"
+"url=\"https://svn.apache.org/repos/asf/subversion/trunk/notes/merge-"
 "tracking/index.html\"><citetitle>Merge tracking "
 "documentation</citetitle></ulink>."
-msgstr "Viac informácií o sledovaní zlúčenia získate od spoločnosti Subversion <ulink url=\"http://svn.apache.org/repos/asf/Subversion/trunk/notes/merge-tracking/index.html\"><citetitle>Dokumentácia na sledovanie zlúčenia</citetitle></ulink> ."
+msgstr ""
 
 #. (title)
 msgid "Handling Conflicts after Merge"
@@ -12067,10 +12138,8 @@ msgid ""
 "This allows TortoiseSVN to display a link in the log dialog, so when you are"
 " looking at the revision log you can jump directly to your bug tracking "
 "tool. You do not have to provide this property, but then TortoiseSVN shows "
-"only the issue number and not the link to it. e.g the TortoiseSVN project is"
-" using <systemitem "
-"class=\"url\">http://issues.tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>."
-msgstr "Nastavte túto vlastnosť na adresu URL svojho nástroja na sledovanie chýb. Ten musí byť správne kódovaný URI a musí obsahovať <literal>%BUGID%</literal>. <literal>%BUGID%</literal> sa nahrádza číslom problému, ktoré ste zadali. Toto umožňuje TortoiseSVN zobraziť odkaz v dialógovom okne záznamu, takže keď sa pozeráte do záznamu revízií, môžete prejsť priamo na svoj nástroj na sledovanie chýb. Túto vlastnosť nemusíte poskytovať, ale potom TortoiseSVN zobrazí iba číslo problému a nie odkaz naňho. Napr. projekt TortoiseSVN používa <systemitem class=\"url\"> http://issues.tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>."
+"only the issue number and not the link to it."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -12087,20 +12156,20 @@ msgid ""
 "relative to the repository root. For example, "
 "<literal>^/../?do=details&amp;id=%BUGID%</literal> will resolve to "
 "<systemitem "
-"class=\"url\">https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>"
-" if your repository is located on <systemitem "
-"class=\"url\">https://tortoisesvn.net/svn/trunk/</systemitem>."
-msgstr "Ak sa to začína reťazcom <literal>^/</literal> predpokladá sa, že je relatívny ku koreňu úložiska. Napríklad, <literal>^/.. /?do=details&amp;id=%BUGID%</literal> bude riešené na <systemitem class=\"url\"> https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem> ak je vaše úložisko umiestnené na <systemitem class=\"url\"> https://tortoisesvn.net/svn/trunk/</systemitem>."
+"class=\"url\">https://example.com/?do=details&amp;id=%BUGID%</systemitem> if"
+" your repository is located on <systemitem "
+"class=\"url\">https://example.com/svn/trunk/</systemitem>."
+msgstr ""
 
 #. (para)
 msgid ""
 "A URL beginning with the string <literal>/</literal> is assumed to be "
 "relative to the server's hostname. For example "
 "<literal>/?do=details&amp;id=%BUGID%</literal> will resolve to <systemitem "
-"class=\"url\">https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>"
-" if your repository is located anywhere on <systemitem "
-"class=\"url\">https://tortoisesvn.net</systemitem>."
-msgstr "Pri adrese URL, začínajúcej reťazcom <literal>/</literal> sa predpokladá, že je relatívna k názvu hostiteľa servera. Napríklad <literal>/?do=details&amp;id=%BUGID%</literal> bude riešené na <systemitem class=\"url\"> https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem> ak je vaše úložisko umiestnené kdekoľvek na <systemitem class=\"url\"> https://tortoisesvn.net</systemitem>."
+"class=\"url\">https://example.com/?do=details&amp;id=%BUGID%</systemitem> if"
+" your repository is located anywhere on <systemitem "
+"class=\"url\">https://example.com</systemitem>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -12232,9 +12301,10 @@ msgid ""
 "introduction at <ulink "
 "url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink>,"
 " and the online documentation and tutorial at <ulink "
-"url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-"
+"url=\"https://www.regular-"
+"expressions.info/\"><citetitle>https://www.regular-"
 "expressions.info/</citetitle></ulink>."
-msgstr "Ak vám regulárne výrazy nie sú známe, pozrite sa časť v úvode <ulink url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle> https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink> a online dokumentáciu a návod na stránke <ulink url=\"http://www.regular-expressions.info/\"><citetitle> http://www.regular-expressions.info/</citetitle></ulink> ."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -12371,11 +12441,12 @@ msgid ""
 "(<xref linkend=\"tsvn-preface-source\"/> explains how to access the "
 "repository.) A summary of the API is also given in <xref linkend=\"tsvn-"
 "ibugtraqprovider\"/>. Another (working) example plugin in C# is <ulink "
-"url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle</citetitle></ulink>"
+"url=\"https://code.google.com/p/gurtle/\"><citetitle>Gurtle</citetitle></ulink>"
 " which implements the required COM interface to interact with the <ulink "
-"url=\"http://code.google.com/hosting/\"><citetitle>Google "
-"Code</citetitle></ulink> issue tracker."
-msgstr "Každé takéto rozhranie je samozrejme veľmi špecifické pre váš systém sledovania problémov, takže nemôžeme poskytnúť túto časť. Popis, ako vytvoriť takýto program, je mimo rozsah tejto príručky. Definíciu rozhrania a ukážkové doplnky v C# a C++/ATL možno získať v priečinku <literal>contrib</literal> v <ulink url=\"https://svn.code.sf.net/p/tortoisesvn/code/trunk/contrib/issue-tracker-plugins\"><citetitle>úložisku TortoiseSVN</citetitle></ulink>. (Časť <xref linkend=\"tsvn-preface-source\"/> vysvetľuje, ako získať prístup do úložiska.) Súhrn API je tiež uvedený v časti <xref linkend=\"tsvn-ibugtraqprovider\"/>. Ďalším (fungujúcim) príkladom doplnku v C# je aplikácia <ulink url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle</citetitle></ulink>, ktorá implementuje požadované rozhranie COM na interakciu so sledovačom problémov <ulink url=\"http://code.google.com/hosting/\"><citetitle>kódu Google</citetitle></ulink>."
+"url=\"https://code.google.com/hosting/\"><citetitle>Google "
+"Code</citetitle></ulink> issue tracker. Google Code itself is turned down as"
+" of 2016, but the plugin is still available as an example implementation."
+msgstr ""
 
 #. (title)
 msgid "Example issue tracker query dialog"
@@ -12417,11 +12488,11 @@ msgstr "WebSVN"
 msgid ""
 "There are several web-based repository viewers available for use with "
 "Subversion such as <ulink "
-"url=\"http://www.viewvc.org/\"><citetitle>ViewVC</citetitle></ulink> and "
+"url=\"https://www.viewvc.org/\"><citetitle>ViewVC</citetitle></ulink> and "
 "<ulink "
 "url=\"https://websvnphp.github.io/\"><citetitle>WebSVN</citetitle></ulink>. "
 "TortoiseSVN provides a means to link with these viewers."
-msgstr "Existuje niekoľko webových prehliadačov archívov, ktoré sú k dispozícii na použitie so Subversion, ako napr. <ulink url=\"http://www.viewvc.org/\"><citetitle>ViewVC</citetitle></ulink> a <ulink url=\"https://websvnphp.github.io/\"><citetitle>WebSVN</citetitle></ulink>. TortoiseSVN poskytuje prostriedky na spojenie s týmito prehliadačmi."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -12649,19 +12720,19 @@ msgid ""
 "Use <guibutton>Edit</guibutton> to edit the Subversion configuration file "
 "directly. Some settings cannot be modified directly by TortoiseSVN, and need"
 " to be set here instead. For more information about the Subversion "
-"<filename>config</filename> file see the <ulink url=\"http://svnbook.red-"
+"<filename>config</filename> file see the <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Runtime "
 "Configuration Area</citetitle></ulink>. The section on <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.props.html#svn.advanced.props.auto\"><citetitle>Automatic"
 " Property Setting</citetitle></ulink> is of particular interest, and that is"
 " configured here. Note that Subversion can read configuration information "
 "from several places, and you need to know which one takes priority. Refer to"
-" <ulink url=\"http://svnbook.red-"
+" <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.confarea.html#svn.advanced.confarea.windows-"
 "registry\"><citetitle>Configuration and the Windows "
 "Registry</citetitle></ulink> to find out more."
-msgstr "Použite tlačidlo <guibutton>Upraviť</guibutton> pre priamu úpravu konfiguračného súboru Subversion. Niektoré nastavenia nemôže TortoiseSVN upravovať priamo a je potrebné ich namiesto toho vykonať tu. Pre viac informácií o súbore <filename>nastavení</filename> Subversion si pozrite časť <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Oblasť konfigurácie za behu</citetitle></ulink>. Časť <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.props.html#svn.advanced.props.auto\"><citetitle>Automatické nastavenie vlastnosti</citetitle></ulink> je obzvlášť zaujímavá a konfiguruje sa tu. Všimnite si, že program Subversion dokáže načítať informácie o konfigurácii z viacerých miest a potrebujete vedieť, ktoré z nich majú prednosť. V časti <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.confarea.html#svn.advanced.confarea.windows-registry\"><citetitle>Konfigurácia a register Windows</citetitle></ulink> sa dozviete viac."
+msgstr ""
 
 #. (term)
 msgid "Apply local modifications to svn:externals when updating"
@@ -12720,6 +12791,13 @@ msgid ""
 "TortoiseSVN's context menu to appear at all, you can list them in the box at"
 " the bottom."
 msgstr "Ak vo vašom počítači existujú cesty, kde nechcete, aby sa kontextová ponuka TortoiseSVN vôbec objavovala, môžete ich uviesť v poli dole."
+
+#. (para)
+msgid ""
+"There's a different settings page for the Windows 11 context menu. That page"
+" also has a button to register the TortoiseSVN entries in the context menu. "
+"You only have to do this if TortoiseSVN was installed as a different user."
+msgstr ""
 
 #. (title)
 msgid "TortoiseSVN Dialog Settings 1"
@@ -13754,10 +13832,10 @@ msgid ""
 "If you need to set up per-repository proxy settings, you will need to use "
 "the Subversion <filename>servers</filename> file to configure this. Use "
 "<guibutton>Edit</guibutton> to get there directly. Consult the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Runtime "
 "Configuration Area</citetitle></ulink> for details on how to use this file."
-msgstr "Ak potrebujete nastaviť proxy server podľa úložiska, budete musieť použiť na ich konfiguráciu súbory <filename>servery</filename> Subversion. Dostanete sa tam priamo použitím tlačidla <guibutton>Upraviť</guibutton>. Prezrite si časť <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Oblasť konfigurácie behu programu</citetitle></ulink> pre detaily, ako používať tento súbor."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -14848,13 +14926,13 @@ msgstr "<placeholder-1/> Kliknite na <guibutton>Pridať...</guibutton> pre použ
 #. (para)
 msgid ""
 "This property specifies the COM UUID of the IBugtraqProvider, for example "
-"<literal>{91974081-2DC7-4FB1-B3BE-0DE1C8D6CE4E}</literal>. (This example is "
+"<literal>{0044f6c0-b999-11e1-afa6-0800200c9a66}</literal>. (This example is "
 "the UUID of the <ulink "
-"url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle bugtraq "
+"url=\"https://github.com/scottiemc7/YurtleTrack\"><citetitle>YurtleTrack "
 "provider</citetitle></ulink>, which is a provider for the <ulink "
-"url=\"http://code.google.com/hosting/\"><citetitle>Google "
-"Code</citetitle></ulink> issue tracker.)"
-msgstr "Táto vlastnosť určuje napríklad UUID modelu COM produktu IBugtraqProvider <literal>{91974081-2DC7-4FB1-B3BE-0DE1C8D6CE4E}</literal>. (Tento príklad je UUID <ulink url=\"http://code.google.com/p/gurtle/\"><citetitle>Poskytovateľa Gurtle bugtraq</citetitle></ulink>, ktorý je poskytovateľom pre sledovač problémov <ulink url=\"http://code.google.com/hosting/\"><citetitle>kódu Google</citetitle></ulink>.)"
+"url=\"http://www.jetbrains.com/youtrack/\"><citetitle>JetBrains YouTrack "
+"6.0</citetitle></ulink> issue tracker.)"
+msgstr ""
 
 #. (para)
 msgid ""
@@ -15307,11 +15385,8 @@ msgid ""
 "If this option is set to <literal>true</literal> then TortoiseSVN tries to "
 "find the revision where the branch was created from and hide all the "
 "revisions that are beyond that revision. Since this can take quite a while, "
-"this option is disabled by default. Also this option doesn't work with some "
-"SVN servers (e.g., Google Code Hosting, see <ulink "
-"url=\"http://code.google.com/p/support/issues/detail?id=5471\"><citetitle>issue"
-" #5471</citetitle></ulink>)."
-msgstr "Ak je táto možnosť nastavená na <literal>true</literal> potom sa TortoiseSVN pokúsi nájsť revíziu, z ktorej bola vetva vytvorená a skryť všetky revízie, ktoré sú mimo tejto revízie. Pretože to môže chvíľu trvať, táto možnosť je v predvolenom nastavení zakázaná. Táto možnosť tiež nefunguje s niektorými servermi SVN (napr. Hostenie kódu Google, pozrite si časť <ulink url=\"http://code.google.com/p/support/issues/detail?id=5471\"><citetitle>problém #5471</citetitle></ulink>)."
+"this option is disabled by default."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -15356,6 +15431,15 @@ msgid ""
 "separate the individual log messages of the merged revisions. If you prefer,"
 " you can set this to a value containing a separator string of your choice."
 msgstr "Keď zlúčite revízie z inej vetvy a budú k dispozícii informácie o sledovaní zlúčenia, správy záznamu z zlúčených revízií sa zhromaždia na vytvorenie správy záznamu odovzdania. Preddefinovaný reťazec sa používa na oddelenie jednotlivých správ záznamu zlúčených revízií. Ak chcete, môžete túto hodnotu nastaviť na hodnotu obsahujúcu oddeľovací reťazec podľa vášho výberu."
+
+#. (para)
+msgid ""
+"By setting to <literal>true</literal> you can set the default value of the "
+"<guilabel>Allow mixed revisions (not recommended)</guilabel> checkbox in the"
+" Merge option dialog. Please be aware of the limitations and potentional "
+"problems of merges into mixed-revision working copies before configuring "
+"this setting."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -15610,11 +15694,11 @@ msgstr "Ak je pole <literal>Cesta alebo adresa URL</literal> zostane prázdne, p
 #. (para)
 msgid ""
 "If you want to monitor all repositories served via the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.serverconfig.httpd.html#svn.serverconfig.httpd.basic\"><citetitle>SVNParentPath</citetitle></ulink>"
 " directive, enter the root Url for your repositories and check the box "
 "<literal>Url points to SVNParentPath list</literal>."
-msgstr "Ak chcete monitorovať všetky úložiská poskytované prostredníctvom príkazu <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.serverconfig.httpd.html#svn.serverconfig.httpd.basic\"><citetitle>SVNParentPath</citetitle></ulink>, zadajte koreňovú adresu URL pre svoje úložiská a zaškrtnite políčko <literal>Adresa URL ukazuje na zoznam SVNParentPath</literal>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -16125,9 +16209,9 @@ msgid ""
 "default, international format is used: <placeholder-1/>. Alternatively, you "
 "can specify a custom format which will be used with <placeholder-2/>, for "
 "example: <placeholder-3/>. For a list of available formatting characters, "
-"look at the <ulink url=\"http://msdn.microsoft.com/en-"
+"look at the <ulink url=\"https://msdn.microsoft.com/en-"
 "us/library/fe06s4ak.aspx\"><placeholder-4/></ulink>."
-msgstr "Nahradené dátumom/časom odovzdania najvyššej revízie potvrdenia. Predvolene sa používa medzinárodný formát: <placeholder-1/>. Prípadne môžete určiť vlastný formát, ktorý sa použije s <placeholder-2/>, napríklad: <placeholder-3/>. Zoznam dostupných formátovacích znakov nájdete na <ulink url=\"http://msdn.microsoft.com/en-us/library/fe06s4ak.aspx\"><placeholder-4/></ulink> ."
+msgstr ""
 
 #. (literal)
 #. (literal)
@@ -16230,6 +16314,10 @@ msgid ""
 "Replaced with the repository URL of the working copy path passed to "
 "SubWCRev."
 msgstr "Nahradené URL úložiska cesty pracovnej kópie odovzdanej SubWCRev."
+
+#. (entry)
+msgid "Replaced with the URL of the repository root."
+msgstr ""
 
 #. (literal)
 msgid "$WCINSVN?TText:FText$"
@@ -16521,6 +16609,16 @@ msgid ""
 "Replaced with the repository URL of the working copy path used in "
 "<placeholder-1/>. Equivalent to <placeholder-2/>."
 msgstr "Nahradené s URL úložiska cesty pracovnej kópie použitej v <placeholder-1/>. Ekvivalent <placeholder-2/>."
+
+#. (literal)
+msgid "$REPOROOT$"
+msgstr ""
+
+#. (entry)
+msgid ""
+"Replaced with the URL of the repository root. Equivalent to "
+"<placeholder-1/>."
+msgstr ""
 
 #. (entry)
 msgid "True if the item is versioned."
@@ -17439,10 +17537,10 @@ msgstr "Pretože TortoiseSVN nikdy nestratí údaje, vaše revízie <quote>vrát
 msgid ""
 "The only way to remove data from the repository is to use the Subversion "
 "command line tool <literal>svnadmin</literal>. You can find a description of"
-" how this works in the <ulink url=\"http://svnbook.red-"
+" how this works in the <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.reposadmin.maint.html\"><citetitle>Repository "
 "Maintenance</citetitle></ulink>."
-msgstr "Jediným spôsobom, ako odstrániť údaje z úložiska, je použiť nástroj príkazového riadku Subversion <literal>svnadmin</literal>. Popis toho, ako to funguje, nájdete v časti <ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.reposadmin.maint.html\"><citetitle>Údržba úložiska</citetitle></ulink>."
+msgstr ""
 
 #. (title)
 msgid "Compare two revisions of a file or folder"
@@ -17745,10 +17843,13 @@ msgstr "Inštalátor TortoiseSVN sa dodáva ako súbor MSI, čo znamená, že by
 
 #. (para)
 msgid ""
-"A good walk-through on how to do that can be found in the knowledge base "
-"article 314934 from Microsoft: <ulink "
-"url=\"http://support.microsoft.com/?kbid=314934\"><citetitle>http://support.microsoft.com/?kbid=314934</citetitle></ulink>."
-msgstr "Dobrý návod, ako to urobiť, nájdete v článku databázy Knowledge Base 314934 od spoločnosti Microsoft: <ulink url=\"http://support.microsoft.com/?kbid=314934\"><citetitle>http://support.microsoft.com/?kbid=314934</citetitle></ulink>."
+"A good walk-through on how to do that can be found in this article from "
+"Microsoft: <ulink url=\"https://learn.microsoft.com/en-"
+"us/troubleshoot/windows-server/group-policy/use-group-policy-to-install-"
+"software\"><citetitle>https://learn.microsoft.com/en-"
+"us/troubleshoot/windows-server/group-policy/use-group-policy-to-install-"
+"software</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -20154,8 +20255,8 @@ msgid ""
 "Mozilla installed, you can copy those dictionaries, which are located in the"
 " installation folders for those applications. Otherwise, you need to "
 "download the required dictionary files from <ulink "
-"url=\"http://wiki.services.openoffice.org/wiki/Dictionaries\"><citetitle>http://wiki.services.openoffice.org/wiki/Dictionaries</citetitle></ulink>."
-msgstr "Alebo si môžete slovníky nainštalovať sami. Ak máte nainštalovaný OpenOffice alebo Mozilla, môžete skopírovať tieto slovníky, ktoré sa nachádzajú v inštalačných priečinkoch pre tieto aplikácie. V opačnom prípade si musíte stiahnuť požadované súbory slovníka zo stránky <ulink url=\"http://wiki.services.openoffice.org/wiki/Dictionaries\"><citetitle> http://wiki.services.openoffice.org/wiki/Dictionaries</citetitle></ulink>."
+"url=\"https://cgit.freedesktop.org/libreoffice/dictionaries/tree/\"><citetitle>https://cgit.freedesktop.org/libreoffice/dictionaries/tree/</citetitle></ulink>."
+msgstr ""
 
 #. (filename)
 msgid "en_US.aff"
@@ -20608,11 +20709,11 @@ msgid ""
 "TortoiseMerge is an Open Source project. That means you have full read "
 "access to the source code of this program. You can browse it on this link "
 "<ulink "
-"url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>."
+"url=\"https://sourceforge.net/p/tortoisesvn/code/HEAD/tree\"><citetitle>https://sourceforge.net/p/tortoisesvn/code/HEAD/tree</citetitle></ulink>."
 " The most recent version (where we're currently working) is located under "
 "<filename>/trunk/</filename>, and the released versions are located under "
 "<filename>/tags/</filename>."
-msgstr "TortoiseMerge je projekt s otvoreným zdrojom. To znamená, že máte plný prístup na čítanie k zdrojovému kódu tohto programu. Môžete ho prehliadať na tomto odkaze <ulink url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle> https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>. Najnovšia verzia (kde momentálne pracujeme) sa nachádza pod <filename>/trunk/</filename> a vydané verzie sú umiestnené pod <filename>/tags/</filename>."
+msgstr ""
 
 #. (para)
 msgid "for the hard work on TortoiseMerge"
@@ -21413,7 +21514,7 @@ msgstr "Zoznam klávesových skratiek a príkazov."
 
 #. (title)
 msgid "General Keyboard Shortcuts"
-msgstr ""
+msgstr "Všeobecné klávesové skratky"
 
 #. (term)
 msgid "Ctrl-Q, Ctrl-W, Escape"
@@ -21571,7 +21672,7 @@ msgstr "Prepína medzi označením vybranej zmeny"
 
 #. (title)
 msgid "Diff-Mode Keyboard Shortcuts"
-msgstr ""
+msgstr "Klávesové skratky režimu rozdielov"
 
 #. (term)
 msgid "Ctrl-D"
@@ -21591,7 +21692,7 @@ msgstr "Prepína zobrazenia"
 
 #. (term)
 msgid "F12"
-msgstr ""
+msgstr "F12"
 
 #. (para)
 #. (para)
@@ -21600,7 +21701,7 @@ msgstr "Použiť ľavý blok"
 
 #. (title)
 msgid "Conflict Resolution Mode Keyboard Shortcuts"
-msgstr ""
+msgstr "Klávesové skratky režimu riešenia konfliktov"
 
 #. (term)
 msgid "F8"
@@ -21620,19 +21721,19 @@ msgstr "Prejsť na predošlý konflikt"
 
 #. (term)
 msgid "Ctrl-F9"
-msgstr ""
+msgstr "Ctrl-F9"
 
 #. (term)
 msgid "Ctrl-Shift-F9"
-msgstr ""
+msgstr "Ctrl-Shift-F9"
 
 #. (para)
 msgid "Use left block then right block"
-msgstr ""
+msgstr "Použite ľavý blok a potom pravý blok"
 
 #. (term)
 msgid "Ctrl-F10"
-msgstr ""
+msgstr "Ctrl-F10"
 
 #. (para)
 msgid "Use right block"
@@ -21640,11 +21741,11 @@ msgstr "Použiť pravý blok"
 
 #. (term)
 msgid "Ctrl-Shift-F10"
-msgstr ""
+msgstr "Ctrl-Shift-F10"
 
 #. (para)
 msgid "Use right block then left block"
-msgstr ""
+msgstr "Použite pravý blok a potom ľavý blok"
 
 #. (title)
 msgid "Automating TortoiseMerge"

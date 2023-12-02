@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN manuals
-# Copyright (C) 2004-2020 the TortoiseSVN team
+# Copyright (C) 2004-2023 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -13,6 +13,7 @@
 # szkingrose <1072258106@qq.com>, 2014
 # AkriaYan <akiraoz1985@gmail.com>, 2020
 # Andy Wu <andy13923@gmail.com>, 2015
+# Capella Lee <limeng0513@gmail.com>, 2022
 # coxxs <hxx107@gmail.com>, 2011
 # Entong Shen <dexter_shen@hotmail.com>, 2011
 # Evil Roach <evilroach@tom.com>, 2015
@@ -59,8 +60,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
 "PO-Revision-Date: 2010-11-30 05:04+0000\n"
-"Last-Translator: 子毅 陈 <Iwonnasnow@outlook.com>, 2019-2020,2022\n"
-"Language-Team: Chinese (China) (http://www.transifex.com/luebbe/tortoisesvn/language/zh_CN/)\n"
+"Last-Translator: Capella Lee <limeng0513@gmail.com>, 2022\n"
+"Language-Team: Chinese (China) (http://app.transifex.com/luebbe/tortoisesvn/language/zh_CN/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -329,10 +330,10 @@ msgid ""
 "Although most people just download the installer, you also have full read "
 "access to the source code of this program. You can browse it on this link "
 "<ulink "
-"url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>."
+"url=\"https://sourceforge.net/p/tortoisesvn/code/HEAD/tree\"><citetitle>https://sourceforge.net/p/tortoisesvn/code/HEAD/tree</citetitle></ulink>."
 " The current development line is located under <filename>/trunk/</filename>,"
 " and the released versions are located under <filename>/tags/</filename>."
-msgstr "尽管绝大多数人都仅仅下载安装包，但你仍然可以阅读本程序的源代码。你可以访问此链接以查看：<ulink url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>。开发版存放于<filename>/trunk/</filename>下，正式版存放于<filename>/tags/</filename>下。"
+msgstr ""
 
 #. (title)
 msgid "Development"
@@ -1045,9 +1046,9 @@ msgstr "Subversion 手册"
 msgid ""
 "This chapter is a slightly modified version of the same chapter in the "
 "Subversion book. An online version of the Subversion book is available here:"
-" <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>http://svnbook.red-"
-"bean.com/</citetitle></ulink>."
-msgstr "本章修改自《使用 Subversion 进行版本管理》的相同章节，它的在线版本位于: <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>http://svnbook.red-bean.com/</citetitle></ulink>。"
+" <ulink url=\"https://svnbook.red-"
+"bean.com/\"><citetitle>https://svnbook.red-bean.com/</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -2236,11 +2237,11 @@ msgid ""
 "target(s) it's operating on, and the username of the person who triggered "
 "the event. Depending on the hook's output or return status, the hook program"
 " may continue the action, stop it, or suspend it in some way. Please refer "
-"to the chapter on <ulink url=\"http://svnbook.red-"
+"to the chapter on <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook"
 " Scripts</citetitle></ulink> in the Subversion Book for full details about "
 "the hooks which are implemented."
-msgstr "钩子脚本是由某些版本库事件触发的程序，例如创建新版本或修改未被版本控制的属性。每个钩子都能掌管足够的信息来了解发生了什么事件，操作对象是谁以及触发事件用户名。根据钩子的输出或者返回状态，钩子程序能够以某种方式继续执行，停止或者挂起。请参阅 Subversion 手册中的 <ulink url=\"http://svnbook.red-bean.com/en/1.7/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>钩子脚本</citetitle></ulink> 章节来获得关于已实现的钩子的完整信息。"
+msgstr ""
 
 #. (para)
 msgid ""
@@ -2337,10 +2338,10 @@ msgstr "\n&lt;a href=\"tsvn:http://project.domain.org/svn/trunk\"&gt;\n&lt;img s
 msgid ""
 "Of course it would look even better if you included a suitable picture. You "
 "can use the <ulink "
-"url=\"https://tortoisesvn.net/images/TortoiseCheckout.png\"><citetitle>TortoiseSVN"
+"url=\"https://svn.code.sf.net/p/tortoisesvn/code/trunk/www/source/assets/img/TortoiseCheckout.png\"><citetitle>TortoiseSVN"
 " logo</citetitle></ulink> or you can provide your own image. "
 "<placeholder-1/>"
-msgstr "当然，如果能插入一张合适的图片看起来更好。你可以使用 <ulink url=\"https://tortoisesvn.net/images/TortoiseCheckout.png\"><citetitle>TortoiseSVN 标志</citetitle></ulink> 或者使用你自己的图片。 <placeholder-1/>\n "
+msgstr ""
 
 #. (programlisting)
 #, no-wrap
@@ -2402,10 +2403,10 @@ msgstr "如果你打算在网络共享中设者一个多用户的版本库，请
 msgid ""
 "More detailed information on the Subversion server options, and how to "
 "choose the best architecture for your situation, can be found in the "
-"Subversion book under <ulink url=\"http://svnbook.red-"
+"Subversion book under <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.serverconfig.html\"><citetitle>Server "
 "Configuration</citetitle></ulink>."
-msgstr "你可以在Subversion 手册中<ulink url=\"http://svnbook.red-bean.com/en/1.8/svn.serverconfig.html\"><citetitle>服务器设置</citetitle></ulink>章节下找到Subversion 服务器选项的更多细节信息和如何选择符合你的最佳架构。"
+msgstr ""
 
 #. (citetitle)
 msgid "VisualSVN"
@@ -2451,9 +2452,9 @@ msgstr "本文目的在与描述TortoiseSVN客户端的日常使用。<emphasis>
 #. (para)
 msgid ""
 "If you need an introduction to version control with Subversion, then we "
-"recommend you read the fantastic book: <ulink url=\"http://svnbook.red-"
+"recommend you read the fantastic book: <ulink url=\"https://svnbook.red-"
 "bean.com/\"><citetitle>Version Control with Subversion</citetitle></ulink>."
-msgstr "如果你需要了解使用Subversion进行版本控制的指南，我们建立你阅读以下这本梦幻之书: <ulink url=\"http://svnbook.red-bean.com/\"><citetitle>《使用 Subversion 进行版本管理》</citetitle></ulink>."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -2704,12 +2705,22 @@ msgid ""
 msgstr "如果想要清除认证缓存，可以通过 TortoiseSVN 设置对话框的<guilabel>已保存数据</guilabel>页来实现。<guibutton>全部清除</guibutton>按钮会清除所有版本库的认证缓存。<guibutton>清除...</guibutton>按钮会显示一个对话框，你能选择哪些认证缓存需要被清除。清参考<xref linkend=\"tsvn-dug-settings-saved-data\"/>"
 
 #. (para)
+msgid "Run <literal>gpedit.msc</literal> (Local Policies)"
+msgstr ""
+
+#. (para)
+msgid ""
+"User Configuration -&gt; Windows Settings -&gt; Scripts -&gt; Logon or "
+"Logoff -&gt; Properties -&gt; Add"
+msgstr ""
+
+#. (para)
 msgid ""
 "Some people like to have the authentication data deleted when they log off Windows, or on shutdown. The way to do that is to use a shutdown script to delete the <filename>%APPDATA%\\Subversion\\auth</filename> directory, e.g. <screen>\n"
 "@echo off\n"
 "rmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n"
-"      </screen> You can find a description of how to install such scripts at <ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>http://www.windows-help-central.com/windows-shutdown-script.html</citetitle></ulink>."
-msgstr "有些人希望在注销 Windows 或者关机时删除认证数据。完成这个的方法是使用关机脚本来删除 <filename>%APPDATA%\\Subversion\\auth</filename> 目录，例如: <screen>\n@echo off\nrmdir /s /q \"%APPDATA%\\Subversion\\auth\"\n</screen> 关于如何安装这种脚本的详细说明请参阅: <ulink url=\"http://www.windows-help-central.com/windows-shutdown-script.html\"><citetitle>http://www.windows-help-central.com/windows-shutdown-script.html</citetitle></ulink>。"
+"      </screen> You can install such a script on Windows like this: <placeholder-1/>"
+msgstr ""
 
 #. (para)
 msgid ""
@@ -2969,6 +2980,10 @@ msgstr "稀疏检出"
 msgid "partial checkout"
 msgstr "部分检出"
 
+#. (primary)
+msgid "pristines on demand"
+msgstr ""
+
 #. (para)
 msgid ""
 "To obtain a working copy you need to do a <firstterm>checkout</firstterm> "
@@ -2989,6 +3004,44 @@ msgid ""
 "folder name that does not yet exist, then a directory with that name is "
 "created."
 msgstr "在Windows资源管理器里选择一个存放工作副本的目录。<action>右键点击</action>弹出右键菜单，选择<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>检出…</guimenuitem></menuchoice>命令。然后就会看到下面的对话框: <placeholder-1/>如果输入一个并不存在的目录名，那么这个名字的目录就会被创建出来。"
+
+#. (para)
+msgid ""
+"If the project contains references to external projects which you do "
+"<emphasis>not</emphasis> want checked out at the same time, use the "
+"<guilabel>Omit externals</guilabel> checkbox."
+msgstr "如果项目含有外部项目的引用，而这些引用你<emphasis>不</emphasis>希望同时检出，请选中<guilabel>忽略外部项目</guilabel>复选框。"
+
+#. (para)
+msgid ""
+"If <guilabel>Omit externals</guilabel> is checked, or if you wish to "
+"increase the depth value, you will have to perform updates to your working "
+"copy using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to "
+"Revision...</guimenuitem></menuchoice> instead of "
+"<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice>."
+" The standard update will include all externals and keep the existing depth."
+msgstr "如果选中了 <guilabel>忽略外部项目</guilabel>，或者想要增加深度值，你应该使用 <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>更新至版本...</guimenuitem></menuchoice> 替代 <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>更新</guimenuitem></menuchoice> 来对工作副本进行更新。标准的更新操作会包含外部项目并保持深度。"
+
+#. (para)
+msgid ""
+"It is recommended that you check out only the <literal>trunk</literal> part "
+"of the directory tree, or lower. If you specify the parent path of the "
+"directory tree in the URL then you might end up with a full hard disk since "
+"you will get a copy of the entire repository tree including every branch and"
+" tag of your project!"
+msgstr "强烈建议你只检出 <literal>trunk</literal> 或更低层的目录树。如果你在 URL 中指定了根路径，你的硬盘有可能被塞满，因为你将会得到整个版本库树的副本，包括项目所有的分支和标签(tag)！"
+
+#. (title)
+msgid "Exporting"
+msgstr "关于导出"
+
+#. (para)
+msgid ""
+"Sometimes you may want to create a local copy without any of those "
+"<filename>.svn</filename> directories, e.g. to create a zipped tarball of "
+"your source. Read <xref linkend=\"tsvn-dug-export\"/> to find out how to do "
+"that."
+msgstr "有时你可能想要建立一个没有<filename>.svn</filename>目录的本地的副本，比如建立一个源代码压缩包。要达到这个目的，请参考<xref linkend=\"tsvn-dug-export\"/>。"
 
 #. (title)
 msgid "Checkout Depth"
@@ -3196,43 +3249,44 @@ msgid ""
 "you should upgrade your server to at least 1.5."
 msgstr "1.5 版之前的服务器不支持工作副本深度请求。所以不能有效的处理这种请求。不过该命令仍然可以使用，但是旧版本的服务器会发送所有的数据，让客户端来过滤掉哪些是不需要的，这就意味着大量的网络传输。如果可能，应该将服务器升级到 1.5 版以上。"
 
-#. (para)
-msgid ""
-"If the project contains references to external projects which you do "
-"<emphasis>not</emphasis> want checked out at the same time, use the "
-"<guilabel>Omit externals</guilabel> checkbox."
-msgstr "如果项目含有外部项目的引用，而这些引用你<emphasis>不</emphasis>希望同时检出，请选中<guilabel>忽略外部项目</guilabel>复选框。"
-
-#. (para)
-msgid ""
-"If <guilabel>Omit externals</guilabel> is checked, or if you wish to "
-"increase the depth value, you will have to perform updates to your working "
-"copy using <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update to "
-"Revision...</guimenuitem></menuchoice> instead of "
-"<menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>Update</guimenuitem></menuchoice>."
-" The standard update will include all externals and keep the existing depth."
-msgstr "如果选中了 <guilabel>忽略外部项目</guilabel>，或者想要增加深度值，你应该使用 <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>更新至版本...</guimenuitem></menuchoice> 替代 <menuchoice><guimenu>TortoiseSVN</guimenu><guimenuitem>更新</guimenuitem></menuchoice> 来对工作副本进行更新。标准的更新操作会包含外部项目并保持深度。"
-
-#. (para)
-msgid ""
-"It is recommended that you check out only the <literal>trunk</literal> part "
-"of the directory tree, or lower. If you specify the parent path of the "
-"directory tree in the URL then you might end up with a full hard disk since "
-"you will get a copy of the entire repository tree including every branch and"
-" tag of your project!"
-msgstr "强烈建议你只检出 <literal>trunk</literal> 或更低层的目录树。如果你在 URL 中指定了根路径，你的硬盘有可能被塞满，因为你将会得到整个版本库树的副本，包括项目所有的分支和标签(tag)！"
-
 #. (title)
-msgid "Exporting"
-msgstr "关于导出"
+msgid "Store pristine copies"
+msgstr ""
 
 #. (para)
 msgid ""
-"Sometimes you may want to create a local copy without any of those "
-"<filename>.svn</filename> directories, e.g. to create a zipped tarball of "
-"your source. Read <xref linkend=\"tsvn-dug-export\"/> to find out how to do "
-"that."
-msgstr "有时你可能想要建立一个没有<filename>.svn</filename>目录的本地的副本，比如建立一个源代码压缩包。要达到这个目的，请参考<xref linkend=\"tsvn-dug-export\"/>。"
+"The checkbox <guilabel>Store pristine copies in working copy</guilabel> is "
+"checked by default. With this option enabled, Subversion caches each file's "
+"<literal>BASE</literal> revision (the <literal>pristine</literal>) inside "
+"the working copy. This is so that operations such as diffing and reverting "
+"work offline, and a commit can just send the modified versions parts of a "
+"file to the repo server rather than the whole file. This design optimizes "
+"the speed and availability of these operations on the assumption that "
+"network connectivity to the repository may be the bottleneck while local "
+"storage is cheap. For version pre 1.15 this was the only way Subversion "
+"worked."
+msgstr ""
+
+#. (para)
+msgid ""
+"Since Subversion 1.15, you can avoid having a copy of each file stored in "
+"the working copy. Subversion will then download the pristine copy only when "
+"needed (\"<literal>on demand</literal>\"). This can be useful if you have "
+"really large files to work with or if you have a lot of binary files which "
+"rarely change."
+msgstr ""
+
+#. (para)
+msgid ""
+"To avoid storing the pristine copies for all files, uncheck the checkbox "
+"<guilabel>Store pristine copies in working copy</guilabel>."
+msgstr ""
+
+#. (para)
+msgid ""
+"If <guilabel>Store pristine copies in working copy</guilabel> is unchecked, "
+"the resulting working copy will be unusable by pre 1.15 Subversion clients."
+msgstr ""
 
 #. (title)
 msgid "Committing Your Changes To The Repository"
@@ -3614,9 +3668,10 @@ msgid ""
 "at the introduction at <ulink "
 "url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink>,"
 " and the online documentation and tutorial at <ulink "
-"url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-"
+"url=\"https://www.regular-"
+"expressions.info/\"><citetitle>https://www.regular-"
 "expressions.info/</citetitle></ulink>."
-msgstr "日志消息窗口同时也含有文件名和函数自动完成的功能。它使用正则表达式从本次提交的(文本)文件中抽取类和函数的名称，以及被提交文件的文件名。如果你输入的单词与列表中的内容匹配(至少键入 3 个字符，或者按 <keycap>Crtl+空格</keycap>)，就会显示一个下拉列表让你选择完整的名字。TortoiseSVN 支持的正则表达式位于 TortoiseSVN 安装文件夹下的 <filename>bin</filename> 文件夹中。你可以自定义匹配规则然后将其保存在文件 <filename>%APPDATA%\\TortoiseSVN\\autolist.txt</filename> 中。当然，在升级新版本的 TortoiseSVN 时你个人的自动匹配规则列表不会被覆盖。如果你不熟悉正则表达式，可以看一下介绍:<ulink url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>http://zh.wikipedia.org/wiki/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F</citetitle></ulink>，以及在线文档和教程: <ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>。"
+msgstr ""
 
 #. (para)
 msgid ""
@@ -6009,7 +6064,8 @@ msgid ""
 "Subversion lets you change revision properties any time you want. But since "
 "such changes can't be undone (those changes are not versioned) this feature "
 "is disabled by default. To make this work, you must set up a pre-revprop-"
-"change hook. Please refer to the chapter on <ulink url=\"http://svnbook.red-"
+"change hook. Please refer to the chapter on <ulink "
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.reposadmin.create.html#svn.reposadmin.create.hooks\"><citetitle>Hook"
 " Scripts</citetitle></ulink> in the Subversion Book for details about how to"
 " do that. Read <xref linkend=\"tsvn-repository-hooks\"/> to find some "
@@ -6095,9 +6151,10 @@ msgstr ""
 msgid ""
 "Describing the use of regular expression searches is beyond the scope of "
 "this manual, but you can find online documentation and a tutorial at <ulink "
-"url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-"
+"url=\"https://www.regular-"
+"expressions.info/\"><citetitle>https://www.regular-"
 "expressions.info/</citetitle></ulink>."
-msgstr "如何使用正则表达式进行查找超出了本手册的范围，你可以查看在线文档和教程 <ulink url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-expressions.info/</citetitle></ulink>。"
+msgstr ""
 
 #. (para)
 msgid ""
@@ -6801,8 +6858,8 @@ msgstr "KDiff3"
 msgid ""
 "KDiff3 is a free diff tool which can also handle directories. You can "
 "download it from <ulink "
-"url=\"http://kdiff3.sf.net/\"><citetitle>here</citetitle></ulink>."
-msgstr "KDiff3也是一款能处理目录的免费比较工具。你可以从<ulink url=\"http://kdiff3.sf.net/\"><citetitle>here</citetitle></ulink>下载。"
+"url=\"https://download.kde.org/stable/kdiff3/\"><citetitle>here</citetitle></ulink>."
+msgstr ""
 
 #. (term)
 msgid "SourceGear DiffMerge"
@@ -6825,8 +6882,8 @@ msgid ""
 "ExamDiff Pro is shareware and adds a number of goodies including directory "
 "diff and editing capability. In both flavours, version 3.2 and above can "
 "handle unicode. You can download them from <ulink "
-"url=\"http://www.prestosoft.com/\"><citetitle>PrestoSoft</citetitle></ulink>."
-msgstr "ExamDiff Standard是免费软件。它能处理文件但不能处理目录。ExamDiff Pro是共享软件，拥有一系列的功能包括目录比较和编辑的能力。对于以上体验，3.2及以上版本能处理二进制。你可以从<ulink url=\"http://www.prestosoft.com/\"><citetitle>PrestoSoft</citetitle></ulink>下载它们。"
+"url=\"https://www.prestosoft.com/\"><citetitle>PrestoSoft</citetitle></ulink>."
+msgstr ""
 
 #. (term)
 msgid "Beyond Compare"
@@ -7202,9 +7259,9 @@ msgstr "模式匹配是大小写敏感的，这在 Windows 平台下会出问题
 msgid ""
 "If you want an official definition for globbing, you can find it in the IEEE"
 " specifications for the shell command language <ulink "
-"url=\"http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13\"><citetitle>Pattern"
+"url=\"https://pubs.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13\"><citetitle>Pattern"
 " Matching Notation</citetitle></ulink>."
-msgstr "如果你想要一个官方定义的匹配规则。你可以在关于shell命令行语言的IEEE规范<ulink url=\"http://www.opengroup.org/onlinepubs/009695399/utilities/xcu_chap02.html#tag_02_13\"><citetitle>Pattern Matching Notation</citetitle></ulink>中找到。"
+msgstr ""
 
 #. (title)
 msgid "No Paths in Global Ignore List"
@@ -7816,7 +7873,7 @@ msgstr "Subversion 支持类似 CVS 的关键字扩展，用来在文件中嵌�
 #. (para)
 msgid ""
 "To find out how to use these keywords, look at the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.props.special.keywords.html\"><citetitle>svn:keywords"
 " section</citetitle></ulink> in the Subversion book, which gives a full "
 "description of these keywords and how to enable and use them."
@@ -7825,10 +7882,10 @@ msgstr ""
 #. (para)
 msgid ""
 "For more information about properties in Subversion see the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.props.html\"><citetitle>Special "
 "Properties</citetitle></ulink>."
-msgstr "更多的关于 Subversion 中属性的信息可以看<ulink url=\"http://svnbook.red-bean.com/en/1.7/svn.advanced.props.html\"><citetitle>Special Properties</citetitle></ulink>。"
+msgstr ""
 
 #. (title)
 msgid "Adding and Editing Properties"
@@ -9022,7 +9079,7 @@ msgstr ""
 msgid ""
 "You can also specify a peg and operative revision for the URL if required. "
 "To learn more about peg and operative revisions, please read the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.pegrevs.html\"><citetitle>corresponding "
 "chapter</citetitle></ulink> in the Subversion book."
 msgstr ""
@@ -9169,9 +9226,9 @@ msgstr "如果你用推荐的目录结构导入了一个工程，那么创建分
 #. (para)
 msgid ""
 "The default destination URL for the new branch will be the source URL on which your working copy is based. You will need to edit that URL to the new path for your branch/tag. So instead of <screen>\n"
-"http://svn.collab.net/repos/ProjectName/trunk\n"
+"https://svn.example.com/repos/ProjectName/trunk\n"
 "      </screen> you might now use something like <screen>\n"
-"http://svn.collab.net/repos/ProjectName/tags/Release_1.10\n"
+"https://svn.example.com/repos/ProjectName/tags/Release_1.10\n"
 "      </screen> If you can't remember the naming convention you used last time, click the button on the right to open the repository browser so you can view the existing repository structure."
 msgstr ""
 
@@ -9183,7 +9240,7 @@ msgstr ""
 msgid ""
 "When you specify the target URL, all the folders up to the last one must "
 "already exist or you will get an error message. In the above example, the "
-"URL <literal>http://svn.collab.net/repos/ProjectName/tags/</literal> must "
+"URL <literal>https://svn.example.com/repos/ProjectName/tags/</literal> must "
 "exist to create the <literal>Release_1.10</literal> tag."
 msgstr ""
 
@@ -9199,9 +9256,9 @@ msgstr ""
 msgid ""
 "Note that this option is disabled by default to avoid typos. For example, if"
 " you typed the target URL as "
-"<literal>http://svn.collab.net/repos/ProjectName/Tags/Release_1.10</literal>"
+"<literal>https://svn.example.com/repos/ProjectName/Tags/Release_1.10</literal>"
 " instead of "
-"<literal>http://svn.collab.net/repos/ProjectName/tags/Release_1.10</literal>,"
+"<literal>https://svn.example.com/repos/ProjectName/tags/Release_1.10</literal>,"
 " you would get an error with the option disabled, but with the option "
 "enabled a folder <literal>Tags</literal> would be automatically created, and"
 " you would end up with a folder <literal>Tags</literal> and a folder "
@@ -9488,7 +9545,7 @@ msgstr "分支用来维护独立的开发支线，在一些阶段，你可能需
 msgid ""
 "It is important to understand how branching and merging works in Subversion "
 "before you start using it, as it can become quite complex. It is highly "
-"recommended that you read the chapter <ulink url=\"http://svnbook.red-"
+"recommended that you read the chapter <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.branchmerge.html\"><citetitle>Branching and "
 "Merging</citetitle></ulink> in the Subversion book, which gives a full "
 "description and many examples of how it is used."
@@ -9564,7 +9621,7 @@ msgid ""
 "only way to merge a branch back to trunk. Another use case occurs when you "
 "are using vendor branches and you need to merge the changes following a new "
 "vendor drop into your trunk code. For more information read the chapter on "
-"<ulink url=\"http://svnbook.red-"
+"<ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.vendorbr.html\"><citetitle>vendor "
 "branches</citetitle></ulink> in the Subversion Book."
 msgstr ""
@@ -9813,7 +9870,7 @@ msgid ""
 " would see a complete removal followed by a complete add. To make Subversion"
 " use only path-based differences rather than history-based differences, "
 "check the <guilabel>Ignore ancestry</guilabel> box. Read more about this "
-"topic in the Subversion book, <ulink url=\"http://svnbook.red-"
+"topic in the Subversion book, <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.branchmerge.advanced.html#svn.branchmerge.advanced.ancestry\"><citetitle>Noticing"
 " or Ignoring Ancestry</citetitle></ulink>."
 msgstr ""
@@ -9833,6 +9890,21 @@ msgid ""
 "modified locally or not versioned at all. If the file is deleted then there "
 "is no way to recover it, which is why that option is not checked by default."
 msgstr "标记为 <guilabel>强制合并</guilabel> 的复选框用于避免树冲突，传入的删除操作会影响到本地修改或不受版本控制的文件。如果删除了该文件，则无法恢复，这就是为什么在默认情况下未选中该选项。"
+
+#. (para)
+msgid ""
+"The checkbox marked <guilabel>Allow mixed revisions (not "
+"recommended)</guilabel> is used to allow merging into mixed-revision working"
+" copies (corresponding to the command line option <literal>--allow-mixed-"
+"revisions</literal>). The default since Subversion 1.7 is to disallow "
+"merging into mixed-revision working copies. The reasons are described in the"
+" Subversion book towards the end of the section <ulink "
+"url=\"https://svnbook.red-"
+"bean.com/en/1.8/svn.branchmerge.basicmerging.html#svn.branchmerge.basicmerging.stayinsync\"><citetitle>Keeping"
+" a Branch in Sync</citetitle></ulink> . If you understand the possible "
+"problems of merging into a mixed-revision working copy you may select this "
+"checkbox to perform the merge anyway."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -9900,10 +9972,10 @@ msgid ""
 "been ported in the merge. If you want to apply another merge at a later time"
 " you will need to know what you have already merged, as you do not want to "
 "port a change more than once. For more information about this, refer to "
-"<ulink url=\"http://svnbook.red-"
+"<ulink url=\"https://svnbook.red-"
 "bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle>Best"
 " Practices for Merging</citetitle></ulink> in the Subversion book."
-msgstr "对于 Subversion 客户端和服务器 1.5 之前的版本，不会存储合并信息并且合并的版本必须手动进行跟踪。当您测试完更改来提交这次修订版本时，您的提交日志信息应该会 <emphasis>始终</emphasis> 包括在合并中已导入的版本号。如果以后要应用另一个合并，您需要知道你已经合并过的，因为没人愿意多次地导入更改。这有关的详细信息，请参阅 Subversion 书册中的 <ulink url=\"http://svnbook.red-bean.com/en/1.4/svn.branchmerge.copychanges.html#svn.branchmerge.copychanges.bestprac\"><citetitle>最佳的合并实践</citetitle></ulink>。"
+msgstr ""
 
 #. (para)
 msgid ""
@@ -10002,7 +10074,7 @@ msgstr "执行合并时客户端将合并跟踪信息存储在 <literal>svn:merg
 #. (para)
 msgid ""
 "Find out more about merge tracking from Subversion's <ulink "
-"url=\"http://svn.apache.org/repos/asf/Subversion/trunk/notes/merge-"
+"url=\"https://svn.apache.org/repos/asf/subversion/trunk/notes/merge-"
 "tracking/index.html\"><citetitle>Merge tracking "
 "documentation</citetitle></ulink>."
 msgstr ""
@@ -12106,10 +12178,8 @@ msgid ""
 "This allows TortoiseSVN to display a link in the log dialog, so when you are"
 " looking at the revision log you can jump directly to your bug tracking "
 "tool. You do not have to provide this property, but then TortoiseSVN shows "
-"only the issue number and not the link to it. e.g the TortoiseSVN project is"
-" using <systemitem "
-"class=\"url\">http://issues.tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>."
-msgstr "将这个属性设置为你的bug跟踪工具的地址。它必须编码并且包含&lt;literal&gt;%BUGID%&lt;/literal&gt;。&lt;literal&gt;%BUGID%&lt;/literal&gt;用你输入的问题编号替换。它允许TortoiseSVN 在日志对话框中显示链接，于是你可以在察看版本日志时直接进入bug跟踪工具。你可以不提供这个属性，但是这样TortoiseSVN就不能显示链接了，只能显示问题编号。例如TortoiseSVN 使用&lt;literal&gt;http://issues.tortoisesvn.net/?do=details&amp;amp;id=%BUGID%&lt;/literal&gt;。"
+"only the issue number and not the link to it."
+msgstr ""
 
 #. (para)
 msgid ""
@@ -12126,9 +12196,9 @@ msgid ""
 "relative to the repository root. For example, "
 "<literal>^/../?do=details&amp;id=%BUGID%</literal> will resolve to "
 "<systemitem "
-"class=\"url\">https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>"
-" if your repository is located on <systemitem "
-"class=\"url\">https://tortoisesvn.net/svn/trunk/</systemitem>."
+"class=\"url\">https://example.com/?do=details&amp;id=%BUGID%</systemitem> if"
+" your repository is located on <systemitem "
+"class=\"url\">https://example.com/svn/trunk/</systemitem>."
 msgstr ""
 
 #. (para)
@@ -12136,9 +12206,9 @@ msgid ""
 "A URL beginning with the string <literal>/</literal> is assumed to be "
 "relative to the server's hostname. For example "
 "<literal>/?do=details&amp;id=%BUGID%</literal> will resolve to <systemitem "
-"class=\"url\">https://tortoisesvn.net/?do=details&amp;id=%BUGID%</systemitem>"
-" if your repository is located anywhere on <systemitem "
-"class=\"url\">https://tortoisesvn.net</systemitem>."
+"class=\"url\">https://example.com/?do=details&amp;id=%BUGID%</systemitem> if"
+" your repository is located anywhere on <systemitem "
+"class=\"url\">https://example.com</systemitem>."
 msgstr ""
 
 #. (para)
@@ -12271,7 +12341,8 @@ msgid ""
 "introduction at <ulink "
 "url=\"https://en.wikipedia.org/wiki/Regular_expression\"><citetitle>https://en.wikipedia.org/wiki/Regular_expression</citetitle></ulink>,"
 " and the online documentation and tutorial at <ulink "
-"url=\"http://www.regular-expressions.info/\"><citetitle>http://www.regular-"
+"url=\"https://www.regular-"
+"expressions.info/\"><citetitle>https://www.regular-"
 "expressions.info/</citetitle></ulink>."
 msgstr ""
 
@@ -12410,10 +12481,11 @@ msgid ""
 "(<xref linkend=\"tsvn-preface-source\"/> explains how to access the "
 "repository.) A summary of the API is also given in <xref linkend=\"tsvn-"
 "ibugtraqprovider\"/>. Another (working) example plugin in C# is <ulink "
-"url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle</citetitle></ulink>"
+"url=\"https://code.google.com/p/gurtle/\"><citetitle>Gurtle</citetitle></ulink>"
 " which implements the required COM interface to interact with the <ulink "
-"url=\"http://code.google.com/hosting/\"><citetitle>Google "
-"Code</citetitle></ulink> issue tracker."
+"url=\"https://code.google.com/hosting/\"><citetitle>Google "
+"Code</citetitle></ulink> issue tracker. Google Code itself is turned down as"
+" of 2016, but the plugin is still available as an example implementation."
 msgstr ""
 
 #. (title)
@@ -12456,7 +12528,7 @@ msgstr "WebSVN"
 msgid ""
 "There are several web-based repository viewers available for use with "
 "Subversion such as <ulink "
-"url=\"http://www.viewvc.org/\"><citetitle>ViewVC</citetitle></ulink> and "
+"url=\"https://www.viewvc.org/\"><citetitle>ViewVC</citetitle></ulink> and "
 "<ulink "
 "url=\"https://websvnphp.github.io/\"><citetitle>WebSVN</citetitle></ulink>. "
 "TortoiseSVN provides a means to link with these viewers."
@@ -12688,15 +12760,15 @@ msgid ""
 "Use <guibutton>Edit</guibutton> to edit the Subversion configuration file "
 "directly. Some settings cannot be modified directly by TortoiseSVN, and need"
 " to be set here instead. For more information about the Subversion "
-"<filename>config</filename> file see the <ulink url=\"http://svnbook.red-"
+"<filename>config</filename> file see the <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Runtime "
 "Configuration Area</citetitle></ulink>. The section on <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.props.html#svn.advanced.props.auto\"><citetitle>Automatic"
 " Property Setting</citetitle></ulink> is of particular interest, and that is"
 " configured here. Note that Subversion can read configuration information "
 "from several places, and you need to know which one takes priority. Refer to"
-" <ulink url=\"http://svnbook.red-"
+" <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.confarea.html#svn.advanced.confarea.windows-"
 "registry\"><citetitle>Configuration and the Windows "
 "Registry</citetitle></ulink> to find out more."
@@ -12759,6 +12831,13 @@ msgid ""
 "TortoiseSVN's context menu to appear at all, you can list them in the box at"
 " the bottom."
 msgstr "如果您不想在计算机中的某些路径中显示 TortoiseSVN 的上下文菜单，您可以在底部的框中列出它们。"
+
+#. (para)
+msgid ""
+"There's a different settings page for the Windows 11 context menu. That page"
+" also has a button to register the TortoiseSVN entries in the context menu. "
+"You only have to do this if TortoiseSVN was installed as a different user."
+msgstr ""
 
 #. (title)
 msgid "TortoiseSVN Dialog Settings 1"
@@ -13793,7 +13872,7 @@ msgid ""
 "If you need to set up per-repository proxy settings, you will need to use "
 "the Subversion <filename>servers</filename> file to configure this. Use "
 "<guibutton>Edit</guibutton> to get there directly. Consult the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.advanced.confarea.html\"><citetitle>Runtime "
 "Configuration Area</citetitle></ulink> for details on how to use this file."
 msgstr ""
@@ -14887,13 +14966,13 @@ msgstr "<placeholder-1/> 点击 <guibutton>增加...</guibutton>按钮,在工作
 #. (para)
 msgid ""
 "This property specifies the COM UUID of the IBugtraqProvider, for example "
-"<literal>{91974081-2DC7-4FB1-B3BE-0DE1C8D6CE4E}</literal>. (This example is "
+"<literal>{0044f6c0-b999-11e1-afa6-0800200c9a66}</literal>. (This example is "
 "the UUID of the <ulink "
-"url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle bugtraq "
+"url=\"https://github.com/scottiemc7/YurtleTrack\"><citetitle>YurtleTrack "
 "provider</citetitle></ulink>, which is a provider for the <ulink "
-"url=\"http://code.google.com/hosting/\"><citetitle>Google "
-"Code</citetitle></ulink> issue tracker.)"
-msgstr "这个属性为COM组件的IBugtraqProvider接口指定UUID,例如, <literal>{91974081-2DC7-4FB1-B3BE-0DE1C8D6CE4E}</literal>.(这个例子是 <ulink url=\"http://code.google.com/p/gurtle/\"><citetitle>Gurtle bugtraq provider</citetitle></ulink>的UUID,它是<ulink url=\"http://code.google.com/hosting/\"><citetitle>Google Code</citetitle></ulink>的问题追踪器.)"
+"url=\"http://www.jetbrains.com/youtrack/\"><citetitle>JetBrains YouTrack "
+"6.0</citetitle></ulink> issue tracker.)"
+msgstr ""
 
 #. (para)
 msgid ""
@@ -15346,10 +15425,7 @@ msgid ""
 "If this option is set to <literal>true</literal> then TortoiseSVN tries to "
 "find the revision where the branch was created from and hide all the "
 "revisions that are beyond that revision. Since this can take quite a while, "
-"this option is disabled by default. Also this option doesn't work with some "
-"SVN servers (e.g., Google Code Hosting, see <ulink "
-"url=\"http://code.google.com/p/support/issues/detail?id=5471\"><citetitle>issue"
-" #5471</citetitle></ulink>)."
+"this option is disabled by default."
 msgstr ""
 
 #. (para)
@@ -15394,6 +15470,15 @@ msgid ""
 "collected to make up a commit log message. A pre-defined string is used to "
 "separate the individual log messages of the merged revisions. If you prefer,"
 " you can set this to a value containing a separator string of your choice."
+msgstr ""
+
+#. (para)
+msgid ""
+"By setting to <literal>true</literal> you can set the default value of the "
+"<guilabel>Allow mixed revisions (not recommended)</guilabel> checkbox in the"
+" Merge option dialog. Please be aware of the limitations and potentional "
+"problems of merges into mixed-revision working copies before configuring "
+"this setting."
 msgstr ""
 
 #. (para)
@@ -15649,7 +15734,7 @@ msgstr ""
 #. (para)
 msgid ""
 "If you want to monitor all repositories served via the <ulink "
-"url=\"http://svnbook.red-"
+"url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.serverconfig.httpd.html#svn.serverconfig.httpd.basic\"><citetitle>SVNParentPath</citetitle></ulink>"
 " directive, enter the root Url for your repositories and check the box "
 "<literal>Url points to SVNParentPath list</literal>."
@@ -16164,7 +16249,7 @@ msgid ""
 "default, international format is used: <placeholder-1/>. Alternatively, you "
 "can specify a custom format which will be used with <placeholder-2/>, for "
 "example: <placeholder-3/>. For a list of available formatting characters, "
-"look at the <ulink url=\"http://msdn.microsoft.com/en-"
+"look at the <ulink url=\"https://msdn.microsoft.com/en-"
 "us/library/fe06s4ak.aspx\"><placeholder-4/></ulink>."
 msgstr ""
 
@@ -16269,6 +16354,10 @@ msgid ""
 "Replaced with the repository URL of the working copy path passed to "
 "SubWCRev."
 msgstr "用传递给SubWCRev的工作目录的版本库地址替换。"
+
+#. (entry)
+msgid "Replaced with the URL of the repository root."
+msgstr ""
 
 #. (literal)
 msgid "$WCINSVN?TText:FText$"
@@ -16559,6 +16648,16 @@ msgstr "$WCURL$"
 msgid ""
 "Replaced with the repository URL of the working copy path used in "
 "<placeholder-1/>. Equivalent to <placeholder-2/>."
+msgstr ""
+
+#. (literal)
+msgid "$REPOROOT$"
+msgstr ""
+
+#. (entry)
+msgid ""
+"Replaced with the URL of the repository root. Equivalent to "
+"<placeholder-1/>."
 msgstr ""
 
 #. (entry)
@@ -17478,7 +17577,7 @@ msgstr "因为TortoiseSVN绝不会丢弃数据，所以那些被回滚的版本�
 msgid ""
 "The only way to remove data from the repository is to use the Subversion "
 "command line tool <literal>svnadmin</literal>. You can find a description of"
-" how this works in the <ulink url=\"http://svnbook.red-"
+" how this works in the <ulink url=\"https://svnbook.red-"
 "bean.com/en/1.8/svn.reposadmin.maint.html\"><citetitle>Repository "
 "Maintenance</citetitle></ulink>."
 msgstr ""
@@ -17784,9 +17883,12 @@ msgstr ""
 
 #. (para)
 msgid ""
-"A good walk-through on how to do that can be found in the knowledge base "
-"article 314934 from Microsoft: <ulink "
-"url=\"http://support.microsoft.com/?kbid=314934\"><citetitle>http://support.microsoft.com/?kbid=314934</citetitle></ulink>."
+"A good walk-through on how to do that can be found in this article from "
+"Microsoft: <ulink url=\"https://learn.microsoft.com/en-"
+"us/troubleshoot/windows-server/group-policy/use-group-policy-to-install-"
+"software\"><citetitle>https://learn.microsoft.com/en-"
+"us/troubleshoot/windows-server/group-policy/use-group-policy-to-install-"
+"software</citetitle></ulink>."
 msgstr ""
 
 #. (para)
@@ -20193,7 +20295,7 @@ msgid ""
 "Mozilla installed, you can copy those dictionaries, which are located in the"
 " installation folders for those applications. Otherwise, you need to "
 "download the required dictionary files from <ulink "
-"url=\"http://wiki.services.openoffice.org/wiki/Dictionaries\"><citetitle>http://wiki.services.openoffice.org/wiki/Dictionaries</citetitle></ulink>."
+"url=\"https://cgit.freedesktop.org/libreoffice/dictionaries/tree/\"><citetitle>https://cgit.freedesktop.org/libreoffice/dictionaries/tree/</citetitle></ulink>."
 msgstr ""
 
 #. (filename)
@@ -20647,7 +20749,7 @@ msgid ""
 "TortoiseMerge is an Open Source project. That means you have full read "
 "access to the source code of this program. You can browse it on this link "
 "<ulink "
-"url=\"https://osdn.net/projects/tortoisesvn/scm/svn/\"><citetitle>https://osdn.net/projects/tortoisesvn/scm/svn/</citetitle></ulink>."
+"url=\"https://sourceforge.net/p/tortoisesvn/code/HEAD/tree\"><citetitle>https://sourceforge.net/p/tortoisesvn/code/HEAD/tree</citetitle></ulink>."
 " The most recent version (where we're currently working) is located under "
 "<filename>/trunk/</filename>, and the released versions are located under "
 "<filename>/tags/</filename>."
@@ -21444,7 +21546,7 @@ msgstr "启用UI的暗黑模式。最低系统要求为 Windows 10 1809"
 #. (title)
 #. (title)
 msgid "Keyboard Shortcuts"
-msgstr ""
+msgstr "快捷键"
 
 #. (para)
 msgid "List of keyboard shortcuts and commands."
@@ -21610,7 +21712,7 @@ msgstr ""
 
 #. (title)
 msgid "Diff-Mode Keyboard Shortcuts"
-msgstr ""
+msgstr "比较模式快捷键"
 
 #. (term)
 msgid "Ctrl-D"

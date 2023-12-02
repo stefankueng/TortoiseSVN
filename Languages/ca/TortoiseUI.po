@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2020 the TortoiseSVN team
+# Copyright (C) 2004-2023 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -13,7 +13,7 @@
 # Adrià Vilanova Martínez <jocdeladria@gmail.com>, 2012
 # Albert Olivé <albert.olivemorros@gmail.com>, 2020
 # el_libre como el chaval <el.libre@gmail.com>, 2011
-# Joan Monguillot <jmonguillot@gmail.com>, 2013-2018,2020-2022
+# Joan Monguillot <jmonguillot@gmail.com>, 2013-2018,2020-2023
 # el_libre como el chaval <el.libre@gmail.com>, 2011
 # Lübbe Onken <luebbe.opensource@gmail.com>, 2013
 # Stefan Kueng <tortoisesvn@gmail.com>, 2021
@@ -23,9 +23,9 @@ msgstr ""
 "Project-Id-Version: TortoiseSVN\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
-"PO-Revision-Date: 2022-01-29 17:12+0000\n"
-"Last-Translator: Joan Monguillot <jmonguillot@gmail.com>\n"
-"Language-Team: Catalan (http://www.transifex.com/luebbe/tortoisesvn/language/ca/)\n"
+"PO-Revision-Date: 2010-11-30 05:14+0000\n"
+"Last-Translator: Joan Monguillot <jmonguillot@gmail.com>, 2013-2018,2020-2023\n"
+"Language-Team: Catalan (http://app.transifex.com/luebbe/tortoisesvn/language/ca/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -207,6 +207,11 @@ msgid ""
 "%Ts\n"
 "%Ts"
 msgstr "%Ts\n%Ts"
+
+#. Resource IDs: (4250)
+#, c-format
+msgid "%d files"
+msgstr "%d fitxers"
 
 #. Resource IDs: (1022)
 #, c-format
@@ -585,6 +590,10 @@ msgstr "&Tanca"
 #. Resource IDs: (65535)
 msgid "&Collaborator username"
 msgstr "Nom d'usuari del &col·laborador"
+
+#. Resource IDs: (1542)
+msgid "&Commit"
+msgstr "&Pujada"
 
 #. Resource IDs: (122)
 msgid "&Commit..."
@@ -1734,6 +1743,10 @@ msgstr "... llegint estat de la còpia de treball"
 msgid "...and %d more paths."
 msgstr "...i %d camins més."
 
+#. Resource IDs: (4249)
+msgid "1 file"
+msgstr "1 fitxer"
+
 #. Resource IDs: (2403)
 #, c-format
 msgid ": Revision %d"
@@ -2210,6 +2223,12 @@ msgstr "Tal com &és (final de línia no específic)"
 msgid "Ask the user"
 msgstr "Pregunta a l'usuari "
 
+#. Resource IDs: (291)
+msgid ""
+"Asks for a specific revision, then shows the log for that revision no matter"
+" what branch it is in."
+msgstr "Demana una revisió específica, i llavors mostra el registre per aquesta revisió qualsevol que sigui la seva branca."
+
 #. Resource IDs: (4210)
 #, c-format
 msgid "Assigned to changelist '%ls'"
@@ -2493,11 +2512,11 @@ msgid ""
 "%2!ls!"
 msgstr "No es pot copiar \n%1!ls!\na\n%2!ls!"
 
-#. Resource IDs: (1383, 2, 5302, Dialog IDD_ENCODING: Control id 2, Dialog
-#. IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog IDD_GOTODLG:
-#. Control id 2, Dialog IDD_OPEN: Control id 2, Dialog IDD_OPENDLG: Control id
-#. 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog IDD_REGEXFILTERS: Control
-#. id 2)
+#. Resource IDs: (1068, 1383, 2, 5302, Dialog IDD_ENCODING: Control id 2,
+#. Dialog IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog
+#. IDD_GOTODLG: Control id 2, Dialog IDD_OPEN: Control id 2, Dialog
+#. IDD_OPENDLG: Control id 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog
+#. IDD_REGEXFILTERS: Control id 2)
 msgid "Cancel"
 msgstr "Cancel·la"
 
@@ -2664,6 +2683,10 @@ msgstr "Comprova si hi ha actualitzacions"
 #. Resource IDs: (136)
 msgid "Check out a working copy from a repository"
 msgstr "Obtén una còpia de treball des d'un repositori"
+
+#. Resource IDs: (1064)
+msgid "Check project now"
+msgstr "Comprova el projecte ara"
 
 #. Resource IDs: (1536)
 msgid "Check the authentication items you want to delete below"
@@ -3155,6 +3178,10 @@ msgstr "Menú contextual "
 msgid "Context lines for patches"
 msgstr "Línies de context per a pedaços"
 
+#. Resource IDs: (9915)
+msgid "Context menu successfully registered!"
+msgstr "S'ha enregistrat el menú contextual"
+
 #. Resource IDs: (1543)
 msgid "Continue &Merge"
 msgstr "Continua &fusió"
@@ -3625,7 +3652,7 @@ msgstr "Camí per defecte:"
 msgid "Default to UTF-8 encoding"
 msgstr "Escull per defecte codificació UTF-8"
 
-#. Resource IDs: (1542)
+#. Resource IDs: (1067, 1542)
 msgid "Delete"
 msgstr "Suprimeix"
 
@@ -3935,6 +3962,11 @@ msgstr "Fes això per a tots els elements sense versionar"
 msgid "Do this for all unversioned/modified items"
 msgstr "Fes això per a tots els elements sense versionar o modificats"
 
+#. Resource IDs: (1065)
+#, c-format
+msgid "Do you really want to delete the shelf \"%s\"?"
+msgstr "Voleu suprimir el prestatge \"%s\"?"
+
 #. Resource IDs: (1464)
 #, c-format
 msgid "Do you want to drop the vendor branch into the working copy \"%ls\"?"
@@ -4228,7 +4260,7 @@ msgstr "Habilita EditorConfig"
 
 #. Resource IDs: (1648)
 msgid "Enable drag context menu"
-msgstr "Habilita el menú contextual arrossegar"
+msgstr "Habilita arrossegar el menú contextual "
 
 #. Resource IDs: (5500)
 msgid "Enable log caching to speed up log and revision graph dialogs"
@@ -4654,6 +4686,10 @@ msgstr "Obtenint revisió %ls de fitxer:"
 msgid "Fetching status of %1!ls!"
 msgstr "Obtenint estat de %1!ls!"
 
+#. Resource IDs: (4248)
+msgid "Fetching text bases"
+msgstr "Obtenint bases de text"
+
 #. Resource IDs: (1237)
 msgid "Fetching tree conflict information..."
 msgstr "Obtenint informació del conflicte d'arbre..."
@@ -4983,6 +5019,11 @@ msgstr "Obté blo&queig..."
 msgid "Get merge logs"
 msgstr "Obté logs de la fusió"
 
+#. Resource IDs: (1901)
+#, c-format
+msgid "Getting BASE of file %1!ls!"
+msgstr "Obtenint BASE del fitxer %1!ls!"
+
 #. Resource IDs: (1900)
 #, c-format
 msgid "Getting file %1!ls!"
@@ -5310,6 +5351,14 @@ msgstr "ID:32825:VA +D"
 msgid "ID:32870:V C +L"
 msgstr "ID:32870:V C +L"
 
+#. Accelerator Entry for Menu ID:32880; ''
+msgid "ID:32880:V C +R"
+msgstr "ID:32880:V C +R"
+
+#. Accelerator Entry for Menu ID:32880; ''
+msgid "ID:32880:VAC +C"
+msgstr "ID:32880:VAC +C"
+
 #. Accelerator Entry for Menu ID:32881; 'Wrap long lines'
 msgid "ID:32881:V C +P"
 msgstr "ID:32881:V C +P"
@@ -5386,7 +5435,7 @@ msgstr "Icones superposades / Columnes d'estat"
 
 #. Resource IDs: (184)
 msgid "Icon Set"
-msgstr ""
+msgstr "Conjunt d'icones"
 
 #. Resource IDs: (Dialog IDD_ABOUT: Control id 65535)
 msgid "Icons/Design/Code:\t\tLuebbe Onken"
@@ -5819,7 +5868,7 @@ msgstr "El rang de revisió no és vàlid.\nLes revisions vàlides són números
 
 #. Resource IDs: (283)
 msgid "Issue Tracker Integration"
-msgstr ""
+msgstr "Integració del seguidor d'incidències"
 
 #. Resource IDs: (1571)
 msgid "Issue tracker"
@@ -6297,7 +6346,7 @@ msgstr "Fusiona Reintegra"
 
 #. Resource IDs: (193)
 msgid "Merge Tool"
-msgstr ""
+msgstr "Eina de fusió"
 
 #. Resource IDs: (1468)
 msgid "Merge a &range of revisions"
@@ -7082,7 +7131,7 @@ msgstr "Sortida.prn"
 
 #. Resource IDs: (308)
 msgid "Overlay Handlers"
-msgstr ""
+msgstr "Gestors de superposició"
 
 #. Resource IDs: (65535)
 msgid "Overlays"
@@ -7713,6 +7762,10 @@ msgstr "Missatge de coincidències de Regex:"
 #. Resource IDs: (Dialog IDD_REGEXFILTER: Control id 65535)
 msgid "Regex:"
 msgstr "Regex:"
+
+#. Resource IDs: (1542)
+msgid "Register context menu"
+msgstr "Enregistrar el menú contextual"
 
 #. Resource IDs: (1576)
 msgid "Regular Expression"
@@ -8908,6 +8961,10 @@ msgstr "Mostra número&s de línia"
 msgid "Show lo&g"
 msgstr "Mostra lo&g"
 
+#. Resource IDs: (290)
+msgid "Show log of repo at revision…"
+msgstr "Mostra el log del repositori a la revisió..."
+
 #. Resource IDs: (1013)
 msgid "Show multiple &changes..."
 msgstr "Mostra &canvis múltiples..."
@@ -9289,6 +9346,10 @@ msgstr "Roba el bloqueig"
 #. Resource IDs: (65535)
 msgid "Stefan Küng, Lübbe Onken"
 msgstr "Stefan Küng, Lübbe Onken"
+
+#. Resource IDs: (1685)
+msgid "Store pristine copies in working copy"
+msgstr "Desa còpies pristine a la còpia de treball"
 
 #. Resource IDs: (270)
 msgid ""
@@ -10085,7 +10146,7 @@ msgstr "A:"
 
 #. Resource IDs: (65535)
 msgid "Top context menu on Windows 11"
-msgstr "Menú superior contextual al Windows 11"
+msgstr "Menú contextual superior al Windows 11"
 
 #. Resource IDs: (244, IDS_APP_TITLE)
 msgid "TortoiseBlame"
@@ -10284,6 +10345,11 @@ msgstr "A&ctualitza"
 #. Resource IDs: (1594, 164, 3307)
 msgid "URL"
 msgstr "URL"
+
+#. Resource IDs: (387)
+#, c-format
+msgid "URL '%s' non-existent in revision %ld"
+msgstr "L'URL '%s' no existeix a la revisió %ld"
 
 #. Resource IDs: (1272)
 msgid "URL history"
@@ -10999,7 +11065,7 @@ msgstr "Espais en blanc"
 
 #. Resource IDs: (197)
 msgid "Win 11 Context Menu"
-msgstr ""
+msgstr "Menú contextual Win 11"
 
 #. Resource IDs: (1493, 1496, 158)
 msgid "Working Copy"
@@ -11106,6 +11172,12 @@ msgstr "Heu de reiniciar el sistema per tal que els canvis tinguin efecte."
 #. Resource IDs: (2756)
 msgid "You selected an unversioned folder for a commit!"
 msgstr "Heu seleccionat una carpeta sense versionar per fer la pujada."
+
+#. Resource IDs: (1066)
+msgid ""
+"You will lose all data of the shelf.\n"
+"This action cannot be undone."
+msgstr "Perdreu totes les dades del prestatge.\nNo es pot desfer aquesta acció."
 
 #. Resource IDs: (1412)
 #, c-format
