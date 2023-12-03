@@ -1,6 +1,6 @@
 ﻿// TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2016 - TortoiseGit
+// Copyright (C) 2016, 2023 - TortoiseGit
 // Copyright (C) 2007-2016, 2019, 2021 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
@@ -203,7 +203,6 @@ CFileTextLines::UnicodeType CFileTextLines::CheckUnicodeType(LPVOID pBuffer, int
 
 BOOL CFileTextLines::Load(const CString& sFilePath, int /*lengthHint*/ /* = 0*/)
 {
-    WCHAR exceptionError[1000] = {0};
     m_saveParams.lineEndings   = EOL_AUTOLINE;
     if (!m_bKeepEncoding)
         m_saveParams.unicodeType = CFileTextLines::AUTOTYPE;
@@ -252,8 +251,7 @@ BOOL CFileTextLines::Load(const CString& sFilePath, int /*lengthHint*/ /* = 0*/)
     }
     catch (CMemoryException* e)
     {
-        e->GetErrorMessage(exceptionError, _countof(exceptionError));
-        m_sErrorString = exceptionError;
+        e->GetErrorMessage(CStrBuf(m_sErrorString, 1000), 1000);
         return FALSE;
     }
 
@@ -311,8 +309,7 @@ BOOL CFileTextLines::Load(const CString& sFilePath, int /*lengthHint*/ /* = 0*/)
     }
     catch (CMemoryException* e)
     {
-        e->GetErrorMessage(exceptionError, _countof(exceptionError));
-        m_sErrorString = exceptionError;
+        e->GetErrorMessage(CStrBuf(m_sErrorString, 1000), 1000);
         return FALSE;
     }
 
@@ -598,9 +595,7 @@ BOOL CFileTextLines::Save(const CString& sFilePath, bool bSaveAsUTF8 /*= false *
     }
     catch (CException* e)
     {
-        CString* psErrorString = const_cast<CString*>(&m_sErrorString);
-        e->GetErrorMessage(psErrorString->GetBuffer(4096), 4096);
-        psErrorString->ReleaseBuffer();
+        e->GetErrorMessage(CStrBuf(m_sErrorString, 4096), 4096);
         e->Delete();
         return FALSE;
     }
