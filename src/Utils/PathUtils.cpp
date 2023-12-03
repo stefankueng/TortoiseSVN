@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2022 - TortoiseSVN
+// Copyright (C) 2003-2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -30,6 +30,7 @@
 #pragma comment(lib, "Shlwapi.lib")
 #pragma warning(push)
 #pragma warning(disable : 4091) // 'typedef ': ignored on left of '' when no variable is declared
+#include <regex>
 #include <shlobj.h>
 #pragma warning(pop)
 
@@ -593,7 +594,19 @@ CStringA CPathUtils::PathEscape(const CStringA& path)
     int           j             = 0;
     bool          needsEscaping = false;
     std::set<int> escapedPositions;
-    for (int i = 0; path[i]; ++i)
+    // the [ and ] chars need escaping, but only if they are not part of an ipv6 address.
+    // so we first try to figure out if the path is an ipv6 address
+    std::regex ipv6Regex(R"(^[a-zA-Z-+]+://\[[0-9a-fA-F:]+\])");
+    std::smatch match;
+    std::string   sPath = static_cast<LPCSTR>(path);
+    int endOfIpv6 = 0;
+    if (std::regex_search(sPath, match, ipv6Regex))
+    {
+        endOfIpv6 = static_cast<int>(match[0].length());
+    }
+    j = endOfIpv6;
+    ret2.Append(path, j);
+    for (int i = j; path[i]; ++i)
     {
         auto c = static_cast<unsigned char>(path[i]);
         if (iri_escape_chars[c])
@@ -612,7 +625,8 @@ CStringA CPathUtils::PathEscape(const CStringA& path)
         ++j;
     }
     CStringA ret;
-    for (int i = 0; ret2[i]; ++i)
+    ret.Append(path, endOfIpv6);
+    for (int i = endOfIpv6; ret2[i]; ++i)
     {
         auto c = static_cast<unsigned char>(ret2[i]);
         if (uri_autoescape_chars[c])
@@ -641,23 +655,6 @@ CStringA CPathUtils::PathEscape(const CStringA& path)
         ret.Replace(("file:///%5C"), ("file://"));
     ret.Replace(("file:////%5C"), ("file://"));
 
-    // properly handle ipv6 addresses
-    int urlPos = ret.Find("://%5B");
-    if (urlPos > 0)
-    {
-        int domainPos = ret.Find("/", urlPos + 6);
-        if (domainPos > urlPos)
-        {
-            CStringA leftpart = ret.Left(domainPos + 1);
-            if ((leftpart.Find("%5D:") > 0) || (leftpart.Find("%5D/") > 0))
-            {
-                leftpart.Replace("://%5B", "://[");
-                leftpart.Replace("%5D/", "]/");
-                leftpart.Replace("%5D:", "]:");
-                ret = leftpart + ret.Mid(domainPos + 1);
-            }
-        }
-    }
     return ret;
 }
 
@@ -1017,6 +1014,10 @@ private:
 
         test  = "https://[2001:db8:85a3:8d3:1319:8a2e:370:7348]:443/page%5B%5D/test";
         test2 = CPathUtils::PathEscape("https://[2001:db8:85a3:8d3:1319:8a2e:370:7348]:443/page[]/test");
+        ATLASSERT(test.Compare(test2) == 0);
+
+        test = "svn://[::1]:40000/foofolder/%E7%94%B5%E5%AD%90%E4%B9%A6";
+        test2 = CPathUtils::PathEscape(reinterpret_cast<const char*>(u8"svn://[::1]:40000/foofolder/电子书"));
         ATLASSERT(test.Compare(test2) == 0);
     }
     static void UnescapeTest()

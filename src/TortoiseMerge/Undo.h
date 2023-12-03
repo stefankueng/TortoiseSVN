@@ -1,6 +1,6 @@
 ﻿// TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2006-2007, 2009-2015, 2021 - TortoiseSVN
+// Copyright (C) 2006-2007, 2009-2015, 2021, 2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -31,24 +31,23 @@ class ViewState
 {
 public:
     ViewState()
-        : modifies(false)
     {
     }
 
-    std::map<int, CString> diffLines;
-    std::map<int, DWORD>   lineStates;
-    std::map<int, DWORD>   linelines;
-    std::map<int, EOL>     linesEOL;
-    std::map<int, bool>    markedLines;
-    std::list<int>         addedLines;
+    std::map<int, CString>    diffLines;
+    std::map<int, DiffStates> lineStates;
+    std::map<int, DWORD>      lineLines;
+    std::map<int, EOL>        linesEOL;
+    std::map<int, bool>       markedLines;
+    std::list<int>            addedLines;
 
-    std::map<int, ViewData> removedLines;
-    std::map<int, ViewData> replacedLines;
-    bool                    modifies; ///< this step modifies view (save before and after save differs)
+    std::map<int, ViewData>   removedLines;
+    std::map<int, ViewData>   replacedLines;
+    bool                      modifies = false; ///< this step modifies view (save before and after save differs)
 
-    void AddViewLineFromView(CBaseView* pView, int nViewLine, bool bAddEmptyLine);
-    void Clear();
-    bool IsEmpty() const { return diffLines.empty() && lineStates.empty() && linelines.empty() && linesEOL.empty() && markedLines.empty() && addedLines.empty() && removedLines.empty() && replacedLines.empty(); }
+    void                      AddViewLineFromView(CBaseView* pView, int nViewLine, bool bAddEmptyLine);
+    void                      Clear();
+    bool                      IsEmpty() const { return diffLines.empty() && lineStates.empty() && lineLines.empty() && linesEOL.empty() && markedLines.empty() && addedLines.empty() && removedLines.empty() && replacedLines.empty(); }
 };
 
 /**
@@ -61,7 +60,7 @@ struct AllViewState
     ViewState bottom;
     ViewState left;
 
-    void Clear()
+    void      Clear()
     {
         right.Clear();
         bottom.Clear();
@@ -80,25 +79,25 @@ class CUndo
 public:
     static CUndo& GetInstance();
 
-    bool Undo(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom);
-    bool Redo(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom);
-    void AddState(const AllViewState& allstate, POINT pt);
-    bool CanUndo() const { return !m_viewStates.empty(); }
-    bool CanRedo() const { return !m_redoViewStates.empty(); }
+    bool          Undo(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom);
+    bool          Redo(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom);
+    void          AddState(const AllViewState& allstate, POINT pt);
+    bool          CanUndo() const { return !m_undoViewStates.empty(); }
+    bool          CanRedo() const { return !m_redoViewStates.empty(); }
 
-    bool IsGrouping() const { return m_groups.size() % 2 == 1; }
-    bool IsRedoGrouping() const { return m_redoGroups.size() % 2 == 1; }
-    void BeginGrouping()
+    bool          IsGrouping() const { return m_undoGroups.size() % 2 == 1; }
+    bool          IsRedoGrouping() const { return m_redoGroups.size() % 2 == 1; }
+    void          BeginGrouping()
     {
-        if (m_groupCount == 0)
-            m_groups.push_back(m_caretPoints.size());
-        m_groupCount++;
+        if (m_undoGroupCount == 0)
+            m_undoGroups.push_back(m_undoCaretPoints.size());
+        m_undoGroupCount++;
     }
     void EndGrouping()
     {
-        m_groupCount--;
-        if (m_groupCount == 0)
-            m_groups.push_back(m_caretPoints.size());
+        m_undoGroupCount--;
+        if (m_undoGroupCount == 0)
+            m_undoGroups.push_back(m_undoCaretPoints.size());
     }
     void Clear();
     void MarkAllAsOriginalState() { MarkAsOriginalState(true, true, true); }
@@ -108,17 +107,19 @@ protected:
     static ViewState                     Do(const ViewState& state, CBaseView* pView, const POINT& pt);
     void                                 UndoOne(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom);
     void                                 RedoOne(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom);
-    std::list<AllViewState>              m_viewStates;
-    std::list<POINT>                     m_caretPoints;
-    std::list<std::list<int>::size_type> m_groups;
-    size_t                               m_originalStateLeft;
-    size_t                               m_originalStateRight;
-    size_t                               m_originalStateBottom;
-    int                                  m_groupCount;
+    void                                 updateActiveView(CBaseView* pLeft, CBaseView* pRight, CBaseView* pBottom) const;
+    std::list<AllViewState>              m_undoViewStates;
+    std::list<POINT>                     m_undoCaretPoints;
+    std::list<std::list<int>::size_type> m_undoGroups;
+    int                                  m_undoGroupCount;
 
     std::list<AllViewState>              m_redoViewStates;
     std::list<POINT>                     m_redoCaretPoints;
     std::list<std::list<int>::size_type> m_redoGroups;
+
+    __int64                              m_savedStateIndexLeft;
+    __int64                              m_savedStateIndexRight;
+    __int64                              m_savedStateIndexBottom;
 
 private:
     CUndo();

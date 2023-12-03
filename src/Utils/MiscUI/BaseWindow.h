@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2007, 2010, 2013-2015, 2021 - TortoiseSVN
+// Copyright (C) 2003-2007, 2010, 2013-2015, 2021, 2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -44,6 +44,8 @@ public:
     void SetWindowTitle(const std::wstring& sTitle)
     {
         sWindowTitle = sTitle;
+        if (m_hwnd)
+            SetWindowText(m_hwnd, sWindowTitle.c_str());
     };
 
     void SetRegistryPath(const std::wstring& sPath)

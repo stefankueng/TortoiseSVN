@@ -269,7 +269,7 @@ void CUnshelve::OnBnClickedDelete()
         m_cShelvesCombo.GetLBText(selectedName, m_sShelveName);
 
         CString message;
-        message.Format(CString(MAKEINTRESOURCE(IDS_SHELF_DELETE_CONFIRM_TASK1)), m_sShelveName);
+        message.Format(CString(MAKEINTRESOURCE(IDS_SHELF_DELETE_CONFIRM_TASK1)), (LPCWSTR)m_sShelveName);
         CTaskDialog taskDlg(CString(MAKEINTRESOURCE(IDS_SHELF_DELETE_CONFIRM_TASK2)),
                             message,
                             L"TortoiseSVN",

@@ -112,8 +112,23 @@
       run this task if the whole build is done via task scheduler
     </description>
     <property name="schedule" value="yes" />
-    <!-- As of 230603 the build server for the nightly builds doesn't have NASM. So build OpenSSL with the no-asm option -->
-    <property name="no-asm" value="yes" />
+    <echo message="trying to fix nightly builds..." level="Warning" />
+    <exec program="svn.exe" verbose="true">
+      <arg value="resolve" />
+      <arg value="-R" />
+      <arg value="--accept" />
+      <arg value="r" />
+      <arg value="." />
+    </exec>
+    <exec program="svn.exe" verbose="true">
+      <arg value="revert" />
+      <arg value="-R" />
+      <arg value="." />
+    </exec>
+    <exec program="svn.exe" verbose="true">
+      <arg value="up" />
+      <arg value="." />
+    </exec>
   </target>
   <!-- ====================================================================== -->
   <!-- Project targets                                                        -->
@@ -158,17 +173,6 @@
         </fileset>
       </move>
     </if>
-  </target>
-
-  <target name="docpot" depends="VSNET,env">
-    <description>
-      Creates the po template file for the docs.
-    </description>
-    <nant target="potfile">
-      <buildfiles>
-        <include name="doc\doc.build" />
-      </buildfiles>
-    </nant>
   </target>
 
   <target name="APIDocs" depends="env">
@@ -622,7 +626,6 @@ Make sure to also check the [changelog of Subversion](https://svn.apache.org/rep
     <echo message="cleanall     : clean every subproject" />
     <echo message="docs	        : builds the docs in all languages and all formats" />
     <echo message="APIDocs      : Builds the API docs from the sourcecode comments" />
-    <echo message="docpot       : Generates the po template file of the docs" />
     <echo message="Subversion   : builds the Subversion libraries, including its" />
     <echo message="               dependencies" />
     <echo message="TortoiseSVN  : builds TortoiseSVN. You must have built the" />

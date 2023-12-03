@@ -74,6 +74,7 @@
 #define HID_VIEW_IGNORECOMMENTS                 0x18080
 #define HID_LOGOBUTTON                          0x18081
 #define HID_VIEW_BARS                           0x18082
+#define HID_VIEW_IGNOREEOL                      0x18083
 #define HID_USEBLOCKS                           0x18092
 #define HID_EDIT_ENABLE                         0x180D0
 #define HID_EDIT_THREEWAY_ACTIONS               0x180E9

@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2003-2015, 2020-2022 - TortoiseSVN
+// Copyright (C) 2003-2015, 2020-2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -153,9 +153,15 @@ BOOL CCheckoutDlg::OnInitDialog()
 
     CheckDlgButton(IDC_STORE_PRISTINES, BST_CHECKED);
 
+#if SVN_VER_MAJOR >= 1 && SVN_VER_MINOR > 14
+    GetDlgItem(IDC_STORE_PRISTINES)->ShowWindow(SW_SHOW);
+#else
+    GetDlgItem(IDC_STORE_PRISTINES)->ShowWindow(SW_HIDE);
+#endif
+
     m_sCheckoutDirOrig = m_strCheckoutDirectory;
 
-    CString sUrlSave = m_urLs.CreateAsteriskSeparatedString();
+    CString sUrlSave   = m_urLs.CreateAsteriskSeparatedString();
     m_urlCombo.SetURLHistory(true, true);
     m_bAutoCreateTargetName = FALSE;
     m_urlCombo.LoadHistory(L"Software\\TortoiseSVN\\History\\repoURLS", L"url");
@@ -273,7 +279,7 @@ void CCheckoutDlg::OnOK()
     if (m_strCheckoutDirectory.IsEmpty())
     {
         m_bBlockMessages = false;
-        return; //don't dismiss the dialog
+        return; // don't dismiss the dialog
     }
 
     CTSVNPath checkoutDirectory;
@@ -365,13 +371,13 @@ void CCheckoutDlg::OnOK()
 
         // is it already a w/c for the directory we want?
 
-        CString parentURL = m_urLs.GetCommonRoot().GetSVNPathString();
+        CString            parentURL = m_urLs.GetCommonRoot().GetSVNPathString();
 
         SVNInfo            info;
         const SVNInfoData* infoData = info.GetFirstFileInfo(targetPath, SVNRev(), SVNRev());
         // exists with matching URL?
 
-        m_parentExists = (infoData != nullptr) && (infoData->url == parentURL);
+        m_parentExists              = (infoData != nullptr) && (infoData->url == parentURL);
         if (!m_parentExists)
         {
             // trying to c/o into an existing, non-empty folder?
@@ -396,7 +402,7 @@ void CCheckoutDlg::OnOK()
                 {
                     m_bAutoCreateTargetName = bAutoCreateTargetName;
                     m_bBlockMessages        = false;
-                    return; //don't dismiss the dialog
+                    return; // don't dismiss the dialog
                 }
             }
         }
@@ -430,7 +436,7 @@ void CCheckoutDlg::OnOK()
             {
                 m_bAutoCreateTargetName = bAutoCreateTargetName;
                 m_bBlockMessages        = false;
-                return; //don't dismiss the dialog
+                return; // don't dismiss the dialog
             }
         }
     }
@@ -505,7 +511,7 @@ void CCheckoutDlg::OnBnClickedShowlog()
     if ((m_pLogDlg) && (m_pLogDlg->IsWindowVisible()))
         return;
     AfxGetApp()->DoWaitCursor(1);
-    //now show the log dialog for working copy
+    // now show the log dialog for working copy
     if (m_urLs.GetCount() > 0)
     {
         delete m_pLogDlg;
@@ -552,7 +558,7 @@ void CCheckoutDlg::OnCbnSelchangeDepth()
     switch (m_depthCombo.GetCurSel())
     {
         case 0:
-            //svn_depth_infinity
+            // svn_depth_infinity
             bOmitExternals = false;
             break;
         default:
@@ -568,7 +574,7 @@ void CCheckoutDlg::OnBnClickedSparse()
 {
     m_tooltips.Pop(); // hide the tooltips
     UpdateData();
-    SVNRev rev = GetSelectedRevisionOrHead();
+    SVNRev  rev = GetSelectedRevisionOrHead();
 
     CString strUrLs;
     m_urlCombo.GetWindowText(strUrLs);

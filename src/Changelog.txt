@@ -22,6 +22,8 @@
        of Allow mixed revisions (not recommended) in the Merge
        options dialog. (Daniel Sahlberg)
 - BUG: TortoiseBlame didn't restore saved window position. (Stefan)
+- BUG: Repository-Urls with ipv6 addresses were not properly
+       handled. (Stefan)
 
 Version 1.14.5
 - BUG: 1.14.4 was wrongly linked against svn 1.14.1

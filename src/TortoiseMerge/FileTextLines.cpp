@@ -1,6 +1,6 @@
 ﻿// TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2016 - TortoiseGit
+// Copyright (C) 2016, 2023 - TortoiseGit
 // Copyright (C) 2007-2016, 2019, 2021 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
@@ -203,7 +203,6 @@ CFileTextLines::UnicodeType CFileTextLines::CheckUnicodeType(LPVOID pBuffer, int
 
 BOOL CFileTextLines::Load(const CString& sFilePath, int /*lengthHint*/ /* = 0*/)
 {
-    WCHAR exceptionError[1000] = {0};
     m_saveParams.lineEndings   = EOL_AUTOLINE;
     if (!m_bKeepEncoding)
         m_saveParams.unicodeType = CFileTextLines::AUTOTYPE;
@@ -252,8 +251,7 @@ BOOL CFileTextLines::Load(const CString& sFilePath, int /*lengthHint*/ /* = 0*/)
     }
     catch (CMemoryException* e)
     {
-        e->GetErrorMessage(exceptionError, _countof(exceptionError));
-        m_sErrorString = exceptionError;
+        e->GetErrorMessage(CStrBuf(m_sErrorString, 1000), 1000);
         return FALSE;
     }
 
@@ -274,10 +272,14 @@ BOOL CFileTextLines::Load(const CString& sFilePath, int /*lengthHint*/ /* = 0*/)
     // enforce conversion for all but ASCII and UTF8 type
     m_bNeedsConversion = (m_saveParams.unicodeType != CFileTextLines::UTF8) && (m_saveParams.unicodeType != CFileTextLines::ASCII);
 
+    // no need to decode empty file
+    if (dwReadBytes == 0)
+        return TRUE;
+
     // we may have to convert the file content - CString is UTF16LE
     try
     {
-        CBaseFilter* pFilter = nullptr;
+        std::unique_ptr<CBaseFilter> pFilter;
         switch (m_saveParams.unicodeType)
         {
             case BINARY:
@@ -285,34 +287,36 @@ BOOL CFileTextLines::Load(const CString& sFilePath, int /*lengthHint*/ /* = 0*/)
                 return FALSE;
             case UTF8:
             case UTF8BOM:
-                pFilter = new CUtf8Filter(nullptr);
+                pFilter = std::make_unique<CUtf8Filter>(nullptr);
                 break;
             default:
             case ASCII:
-                pFilter = new CAsciiFilter(nullptr);
+                pFilter = std::make_unique<CAsciiFilter>(nullptr);
                 break;
             case UTF16_BE:
             case UTF16_BEBOM:
-                pFilter = new CUtf16BeFilter(nullptr);
+                pFilter = std::make_unique<CUtf16BeFilter>(nullptr);
                 break;
             case UTF16_LE:
             case UTF16_LEBOM:
-                pFilter = new CUtf16LeFilter(nullptr);
+                pFilter = std::make_unique<CUtf16LeFilter>(nullptr);
                 break;
             case UTF32_BE:
-                pFilter = new CUtf32BeFilter(nullptr);
+                pFilter = std::make_unique<CUtf32BeFilter>(nullptr);
                 break;
             case UTF32_LE:
-                pFilter = new CUtf32LeFilter(nullptr);
+                pFilter = std::make_unique<CUtf32LeFilter>(nullptr);
                 break;
         }
-        pFilter->Decode(oFile);
-        delete pFilter;
+        if (!pFilter->Decode(oFile))
+        {
+            SetErrorString();
+            return FALSE;
+        }
     }
     catch (CMemoryException* e)
     {
-        e->GetErrorMessage(exceptionError, _countof(exceptionError));
-        m_sErrorString = exceptionError;
+        e->GetErrorMessage(CStrBuf(m_sErrorString, 1000), 1000);
         return FALSE;
     }
 
@@ -498,7 +502,7 @@ BOOL CFileTextLines::Save(const CString& sFilePath, bool bSaveAsUTF8 /*= false *
             return FALSE;
         }
 
-        CBaseFilter*                pFilter      = nullptr;
+        std::unique_ptr<CBaseFilter> pFilter;
         bool                        bSaveBom     = true;
         CFileTextLines::UnicodeType eUnicodeType = bSaveAsUTF8 ? CFileTextLines::UTF8 : m_saveParams.unicodeType;
         switch (eUnicodeType)
@@ -506,33 +510,33 @@ BOOL CFileTextLines::Save(const CString& sFilePath, bool bSaveAsUTF8 /*= false *
             default:
             case CFileTextLines::ASCII:
                 bSaveBom = false;
-                pFilter  = new CAsciiFilter(&file);
+                pFilter  = std::make_unique<CAsciiFilter>(&file);
                 break;
             case CFileTextLines::UTF8:
                 bSaveBom = false;
                 [[fallthrough]];
             case CFileTextLines::UTF8BOM:
-                pFilter = new CUtf8Filter(&file);
+                pFilter = std::make_unique<CUtf8Filter>(&file);
                 break;
             case CFileTextLines::UTF16_BE:
                 bSaveBom = false;
-                pFilter  = new CUtf16BeFilter(&file);
+                pFilter  = std::make_unique<CUtf16BeFilter>(&file);
                 break;
             case CFileTextLines::UTF16_BEBOM:
-                pFilter = new CUtf16BeFilter(&file);
+                pFilter = std::make_unique<CUtf16BeFilter>(&file);
                 break;
             case CFileTextLines::UTF16_LE:
                 bSaveBom = false;
-                pFilter  = new CUtf16LeFilter(&file);
+                pFilter  = std::make_unique<CUtf16LeFilter>(&file);
                 break;
             case CFileTextLines::UTF16_LEBOM:
-                pFilter = new CUtf16LeFilter(&file);
+                pFilter = std::make_unique<CUtf16LeFilter>(&file);
                 break;
             case CFileTextLines::UTF32_BE:
-                pFilter = new CUtf32BeFilter(&file);
+                pFilter = std::make_unique<CUtf32BeFilter>(&file);
                 break;
             case CFileTextLines::UTF32_LE:
-                pFilter = new CUtf32LeFilter(&file);
+                pFilter = std::make_unique<CUtf32LeFilter>(&file);
                 break;
         }
 
@@ -593,14 +597,11 @@ BOOL CFileTextLines::Save(const CString& sFilePath, bool bSaveAsUTF8 /*= false *
             EOL eEol = GetLineEnding(i);
             pFilter->Write(oEncodedEol[eEol]);
         }
-        delete pFilter;
         file.Close();
     }
     catch (CException* e)
     {
-        CString* psErrorString = const_cast<CString*>(&m_sErrorString);
-        e->GetErrorMessage(psErrorString->GetBuffer(4096), 4096);
-        psErrorString->ReleaseBuffer();
+        e->GetErrorMessage(CStrBuf(m_sErrorString, 4096), 4096);
         e->Delete();
         return FALSE;
     }

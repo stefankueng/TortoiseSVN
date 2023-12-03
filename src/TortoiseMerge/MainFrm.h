@@ -1,6 +1,6 @@
 ﻿// TortoiseMerge - a Diff/Patch program
 
-// Copyright (C) 2006-2015, 2017, 2020-2021 - TortoiseSVN
+// Copyright (C) 2006-2015, 2017, 2020-2021, 2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -176,6 +176,8 @@ protected:
     afx_msg void    OnIndicatorBottomview();
     afx_msg void    OnTimer(UINT_PTR nIDEvent);
     afx_msg void    OnViewIgnorecomments();
+    afx_msg void    OnViewIgnoreEOL();
+    afx_msg void    OnUpdateViewIgnoreEOL(CCmdUI *pCmdUI);
     afx_msg void    OnUpdateViewIgnorecomments(CCmdUI *pCmdUI);
     afx_msg void    OnUpdateViewRegexFilter(CCmdUI *pCmdUI);
     afx_msg void    OnRegexfilter(UINT cmd);
@@ -297,6 +299,7 @@ protected:
     CRegDWORD                                                m_regUseRibbons;
     CRegDWORD                                                m_regUseTaskDialog;
     CRegDWORD                                                m_regIgnoreComments;
+    CRegDWORD                                                m_regIgnoreEOL;
 
     std::map<CString, std::tuple<CString, CString, CString>> m_ignoreCommentsMap;
     CSimpleIni                                               m_regexIni;

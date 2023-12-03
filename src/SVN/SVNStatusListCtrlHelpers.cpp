@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2008-2015, 2021 - TortoiseSVN
+// Copyright (C) 2008-2015, 2021, 2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -784,7 +784,7 @@ void CSVNStatusListCtrl::ColumnManager::ApplyColumnOrder() const
     int order[SVNSLC_MAXCOLUMNCOUNT + 1] = {0};
 
     std::vector<int> gridColumnOrder = GetGridColumnOrder();
-    std::copy(gridColumnOrder.begin(), gridColumnOrder.end(), stdext::checked_array_iterator<int*>(&order[0], sizeof(order)));
+    std::ranges::copy(gridColumnOrder, order);
 
     // we must have placed all columns or something is really fishy ..
 

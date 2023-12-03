@@ -1,5 +1,5 @@
 # Translation of the TortoiseSVN user interface
-# Copyright (C) 2004-2020 the TortoiseSVN team
+# Copyright (C) 2004-2023 the TortoiseSVN team
 # 
 # This file is distributed under the same license as TortoiseSVN
 # 
@@ -29,7 +29,7 @@
 # Mr.Update, 2019-2021
 # peu <peu@rekoba.de>, 2013
 # peu <peu@rekoba.de>, 2013
-# Stefan Kueng <tortoisesvn@gmail.com>, 2014,2019-2022
+# Stefan Kueng <tortoisesvn@gmail.com>, 2014,2019-2023
 # Sven Strickroth <sstrickroth@googlemail.com>, 2012-2014
 msgid ""
 msgstr ""
@@ -37,8 +37,8 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 1900-01-01 00:00+0000\n"
 "PO-Revision-Date: 2010-11-30 05:14+0000\n"
-"Last-Translator: Stefan Kueng <tortoisesvn@gmail.com>, 2014,2019-2022\n"
-"Language-Team: German (http://www.transifex.com/luebbe/tortoisesvn/language/de/)\n"
+"Last-Translator: Stefan Kueng <tortoisesvn@gmail.com>, 2014,2019-2023\n"
+"Language-Team: German (http://app.transifex.com/luebbe/tortoisesvn/language/de/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -220,6 +220,11 @@ msgid ""
 "%Ts\n"
 "%Ts"
 msgstr "%Ts\n%Ts"
+
+#. Resource IDs: (4250)
+#, c-format
+msgid "%d files"
+msgstr "%dDateien"
 
 #. Resource IDs: (1022)
 #, c-format
@@ -1015,7 +1020,7 @@ msgstr "&Maximale Größe [kByte] eines gelöschten inaktiven Puffers"
 
 #. Resource IDs: (1, 4454)
 msgid "&Merge"
-msgstr "&Start"
+msgstr "&Zusammenführen"
 
 #. Resource IDs: (ID_VIEW_MERGEPATH - Menu)
 msgid "&Merge paths"
@@ -1751,6 +1756,10 @@ msgstr "... lese Status der Arbeitskopie"
 msgid "...and %d more paths."
 msgstr "... und %d weitere Pfade."
 
+#. Resource IDs: (4249)
+msgid "1 file"
+msgstr "1 Datei"
+
 #. Resource IDs: (2403)
 #, c-format
 msgid ": Revision %d"
@@ -2227,6 +2236,12 @@ msgstr "Wie &vorhanden (kein spezifisches Zeilenende)"
 msgid "Ask the user"
 msgstr "Anwender fragen"
 
+#. Resource IDs: (291)
+msgid ""
+"Asks for a specific revision, then shows the log for that revision no matter"
+" what branch it is in."
+msgstr "Fragt nach einer spezifischen Revision und zeigt dann die Historie für diese Revision unabhängig davon in welchem Zweig die Revision ist."
+
 #. Resource IDs: (4210)
 #, c-format
 msgid "Assigned to changelist '%ls'"
@@ -2510,11 +2525,11 @@ msgid ""
 "%2!ls!"
 msgstr "Kann\n%1!ls!\nnicht nach\n%2!ls!\nkopieren!"
 
-#. Resource IDs: (1383, 2, 5302, Dialog IDD_ENCODING: Control id 2, Dialog
-#. IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog IDD_GOTODLG:
-#. Control id 2, Dialog IDD_OPEN: Control id 2, Dialog IDD_OPENDLG: Control id
-#. 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog IDD_REGEXFILTERS: Control
-#. id 2)
+#. Resource IDs: (1068, 1383, 2, 5302, Dialog IDD_ENCODING: Control id 2,
+#. Dialog IDD_FIND: Control id 2, Dialog IDD_GOTO: Control id 2, Dialog
+#. IDD_GOTODLG: Control id 2, Dialog IDD_OPEN: Control id 2, Dialog
+#. IDD_OPENDLG: Control id 2, Dialog IDD_REGEXFILTER: Control id 2, Dialog
+#. IDD_REGEXFILTERS: Control id 2)
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -2681,6 +2696,10 @@ msgstr "Auf Aktualisierungen prüfen"
 #. Resource IDs: (136)
 msgid "Check out a working copy from a repository"
 msgstr "Lokale Arbeitskopie aus einem Projektarchiv erstellen"
+
+#. Resource IDs: (1064)
+msgid "Check project now"
+msgstr "Projekt jetzt überprüfen"
 
 #. Resource IDs: (1536)
 msgid "Check the authentication items you want to delete below"
@@ -3172,6 +3191,10 @@ msgstr "Kontextmenü"
 msgid "Context lines for patches"
 msgstr "Kontextzeilen für Patches"
 
+#. Resource IDs: (9915)
+msgid "Context menu successfully registered!"
+msgstr "Kontextmenü wurde erfolgreich registriert!"
+
 #. Resource IDs: (1543)
 msgid "Continue &Merge"
 msgstr "Weiter &Zusammenführen"
@@ -3642,7 +3665,7 @@ msgstr "Standardpfad:"
 msgid "Default to UTF-8 encoding"
 msgstr "UTF-8-Codierung als Vorgabe"
 
-#. Resource IDs: (1542)
+#. Resource IDs: (1067, 1542)
 msgid "Delete"
 msgstr "Löschen"
 
@@ -3951,6 +3974,11 @@ msgstr "Für alle nicht versionierten Elemente durchführen"
 #. Resource IDs: (2358)
 msgid "Do this for all unversioned/modified items"
 msgstr "Für alle nicht versionierten/geänderten Elemente durchführen"
+
+#. Resource IDs: (1065)
+#, c-format
+msgid "Do you really want to delete the shelf \"%s\"?"
+msgstr "Wollen Sie die Ablage \"%s\" wirklich löschen?"
 
 #. Resource IDs: (1464)
 #, c-format
@@ -4671,6 +4699,10 @@ msgstr "Hole Revision %ls der Datei:"
 msgid "Fetching status of %1!ls!"
 msgstr "Status von %1!ls! abrufen"
 
+#. Resource IDs: (4248)
+msgid "Fetching text bases"
+msgstr "Lade Text-Basen"
+
 #. Resource IDs: (1237)
 msgid "Fetching tree conflict information..."
 msgstr "Hole Baumkonfliktinformationen..."
@@ -5000,6 +5032,11 @@ msgstr "&Sperre holen..."
 msgid "Get merge logs"
 msgstr "Logs vom Zusammenführen holen"
 
+#. Resource IDs: (1901)
+#, c-format
+msgid "Getting BASE of file %1!ls!"
+msgstr "Lade BASIS der Datei %1!ls!"
+
 #. Resource IDs: (1900)
 #, c-format
 msgid "Getting file %1!ls!"
@@ -5326,6 +5363,14 @@ msgstr "ID:32825:VA  +D"
 #. Accelerator Entry for Menu ID:32870; 'Collapse'
 msgid "ID:32870:V C +L"
 msgstr "ID:32870:V C +L"
+
+#. Accelerator Entry for Menu ID:32880; ''
+msgid "ID:32880:V C +R"
+msgstr "ID:32880:V C +R"
+
+#. Accelerator Entry for Menu ID:32880; ''
+msgid "ID:32880:VAC +C"
+msgstr "ID:32880:VAC +C"
 
 #. Accelerator Entry for Menu ID:32881; 'Wrap long lines'
 msgid "ID:32881:V C +P"
@@ -7731,6 +7776,10 @@ msgstr "RegEx-Treffermeldung:"
 msgid "Regex:"
 msgstr "RegEx:"
 
+#. Resource IDs: (1542)
+msgid "Register context menu"
+msgstr "Registriere Kontextmenü"
+
 #. Resource IDs: (1576)
 msgid "Regular Expression"
 msgstr "Regulärer Ausdruck"
@@ -8925,6 +8974,10 @@ msgstr "Zeige Zeilen&nummern"
 msgid "Show lo&g"
 msgstr "Zeige &Log"
 
+#. Resource IDs: (290)
+msgid "Show log of repo at revision…"
+msgstr "Zeige Historie für Revision..."
+
 #. Resource IDs: (1013)
 msgid "Show multiple &changes..."
 msgstr "Mehrere &Änderungen anzeigen..."
@@ -9306,6 +9359,10 @@ msgstr "Sperre von einer anderen Arbeitskopie stehlen"
 #. Resource IDs: (65535)
 msgid "Stefan Küng, Lübbe Onken"
 msgstr "Stefan Küng, Lübbe Onken"
+
+#. Resource IDs: (1685)
+msgid "Store pristine copies in working copy"
+msgstr "Speichere Basisdaten in Arbeitskopie"
 
 #. Resource IDs: (270)
 msgid ""
@@ -10302,6 +10359,11 @@ msgstr "A&ktualisieren"
 msgid "URL"
 msgstr "URL"
 
+#. Resource IDs: (387)
+#, c-format
+msgid "URL '%s' non-existent in revision %ld"
+msgstr "URL '%s' existiert nicht in Revision %ld"
+
 #. Resource IDs: (1272)
 msgid "URL history"
 msgstr "URL-Historie"
@@ -11123,6 +11185,12 @@ msgstr "Sie müssen Ihren Rechner neu starten, damit die Änderungen wirksam wer
 #. Resource IDs: (2756)
 msgid "You selected an unversioned folder for a commit!"
 msgstr "Sie haben einen nicht versionierten Ordner zum Übertragen ausgewählt."
+
+#. Resource IDs: (1066)
+msgid ""
+"You will lose all data of the shelf.\n"
+"This action cannot be undone."
+msgstr "Sie verlieren dadurch alle Daten der Ablage.\nDiese Aktion kann nicht mehr rückgängig gemacht werden."
 
 #. Resource IDs: (1412)
 #, c-format

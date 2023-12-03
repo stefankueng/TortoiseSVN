@@ -7,10 +7,16 @@
   -->
 
   <Type Name="CTSVNPath">
-    <DisplayString Condition="m_bIsURL">{m_sFwdslashPath}</DisplayString>
-    <DisplayString Condition="!m_bIsURL &amp;&amp; m_bDirectoryKnown &amp;&amp; m_bIsDirectory">dir: {m_sBackslashPath}</DisplayString>
-    <DisplayString Condition="!m_bIsURL &amp;&amp; m_bDirectoryKnown &amp;&amp; !m_bIsDirectory">file: {m_sBackslashPath}</DisplayString>
-    <DisplayString Condition="!m_bIsURL">{m_sBackslashPath}</DisplayString>
+    <DisplayString Condition="m_bIsURL &amp;&amp; m_bURLKnown">{m_sFwdslashPath}</DisplayString>
+    <DisplayString Condition="!m_bIsURL &amp;&amp; m_bURLKnown &amp;&amp; m_bDirectoryKnown &amp;&amp; m_bIsDirectory">dir: {m_sBackslashPath}</DisplayString>
+    <DisplayString Condition="!m_bIsURL &amp;&amp; m_bURLKnown &amp;&amp; m_bDirectoryKnown &amp;&amp; !m_bIsDirectory">file: {m_sBackslashPath}</DisplayString>
+    <DisplayString Condition="!m_bIsURL &amp;&amp; m_bURLKnown">{m_sBackslashPath}</DisplayString>
+    <DisplayString Condition="m_sUIPath.m_pszData[0]">{m_sUIPath}</DisplayString>
+    <DisplayString Condition="m_sUTF8FwdslashPath.m_pszData[0]">{m_sUTF8FwdslashPath}</DisplayString>
+    <DisplayString Condition="m_sFwdslashPath.m_pszData[0]">{m_sFwdslashPath}</DisplayString>
+    <DisplayString Condition="m_sLongBackslashPath.m_pszData[0]">{m_sLongBackslashPath}</DisplayString>
+    <DisplayString Condition="m_sBackslashPath.m_pszData[0]">{m_sBackslashPath}</DisplayString>
+    <DisplayString>{m_sFwdslashPath }</DisplayString>
   </Type>
 
   <Type Name="SVNRev">

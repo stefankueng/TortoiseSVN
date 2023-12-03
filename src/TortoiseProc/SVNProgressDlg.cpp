@@ -908,6 +908,7 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, const CTSVNPath& url, svn_wc
             data->sActionColumnText.LoadString(IDS_SVNACTION_COMMITTINGTRANSACTION);
             data->sPathColumnText.Empty();
             break;
+#if SVN_VER_MAJOR >= 1 && SVN_VER_MINOR > 14
         case svn_wc_notify_hydrating_start:
             m_hydratingData = std::nullopt;
             bNoNotify       = true;
@@ -962,6 +963,7 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, const CTSVNPath& url, svn_wc
         }
         break;
         case svn_wc_notify_hydrating_end:
+#endif
         case svn_wc_notify_upgraded_path:
         case svn_wc_notify_failed_conflict:
         case svn_wc_notify_failed_missing:
@@ -991,12 +993,13 @@ BOOL CSVNProgressDlg::Notify(const CTSVNPath& path, const CTSVNPath& url, svn_wc
                     m_bExtDataAdded = true;
             }
 
+#if SVN_VER_MAJOR >= 1 && SVN_VER_MINOR > 14
             // Remember the hydrating notification data for future updates.
             if (action == svn_wc_notify_hydrating_file && !m_hydratingData)
             {
                 m_hydratingData = HydratingNotificationData(data->id, m_arData.size() - 1, 1);
             }
-
+#endif
             if ((!data->bAuxItem) && (m_itemCount > 0))
             {
                 m_itemCount--;
@@ -1334,7 +1337,7 @@ void CSVNProgressDlg::ReportError(const CString& sError)
 {
     if (CRegDWORD(L"Software\\TortoiseSVN\\PlaySound", TRUE) != 0)
         PlaySound(reinterpret_cast<LPCWSTR>(SND_ALIAS_SYSTEMEXCLAMATION), nullptr, SND_ALIAS_ID | SND_ASYNC);
-    ReportString(sError, CString(MAKEINTRESOURCE(IDS_ERR_ERROR)), m_colors.GetColor(CColors::Conflict));
+    ReportString(sError, CString(MAKEINTRESOURCE(IDS_ERR_ERROR)), true, m_colors.GetColor(CColors::Conflict));
     m_bErrorsOccurred = true;
 }
 
