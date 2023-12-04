@@ -203,6 +203,13 @@ In each table entry, the following keys are significant:
                            to have the different variants in different
                            directories.
 
+        multibin        => On systems that support having multiple
+                           implementations of a library and binaries
+                           (typically a 32-bit and a 64-bit variant),
+                           this is used to have the different variants
+                           in different binary directories. This setting
+                           works in conjunction with multilib.
+
         bn_ops          => Building options (was just bignum options in
                            the earlier history of this option, hence the
                            name). This is a string of words that describe
@@ -233,8 +240,14 @@ In each table entry, the following keys are significant:
                                                 is ILP32;
                            RC4_CHAR             RC4 key schedule is made
                                                 up of 'unsigned char's;
+                                                Note: should not be used
+                                                for new configuration
+                                                targets
                            RC4_INT              RC4 key schedule is made
                                                 up of 'unsigned int's;
+                                                Note: should not be used
+                                                for new configuration
+                                                targets
 
 [1] as part of the target configuration, one can have a key called
   `inherit_from` that indicates what other configurations to inherit

@@ -12,7 +12,7 @@
 
 #ifdef _WIN32
 # ifndef _WIN32_WINNT
-#  define _WIN32_WINNT 0x0600
+#  define _WIN32_WINNT 0x0400
 # endif
 # include <windows.h>
 # include <wincrypt.h>
@@ -21,11 +21,10 @@
 # include <string.h>
 # include <stdlib.h>
 # include <malloc.h>
-# include <shlwapi.h>
 # ifndef alloca
 #  define alloca _alloca
 # endif
-# pragma comment(lib, "shlwapi.lib")
+
 # include <openssl/crypto.h>
 
 # ifndef OPENSSL_NO_CAPIENG
@@ -34,15 +33,6 @@
 #  include <openssl/bn.h>
 #  include <openssl/rsa.h>
 #  include <openssl/dsa.h>
-
-struct X509_name_st {
-    STACK_OF(X509_NAME_ENTRY) *entries; /* DN components */
-    int modified;               /* true if 'bytes' needs to be built */
-    BUF_MEM *bytes;             /* cached encoding: cannot be NULL */
-    /* canonical encoding used for rapid Name comparison */
-    unsigned char *canon_enc;
-    int canon_enclen;
-} /* X509_NAME */ ;
 
 /*
  * This module uses several "new" interfaces, among which is
@@ -111,96 +101,6 @@ struct X509_name_st {
 
 # include "e_capi_err.h"
 # include "e_capi_err.c"
-
-char lastUsedAuthCacheHash[100] = {0};
-
- void TSVN_GetSHA1HashFromX509(STACK_OF(X509_NAME) *ca_dn, char * outbuf)
- {
-     HCRYPTPROV hProv = 0;
-     HCRYPTHASH hHash = 0;
-     DWORD cbHash = 0;
-     BYTE rgbHash[20];
-     char sha1hashstring[50];
-     CHAR rgbDigits[] = "0123456789abcdef";
-     int i;
-     X509_NAME * nm;
-
-     outbuf[0] = 0;
-     if (CryptAcquireContext(&hProv,
-         NULL,
-         NULL,
-         PROV_RSA_FULL,
-         CRYPT_VERIFYCONTEXT))
-     {
-         if (CryptCreateHash(hProv, CALG_SHA1, 0, 0, &hHash))
-         {
-             for (i = 0; i < sk_X509_NAME_num(ca_dn); ++i)
-             {
-                 nm = sk_X509_NAME_value(ca_dn, i);
-                 CryptHashData(hHash, nm->canon_enc, nm->canon_enclen, 0);
-             }
-
-             cbHash = 20;
-             if (CryptGetHashParam(hHash, HP_HASHVAL, rgbHash, &cbHash, 0))
-             {
-                 for (i = 0; i < (int)cbHash; ++i)
-                 {
-                     sha1hashstring[i*2]   = rgbDigits[rgbHash[i] >> 4];
-                     sha1hashstring[i*2+1] = rgbDigits[rgbHash[i] & 0xf];
-                 }
-                 sha1hashstring[cbHash] = 0;
-                 strcpy(outbuf, sha1hashstring);
-             }
-             CryptDestroyHash(hHash);
-         }
-         CryptReleaseContext(hProv, 0);
-     }
- }
-
- int TSVN_GetSavedIndexForHash(const char* hash)
- {
-     int ret = -1;
-     DWORD dwType = 0;
-     DWORD dwData = 0;
-     DWORD dwDataSize = 4;
-     int bLoad = 1;
-     if (SHGetValueA(HKEY_CURRENT_USER, "Software\\TortoiseSVN\\CAPIAuthz", hash, &dwType, &dwData, &dwDataSize) == ERROR_SUCCESS)
-     {
-         if (dwType == REG_DWORD)
-         {
-             ret = (int)dwData;
-         }
-     }
-     return ret;
- }
-
- void TSVN_SaveIndexForHash(const char* hash, int index)
- {
-     DWORD value = index;
-     SHSetValueA(HKEY_CURRENT_USER, "Software\\TortoiseSVN\\CAPIAuthz", hash, REG_DWORD, &value, sizeof(value));
- }
-
- void TSVN_ClearLastUsedAuthCache()
- {
-     SHDeleteValueA(HKEY_CURRENT_USER, "Software\\TortoiseSVN\\CAPIAuthz", lastUsedAuthCacheHash);
- }
-
- BOOL CALLBACK FindWindoProc(HWND hwnd, LPARAM lParam)
- {
-     HWND * pWnd;
-     DWORD pid = 0;
-     if ((GetWindowLongPtr(hwnd, GWL_STYLE) & WS_VISIBLE))
-     {
-         GetWindowThreadProcessId(hwnd, &pid);
-         if (pid == GetCurrentProcessId())
-         {
-             pWnd = (HWND*)lParam;
-             (*pWnd) = hwnd;
-             return FALSE;
-         }
-     }
-     return TRUE;
- }
 
 static const char *engine_capi_id = "capi";
 static const char *engine_capi_name = "CryptoAPI ENGINE";
@@ -423,7 +323,6 @@ static int capi_ctrl(ENGINE *e, int cmd, long i, void *p, void (*f) (void))
             ctx->storename = tmpstr;
             CAPI_trace(ctx, "Setting store name to %s\n", p);
         } else {
-            CAPIerr(CAPI_F_CAPI_CTRL, ERR_R_MALLOC_FAILURE);
             ret = 0;
         }
         break;
@@ -450,7 +349,6 @@ static int capi_ctrl(ENGINE *e, int cmd, long i, void *p, void (*f) (void))
             ctx->debug_file = tmpstr;
             CAPI_trace(ctx, "Setting debug file to %s\n", ctx->debug_file);
         } else {
-            CAPIerr(CAPI_F_CAPI_CTRL, ERR_R_MALLOC_FAILURE);
             ret = 0;
         }
         break;
@@ -517,15 +415,17 @@ static int capi_init(ENGINE *e)
 
     if (capi_idx < 0) {
         capi_idx = ENGINE_get_ex_new_index(0, NULL, NULL, NULL, 0);
-        if (capi_idx < 0)
-            goto memerr;
+        if (capi_idx < 0) {
+            CAPIerr(CAPI_F_CAPI_INIT, ERR_R_ENGINE_LIB);
+            goto err;
+        }
 
         cert_capi_idx = X509_get_ex_new_index(0, NULL, NULL, NULL, 0);
 
         /* Setup RSA_METHOD */
         rsa_capi_idx = RSA_get_ex_new_index(0, NULL, NULL, NULL, 0);
         ossl_rsa_meth = RSA_PKCS1_OpenSSL();
-        if (   !RSA_meth_set_pub_enc(capi_rsa_method,
+        if (!RSA_meth_set_pub_enc(capi_rsa_method,
                                      RSA_meth_get_pub_enc(ossl_rsa_meth))
             || !RSA_meth_set_pub_dec(capi_rsa_method,
                                      RSA_meth_get_pub_dec(ossl_rsa_meth))
@@ -537,14 +437,15 @@ static int capi_init(ENGINE *e)
                                         RSA_meth_get_bn_mod_exp(ossl_rsa_meth))
             || !RSA_meth_set_finish(capi_rsa_method, capi_rsa_free)
             || !RSA_meth_set_sign(capi_rsa_method, capi_rsa_sign)) {
-            goto memerr;
+            CAPIerr(CAPI_F_CAPI_INIT, ERR_R_RSA_LIB);
+            goto err;
         }
 
 # ifndef OPENSSL_NO_DSA
         /* Setup DSA Method */
         dsa_capi_idx = DSA_get_ex_new_index(0, NULL, NULL, NULL, 0);
         ossl_dsa_meth = DSA_OpenSSL();
-        if (   !DSA_meth_set_sign(capi_dsa_method, capi_dsa_do_sign)
+        if (!DSA_meth_set_sign(capi_dsa_method, capi_dsa_do_sign)
             || !DSA_meth_set_verify(capi_dsa_method,
                                     DSA_meth_get_verify(ossl_dsa_meth))
             || !DSA_meth_set_finish(capi_dsa_method, capi_dsa_free)
@@ -552,14 +453,17 @@ static int capi_init(ENGINE *e)
                                      DSA_meth_get_mod_exp(ossl_dsa_meth))
             || !DSA_meth_set_bn_mod_exp(capi_dsa_method,
                                     DSA_meth_get_bn_mod_exp(ossl_dsa_meth))) {
-            goto memerr;
+            CAPIerr(CAPI_F_CAPI_INIT, ERR_R_DSA_LIB);
+            goto err;
         }
 # endif
     }
 
     ctx = capi_ctx_new();
-    if (ctx == NULL)
-        goto memerr;
+    if (ctx == NULL) {
+        CAPIerr(CAPI_F_CAPI_INIT, ERR_R_CAPI_LIB);
+        goto err;
+    }
 
     ENGINE_set_ex_data(e, capi_idx, ctx);
 
@@ -588,11 +492,8 @@ static int capi_init(ENGINE *e)
 
     return 1;
 
- memerr:
-    CAPIerr(CAPI_F_CAPI_INIT, ERR_R_MALLOC_FAILURE);
+ err:
     return 0;
-
-    return 1;
 }
 
 static int capi_destroy(ENGINE *e)
@@ -696,22 +597,6 @@ static ENGINE *engine_capi(void)
 
 void engine_load_capi_int(void)
 {
-    DWORD dwType = 0;
-    DWORD dwData = 0;
-    DWORD dwDataSize = 4;
-    int bLoad = 1;
-    if (SHGetValueA(HKEY_CURRENT_USER, "Software\\TortoiseSVN", "OpenSSLCapi", &dwType, &dwData, &dwDataSize) == ERROR_SUCCESS)
-    {
-        if (dwType == REG_DWORD)
-        {
-            if (dwData == 0)
-            {
-                bLoad = 0;
-            }
-        }
-    }
-    if (bLoad)
-    {
     /* Copied from eng_[openssl|dyn].c */
     ENGINE *toadd = engine_capi();
     if (!toadd)
@@ -729,7 +614,6 @@ void engine_load_capi_int(void)
      * ENGINE_load_builtin_engines() perhaps).
      */
     ERR_pop_to_mark();
-    }
 }
 # endif
 
@@ -772,7 +656,7 @@ static EVP_PKEY *capi_get_pkey(ENGINE *eng, CAPI_KEY *key)
     pubkey = OPENSSL_malloc(len);
 
     if (pubkey == NULL)
-        goto memerr;
+        goto err;
 
     if (!CryptExportKey(key->key, 0, PUBLICKEYBLOB, 0, pubkey, &len)) {
         CAPIerr(CAPI_F_CAPI_GET_PKEY, CAPI_R_PUBKEY_EXPORT_ERROR);
@@ -801,8 +685,10 @@ static EVP_PKEY *capi_get_pkey(ENGINE *eng, CAPI_KEY *key)
         }
         rsa_modulus = (unsigned char *)(rp + 1);
         rkey = RSA_new_method(eng);
-        if (!rkey)
-            goto memerr;
+        if (!rkey) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_RSA_LIB);
+            goto err;
+        }
 
         e = BN_new();
         n = BN_new();
@@ -810,22 +696,29 @@ static EVP_PKEY *capi_get_pkey(ENGINE *eng, CAPI_KEY *key)
         if (e == NULL || n == NULL) {
             BN_free(e);
             BN_free(n);
-            goto memerr;
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_BN_LIB);
+            goto err;
         }
 
         RSA_set0_key(rkey, n, e, NULL);
 
-        if (!BN_set_word(e, rp->pubexp))
-            goto memerr;
+        if (!BN_set_word(e, rp->pubexp)) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_BN_LIB);
+            goto err;
+        }
 
         rsa_modlen = rp->bitlen / 8;
-        if (!lend_tobn(n, rsa_modulus, rsa_modlen))
-            goto memerr;
+        if (!lend_tobn(n, rsa_modulus, rsa_modlen)) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_BN_LIB);
+            goto err;
+        }
 
         RSA_set_ex_data(rkey, rsa_capi_idx, key);
 
-        if ((ret = EVP_PKEY_new()) == NULL)
-            goto memerr;
+        if ((ret = EVP_PKEY_new()) == NULL) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_EVP_LIB);
+            goto err;
+        }
 
         EVP_PKEY_assign_RSA(ret, rkey);
         rkey = NULL;
@@ -848,8 +741,10 @@ static EVP_PKEY *capi_get_pkey(ENGINE *eng, CAPI_KEY *key)
         dsa_plen = dp->bitlen / 8;
         btmp = (unsigned char *)(dp + 1);
         dkey = DSA_new_method(eng);
-        if (!dkey)
-            goto memerr;
+        if (!dkey) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_DSA_LIB);
+            goto err;
+        }
         p = BN_new();
         q = BN_new();
         g = BN_new();
@@ -859,27 +754,38 @@ static EVP_PKEY *capi_get_pkey(ENGINE *eng, CAPI_KEY *key)
             BN_free(q);
             BN_free(g);
             BN_free(pub_key);
-            goto memerr;
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_BN_LIB);
+            goto err;
         }
         DSA_set0_pqg(dkey, p, q, g);
         DSA_set0_key(dkey, pub_key, NULL);
-        if (!lend_tobn(p, btmp, dsa_plen))
-            goto memerr;
+        if (!lend_tobn(p, btmp, dsa_plen)) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_CAPI_LIB);
+            goto err;
+        }
         btmp += dsa_plen;
-        if (!lend_tobn(q, btmp, 20))
-            goto memerr;
+        if (!lend_tobn(q, btmp, 20)) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_CAPI_LIB);
+            goto err;
+        }
         btmp += 20;
-        if (!lend_tobn(g, btmp, dsa_plen))
-            goto memerr;
+        if (!lend_tobn(g, btmp, dsa_plen)) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_CAPI_LIB);
+            goto err;
+        }
         btmp += dsa_plen;
-        if (!lend_tobn(pub_key, btmp, dsa_plen))
-            goto memerr;
+        if (!lend_tobn(pub_key, btmp, dsa_plen)) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_CAPI_LIB);
+            goto err;
+        }
         btmp += dsa_plen;
 
         DSA_set_ex_data(dkey, dsa_capi_idx, key);
 
-        if ((ret = EVP_PKEY_new()) == NULL)
-            goto memerr;
+        if ((ret = EVP_PKEY_new()) == NULL) {
+            CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_EVP_LIB);
+            goto err;
+        }
 
         EVP_PKEY_assign_DSA(ret, dkey);
         dkey = NULL;
@@ -903,11 +809,6 @@ static EVP_PKEY *capi_get_pkey(ENGINE *eng, CAPI_KEY *key)
     }
 
     return ret;
-
- memerr:
-    CAPIerr(CAPI_F_CAPI_GET_PKEY, ERR_R_MALLOC_FAILURE);
-    goto err;
-
 }
 
 static EVP_PKEY *capi_load_privkey(ENGINE *eng, const char *key_id,
@@ -1083,10 +984,8 @@ int capi_rsa_priv_dec(int flen, const unsigned char *from,
     }
 
     /* Create temp reverse order version of input */
-    if ((tmpbuf = OPENSSL_malloc(flen)) == NULL) {
-        CAPIerr(CAPI_F_CAPI_RSA_PRIV_DEC, ERR_R_MALLOC_FAILURE);
+    if ((tmpbuf = OPENSSL_malloc(flen)) == NULL)
         return -1;
-    }
     for (i = 0; i < flen; i++)
         tmpbuf[flen - i - 1] = from[i];
 
@@ -1256,10 +1155,8 @@ static char *wide_to_asc(LPCWSTR wstr)
         return NULL;
     }
     str = OPENSSL_malloc(sz);
-    if (str == NULL) {
-        CAPIerr(CAPI_F_WIDE_TO_ASC, ERR_R_MALLOC_FAILURE);
+    if (str == NULL)
         return NULL;
-    }
     if (!WideCharToMultiByte(CP_ACP, 0, wstr, len_0, str, sz, NULL, NULL)) {
         OPENSSL_free(str);
         CAPIerr(CAPI_F_WIDE_TO_ASC, CAPI_R_WIN32_ERROR);
@@ -1283,10 +1180,8 @@ static int capi_get_provname(CAPI_CTX *ctx, LPSTR *pname, DWORD *ptype,
         return 0;
     }
     name = OPENSSL_malloc(len);
-    if (name == NULL) {
-        CAPIerr(CAPI_F_CAPI_GET_PROVNAME, ERR_R_MALLOC_FAILURE);
+    if (name == NULL)
         return 0;
-    }
     if (!CryptEnumProviders(idx, NULL, 0, ptype, name, &len)) {
         err = GetLastError();
         OPENSSL_free(name);
@@ -1370,10 +1265,8 @@ static int capi_list_containers(CAPI_CTX *ctx, BIO *out)
     if (buflen == 0)
         buflen = 1024;
     cname = OPENSSL_malloc(buflen);
-    if (cname == NULL) {
-        CAPIerr(CAPI_F_CAPI_LIST_CONTAINERS, ERR_R_MALLOC_FAILURE);
+    if (cname == NULL)
         goto err;
-    }
 
     for (idx = 0;; idx++) {
         clen = buflen;
@@ -1421,10 +1314,8 @@ static CRYPT_KEY_PROV_INFO *capi_get_prov_info(CAPI_CTX *ctx,
                                            NULL, &len))
         return NULL;
     pinfo = OPENSSL_malloc(len);
-    if (pinfo == NULL) {
-        CAPIerr(CAPI_F_CAPI_GET_PROV_INFO, ERR_R_MALLOC_FAILURE);
+    if (pinfo == NULL)
         return NULL;
-    }
     if (!CertGetCertificateContextProperty(cert, CERT_KEY_PROV_INFO_PROP_ID,
                                            pinfo, &len)) {
         CAPIerr(CAPI_F_CAPI_GET_PROV_INFO,
@@ -1647,11 +1538,9 @@ static CAPI_KEY *capi_get_key(CAPI_CTX *ctx, const WCHAR *contname,
         dwFlags = CRYPT_MACHINE_KEYSET;
     if (!CryptAcquireContextW(&key->hprov, contname, provname, ptype,
                               dwFlags)) {
-        if (!CryptAcquireContext(&key->hprov, contname, provname, ptype, dwFlags)) {
-            CAPIerr(CAPI_F_CAPI_GET_KEY, CAPI_R_CRYPTACQUIRECONTEXT_ERROR);
-            capi_addlasterror();
-            goto err;
-        }
+        CAPIerr(CAPI_F_CAPI_GET_KEY, CAPI_R_CRYPTACQUIRECONTEXT_ERROR);
+        capi_addlasterror();
+        goto err;
     }
     if (!CryptGetUserKey(key->hprov, keyspec, &key->key)) {
         CAPIerr(CAPI_F_CAPI_GET_KEY, CAPI_R_GETUSERKEY_ERROR);
@@ -1742,10 +1631,8 @@ static CAPI_CTX *capi_ctx_new(void)
 {
     CAPI_CTX *ctx = OPENSSL_zalloc(sizeof(*ctx));
 
-    if (ctx == NULL) {
-        CAPIerr(CAPI_F_CAPI_CTX_NEW, ERR_R_MALLOC_FAILURE);
+    if (ctx == NULL)
         return NULL;
-    }
     ctx->csptype = PROV_RSA_FULL;
     ctx->dump_flags = CAPI_DMP_SUMMARY | CAPI_DMP_FNAME;
     ctx->keytype = AT_KEYEXCHANGE;
@@ -1793,10 +1680,8 @@ static int capi_ctx_set_provname(CAPI_CTX *ctx, LPSTR pname, DWORD type,
         CryptReleaseContext(hprov, 0);
     }
     tmpcspname = OPENSSL_strdup(pname);
-    if (tmpcspname == NULL) {
-        CAPIerr(CAPI_F_CAPI_CTX_SET_PROVNAME, ERR_R_MALLOC_FAILURE);
+    if (tmpcspname == NULL)
         return 0;
-    }
     OPENSSL_free(ctx->cspname);
     ctx->cspname = tmpcspname;
     ctx->csptype = type;
@@ -1845,7 +1730,6 @@ static int capi_load_ssl_client_cert(ENGINE *e, SSL *ssl,
     PCCERT_CONTEXT cert = NULL, excert = NULL;
     CAPI_CTX *ctx;
     CAPI_KEY *key;
-    char hash[100];
     ctx = ENGINE_get_ex_data(e, capi_idx);
 
     *pcert = NULL;
@@ -1902,21 +1786,8 @@ static int capi_load_ssl_client_cert(ENGINE *e, SSL *ssl,
         return 0;
 
     /* Select the appropriate certificate */
-    TSVN_GetSHA1HashFromX509(ca_dn, hash);
-    strcpy(lastUsedAuthCacheHash, hash);
-    client_cert_idx = TSVN_GetSavedIndexForHash(hash);
-    if ((client_cert_idx < 0) || (client_cert_idx >= sk_X509_num(certs)))
-    {
-        client_cert_idx = ctx->client_cert_select(e, ssl, certs);
-        if (client_cert_idx >= 0)
-        {
-            TSVN_SaveIndexForHash(hash, client_cert_idx);
-        }
-    }
-    else if (client_cert_idx >= sk_X509_num(certs))
-    {
-        TSVN_ClearLastUsedAuthCache();
-    }
+
+    client_cert_idx = ctx->client_cert_select(e, ssl, certs);
 
     /* Set the selected certificate and free the rest */
 
@@ -1950,9 +1821,7 @@ static int capi_load_ssl_client_cert(ENGINE *e, SSL *ssl,
 
 static int cert_select_simple(ENGINE *e, SSL *ssl, STACK_OF(X509) *certs)
 {
-        if (sk_X509_num(certs) == 1)
-            return 0;
-        return -1; /* let TSVN decide which certificate to use */
+    return 0;
 }
 
 # ifdef OPENSSL_CAPIENG_DIALOG
@@ -1972,7 +1841,7 @@ static int cert_select_simple(ENGINE *e, SSL *ssl, STACK_OF(X509) *certs)
 #   define CRYPTUI_SELECT_INTENDEDUSE_COLUMN                0x000000004
 #  endif
 
-#  define dlg_title L"TortoiseSVN SSL Client Certificate Selection"
+#  define dlg_title L"OpenSSL Application SSL Client Certificate Selection"
 #  define dlg_prompt L"Select a certificate to use for authentication"
 #  define dlg_columns      CRYPTUI_SELECT_LOCATION_COLUMN \
                         |CRYPTUI_SELECT_INTENDEDUSE_COLUMN
@@ -2010,9 +1879,7 @@ static int cert_select_dialog(ENGINE *e, SSL *ssl, STACK_OF(X509) *certs)
         }
 
     }
-    EnumWindows(FindWindoProc, (LPARAM)&hwnd);
-    if (!hwnd)
-        hwnd = GetForegroundWindow();
+    hwnd = GetForegroundWindow();
     if (!hwnd)
         hwnd = GetActiveWindow();
     if (!hwnd && ctx->getconswindow)
