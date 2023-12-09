@@ -118,7 +118,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\SubVersion\subversion\include;..\..\ext\SubVersion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_INTSAFE_SIGNED_FUNCTIONS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -134,7 +134,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_INTSAFE_SIGNED_FUNCTIONS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -150,7 +150,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\SubVersion\subversion\include;..\..\ext\SubVersion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_INTSAFE_SIGNED_FUNCTIONS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -166,7 +166,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\SubVersion\subversion\include;..\..\ext\SubVersion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_INTSAFE_SIGNED_FUNCTIONS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -182,7 +182,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_INTSAFE_SIGNED_FUNCTIONS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
@@ -198,7 +198,7 @@
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
     <ClCompile>
       <AdditionalIncludeDirectories>..\..\ext\apr\include;..\..\ext\apr-util\include;..\..\ext\editorconfig\include;..\..\ext\Subversion\subversion\include;..\..\ext\Subversion\subversion\libsvn_diff;..\Utils;..\Utils\NewMenu;..\Utils\ColourPickerXP;..\TortoiseMerge;..\crashrpt;..\;..\SVN;..\Utils\MiscUI;..\..\ext\ResizableLib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <PreprocessorDefinitions>APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>ENABLE_INTSAFE_SIGNED_FUNCTIONS;APR_DECLARE_STATIC;APU_DECLARE_STATIC;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <ResourceCompile>
       <AdditionalIncludeDirectories>$(IntDir);%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
