@@ -910,8 +910,11 @@ int wmain(int argc, wchar_t *argv[])
             return ERR_READ;
         }
         maxLength = fileLength + 4096; // We might be increasing file size.
-        pBuf      = std::make_unique<char[]>(maxLength);
-        if (pBuf == nullptr)
+        try
+        {
+            pBuf = std::make_unique<char[]>(maxLength);
+        }
+        catch (const std::bad_alloc &)
         {
             wprintf(L"Could not allocate enough memory!\n");
             return ERR_ALLOC;
