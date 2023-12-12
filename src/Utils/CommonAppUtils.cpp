@@ -1,6 +1,6 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
-// Copyright (C) 2010-2018, 2020-2022 - TortoiseSVN
+// Copyright (C) 2010-2018, 2020-2023 - TortoiseSVN
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -798,9 +798,6 @@ bool CCommonAppUtils::StartHtmlHelp(DWORD_PTR id)
 
     std::wstring baseUrl = L"https://tortoisesvn.net/docs/release/";
     CString      appName(MAKEINTRESOURCE(IDS_APPNAME));
-    CString      langPart(MAKEINTRESOURCE(IDS_HELPURLPART));
-    if (langPart.IsEmpty())
-        langPart = L"en";
 
     CString page = L"index.html";
     if (idMap.contains(id))
@@ -810,8 +807,7 @@ bool CCommonAppUtils::StartHtmlHelp(DWORD_PTR id)
     }
 
     baseUrl += appName;
-    baseUrl += L"_";
-    baseUrl += langPart;
+    baseUrl += L"_en";
     baseUrl += L"/";
     baseUrl += page;
 
