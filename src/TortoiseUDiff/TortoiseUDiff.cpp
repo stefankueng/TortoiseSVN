@@ -1,7 +1,7 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
 // Copyright (C) 2003-2008, 2010-2012, 2014-2015, 2020-2022 - TortoiseSVN
-// Copyright (C) 2011-2016 - TortoiseGit
+// Copyright (C) 2011-2016, 2023 - TortoiseGit
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License

@@ -163,6 +163,8 @@ LRESULT CALLBACK CMainWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam,
             PostQuitMessage(0);
             break;
         case WM_CLOSE:
+            if (!canCloseWhenModified())
+                break;
             ::DestroyWindow(m_hwnd);
             break;
         case WM_SETFOCUS:
@@ -263,6 +265,8 @@ LRESULT CMainWindow::DoCommand(int id)
             loadOrSaveFile(false, m_fileName);
             break;
         case ID_FILE_EXIT:
+            if (!canCloseWhenModified())
+                break;
             ::PostQuitMessage(0);
             return 0;
         case IDM_SHOWFINDBAR:
@@ -326,7 +330,7 @@ LRESULT CMainWindow::DoCommand(int id)
                                rect.right - rect.left, rect.bottom - rect.top,
                                SWP_SHOWWINDOW);
             }
-            else
+            else if (canCloseWhenModified())
                 PostQuitMessage(0);
             break;
         case ID_FILE_SETTINGS:
@@ -1033,7 +1037,25 @@ bool CMainWindow::IsUTF8(LPVOID pBuffer, size_t cb)
     return false;
 }
 
-void CMainWindow::loadOrSaveFile(bool doLoad, const std::wstring& filename /* = L"" */)
+bool CMainWindow::canCloseWhenModified()
+{
+    if (SendEditor(SCI_GETMODIFY) != TRUE)
+        return true;
+
+    wchar_t question[1024] = {0};
+    LoadString(hResource, IDS_MODIFIEDASKSAVE, question, _countof(question));
+    switch (MessageBox(m_hwnd, question, L"TortoiseUDiff", MB_YESNOCANCEL | MB_ICONQUESTION))
+    {
+        case IDNO:
+            return true;
+        case IDYES:
+            loadOrSaveFile(false, m_fileName);
+        default:
+            return false;
+    }
+}
+
+bool CMainWindow::loadOrSaveFile(bool doLoad, const std::wstring& filename /* = L"" */)
 {
     OPENFILENAME ofn              = {0}; // common dialog box structure
     wchar_t      szFile[MAX_PATH] = {0}; // buffer for file name
@@ -1064,8 +1086,9 @@ void CMainWindow::loadOrSaveFile(bool doLoad, const std::wstring& filename /* = 
     {
         if (GetOpenFileName(&ofn) == TRUE)
         {
-            LoadFile(ofn.lpstrFile);
+            return LoadFile(ofn.lpstrFile);
         }
+        return false;
     }
     else
     {
@@ -1073,10 +1096,11 @@ void CMainWindow::loadOrSaveFile(bool doLoad, const std::wstring& filename /* = 
         {
             if (GetSaveFileName(&ofn) == TRUE)
             {
-                SaveFile(ofn.lpstrFile);
+                return SaveFile(ofn.lpstrFile);
             }
+            return false;
         }
         else
-            SaveFile(filename.c_str());
+            return SaveFile(filename.c_str());
     }
 }
