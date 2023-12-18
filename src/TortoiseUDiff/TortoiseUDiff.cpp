@@ -120,7 +120,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
     }
     else if (parser.HasVal(L"patchfile"))
         bLoadedSuccessfully = mainWindow.LoadFile(parser.GetVal(L"patchfile"));
-    else if (lpCmdLine[0] != L'\0')
+    else if (lpCmdLine[0] && !parser.HasKey(L"p"))
     {
         // remove double quotes
         std::wstring path = lpCmdLine;
