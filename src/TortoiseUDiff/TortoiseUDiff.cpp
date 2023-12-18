@@ -116,7 +116,7 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
         GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), &oldMode);
         SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), oldMode & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT));
 
-        bLoadedSuccessfully = mainWindow.LoadFile(GetStdHandle(STD_INPUT_HANDLE));
+        bLoadedSuccessfully = mainWindow.LoadFile(GetStdHandle(STD_INPUT_HANDLE), parser.HasKey(L"p"));
     }
     else if (parser.HasVal(L"patchfile"))
         bLoadedSuccessfully = mainWindow.LoadFile(parser.GetVal(L"patchfile"));
