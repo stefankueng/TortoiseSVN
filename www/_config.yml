@@ -20,9 +20,9 @@ encoding:           UTF-8
 
 # custom variables
 version:
-  short:            1.14.5
-  long:             1.14.5.29465
-  svn:              1.14.2
+  short:            1.14.6
+  long:             1.14.6.29673
+  svn:              1.14.3
 
 version-pre:
   short:            1.10.5
