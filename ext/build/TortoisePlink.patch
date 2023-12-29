@@ -1,6 +1,6 @@
 Index: cmdline.c
 ===================================================================
---- cmdline.c	(revision 29506)
+--- cmdline.c	(revision 29668)
 +++ cmdline.c	(working copy)
 @@ -186,11 +186,11 @@
  }
@@ -35,7 +35,7 @@ Index: cmdline.c
      if (!strcmp(p, "-load")) {
          RETURN(2);
          /* This parameter must be processed immediately rather than being
-@@ -581,7 +584,7 @@
+@@ -581,12 +584,24 @@
          conf_set_bool(conf, CONF_nopty, true);   /* command => no terminal */
          strbuf_free(command);
      }
@@ -44,7 +44,24 @@ Index: cmdline.c
          RETURN(2);
          UNAVAILABLE_IN(TOOLTYPE_NONNETWORK);
          SAVEABLE(1);            /* lower priority than -ssh, -telnet, etc */
-@@ -925,7 +928,7 @@
+         conf_set_int(conf, CONF_port, atoi(value));
+     }
++    if (!strcmp(p, "-o")) {
++        RETURN(2);
++        UNAVAILABLE_IN(TOOLTYPE_NONNETWORK);
++        SAVEABLE(0);
++        if (stricmp(value, "SendEnv=GIT_PROTOCOL")) {
++            cmdline_error("Unrecognised suboption \"-o %s\"", value);
++            return -1;
++        }
++        const char *env = getenv("GIT_PROTOCOL");
++        if (env)
++            conf_set_str_str(conf, CONF_environmt, "GIT_PROTOCOL", env);
++    }
+     if (!strcmp(p, "-pw")) {
+         RETURN(2);
+         UNAVAILABLE_IN(TOOLTYPE_NONNETWORK);
+@@ -925,7 +940,7 @@
      for (size_t pri = 0; pri < NPRIORITIES; pri++) {
          for (size_t i = 0; i < saves[pri].nsaved; i++) {
              cmdline_process_param(saves[pri].params[i].p,
@@ -55,15 +72,13 @@ Index: cmdline.c
          }
 Index: console.c
 ===================================================================
---- console.c	(revision 29506)
+--- console.c	(revision 29668)
 +++ console.c	(working copy)
-@@ -20,16 +20,16 @@
-     "above the threshold, which we do not have stored:\n"
-     "%s\n";
+@@ -9,17 +9,17 @@
+ #include "misc.h"
+ #include "console.h"
  
--const char console_continue_prompt[] = "Continue with connection? (y/n) ";
 -const char console_abandoned_msg[] = "Connection abandoned.\n";
-+//const char console_continue_prompt[] = "Continue with connection? (y/n) ";
 +//const char console_abandoned_msg[] = "Connection abandoned.\n";
  
  const SeatDialogPromptDescriptions *console_prompt_descriptions(Seat *seat)
@@ -73,14 +88,18 @@ Index: console.c
 -        .hk_connect_once_action = "enter \"n\"",
 -        .hk_cancel_action = "press Return",
 -        .hk_cancel_action_Participle = "Pressing Return",
+-        .weak_accept_action = "enter \"y\"",
+-        .weak_cancel_action = "enter \"n\"",
 +        .hk_accept_action = "hit Yes",
 +        .hk_connect_once_action = "hit No",
 +        .hk_cancel_action = "hit Cancel",
 +        .hk_cancel_action_Participle = "Hitting Cancel",
++        .weak_accept_action = "hit Yes",
++        .weak_cancel_action = "hit No",
      };
      return &descs;
  }
-@@ -40,42 +40,36 @@
+@@ -30,28 +30,16 @@
   * Error message and/or fatal exit functions, all based on
   * console_print_error_msg which the platform front end provides.
   */
@@ -102,61 +121,87 @@ Index: console.c
 -
  void modalfatalbox(const char *fmt, ...)
  {
--    va_list ap;
--    va_start(ap, fmt);
+     va_list ap;
++    char *stuff, morestuff[100];
+     va_start(ap, fmt);
 -    console_print_error_msg_fmt_v("FATAL ERROR", fmt, ap);
--    va_end(ap);
-+	va_list ap;
-+	char *stuff, morestuff[100];
-+	va_start(ap, fmt);
-+	stuff = dupvprintf(fmt, ap);
-+	va_end(ap);
-+	sprintf(morestuff, "%.70s Fatal Error", appname);
-+	MessageBox(GetParentHwnd(), stuff, morestuff, MB_SYSTEMMODAL | MB_ICONERROR | MB_OK);
-+	sfree(stuff);
++    stuff = dupvprintf(fmt, ap);
+     va_end(ap);
++    sprintf(morestuff, "%.70s Fatal Error", appname);
++    MessageBox(GetParentHwnd(), stuff, morestuff, MB_SYSTEMMODAL | MB_ICONERROR | MB_OK);
++    sfree(stuff);
      cleanup_exit(1);
  }
  
+@@ -58,14 +46,20 @@
  void nonfatal(const char *fmt, ...)
  {
--    va_list ap;
--    va_start(ap, fmt);
+     va_list ap;
++    char *stuff, morestuff[100];
+     va_start(ap, fmt);
 -    console_print_error_msg_fmt_v("ERROR", fmt, ap);
--    va_end(ap);
-+	va_list ap;
-+	char *stuff, morestuff[100];
-+	va_start(ap, fmt);
-+	stuff = dupvprintf(fmt, ap);
-+	va_end(ap);
-+	sprintf(morestuff, "%.70s Error", appname);
-+	MessageBox(GetParentHwnd(), stuff, morestuff, MB_SYSTEMMODAL | MB_ICONERROR | MB_OK);
-+	sfree(stuff);
++    stuff = dupvprintf(fmt, ap);
+     va_end(ap);
++    sprintf(morestuff, "%.70s Error", appname);
++    MessageBox(GetParentHwnd(), stuff, morestuff, MB_SYSTEMMODAL | MB_ICONERROR | MB_OK);
++    sfree(stuff);
  }
  
  void console_connection_fatal(Seat *seat, const char *msg)
  {
 -    console_print_error_msg("FATAL ERROR", msg);
-+	char morestuff[100];
-+	sprintf(morestuff, "%.70s Fatal Error", appname);
-+	MessageBox(GetParentHwnd(), msg, morestuff, MB_SYSTEMMODAL | MB_ICONERROR | MB_OK);
++    char morestuff[100];
++    sprintf(morestuff, "%.70s Fatal Error", appname);
++    MessageBox(GetParentHwnd(), msg, morestuff, MB_SYSTEMMODAL | MB_ICONERROR | MB_OK);
      cleanup_exit(1);
  }
  
+Index: ssh/common.c
+===================================================================
+--- ssh/common.c	(revision 29668)
++++ ssh/common.c	(working copy)
+@@ -984,6 +984,8 @@
+             text, SDT_PARA, "The new %s key fingerprint is:", keytype);
+         seat_dialog_text_append(
+             text, SDT_DISPLAY, "%s", fingerprints[fptype_default]);
++        seat_dialog_text_append(
++            text, SDT_DISPLAY, "%s", fingerprints[SSH_FPTYPE_MD5]);
+         helpctx = HELPCTX(errors_cert_mismatch);
+     } else if (storage_status == 1) {
+         seat_dialog_text_append(
+@@ -997,6 +999,8 @@
+             text, SDT_PARA, "The server's %s key fingerprint is:", keytype);
+         seat_dialog_text_append(
+             text, SDT_DISPLAY, "%s", fingerprints[fptype_default]);
++        seat_dialog_text_append(
++            text, SDT_DISPLAY, "%s", fingerprints[SSH_FPTYPE_MD5]);
+         helpctx = HELPCTX(errors_hostkey_absent);
+     } else {
+         seat_dialog_text_append(
+@@ -1014,6 +1018,8 @@
+             text, SDT_PARA, "The new %s key fingerprint is:", keytype);
+         seat_dialog_text_append(
+             text, SDT_DISPLAY, "%s", fingerprints[fptype_default]);
++        seat_dialog_text_append(
++            text, SDT_DISPLAY, "%s", fingerprints[SSH_FPTYPE_MD5]);
+         helpctx = HELPCTX(errors_hostkey_changed);
+     }
+ 
 Index: version.h
 ===================================================================
---- version.h	(revision 29506)
+--- version.h	(revision 29668)
 +++ version.h	(working copy)
 @@ -1,5 +1,5 @@
 -/* Generated by automated build script */
 +
- #define RELEASE 0.78
- #define TEXTVER "Release 0.78"
--#define SSHVER "-Release-0.78"
-+#define SSHVER "TortoisePlink-Release-0.78"
- #define BINARY_VERSION 0,78,0,0
+ #define RELEASE 0.80
+ #define TEXTVER "Release 0.80"
+-#define SSHVER "-Release-0.80"
++#define SSHVER "TortoisePlink-Release-0.80"
+ #define BINARY_VERSION 0,80,0,0
 Index: windows/console.c
 ===================================================================
---- windows/console.c	(revision 29506)
+--- windows/console.c	(revision 29668)
 +++ windows/console.c	(working copy)
 @@ -11,6 +11,8 @@
  #include "ssh.h"
@@ -167,7 +212,7 @@ Index: windows/console.c
  void cleanup_exit(int code)
  {
      /*
-@@ -23,108 +25,66 @@
+@@ -23,15 +25,6 @@
      exit(code);
  }
  
@@ -180,28 +225,29 @@ Index: windows/console.c
 -    fflush(stderr);
 -}
 -
- SeatPromptResult console_confirm_ssh_host_key(
-     Seat *seat, const char *host, int port, const char *keytype,
-     char *keystr, SeatDialogText *text, HelpCtx helpctx,
-     void (*callback)(void *ctx, SeatPromptResult result), void *ctx)
+ /*
+  * Helper function to print the message from a SeatDialogText. Returns
+  * the final prompt to print on the input line, or NULL if a
+@@ -38,43 +31,50 @@
+  * batch-mode abort is needed. In the latter case it will have printed
+  * the abort text already.
+  */
+-static const char *console_print_seatdialogtext(SeatDialogText *text)
++static strbuf *console_print_seatdialogtext(SeatDialogText *text, const char **title)
  {
--    HANDLE hin;
--    DWORD savemode, i;
 -    const char *prompt = NULL;
-+	int mbret;
-+	const char* title = NULL;
- 
 -    stdio_sink errsink[1];
 -    stdio_sink_init(errsink, stderr);
 +    strbuf* buf = strbuf_new();
  
--    char line[32];
--
++    assert(title);
++    *title = NULL;
++
      for (SeatDialogTextItem *item = text->items,
               *end = item+text->nitems; item < end; item++) {
          switch (item->type) {
 +          case SDT_TITLE:
-+              title = item->text;
++              *title = item->text;
 +              break;
            case SDT_PARA:
 -            wordwrap(BinarySink_UPCAST(errsink),
@@ -227,7 +273,8 @@ Index: windows/console.c
              if (console_batch_mode) {
 -                fprintf(stderr, "%s\n", item->text);
 -                fflush(stderr);
-                 return SPR_SW_ABORT("Cannot confirm a host key in batch mode");
++                strbuf_free(buf);
+                 return NULL;
              }
              break;
            case SDT_PROMPT:
@@ -240,8 +287,29 @@ Index: windows/console.c
          }
      }
 -    assert(prompt); /* something in the SeatDialogText should have set this */
-+	assert(title);
+-    return prompt;
++    assert(*title);
++    return buf;
+ }
  
+ SeatPromptResult console_confirm_ssh_host_key(
+@@ -82,61 +82,26 @@
+     char *keystr, SeatDialogText *text, HelpCtx helpctx,
+     void (*callback)(void *ctx, SeatPromptResult result), void *ctx)
+ {
+-    HANDLE hin;
+-    DWORD savemode, i;
++    int mbret;
++    const char* title = NULL;
+ 
+-    const char *prompt = console_print_seatdialogtext(text);
+-    if (!prompt)
++    strbuf *buf = console_print_seatdialogtext(text, &title);
++    if (!buf)
+         return SPR_SW_ABORT("Cannot confirm a host key in batch mode");
+ 
+-    char line[32];
+-
 -    while (true) {
 -        fprintf(stderr,
 -                "%s (y/n, Return cancels connection, i for more info) ",
@@ -277,7 +345,13 @@ Index: windows/console.c
 -        } else {
 -            break;
 -        }
--    }
++    mbret = MessageBox(GetParentHwnd(), buf->s, title, MB_ICONWARNING | MB_YESNOCANCEL | MB_DEFBUTTON3);
++    strbuf_free(buf);
++    if (mbret == IDYES)
++    {
++        store_host_key(host, port, keytype, keystr);
++        return SPR_OK;
+     }
 -
 -    /* In case of misplaced reflexes from another program, also recognise 'q'
 -     * as 'abandon connection rather than trust this key' */
@@ -285,51 +359,38 @@ Index: windows/console.c
 -        line[0] != 'q' && line[0] != 'Q') {
 -        if (line[0] == 'y' || line[0] == 'Y')
 -            store_host_key(host, port, keytype, keystr);
--        return SPR_OK;
++    else if (mbret == IDNO)
++    {
+         return SPR_OK;
 -    } else {
 -        fputs(console_abandoned_msg, stderr);
--        return SPR_USER_ABORT;
--    }
-+	mbret = MessageBox(GetParentHwnd(), strbuf_to_str(buf), title, MB_ICONWARNING | MB_YESNOCANCEL | MB_DEFBUTTON3);
-+	if (mbret == IDYES)
-+	{
-+		store_host_key(host, port, keytype, keystr);
-+		return SPR_OK;
-+	}
-+	else if (mbret == IDNO)
-+	{
-+		return SPR_OK;
-+	}
-+	else
-+	{
-+		return SPR_USER_ABORT;
-+	}
++    }
++    else
++    {
+         return SPR_USER_ABORT;
+     }
  }
- 
- SeatPromptResult console_confirm_weak_crypto_primitive(
-@@ -131,33 +91,19 @@
-     Seat *seat, const char *algtype, const char *algname,
+@@ -145,30 +110,23 @@
+     Seat *seat, SeatDialogText *text,
      void (*callback)(void *ctx, SeatPromptResult result), void *ctx)
  {
 -    HANDLE hin;
 -    DWORD savemode, i;
-+	int mbret;
-+	char *message, *title;
-+	static const char mbtitle[] = "%s Security Alert";
++    int mbret;
++    char *title = NULL;
++    static const char mbtitle[] = "%s Security Alert";
+ 
+-    const char *prompt = console_print_seatdialogtext(text);
+-    if (!prompt)
++    strbuf* buf = console_print_seatdialogtext(text, &title);
++    if (!buf)
+         return SPR_SW_ABORT("Cannot confirm a weak crypto primitive "
+                             "in batch mode");
  
 -    char line[32];
-+    message = dupprintf(weakcrypto_msg_common_fmt, algtype, algname);
-+	title = dupprintf(mbtitle, appname);
++    title = dupprintf(mbtitle, appname);
  
--    fprintf(stderr, weakcrypto_msg_common_fmt, algtype, algname);
--
--    if (console_batch_mode) {
--        fputs(console_abandoned_msg, stderr);
--        return SPR_SW_ABORT("Cannot confirm a weak crypto primitive "
--                            "in batch mode");
--    }
--
--    fputs(console_continue_prompt, stderr);
+-    fprintf(stderr, "%s (y/n) ", prompt);
 -    fflush(stderr);
 -
 -    hin = GetStdHandle(STD_INPUT_HANDLE);
@@ -340,9 +401,9 @@ Index: windows/console.c
 -    SetConsoleMode(hin, savemode);
 -
 -    if (line[0] == 'y' || line[0] == 'Y') {
-+	mbret = MessageBox(GetParentHwnd(), message, title, MB_ICONWARNING | MB_YESNO | MB_DEFBUTTON2);
-+	sfree(message);
-+	sfree(title);
++    mbret = MessageBox(GetParentHwnd(), buf->s, title, MB_ICONWARNING | MB_YESNO | MB_DEFBUTTON2);
++    strbuf_free(buf);
++    sfree(title);
 +    if (mbret == IDYES) {
          return SPR_OK;
      } else {
@@ -350,34 +411,32 @@ Index: windows/console.c
          return SPR_USER_ABORT;
      }
  }
-@@ -166,33 +112,20 @@
-     Seat *seat, const char *algname, const char *betteralgs,
+@@ -177,30 +135,24 @@
+     Seat *seat, SeatDialogText *text,
      void (*callback)(void *ctx, SeatPromptResult result), void *ctx)
  {
 -    HANDLE hin;
 -    DWORD savemode, i;
-+	int mbret;
-+	char *message, *title;
-+	static const char mbtitle[] = "%s Security Alert";
++    int mbret;
++    char *title = NULL;
++    static const char mbtitle[] = "%s Security Alert";
+ 
+-    const char *prompt = console_print_seatdialogtext(text);
+-    if (!prompt)
++    strbuf* buf = console_print_seatdialogtext(text, &title);
++    if (!buf)
+         return SPR_SW_ABORT("Cannot confirm a weak cached host key "
+                             "in batch mode");
  
 -    char line[32];
-+	message = dupprintf(weakhk_msg_common_fmt, algname, betteralgs);
-+	title = dupprintf(mbtitle, appname);
++    title = dupprintf(mbtitle, appname);
  
--    fprintf(stderr, weakhk_msg_common_fmt, algname, betteralgs);
-+    mbret = MessageBox(GetParentHwnd(), message, title, MB_ICONWARNING | MB_YESNOCANCEL | MB_DEFBUTTON3);
-+	sfree(message);
-+	sfree(title);
- 
--    if (console_batch_mode) {
--        fputs(console_abandoned_msg, stderr);
--        return SPR_SW_ABORT("Cannot confirm a weak cached host key "
--                            "in batch mode");
--    }
--
--    fputs(console_continue_prompt, stderr);
+-    fprintf(stderr, "%s (y/n) ", prompt);
 -    fflush(stderr);
--
++    mbret = MessageBox(GetParentHwnd(), buf->s, title, MB_ICONWARNING | MB_YESNOCANCEL | MB_DEFBUTTON3);
++    strbuf_to_str(buf);
++    sfree(title);
+ 
 -    hin = GetStdHandle(STD_INPUT_HANDLE);
 -    GetConsoleMode(hin, &savemode);
 -    SetConsoleMode(hin, (savemode | ENABLE_ECHO_INPUT |
@@ -393,7 +452,7 @@ Index: windows/console.c
          return SPR_USER_ABORT;
      }
  }
-@@ -258,34 +191,28 @@
+@@ -266,34 +218,28 @@
          "You can overwrite it with a new session log,\n"
          "append your session log to the end of it,\n"
          "or disable session logging for this session.\n"
@@ -441,7 +500,7 @@ Index: windows/console.c
          return 1;
      else
          return 0;
-@@ -377,119 +304,18 @@
+@@ -385,119 +331,18 @@
              prompt_set_result(p->prompts[i], "");
      }
  
@@ -462,7 +521,7 @@ Index: windows/console.c
 -        }
 -    }
 +    if (console_batch_mode)
-+		return SPR_USER_ABORT;
++        return SPR_USER_ABORT;
  
 -    /*
 -     * And if we have anything to print, we need standard output.
@@ -561,16 +620,16 @@ Index: windows/console.c
 -        if (failed)
 -            return spr;
 +        char result[MAX_LENGTH_PASSWORD] = { 0 };
-+		if (!DoLoginDialog(result, sizeof(result), pr->prompt))
-+			return SPR_USER_ABORT;
-+		prompt_set_result(pr, result);
-+		SecureZeroMemory(&result, sizeof(result));
++        if (!DoLoginDialog(result, sizeof(result), pr->prompt))
++            return SPR_USER_ABORT;
++        prompt_set_result(pr, result);
++        SecureZeroMemory(&result, sizeof(result));
      }
  
      return SPR_OK;
 Index: windows/plink.c
 ===================================================================
---- windows/plink.c	(revision 29506)
+--- windows/plink.c	(revision 29668)
 +++ windows/plink.c	(working copy)
 @@ -1,4 +1,4 @@
 -/*
@@ -713,11 +772,11 @@ Index: windows/plink.c
 +    j += sprintf(buf + j, "  -share    enable use of connection sharing\n");
 +    j += sprintf(buf + j, "  -hostkey keyid\n");
 +    j += sprintf(buf + j, "            manually specify a host key (may be repeated)\n");
-+	j += sprintf(buf + j, "  -sanitise-stderr, -sanitise-stdout, ");
++    j += sprintf(buf + j, "  -sanitise-stderr, -sanitise-stdout, ");
 +    j += sprintf(buf + j, "-no-sanitise-stderr, -no-sanitise-stdout\n");
-+	j += sprintf(buf + j, "            do/don't strip control chars from standard ");
++    j += sprintf(buf + j, "            do/don't strip control chars from standard ");
 +    j += sprintf(buf + j, "output/error\n");
-+	j += sprintf(buf + j, "  -no-antispoof   omit anti-spoofing prompt after ");
++    j += sprintf(buf + j, "  -no-antispoof   omit anti-spoofing prompt after ");
 +    j += sprintf(buf + j, "authentication\n");
 +    j += sprintf(buf + j, "  -m file   read remote command(s) from file\n");
 +    j += sprintf(buf + j, "  -s        remote command is an SSH subsystem (SSH-2 only)\n");

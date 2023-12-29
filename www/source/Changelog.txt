@@ -1,11 +1,38 @@
-﻿Version 1.14.5
+﻿Version 1.14.6
+- BUG: context menu for a directory background in
+       Win11 when not using the first tab in explorer
+       used the wrong path. (Stefan)
+- BUG: the revision graph did not show the HEAD revision
+       if not all revisions were shown. (Stefan)
+- BUG: context menu items in Win11 did show up but
+       didn't invoke the command. (Stefan)
+- BUG: the repository tree control in the Checkout "Choose
+       items" dialog didn't resize properly when resizing
+       the window. (Daniel Sahlberg)
+- BUG: TMerge didn't properly restore line numbers when undoing
+       pasting multiple lines. (Daniel Sahlberg)
+- BUG: Project monitor duplicated the list of Users to ignore
+       every time a project was edited. (Daniel Sahlberg)
+- BUG: Project monitor kept an error status on a project that had
+       temporary connection issues, even after the next connection
+       was successful. (Daniel Sahlberg)
+- NEW: added a menu item in Project monitor to check one specific
+       project. (Daniel Sahlberg)
+- NEW: added an advanced setting to control the default value
+       of Allow mixed revisions (not recommended) in the Merge
+       options dialog. (Daniel Sahlberg)
+- BUG: TortoiseBlame didn't restore saved window position. (Stefan)
+- BUG: Repository-Urls with ipv6 addresses were not properly
+       handled. (Stefan)
+
+Version 1.14.5
 - BUG: 1.14.4 was wrongly linked against svn 1.14.1
        instead of svn 1.14.2
        
 Version 1.14.4
 - BUG: revisions entered in the merge dialog were
        not selected anymore in the log dialog. (Stefan)
-- BUG: urls pated in merge dialog could have newlines
+- BUG: urls pasted in merge dialog could have newlines
        at the end. (Daniel Sahlberg)
 - NEW: add autocomplete functionality in the log dialog 
        used in Repository browser. (Daniel Sahlberg)

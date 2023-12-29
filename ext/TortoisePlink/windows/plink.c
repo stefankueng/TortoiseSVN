@@ -181,11 +181,11 @@ static void usage(void)
     j += sprintf(buf + j, "  -share    enable use of connection sharing\n");
     j += sprintf(buf + j, "  -hostkey keyid\n");
     j += sprintf(buf + j, "            manually specify a host key (may be repeated)\n");
-	j += sprintf(buf + j, "  -sanitise-stderr, -sanitise-stdout, ");
+    j += sprintf(buf + j, "  -sanitise-stderr, -sanitise-stdout, ");
     j += sprintf(buf + j, "-no-sanitise-stderr, -no-sanitise-stdout\n");
-	j += sprintf(buf + j, "            do/don't strip control chars from standard ");
+    j += sprintf(buf + j, "            do/don't strip control chars from standard ");
     j += sprintf(buf + j, "output/error\n");
-	j += sprintf(buf + j, "  -no-antispoof   omit anti-spoofing prompt after ");
+    j += sprintf(buf + j, "  -no-antispoof   omit anti-spoofing prompt after ");
     j += sprintf(buf + j, "authentication\n");
     j += sprintf(buf + j, "  -m file   read remote command(s) from file\n");
     j += sprintf(buf + j, "  -s        remote command is an SSH subsystem (SSH-2 only)\n");

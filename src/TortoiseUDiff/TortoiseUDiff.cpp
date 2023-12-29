@@ -1,7 +1,7 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
 // Copyright (C) 2003-2008, 2010-2012, 2014-2015, 2020-2022 - TortoiseSVN
-// Copyright (C) 2011-2016 - TortoiseGit
+// Copyright (C) 2011-2016, 2023 - TortoiseGit
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -116,11 +116,11 @@ int APIENTRY wWinMain(HINSTANCE hInstance,
         GetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), &oldMode);
         SetConsoleMode(GetStdHandle(STD_INPUT_HANDLE), oldMode & ~(ENABLE_LINE_INPUT | ENABLE_ECHO_INPUT));
 
-        bLoadedSuccessfully = mainWindow.LoadFile(GetStdHandle(STD_INPUT_HANDLE));
+        bLoadedSuccessfully = mainWindow.LoadFile(GetStdHandle(STD_INPUT_HANDLE), parser.HasKey(L"p"));
     }
     else if (parser.HasVal(L"patchfile"))
         bLoadedSuccessfully = mainWindow.LoadFile(parser.GetVal(L"patchfile"));
-    else if (lpCmdLine[0] != L'\0')
+    else if (lpCmdLine[0] && !parser.HasKey(L"p"))
     {
         // remove double quotes
         std::wstring path = lpCmdLine;

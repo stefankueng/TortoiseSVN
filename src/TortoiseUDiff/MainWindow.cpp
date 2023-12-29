@@ -33,6 +33,7 @@
 #include "ResString.h"
 #include "SciLexer.h"
 #include "Lexilla.h"
+#include "SmartHandle.h"
 
 const UINT TaskBarButtonCreated = RegisterWindowMessage(L"TaskbarButtonCreated");
 
@@ -163,6 +164,8 @@ LRESULT CALLBACK CMainWindow::WinMsgHandler(HWND hwnd, UINT uMsg, WPARAM wParam,
             PostQuitMessage(0);
             break;
         case WM_CLOSE:
+            if (!canCloseWhenModified())
+                break;
             ::DestroyWindow(m_hwnd);
             break;
         case WM_SETFOCUS:
@@ -252,6 +255,8 @@ LRESULT CMainWindow::DoCommand(int id)
     switch (id)
     {
         case ID_FILE_OPEN:
+            if (!canCloseWhenModified())
+                break;
             loadOrSaveFile(true);
             break;
         case ID_FILE_SAVEAS:
@@ -261,6 +266,8 @@ LRESULT CMainWindow::DoCommand(int id)
             loadOrSaveFile(false, m_fileName);
             break;
         case ID_FILE_EXIT:
+            if (!canCloseWhenModified())
+                break;
             ::PostQuitMessage(0);
             return 0;
         case IDM_SHOWFINDBAR:
@@ -324,7 +331,7 @@ LRESULT CMainWindow::DoCommand(int id)
                                rect.right - rect.left, rect.bottom - rect.top,
                                SWP_SHOWWINDOW);
             }
-            else
+            else if (canCloseWhenModified())
                 PostQuitMessage(0);
             break;
         case ID_FILE_SETTINGS:
@@ -842,7 +849,7 @@ void CMainWindow::SetTheme(bool bDark) const
     ::RedrawWindow(*this, nullptr, nullptr, RDW_FRAME | RDW_INVALIDATE | RDW_ERASE | RDW_INTERNALPAINT | RDW_ALLCHILDREN | RDW_UPDATENOW);
 }
 
-bool CMainWindow::LoadFile(HANDLE hFile) const
+bool CMainWindow::LoadFile(HANDLE hFile, bool wantStdIn)
 {
     InitEditor();
     char  data[4096] = {0};
@@ -854,7 +861,27 @@ bool CMainWindow::LoadFile(HANDLE hFile) const
     {
         SendEditor(SCI_ADDTEXT, dwRead,
                    reinterpret_cast<LPARAM>(static_cast<char*>(data)));
+        if (auto sciStatus = static_cast<int>(SendEditor(SCI_GETSTATUS)); sciStatus > SC_STATUS_OK && sciStatus < SC_STATUS_WARN_START)
+        {
+            if (sciStatus == SC_STATUS_BADALLOC)
+                SetLastError(static_cast<DWORD>(E_OUTOFMEMORY));
+            else
+                SetLastError(static_cast<DWORD>(E_FAIL));
+            MessageBox(*this, static_cast<LPCWSTR>(CFormatMessageWrapper()), L"TortoiseUDiff", MB_ICONEXCLAMATION);
+            return false;
+        }
         bRet = ReadFile(hFile, data, sizeof(data), &dwRead, nullptr);
+    }
+    if (!bRet)
+    {
+        if (hFile || wantStdIn)
+        {
+            MessageBox(*this, static_cast<LPCWSTR>(CFormatMessageWrapper()), L"TortoiseUDiff", MB_ICONEXCLAMATION);
+            return false;
+        }
+        SetTitle(L"Unnamed");
+        InitEditor();
+        bUTF8 = true;
     }
     SetupWindow(bUTF8);
     return true;
@@ -862,30 +889,62 @@ bool CMainWindow::LoadFile(HANDLE hFile) const
 
 bool CMainWindow::LoadFile(LPCWSTR filename)
 {
-    InitEditor();
-    FILE* fp = nullptr;
-    _wfopen_s(&fp, filename, L"rb");
-    if (!fp)
-        return false;
-
-    SetTitle(filename);
-    char   data[4096] = {0};
-    size_t lenFile    = fread(data, 1, sizeof(data), fp);
-    bool   bUTF8      = IsUTF8(data, lenFile);
-    while (lenFile > 0)
+    CAutoFile hfile = CreateFile(filename, GENERIC_READ, FILE_SHARE_READ | FILE_SHARE_DELETE, nullptr, OPEN_EXISTING, FILE_ATTRIBUTE_NORMAL, nullptr);
+    if (!hfile)
     {
-        SendEditor(SCI_ADDTEXT, lenFile,
-                   reinterpret_cast<LPARAM>(static_cast<char*>(data)));
-        lenFile = fread(data, 1, sizeof(data), fp);
+        MessageBox(*this, static_cast<LPCWSTR>(CFormatMessageWrapper()), L"TortoiseUDiff", MB_ICONEXCLAMATION);
+        return false;
     }
-    fclose(fp);
+
+    char  data[4096] = {0};
+    DWORD size       = 0;
+    if (!ReadFile(hfile, data, sizeof(data), &size, nullptr))
+    {
+        MessageBox(*this, static_cast<LPCWSTR>(CFormatMessageWrapper()), L"TortoiseUDiff", MB_ICONEXCLAMATION);
+        return false;
+    }
+    bool bUTF8 = IsUTF8(data, size);
+    InitEditor();
+    bool error = false;
+    while (size > 0)
+    {
+        SendEditor(SCI_ADDTEXT, size,
+                   reinterpret_cast<LPARAM>(static_cast<char*>(data)));
+        if (auto sciStatus = static_cast<int>(SendEditor(SCI_GETSTATUS)); sciStatus > SC_STATUS_OK && sciStatus < SC_STATUS_WARN_START)
+        {
+            if (sciStatus == SC_STATUS_BADALLOC)
+                SetLastError(static_cast<DWORD>(E_OUTOFMEMORY));
+            else
+                SetLastError(static_cast<DWORD>(E_FAIL));
+            error = true;
+            break;
+        }
+        if (!ReadFile(hfile, data, sizeof(data), &size, nullptr))
+        {
+            error = true;
+            break;
+        }
+    }
+
+    if (error)
+    {
+        MessageBox(*this, static_cast<LPCWSTR>(CFormatMessageWrapper()), L"TortoiseUDiff", MB_ICONEXCLAMATION);
+        InitEditor();
+        bUTF8 = true;
+        SetTitle(L"Unnamed");
+    }
+    else
+    {
+        m_fileName = filename;
+        SetTitle(filename);
+    }
     SetupWindow(bUTF8);
-    m_fileName = filename;
-    return true;
+    return !error;
 }
 
-void CMainWindow::InitEditor() const
+void CMainWindow::InitEditor()
 {
+    m_fileName.clear();
     SendEditor(SCI_SETREADONLY, FALSE);
     SendEditor(SCI_CLEARALL);
     SendEditor(EM_EMPTYUNDOBUFFER);
@@ -1031,7 +1090,25 @@ bool CMainWindow::IsUTF8(LPVOID pBuffer, size_t cb)
     return false;
 }
 
-void CMainWindow::loadOrSaveFile(bool doLoad, const std::wstring& filename /* = L"" */)
+bool CMainWindow::canCloseWhenModified()
+{
+    if (SendEditor(SCI_GETMODIFY) != TRUE)
+        return true;
+
+    wchar_t question[1024] = {0};
+    LoadString(hResource, IDS_MODIFIEDASKSAVE, question, _countof(question));
+    switch (MessageBox(m_hwnd, question, L"TortoiseUDiff", MB_YESNOCANCEL | MB_ICONQUESTION))
+    {
+        case IDNO:
+            return true;
+        case IDYES:
+            loadOrSaveFile(false, m_fileName);
+        default:
+            return false;
+    }
+}
+
+bool CMainWindow::loadOrSaveFile(bool doLoad, const std::wstring& filename /* = L"" */)
 {
     OPENFILENAME ofn              = {0}; // common dialog box structure
     wchar_t      szFile[MAX_PATH] = {0}; // buffer for file name
@@ -1062,8 +1139,9 @@ void CMainWindow::loadOrSaveFile(bool doLoad, const std::wstring& filename /* = 
     {
         if (GetOpenFileName(&ofn) == TRUE)
         {
-            LoadFile(ofn.lpstrFile);
+            return LoadFile(ofn.lpstrFile);
         }
+        return false;
     }
     else
     {
@@ -1071,10 +1149,11 @@ void CMainWindow::loadOrSaveFile(bool doLoad, const std::wstring& filename /* = 
         {
             if (GetSaveFileName(&ofn) == TRUE)
             {
-                SaveFile(ofn.lpstrFile);
+                return SaveFile(ofn.lpstrFile);
             }
+            return false;
         }
         else
-            SaveFile(filename.c_str());
+            return SaveFile(filename.c_str());
     }
 }

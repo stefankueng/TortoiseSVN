@@ -1,6 +1,7 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
 // Copyright (C) 2009-2015, 2018-2023 - TortoiseSVN
+// Copyright (C) 2023 - TortoiseGit
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -26,189 +27,50 @@ IMPLEMENT_DYNAMIC(CSettingsAdvanced, ISettingsPropPage)
 CSettingsAdvanced::CSettingsAdvanced()
     : ISettingsPropPage(CSettingsAdvanced::IDD)
 {
-    int i               = 0;
-    settings[i].sName   = L"AllowAuthSave";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"AllowUnversionedObstruction";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"AlwaysExtendedMenu";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"AutoCompleteMinChars";
-    settings[i].type    = CSettingsAdvanced::SettingTypeNumber;
-    settings[i++].def.l = 3;
-
-    settings[i].sName   = L"AutocompleteRemovesExtensions";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"BlockPeggedExternals";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"BlockStatus";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"CacheTrayIcon";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"ColumnsEveryWhere";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"ConfigDir";
-    settings[i].type    = CSettingsAdvanced::SettingTypeString;
-    settings[i++].def.s = L"";
-
-    settings[i].sName   = L"CtrlEnter";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"Debug";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"DebugOutputString";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"DialogTitles";
-    settings[i].type    = CSettingsAdvanced::SettingTypeNumber;
-    settings[i++].def.l = 0;
-
-    settings[i].sName   = L"DiffBlamesWithTortoiseMerge";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"DlgStickySize";
-    settings[i].type    = CSettingsAdvanced::SettingTypeNumber;
-    settings[i++].def.l = 3;
-
-    settings[i].sName   = L"FixCaseRenames";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"FullRowSelect";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"GroupTaskbarIconsPerRepo";
-    settings[i].type    = CSettingsAdvanced::SettingTypeNumber;
-    settings[i++].def.l = 3;
-
-    settings[i].sName   = L"GroupTaskbarIconsPerRepoOverlay";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"HideExternalInfo";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"HookCancelError";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"IncludeExternals";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"LogFindCopyFrom";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"LogMultiRevFormat";
-    settings[i].type    = CSettingsAdvanced::SettingTypeString;
-    settings[i++].def.s = L"r%1!ld!\n%2!s!\n---------------------\n";
-
-    settings[i].sName   = L"LogStatusCheck";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"MaxHistoryComboItems";
-    settings[i].type    = CSettingsAdvanced::SettingTypeNumber;
-    settings[i++].def.l = 25;
-
-    settings[i].sName   = L"MergeLogSeparator";
-    settings[i].type    = CSettingsAdvanced::SettingTypeString;
-    settings[i++].def.s = L"........";
-
-    settings[i].sName   = L"MergeAllowMixedRevisionsDefault";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"NumDiffWarning";
-    settings[i].type    = CSettingsAdvanced::SettingTypeNumber;
-    settings[i++].def.l = 10;
-
-    settings[i].sName   = L"OldVersionCheck";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"OutOfDateRetry";
-    settings[i].type    = CSettingsAdvanced::SettingTypeNumber;
-    settings[i++].def.l = 1;
-
-    settings[i].sName   = L"PlaySound";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"RepoBrowserTrySVNParentPath";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"ScintillaBidirectional";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = false;
-
-    settings[i].sName   = L"ScintillaDirect2D";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"ShellMenuAccelerators";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"ShowContextMenuIcons";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"ShowAppContextMenuIcons";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"ShowNotifications";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"StyleCommitMessages";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"UpdateCheckURL";
-    settings[i].type    = CSettingsAdvanced::SettingTypeString;
-    settings[i++].def.s = L"";
-
-    settings[i].sName   = L"UseCustomWordBreak";
-    settings[i].type    = CSettingsAdvanced::SettingTypeNumber;
-    settings[i++].def.l = 2;
-
-    settings[i].sName   = L"VersionCheck";
-    settings[i].type    = CSettingsAdvanced::SettingTypeBoolean;
-    settings[i++].def.b = true;
-
-    settings[i].sName   = L"";
-    settings[i].type    = CSettingsAdvanced::SettingTypeNone;
-    settings[i++].def.b = false;
-
-    // 45 so far...
-    ASSERT(i < _countof(settings));
+    AddSetting<BooleanSetting>(L"AllowAuthSave", true);
+    AddSetting<BooleanSetting>(L"AllowUnversionedObstruction", true);
+    AddSetting<BooleanSetting>(L"AlwaysExtendedMenu", false);
+    AddSetting<DWORDSetting>  (L"AutoCompleteMinChars", 3);
+    AddSetting<BooleanSetting>(L"AutocompleteRemovesExtensions", false);
+    AddSetting<BooleanSetting>(L"BlockPeggedExternals", true);
+    AddSetting<BooleanSetting>(L"BlockStatus", false);
+    AddSetting<BooleanSetting>(L"CacheTrayIcon", false);
+    AddSetting<BooleanSetting>(L"ColumnsEveryWhere", false);
+    AddSetting<StringSetting> (L"ConfigDir", L"");
+    AddSetting<BooleanSetting>(L"CtrlEnter", true);
+    AddSetting<BooleanSetting>(L"Debug", false);
+    AddSetting<BooleanSetting>(L"DebugOutputString", false);
+    AddSetting<DWORDSetting>  (L"DialogTitles", 0);
+    AddSetting<BooleanSetting>(L"DiffBlamesWithTortoiseMerge", false);
+    AddSetting<DWORDSetting>  (L"DlgStickySize", 3);
+    AddSetting<BooleanSetting>(L"FixCaseRenames", true);
+    AddSetting<BooleanSetting>(L"FullRowSelect", true);
+    AddSetting<DWORDSetting>  (L"GroupTaskbarIconsPerRepo", 3);
+    AddSetting<BooleanSetting>(L"GroupTaskbarIconsPerRepoOverlay", true);
+    AddSetting<BooleanSetting>(L"HideExternalInfo", true);
+    AddSetting<BooleanSetting>(L"HookCancelError", false);
+    AddSetting<BooleanSetting>(L"IncludeExternals", true);
+    AddSetting<BooleanSetting>(L"LogFindCopyFrom", true);
+    AddSetting<StringSetting> (L"LogMultiRevFormat", L"r%1!ld!\n%2!s!\n---------------------\n");
+    AddSetting<BooleanSetting>(L"LogStatusCheck", true);
+    AddSetting<DWORDSetting>  (L"MaxHistoryComboItems", 25);
+    AddSetting<StringSetting> (L"MergeLogSeparator", L"........");
+    AddSetting<BooleanSetting>(L"MergeAllowMixedRevisionsDefault", false);
+    AddSetting<DWORDSetting>  (L"NumDiffWarning", 10);
+    AddSetting<BooleanSetting>(L"OldVersionCheck", false);
+    AddSetting<DWORDSetting>  (L"OutOfDateRetry", 1);
+    AddSetting<BooleanSetting>(L"PlaySound", true);
+    AddSetting<BooleanSetting>(L"RepoBrowserTrySVNParentPath", true);
+    AddSetting<BooleanSetting>(L"ScintillaBidirectional", false);
+    AddSetting<BooleanSetting>(L"ScintillaDirect2D", true);
+    AddSetting<BooleanSetting>(L"ShellMenuAccelerators", true);
+    AddSetting<BooleanSetting>(L"ShowContextMenuIcons", true);
+    AddSetting<BooleanSetting>(L"ShowAppContextMenuIcons", true);
+    AddSetting<BooleanSetting>(L"ShowNotifications", true);
+    AddSetting<BooleanSetting>(L"StyleCommitMessages", true);
+    AddSetting<StringSetting> (L"UpdateCheckURL", L"");
+    AddSetting<DWORDSetting>  (L"UseCustomWordBreak", 2);
+    AddSetting<BooleanSetting>(L"VersionCheck", true);
 }
 
 CSettingsAdvanced::~CSettingsAdvanced()
@@ -246,36 +108,11 @@ BOOL CSettingsAdvanced::OnInitDialog()
 
     m_listCtrl.SetRedraw(FALSE);
 
-    int i = 0;
-    while (settings[i].type != SettingTypeNone)
+    for (int i = 0; i < static_cast<int>(settings.size()); ++i)
     {
-        m_listCtrl.InsertItem(i, settings[i].sName);
-        m_listCtrl.SetItemText(i, 1, settings[i].sName);
-        switch (settings[i].type)
-        {
-            case SettingTypeBoolean:
-            {
-                CRegDWORD s(L"Software\\TortoiseSVN\\" + settings[i].sName, settings[i].def.b);
-                m_listCtrl.SetItemText(i, 0, static_cast<DWORD>(s) ? L"true" : L"false");
-            }
-            break;
-            case SettingTypeNumber:
-            {
-                CRegDWORD s(L"Software\\TortoiseSVN\\" + settings[i].sName, settings[i].def.l);
-                temp.Format(L"%ld", static_cast<DWORD>(s));
-                m_listCtrl.SetItemText(i, 0, temp);
-            }
-            break;
-            case SettingTypeString:
-            {
-                CRegString s(L"Software\\TortoiseSVN\\" + settings[i].sName, settings[i].def.s);
-                m_listCtrl.SetItemText(i, 0, CString(s));
-            }
-            default:
-                break;
-        }
-
-        i++;
+        m_listCtrl.InsertItem(i, settings.at(i)->GetName());
+        m_listCtrl.SetItemText(i, 1, settings.at(i)->GetName());
+        m_listCtrl.SetItemText(i, 0, settings.at(i)->GetValue());
     }
 
     int minCol = 0;
@@ -293,49 +130,9 @@ BOOL CSettingsAdvanced::OnInitDialog()
 
 BOOL CSettingsAdvanced::OnApply()
 {
-    int i = 0;
-    while (settings[i].type != SettingTypeNone)
+    for (int i = 0; i < static_cast<int>(settings.size()); ++i)
     {
-        CString sValue = m_listCtrl.GetItemText(i, 0);
-        switch (settings[i].type)
-        {
-            case SettingTypeBoolean:
-            {
-                CRegDWORD s(L"Software\\TortoiseSVN\\" + settings[i].sName, settings[i].def.b);
-                if (sValue.IsEmpty())
-                    s.removeValue();
-                else
-                {
-                    DWORD newValue = sValue.Compare(L"true") == 0;
-                    if (static_cast<DWORD>(s) != newValue)
-                    {
-                        s = newValue;
-                    }
-                }
-            }
-            break;
-            case SettingTypeNumber:
-            {
-                CRegDWORD s(L"Software\\TortoiseSVN\\" + settings[i].sName, settings[i].def.l);
-                if (static_cast<DWORD>(_tstol(sValue)) != static_cast<DWORD>(s))
-                {
-                    s = _tstol(sValue);
-                }
-            }
-            break;
-            case SettingTypeString:
-            {
-                CRegString s(L"Software\\TortoiseSVN\\" + settings[i].sName, settings[i].def.s);
-                if (sValue.Compare(CString(s)))
-                {
-                    s = sValue;
-                }
-            }
-            default:
-                break;
-        }
-
-        i++;
+        settings.at(i)->StoreValue(m_listCtrl.GetItemText(i, 0));
     }
 
     return ISettingsPropPage::OnApply();
@@ -354,40 +151,7 @@ void CSettingsAdvanced::OnLvnEndlabeledit(NMHDR *pNMHDR, LRESULT *pResult)
     if (pDispInfo->item.pszText == nullptr)
         return;
 
-    bool allowEdit = false;
-    switch (settings[pDispInfo->item.iItem].type)
-    {
-        case SettingTypeBoolean:
-        {
-            if ((pDispInfo->item.pszText[0] == 0) ||
-                (wcscmp(pDispInfo->item.pszText, L"true") == 0) ||
-                (wcscmp(pDispInfo->item.pszText, L"false") == 0))
-            {
-                allowEdit = true;
-            }
-        }
-        break;
-        case SettingTypeNumber:
-        {
-            wchar_t *pChar = pDispInfo->item.pszText;
-            allowEdit      = true;
-            while (*pChar)
-            {
-                if (!_istdigit(*pChar))
-                {
-                    allowEdit = false;
-                    break;
-                }
-                pChar++;
-            }
-        }
-        break;
-        case SettingTypeString:
-            allowEdit = true;
-            break;
-        default:
-            break;
-    }
+    bool allowEdit = settings.at(pDispInfo->item.iItem)->IsValid(pDispInfo->item.pszText);
 
     if (allowEdit)
         SetModified();

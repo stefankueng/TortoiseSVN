@@ -1,7 +1,7 @@
 ﻿// TortoiseSVN - a Windows shell extension for easy version control
 
 // Copyright (C) 2007, 2009-2013, 2020-2021 - TortoiseSVN
-// Copyright (C) 2020 - TortoiseGit
+// Copyright (C) 2020, 2023 - TortoiseGit
 
 // This program is free software; you can redistribute it and/or
 // modify it under the terms of the GNU General Public License
@@ -44,7 +44,7 @@ public:
     LRESULT      SendEditor(UINT msg, WPARAM wParam = 0, LPARAM lParam = 0) const;
     HWND         GetHWNDEdit() const { return m_hWndEdit; }
     bool         LoadFile(LPCWSTR filename);
-    bool         LoadFile(HANDLE hFile) const;
+    bool         LoadFile(HANDLE hFile, bool wantStdIn);
     bool         SaveFile(LPCWSTR filename) const;
     void         SetTitle(LPCWSTR title);
     std::wstring GetAppDirectory() const;
@@ -62,7 +62,7 @@ protected:
 private:
     void        SetAStyle(int style, COLORREF fore, COLORREF back = ::GetSysColor(COLOR_WINDOW), int size = -1, const char* face = nullptr) const;
     static bool IsUTF8(LPVOID pBuffer, size_t cb);
-    void        InitEditor() const;
+    void        InitEditor();
     void        SetupWindow(bool bUTF8) const;
     void        UpdateLineCount() const;
 
@@ -78,5 +78,6 @@ private:
     std::wstring m_findText;
     std::wstring m_fileName;
 
-    void loadOrSaveFile(bool doLoad, const std::wstring& filename = L"");
+    bool         canCloseWhenModified();
+    bool         loadOrSaveFile(bool doLoad, const std::wstring& filename = L"");
 };
